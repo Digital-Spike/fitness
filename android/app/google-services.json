@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1009790740333",
+    "project_id": "fitnessjourney-48caa",
+    "storage_bucket": "fitnessjourney-48caa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009790740333:android:aac26e3c956b7358acdc64",
+        "android_client_info": {
+          "package_name": "com.example.fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009790740333-i0pbbl6n03kqs13ujeratg3s17ul7ejj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNZvcQ2-ebE7x-PzB9T2BcM-nRNxtNnX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009790740333-i0pbbl6n03kqs13ujeratg3s17ul7ejj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
