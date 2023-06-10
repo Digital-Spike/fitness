@@ -45,6 +45,8 @@ class WelcomePage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
+
+                        ////////////////////// text field//////
                       ],
                     ),
                   ),
