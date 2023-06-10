@@ -1,119 +1,134 @@
-import 'package:fitness/authentication%20screen/splashSceen.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-import 'package:chewie/chewie.dart';
 
-class WelcomeScreen extends StatefulWidget {
-  @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: WelcomeScreen(),
+  ));
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
-  // Initializing video player
-  final VideoPlayerController videoPlayerController =
-      VideoPlayerController.asset("assets/v2.mp4");
+class WelcomeScreen extends StatelessWidget {
+  final List<String> slideTexts = [
+    "Transform your body",
+    "Achieve your fitness goals",
+    "Stay healthy and active"
+  ];
 
-  ChewieController? chewieController;
-  bool isPlaying = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          Image.asset(
+            'assets/1.png',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.black54, // Light background color for text
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SlideText(
+                  slideTexts: slideTexts,
+                ),
+                SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle sign up button press
+                  },
+                  child: Text("Sign up with Apple"),
+                ),
+                SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    // Handle sign up button press
+                  },
+                  child: Text("Sign up"),
+                ),
+                SizedBox(height: 16),
+                TextButton(
+                  onPressed: () {
+                    // Handle login button press
+                  },
+                  child: Text(
+                    "Already have an account? Login",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-  // Init state
+class SlideText extends StatefulWidget {
+  final List<String> slideTexts;
+
+  const SlideText({required this.slideTexts});
+
+  @override
+  _SlideTextState createState() => _SlideTextState();
+}
+
+class _SlideTextState extends State<SlideText>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<Offset> _slideAnimation;
+  int _currentIndex = 0;
+
   @override
   void initState() {
-    chewieController = ChewieController(
-      videoPlayerController: videoPlayerController,
-      aspectRatio: 16 / 9, // Adjust this aspect ratio according to your video
-      autoPlay: false, // Set autoPlay to false initially
-      looping: true,
-      autoInitialize: true,
-      showControls: false,
-    );
     super.initState();
+    _animationController = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+    );
+
+    _slideAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: Offset(0, 0.5),
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
+
+    _animationController.repeat(reverse: true);
   }
 
   @override
   void dispose() {
-    videoPlayerController.dispose();
-    chewieController!.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
-  void togglePlayPause() {
-    if (isPlaying) {
-      chewieController!.pause();
-    } else {
-      chewieController!.play();
-    }
+  void _updateIndex() {
     setState(() {
-      isPlaying = !isPlaying;
+      _currentIndex = (_currentIndex + 1) % widget.slideTexts.length;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Positioned.fill(
-            child: Chewie(
-              controller: chewieController!,
-            ),
+    return SlideTransition(
+      position: _slideAnimation,
+      child: GestureDetector(
+        onTap: _updateIndex,
+        child: Text(
+          widget.slideTexts[_currentIndex],
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      IconButton(
-                        icon: Icon(
-                          isPlaying ? Icons.pause : Icons.play_arrow,
-                          color: Colors.deepOrange,
-                        ),
-                        onPressed: togglePlayPause,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                      width: 150, // Set the desired width of the button
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.deepOrange,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 6.0,
-                            horizontal: 10.0,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SplashScreen()));
-                        },
-                        child: const Text(
-                          'Get Started',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 19,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      )),
-                ],
-              ),
-            ),
-          )
-        ],
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

@@ -2,14 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
-import 'addbooking.dart';
 
 class Slot {
   final String time;
   final bool available;
+  final String bookingStatus;
 
-  Slot({required this.time, required this.available});
+  Slot(
+      {required this.time,
+      required this.available,
+      required this.bookingStatus});
 }
 
 class SlotAvailability extends StatefulWidget {
@@ -39,9 +41,11 @@ class _SlotAvailabilityState extends State<SlotAvailability>
 
     List<Slot> updatedSlots = List.generate(13, (index) {
       bool isAvailable = jsondata[(index + 1).toString()] == "available";
+      String bookingStatus = isAvailable ? "Book" : "Booked";
       return Slot(
         time: getTime(index + 1),
         available: isAvailable,
+        bookingStatus: bookingStatus,
       );
     });
 
@@ -172,23 +176,11 @@ class _SlotAvailabilityState extends State<SlotAvailability>
       ),
       body: Column(
         children: [
-          TabBar(
-            controller: _tabController,
-            labelColor:
-                Colors.deepOrange, // Set the tab bar text color to deep orange
-            tabs: [
-              Tab(text: "Lists"), // Change tab 1 text to "Lists"
-              Tab(text: "Weeks"), // Change tab 2 text to "Weeks"
-              Tab(text: "Months"), // Change tab 3 text to "Months"
-            ],
-          ),
           Expanded(
             child: TabBarView(
               controller: _tabController,
               children: [
-                _buildListsTab(slots), // Rename _buildTab to _buildListsTab
-                _buildWeeksTab(
-                    slots), // Create a new method _buildWeeksTab and pass slots
+                // Create a new method _buildWeeksTab and pass slots
                 _buildMonthsTab(
                     slots), // Create a new method _buildMonthsTab and pass slots
               ],
@@ -199,279 +191,7 @@ class _SlotAvailabilityState extends State<SlotAvailability>
     );
   }
 
-  ///// lists section ////////////////////////
-  Widget _buildListsTab(List<Slot> slots) {
-    if (_showCircle) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10.0),
-            padding: EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
-              border: Border.all(color: Colors.deepOrange),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Date: ${DateFormat('dd/MM/yyyy').format(selectedDate)}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Day: ${DateFormat('EEEE').format(selectedDate)}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: slots.length,
-              itemBuilder: (context, index) {
-                Slot slot = slots[index];
-                bool isAvailable = slot.available;
-                String buttonText = isAvailable ? 'Book' : 'Booked';
-                Color buttonTextColor =
-                    isAvailable ? Colors.black : Colors.white;
-                Color buttonBorderColor =
-                    isAvailable ? Colors.green : Colors.red;
-                Color containerBorderColor = Colors.deepOrange;
-                String slotTime = slot.time;
-
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: containerBorderColor),
-                  ),
-                  child: ListTile(
-                    title: Text(slotTime),
-                    subtitle: Text(isAvailable ? "Available" : "Not Available"),
-                    trailing: ElevatedButton(
-                      onPressed: () {
-                        if (isAvailable) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Alert'),
-                                content: Text('Book your slot now'),
-                                contentPadding: EdgeInsets.all(16.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                backgroundColor: Colors.white,
-                                actions: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Colors.orangeAccent,
-                                          Colors.amber,
-                                          Colors.orangeAccent,
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        stops: [0.2, 0.5, 0.8],
-                                      ),
-                                    ),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Addbooking()),
-                                        );
-                                      },
-                                      child: Text('Book'),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Colors.transparent,
-                                        onPrimary: Colors.white,
-                                        elevation: 0,
-                                        textStyle: TextStyle(fontSize: 16.0),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Alert'),
-                                content: Text(
-                                    'This slot is already booked. Do you want to cancel the booking?'),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      // cancelBooking(slot);
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Cancel Booking'),
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.red,
-                                      onPrimary: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      },
-                      child: Text(
-                        buttonText,
-                        style: TextStyle(color: buttonTextColor),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        onPrimary: buttonTextColor,
-                        side: BorderSide(color: buttonBorderColor),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      );
-    }
-  }
-
-  /////////////////////// weeks  ///////////////////////////
-  Widget _buildWeeksTab(List<Slot> slots) {
-    if (_showCircle) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    } else {
-      return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 60.0, // Adjust the height as needed
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: slots.length,
-                itemBuilder: (context, index) {
-                  Slot slot = slots[index];
-                  DateTime slotDateTime =
-                      selectedDate.add(Duration(days: index));
-                  String day = DateFormat('EEE').format(slotDateTime);
-                  String date = DateFormat('dd').format(slotDateTime);
-
-                  return Container(
-                    width: 65.0,
-                    height: 20.0, // Adjust the width as needed
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.deepOrange, Colors.white],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(color: Colors.black),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          day,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                        Text(
-                          date,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics:
-                  NeverScrollableScrollPhysics(), // Disable scrolling for the inner ListView.builder
-              itemCount: slots.length,
-              itemBuilder: (context, index) {
-                Slot slot = slots[index];
-                if (slot.available) {
-                  // Skip rendering the slot if it is available
-                  return SizedBox.shrink();
-                }
-
-                bool isAvailable = slot.available;
-                String buttonText = isAvailable ? 'Book' : 'Booked';
-                Color buttonTextColor =
-                    isAvailable ? Colors.black : Colors.white;
-                Color buttonBorderColor =
-                    isAvailable ? Colors.green : Colors.red;
-                Color containerBorderColor = Colors.deepOrange;
-
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                  padding: EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: containerBorderColor),
-                  ),
-                  child: ListTile(
-                    title: Text(slot.time),
-                    subtitle: Text(isAvailable ? "Available" : "Not Available"),
-                    trailing: ElevatedButton(
-                      onPressed: isAvailable ? () => bookSlot(slot) : null,
-                      child: Text(
-                        buttonText,
-                        style: TextStyle(color: buttonTextColor),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        onPrimary: buttonTextColor,
-                        side: BorderSide(color: buttonBorderColor),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      );
-    }
-  }
-
-////////////////////////// months  //////////////////////////
+  ////////////////////////// months  //////////////////////////
   Widget _buildMonthsTab(List<Slot> slots) {
     return Column(
       children: [
@@ -496,19 +216,41 @@ class _SlotAvailabilityState extends State<SlotAvailability>
               itemCount: slots.length,
               itemBuilder: (context, index) {
                 Slot slot = slots[index];
-                String bookingStatus = slot.available ? "Book" : "Booked";
+                Color backgroundColor = Colors.white;
+                Color textColor = Colors.black;
+                Color borderColor = Colors.grey;
+                String bookingStatus = slot.bookingStatus;
+
+                if (slot.available) {
+                  backgroundColor = Colors.black;
+                  textColor = Colors.white;
+                  borderColor = Colors.deepOrange;
+                } else {
+                  backgroundColor = Colors.red;
+                  textColor = Colors.white;
+                }
+
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
+                    color: backgroundColor,
+                    border: Border.all(color: borderColor),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ListTile(
-                    title: Text(slot.time),
-                    subtitle:
-                        Text(slot.available ? "Available" : "Not Available"),
-                    trailing: Text(bookingStatus),
+                    title: Text(
+                      slot.time,
+                      style: TextStyle(color: textColor),
+                    ),
+                    subtitle: Text(
+                      slot.available ? "Available" : "Not Available",
+                      style: TextStyle(color: textColor),
+                    ),
+                    trailing: Text(
+                      bookingStatus,
+                      style: TextStyle(color: textColor),
+                    ),
                     onTap: () {
                       bookSlot(slot);
                     },
@@ -524,7 +266,9 @@ class _SlotAvailabilityState extends State<SlotAvailability>
   void main() {
     runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SlotAvailability(),
+      home: Scaffold(
+        body: SlotAvailability(),
+      ),
     ));
   }
 }

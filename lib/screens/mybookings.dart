@@ -1,6 +1,9 @@
 import 'package:fitness/schedule/alvailableranches.dart';
 import 'package:flutter/material.dart';
 
+import '../schedule/gettrinerdetails.dart';
+import '../schedule/slot.dart';
+
 class MyBookingScreen extends StatefulWidget {
   const MyBookingScreen({Key? key}) : super(key: key);
 
@@ -41,8 +44,10 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
                 ),
               ),
               onPressed: () {
-                // Perform action when Current Bookings option is pressed
-                // Add your custom action here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GetTrainerDetails()),
+                );
               },
               child: Column(
                 children: [
@@ -84,8 +89,10 @@ class _MyBookingScreenState extends State<MyBookingScreen> {
                 ),
               ),
               onPressed: () {
-                // Perform action when Pending Bookings option is pressed
-                // Add your custom action here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SlotAvailability()),
+                );
               },
               child: Column(
                 children: [

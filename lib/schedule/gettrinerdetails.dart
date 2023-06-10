@@ -170,7 +170,6 @@ class _GetTrainerDetailsState extends State<GetTrainerDetails>
                                         14, // Increase the font size as needed
                                   ),
                                 ),
-                                SizedBox(height: 8),
                               ],
                             ),
                           ),
