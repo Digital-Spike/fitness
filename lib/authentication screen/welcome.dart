@@ -20,6 +20,8 @@ class WelcomePage extends StatelessWidget {
           Column(
             children: [
               Expanded(
+                flex:
+                    2, // Adjust the flex value to change the height ratio of the sections
                 child: Container(
                   color: Colors.grey.withOpacity(0.4),
                   child: Padding(
@@ -45,51 +47,53 @@ class WelcomePage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-
-                        ////////////////////// text field//////
                       ],
                     ),
                   ),
                 ),
               ),
-              Container(
-                color: Colors.grey.withOpacity(0.4),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          // TODO: Implement sign up with Apple
-                        },
-                        child: Text('Sign up with Apple'),
-                      ),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () {
-                          // TODO: Implement regular sign up
-                        },
-                        child: Text('Sign up'),
-                      ),
-                      SizedBox(height: 10),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
+              Expanded(
+                flex:
+                    1, // Adjust the flex value to change the height ratio of the sections
+                child: Container(
+                  color: Colors.grey.withOpacity(0.4),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // TODO: Implement sign up with Apple
+                          },
+                          child: Text('Sign up with Apple'),
+                        ),
+                        SizedBox(height: 10),
+                        ElevatedButton(
+                          onPressed: () {
+                            // TODO: Implement regular sign up
+                          },
+                          child: Text('Sign up'),
+                        ),
+                        SizedBox(height: 10),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Already have an account? Login',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
                             ),
-                          );
-                        },
-                        child: Text(
-                          'Already have an account? Login',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
