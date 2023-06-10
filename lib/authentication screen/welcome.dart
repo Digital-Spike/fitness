@@ -1,134 +1,99 @@
 import 'package:flutter/material.dart';
+import 'package:fitness/authentication%20screen/log_in.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: WelcomeScreen(),
-  ));
-}
-
-class WelcomeScreen extends StatelessWidget {
-  final List<String> slideTexts = [
-    "Transform your body",
-    "Achieve your fitness goals",
-    "Stay healthy and active"
-  ];
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(
-            'assets/1.png',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.black54, // Light background color for text
+              image: DecorationImage(
+                image: AssetImage('assets/1.png'),
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SlideText(
-                  slideTexts: slideTexts,
-                ),
-                SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle sign up button press
-                  },
-                  child: Text("Sign up with Apple"),
-                ),
-                SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle sign up button press
-                  },
-                  child: Text("Sign up"),
-                ),
-                SizedBox(height: 16),
-                TextButton(
-                  onPressed: () {
-                    // Handle login button press
-                  },
-                  child: Text(
-                    "Already have an account? Login",
-                    style: TextStyle(color: Colors.white),
+          ),
+          Column(
+            children: [
+              Expanded(
+                child: Container(
+                  color: Colors.grey.withOpacity(0.4),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Transform your body and mind',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              Container(
+                color: Colors.grey.withOpacity(0.4),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // TODO: Implement sign up with Apple
+                        },
+                        child: Text('Sign up with Apple'),
+                      ),
+                      SizedBox(height: 10),
+                      ElevatedButton(
+                        onPressed: () {
+                          // TODO: Implement regular sign up
+                        },
+                        child: Text('Sign up'),
+                      ),
+                      SizedBox(height: 10),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Already have an account? Login',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class SlideText extends StatefulWidget {
-  final List<String> slideTexts;
-
-  const SlideText({required this.slideTexts});
-
-  @override
-  _SlideTextState createState() => _SlideTextState();
-}
-
-class _SlideTextState extends State<SlideText>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<Offset> _slideAnimation;
-  int _currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: Duration(seconds: 1),
-      vsync: this,
-    );
-
-    _slideAnimation = Tween<Offset>(
-      begin: Offset.zero,
-      end: Offset(0, 0.5),
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
-
-    _animationController.repeat(reverse: true);
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  void _updateIndex() {
-    setState(() {
-      _currentIndex = (_currentIndex + 1) % widget.slideTexts.length;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SlideTransition(
-      position: _slideAnimation,
-      child: GestureDetector(
-        onTap: _updateIndex,
-        child: Text(
-          widget.slideTexts[_currentIndex],
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-          textAlign: TextAlign.center,
-        ),
       ),
     );
   }
