@@ -1,3 +1,4 @@
+import 'package:fitness/authentication%20screen/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness/authentication%20screen/log_in.dart';
 
@@ -80,7 +81,12 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
-                      // TODO: Implement regular sign up
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => signin(),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red,
