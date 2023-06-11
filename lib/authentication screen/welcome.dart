@@ -19,81 +19,99 @@ class WelcomePage extends StatelessWidget {
           ),
           Column(
             children: [
-              Expanded(
-                flex:
-                    2, // Adjust the flex value to change the height ratio of the sections
+              SizedBox(height: 50),
+              Container(
+                height: 180,
+                width: double.infinity,
                 child: Container(
-                  color: Colors.grey.withOpacity(0.4),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Transform your body and mind',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Transform your body and mind',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
-                        SizedBox(height: 20),
-                        Text(
-                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
-                      ],
-                    ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Expanded(
-                flex:
-                    1, // Adjust the flex value to change the height ratio of the sections
-                child: Container(
-                  color: Colors.grey.withOpacity(0.4),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // TODO: Implement sign up with Apple
-                          },
-                          child: Text('Sign up with Apple'),
-                        ),
-                        SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () {
-                            // TODO: Implement regular sign up
-                          },
-                          child: Text('Sign up'),
-                        ),
-                        SizedBox(height: 10),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Already have an account? Login',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-                      ],
+              SizedBox(height: 350),
+              Column(
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      // TODO: Implement sign up with Apple
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      onPrimary: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                     ),
+                    icon: Image.asset(
+                      'assets/icons/blue.png',
+                      height: 20,
+                      width: 20,
+                    ),
+                    label: Text('Sign up with Apple'),
+                  ),
+                  SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      // TODO: Implement regular sign up
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      onPrimary: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                    ),
+                    child: Text('Sign up'),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                ),
+                child: Text(
+                  'Already have an account? Login',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
                   ),
                 ),
               ),
