@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -14,13 +15,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late String? _displayName;
   late String? _email;
   File? _profileImage;
+  SharedPreferences? _prefs;
 
   @override
   void initState() {
     super.initState();
     _displayName = user?.displayName;
     _email = user?.email;
-    _profileImage = null; // Initialize profile image to null
+    _loadProfileImage();
   }
 
   Future<void> _chooseProfileImage() async {
@@ -30,7 +32,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
       setState(() {
         _profileImage = File(pickedImage.path);
       });
+      _saveProfileImage();
     }
+  }
+
+  Future<void> _loadProfileImage() async {
+    _prefs = await SharedPreferences.getInstance();
+    final imagePath = _prefs?.getString('profile_image_path');
+    if (imagePath != null) {
+      setState(() {
+        _profileImage = File(imagePath);
+      });
+    }
+  }
+
+  Future<void> _saveProfileImage() async {
+    final imagePath = _profileImage?.path ?? '';
+    await _prefs?.setString('profile_image_path', imagePath);
   }
 
   @override
