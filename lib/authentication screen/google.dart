@@ -1,92 +1,76 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/authentication%20screen/services.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Google extends StatefulWidget {
-  const Google({Key? key}) : super(key: key);
-
   @override
   _GoogleState createState() => _GoogleState();
 }
 
 class _GoogleState extends State<Google> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Colors.black,
-          Colors.deepOrange,
-          Colors.grey,
-        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-        child: Center(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 30),
-            child: ElevatedButton(
+      appBar: AppBar(
+        title: Text('Google Sign In'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
               onPressed: () async {
-                await FirebaseServices().signInWithGoogle();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MainScreen()));
-              },
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith((states) {
-                if (states.contains(MaterialState.pressed)) {
-                  return Colors.black26;
+                try {
+                  final GoogleSignInAccount? googleSignInAccount =
+                      await _googleSignIn.signIn();
+                  final GoogleSignInAuthentication googleSignInAuthentication =
+                      await googleSignInAccount!.authentication;
+                  final AuthCredential credential =
+                      GoogleAuthProvider.credential(
+                    accessToken: googleSignInAuthentication.accessToken,
+                    idToken: googleSignInAuthentication.idToken,
+                  );
+                  await _auth.signInWithCredential(credential);
+
+                  // Get the user display name
+                  final user = _auth.currentUser;
+                  final userName = user?.displayName ?? 'User';
+
+                  // Display success message
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Sign In Successful'),
+                        content: Text('User $userName signed in successfully!'),
+                      );
+                    },
+                  );
+
+                  // Navigate to the MainScreen after a short delay
+                  Future.delayed(Duration(seconds: 2), () {
+                    Navigator.pop(context); // Close the dialog
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainScreen(),
+                      ),
+                    );
+                  });
+                } on FirebaseAuthException catch (e) {
+                  print(e.message);
+                  throw e;
                 }
-                return Colors.white;
-              })),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/google.jpeg",
-                      height: 40,
-                      width: 40,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    const Text(
-                      "Login with Gmail",
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87),
-                    ),
-                  ],
-                ),
-              ),
+              },
+              child: Text('Sign In'),
             ),
-          ),
+          ],
         ),
       ),
     );
-  }
-
-  Future<void> signInWithGoogle() async {
-    try {
-      final GoogleSignIn _googleSignIn = GoogleSignIn();
-      final FirebaseAuth _auth = FirebaseAuth.instance;
-
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-        final AuthCredential authCredential = GoogleAuthProvider.credential(
-          accessToken: googleSignInAuthentication.accessToken,
-          idToken: googleSignInAuthentication.idToken,
-        );
-        await _auth.signInWithCredential(authCredential);
-      }
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-      throw e;
-    }
   }
 }
