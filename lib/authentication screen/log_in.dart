@@ -25,6 +25,23 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    // Check if the user is already logged in
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        // User is logged in, navigate to MainScreen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainScreen(),
+          ),
+        );
+      }
+    });
+  }
+
   userLogin() async {
     try {
       await FirebaseAuth.instance
