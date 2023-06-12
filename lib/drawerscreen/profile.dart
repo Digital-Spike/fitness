@@ -1,71 +1,35 @@
 import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Profile extends StatefulWidget {
+class ProfileScreen extends StatefulWidget {
   @override
-  _ProfileState createState() => _ProfileState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileState extends State<Profile> {
-  File? _image;
-  final picker = ImagePicker();
+class _ProfileScreenState extends State<ProfileScreen> {
+  final User? user = FirebaseAuth.instance.currentUser;
+  late String? _displayName;
+  late String? _email;
+  File? _profileImage;
 
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController mobileNumberController = TextEditingController();
-  TextEditingController countryController = TextEditingController();
-  TextEditingController stateController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
-  TextEditingController zipCodeController = TextEditingController();
-
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  void _selectImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      }
-    });
+  @override
+  void initState() {
+    super.initState();
+    _displayName = user?.displayName;
+    _email = user?.email;
+    _profileImage = null; // Initialize profile image to null
   }
 
-  void _editProfile() {
-    if (_formKey.currentState!.validate()) {
-      // Perform edit profile functionality here
-      // Retrieve the updated values from the text controllers
-      String firstName = firstNameController.text;
-      String lastName = lastNameController.text;
-      String email = emailController.text;
-      String mobileNumber = mobileNumberController.text;
-      String country = countryController.text;
-      String state = stateController.text;
-      String city = cityController.text;
-      String zipCode = zipCodeController.text;
-
-      // Use the updated values as required
-      // For example, you can save the changes to a database or update a user object
-
-      // Show a success message or navigate to another screen
-      // after successfully editing the profile
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Profile Updated'),
-            content: Text('Your profile has been successfully updated.'),
-            actions: [
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+  Future<void> _chooseProfileImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _profileImage = File(pickedImage.path);
+      });
     }
   }
 
@@ -73,197 +37,109 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         title: Text(
           'Profile',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                GestureDetector(
-                  onTap: _selectImage,
-                  child: Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.deepOrange,
-                        backgroundImage:
-                            _image != null ? FileImage(_image!) : null,
-                        child: _image == null
-                            ? Icon(Icons.person, size: 60)
-                            : null,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 16),
-                TextFormField(
-                  controller: firstNameController,
-                  decoration: InputDecoration(
-                    labelText: 'First Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.deepOrange),
-                    ),
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter yourfirst name';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  controller: lastNameController,
-                  decoration: InputDecoration(
-                    labelText: 'Last Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.deepOrange),
-                    ),
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your last name';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.deepOrange),
-                    ),
-                    prefixIcon: Icon(Icons.email),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your email abcd1234@gmail.com';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  controller: mobileNumberController,
-                  decoration: InputDecoration(
-                    labelText: 'Mobile Number',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.deepOrange),
-                    ),
-                    prefixIcon: Icon(Icons.phone),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your mobile number';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  controller: countryController,
-                  decoration: InputDecoration(
-                    labelText: 'Country',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.deepOrange),
-                    ),
-                    prefixIcon: Icon(Icons.location_on),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your country';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  controller: stateController,
-                  decoration: InputDecoration(
-                    labelText: 'State',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.deepOrange),
-                    ),
-                    prefixIcon: Icon(Icons.location_on),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your state';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  controller: cityController,
-                  decoration: InputDecoration(
-                    labelText: 'City',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.deepOrange),
-                    ),
-                    prefixIcon: Icon(Icons.location_on),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your city';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  controller: zipCodeController,
-                  decoration: InputDecoration(
-                    labelText: 'Zip Code',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.deepOrange),
-                    ),
-                    prefixIcon: Icon(Icons.location_on),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your zip code';
-                    }
-                    return null;
-                  },
-                ),
-                SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: _editProfile,
-                  child: Text('Edit Profile'),
-                ),
-              ],
+      backgroundColor: Colors.black,
+      body: ListView(
+        padding: EdgeInsets.symmetric(vertical: 16),
+        children: [
+          Container(
+            color: Colors.grey[800],
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                backgroundImage:
+                    _profileImage != null ? FileImage(_profileImage!) : null,
+                child: _profileImage == null ? Icon(Icons.person) : null,
+              ),
+              title: Text(
+                _displayName ?? '',
+                style: TextStyle(color: Colors.white),
+              ),
+              subtitle: Text(
+                _email ?? '',
+                style: TextStyle(color: Colors.white),
+              ),
+              trailing: Icon(
+                Icons.edit,
+                color: Colors.grey,
+              ),
+              onTap: _chooseProfileImage,
             ),
           ),
+          Divider(
+            color: Colors.white, // Set the divider color to white
+            thickness: 1, // Set the thickness as desired
+          ),
+          SizedBox(height: 20),
+          buildSettingsButton('Languages', Icons.language, () {
+            // Handle languages button tap
+          }),
+          SizedBox(height: 20),
+          buildSettingsButton('Subscription', Icons.subscriptions, () {
+            // Handle subscription button tap
+          }),
+          SizedBox(height: 20),
+          buildSettingsButton('Account and Privacy', Icons.security, () {
+            // Handle Account and Privacy button tap
+          }),
+          SizedBox(height: 20),
+          buildSettingsButton('Settings', Icons.settings, () {
+            // Handle Settings button tap
+          }),
+          SizedBox(height: 20),
+          buildSettingsButton('Help & Support', Icons.help, () {
+            // Handle Help & Support button tap
+          }),
+          SizedBox(height: 20),
+          buildSettingsButton('Logout', Icons.logout, () {
+            // Handle Logout button tap
+          }),
+          SizedBox(height: 20),
+          Center(
+            child: Image.asset(
+              'assets/fitnessname.png',
+              height: 80, // Adjust the height as needed
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSettingsButton(
+      String title, IconData icon, VoidCallback onPressed) {
+    return Container(
+      width: 200, // Set the desired width of the button
+      decoration: BoxDecoration(
+        color: Colors.grey[800],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding: EdgeInsets.symmetric(
+          horizontal: 10, vertical: 1), // Adjust the padding as needed
+      child: ListTile(
+        title: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+            ),
+            SizedBox(width: 10),
+            Text(
+              title,
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
         ),
+        trailing: Icon(
+          Icons.arrow_forward_ios,
+          color: Colors.grey,
+        ),
+        onTap: onPressed,
       ),
     );
   }
