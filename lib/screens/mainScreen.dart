@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     Video(),
     MyBookingScreen(),
-    Profile(),
+    ProfileScreen(),
   ];
 
   void onTapped(int value) {
