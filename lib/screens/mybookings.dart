@@ -1,129 +1,121 @@
-import 'package:fitness/schedule/alvailableranches.dart';
 import 'package:flutter/material.dart';
 
-import '../schedule/gettrinerdetails.dart';
-import '../schedule/slot.dart';
-
-class MyBookingScreen extends StatefulWidget {
-  const MyBookingScreen({Key? key}) : super(key: key);
-
+class MyBookingPage extends StatefulWidget {
   @override
-  _MyBookingScreenState createState() => _MyBookingScreenState();
+  _MyBookingPageState createState() => _MyBookingPageState();
 }
 
-class _MyBookingScreenState extends State<MyBookingScreen> {
+class _MyBookingPageState extends State<MyBookingPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+  }
+
+  @override
+  void dispose() {
+    _tabController.removeListener(_handleTabSelection);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _handleTabSelection() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF8F8F8),
       appBar: AppBar(
-        backgroundColor: Colors.white, // Change app bar color to white
+        backgroundColor: Colors.black,
         title: Text(
-          'My Bookings',
-          style: TextStyle(
-            color: Colors.black, // Change text color to black
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
-          ),
+          'My Booking',
+          style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Color(0xff3E64AF),
-                elevation: 5.0,
-                padding: EdgeInsets.all(20.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+      body: Column(
+        children: [
+          Divider(
+            color: Colors.white,
+            height: 1,
+          ),
+          Container(
+            color: Colors.grey.shade200,
+            child: TabBar(
+              controller: _tabController,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.black,
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                color:
+                    Colors.deepOrange, // Set the indicator color to deep orange
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GetTrainerDetails()),
-                );
-              },
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.book_online,
-                    color: Colors.black,
-                    size: 40.0,
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Current Bookings',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff3E64AF),
+              tabs: [
+                Tab(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Bookings',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: _tabController.index == 0
+                            ? Colors.white
+                            : Colors.black,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'View your current bookings',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black54,
+                ),
+                Tab(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'History',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: _tabController.index == 1
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.black, // Set background color to black
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  Center(
+                    child: Text(
+                      'Bookings',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      'History',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Color(0xff3E64AF),
-                elevation: 5.0,
-                padding: EdgeInsets.all(20.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SlotAvailability()),
-                );
-              },
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.pending_actions,
-                    color: Colors.black,
-                    size: 40.0,
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Pending Bookings',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff3E64AF),
-                    ),
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'View your pending bookings',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
