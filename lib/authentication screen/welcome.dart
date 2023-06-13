@@ -1,142 +1,85 @@
 import 'package:flutter/material.dart';
-
-import 'log_in.dart';
-import 'sign_in.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    Color containerColor = Color.fromRGBO(217, 217, 217, 0.25);
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/1.png'),
+            image: AssetImage('assets/back.jpg'),
             fit: BoxFit.cover,
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50),
-            Expanded(
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 45),
+              color: containerColor,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 10,
-                            offset: Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Transform your body and mind',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 400),
-                    Column(
-                      children: [
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            // TODO: Implement sign up with Apple
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => SlotAvailability(),
-                            //   ),
-                            // );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
-                            onPrimary: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 20),
-                          ),
-                          icon: Image.asset(
-                            'assets/apple.png',
-                            height: 20,
-                            width: 20,
-                          ),
-                          label: Text('Sign up with Apple'),
-                        ),
-                        SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () {
-                            // TODO: Handle sign up button press
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Signup(),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
-                            onPrimary: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 20),
-                          ),
-                          child: Text('Sign up'),
-                        ),
-                      ],
-                    ),
-                  ],
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: containerColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  'Transform your body\n and mind\nWith the ultimate EMS Fitness\njourney app for anyone who\nwants to take control of their\nhealth and fitness',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
-            SizedBox(height: 8),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Login(),
-                  ),
-                );
-              },
-              style: TextButton.styleFrom(
-                primary: Colors.white,
+            Spacer(),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 45),
+              width: double.infinity,
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: containerColor,
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
-                'Already have an account? Login',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontSize: 15,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      // Handle login action
+                    },
+                    child: SvgPicture.asset(
+                      'assets/applesignup.svg',
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () {
+                      // Handle login action
+                    },
+                    child: SvgPicture.asset(
+                      'assets/signup.svg',
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  GestureDetector(
+                    onTap: () {
+                      // Handle login action
+                    },
+                    child: Text(
+                      'Already have an Account? Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
