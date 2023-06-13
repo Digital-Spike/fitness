@@ -56,72 +56,93 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
-          'Profile',
-          style: TextStyle(color: Colors.white),
+        title: Center(
+          child: Text(
+            'Profile',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return [];
+            },
+          ),
+        ],
       ),
       backgroundColor: Colors.black,
-      body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 16),
+      body: Column(
         children: [
-          Container(
-            color: Colors.grey[800],
-            child: ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundImage:
-                    _profileImage != null ? FileImage(_profileImage!) : null,
-                child: _profileImage == null ? Icon(Icons.person) : null,
-              ),
-              title: Text(
-                _displayName ?? '',
-                style: TextStyle(color: Colors.white),
-              ),
-              subtitle: Text(
-                _email ?? '',
-                style: TextStyle(color: Colors.white),
-              ),
-              trailing: Icon(
-                Icons.edit,
-                color: Colors.grey,
-              ),
-              onTap: _chooseProfileImage,
-            ),
-          ),
           Divider(
-            color: Colors.white, // Set the divider color to white
-            thickness: 1, // Set the thickness as desired
+            color: Colors.white,
+            thickness: 1,
           ),
-          SizedBox(height: 20),
-          buildSettingsButton('Languages', Icons.language, () {
-            // Handle languages button tap
-          }),
-          SizedBox(height: 20),
-          buildSettingsButton('Subscription', Icons.subscriptions, () {
-            // Handle subscription button tap
-          }),
-          SizedBox(height: 20),
-          buildSettingsButton('Account and Privacy', Icons.security, () {
-            // Handle Account and Privacy button tap
-          }),
-          SizedBox(height: 20),
-          buildSettingsButton('Settings', Icons.settings, () {
-            // Handle Settings button tap
-          }),
-          SizedBox(height: 20),
-          buildSettingsButton('Help & Support', Icons.help, () {
-            // Handle Help & Support button tap
-          }),
-          SizedBox(height: 20),
-          buildSettingsButton('Logout', Icons.logout, () {
-            // Handle Logout button tap
-          }),
-          SizedBox(height: 20),
-          Center(
-            child: Image.asset(
-              'assets/fitnessname.png',
-              height: 80, // Adjust the height as needed
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              children: [
+                Container(
+                  width: 300, // Increased width for the circular avatar
+                  height: 80,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 50, // Increased size for the circular avatar
+                      backgroundImage: _profileImage != null
+                          ? FileImage(_profileImage!)
+                          : null,
+                      child: _profileImage == null ? Icon(Icons.person) : null,
+                    ),
+                    title: Text(
+                      _displayName ?? '',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    subtitle: Text(
+                      _email ?? '',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    trailing: Icon(
+                      Icons.edit,
+                      color: Colors.grey,
+                    ),
+                    onTap: _chooseProfileImage,
+                  ),
+                ),
+                Divider(
+                  color: Colors.white,
+                  thickness: 1,
+                ),
+                SizedBox(height: 20),
+                buildSettingsButton('Languages', Icons.language, () {
+                  // Handle languages button tap
+                }),
+                SizedBox(height: 20),
+                buildSettingsButton('Subscription', Icons.subscriptions, () {
+                  // Handle subscription button tap
+                }),
+                SizedBox(height: 20),
+                buildSettingsButton('Account and Privacy', Icons.security, () {
+                  // Handle Account and Privacy button tap
+                }),
+                SizedBox(height: 20),
+                buildSettingsButton('Settings', Icons.settings, () {
+                  // Handle Settings button tap
+                }),
+                SizedBox(height: 20),
+                buildSettingsButton('Help & Support', Icons.help, () {
+                  // Handle Help & Support button tap
+                }),
+                SizedBox(height: 20),
+                buildSettingsButton('Logout', Icons.logout, () {
+                  // Handle Logout button tap
+                }),
+                SizedBox(height: 10),
+                Center(
+                  child: Image.asset(
+                    'assets/fitnessname.png',
+                    height: 80,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -131,33 +152,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget buildSettingsButton(
       String title, IconData icon, VoidCallback onPressed) {
-    return Container(
-      width: 200, // Set the desired width of the button
-      decoration: BoxDecoration(
-        color: Colors.grey[800],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      padding: EdgeInsets.symmetric(
-          horizontal: 10, vertical: 1), // Adjust the padding as needed
-      child: ListTile(
-        title: Row(
-          children: [
-            Icon(
-              icon,
-              color: Colors.white,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+      child: SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.grey[600],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
             ),
-            SizedBox(width: 10),
-            Text(
-              title,
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
+            padding: EdgeInsets.symmetric(vertical: 6),
+          ),
+          onPressed: onPressed,
+          child: Row(
+            children: [
+              SizedBox(
+                width: 10,
+              ),
+              Icon(
+                icon,
+                color: Colors.white,
+                size: 18,
+              ),
+              SizedBox(width: 8),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.white,
+                size: 18,
+              ),
+            ],
+          ),
         ),
-        trailing: Icon(
-          Icons.arrow_forward_ios,
-          color: Colors.grey,
-        ),
-        onTap: onPressed,
       ),
     );
   }
