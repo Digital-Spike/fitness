@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     HomeScreen(),
     Video(),
-    MyBookingScreen(),
+    MyBookingPage(),
     ProfileScreen(),
   ];
 
