@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'log_in.dart';
 
@@ -109,7 +110,7 @@ class _SignupState extends State<Signup> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/1.png"),
+                image: AssetImage("assets/back.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -122,15 +123,8 @@ class _SignupState extends State<Signup> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.2),
+                      color: Color.fromRGBO(217, 217, 217, 0.25),
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
                     ),
                     padding: const EdgeInsets.all(20),
                     child: Column(
@@ -170,6 +164,8 @@ class _SignupState extends State<Signup> {
                           child: TextFormField(
                             autofocus: false,
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey.shade100,
                               labelText: 'Name: ',
                               labelStyle: TextStyle(fontSize: 20.0),
                               border: OutlineInputBorder(
@@ -181,6 +177,8 @@ class _SignupState extends State<Signup> {
                                 fontSize: 15,
                               ),
                             ),
+                            style: TextStyle(
+                                color: Colors.black), // Set text color to black
                             controller: nameController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -195,6 +193,8 @@ class _SignupState extends State<Signup> {
                           child: TextFormField(
                             autofocus: false,
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey.shade100,
                               labelText: 'Email: ',
                               labelStyle: TextStyle(fontSize: 20.0),
                               border: OutlineInputBorder(
@@ -206,6 +206,8 @@ class _SignupState extends State<Signup> {
                                 fontSize: 15,
                               ),
                             ),
+                            style: TextStyle(
+                                color: Colors.black), // Set text color to black
                             controller: emailController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -221,12 +223,13 @@ class _SignupState extends State<Signup> {
                           margin: EdgeInsets.symmetric(vertical: 10.0),
                           child: TextFormField(
                             autofocus: false,
-                            keyboardType: TextInputType
-                                .phone, // Set the keyboard type to phone
+                            keyboardType: TextInputType.phone,
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly
-                            ], // Allow only digits
+                            ],
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey.shade100,
                               labelText: 'Phone Number: ',
                               labelStyle: TextStyle(fontSize: 20.0),
                               border: OutlineInputBorder(
@@ -238,6 +241,8 @@ class _SignupState extends State<Signup> {
                                 fontSize: 15,
                               ),
                             ),
+                            style: TextStyle(
+                                color: Colors.black), // Set text color to black
                             controller: phoneNumberController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -253,17 +258,23 @@ class _SignupState extends State<Signup> {
                             autofocus: false,
                             obscureText: true,
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey.shade100,
                               labelText: 'Password: ',
                               labelStyle: TextStyle(fontSize: 20.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               prefixIcon: Icon(Icons.lock),
+                              suffixIcon: Icon(Icons
+                                  .visibility), // Show/hide password toggle
                               errorStyle: TextStyle(
                                 color: Colors.redAccent,
                                 fontSize: 15,
                               ),
                             ),
+                            style: TextStyle(
+                                color: Colors.black), // Set text color to black
                             controller: passwordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -279,17 +290,23 @@ class _SignupState extends State<Signup> {
                             autofocus: false,
                             obscureText: true,
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey.shade100,
                               labelText: 'Confirm Password: ',
                               labelStyle: TextStyle(fontSize: 20.0),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               prefixIcon: Icon(Icons.lock),
+                              suffixIcon: Icon(Icons
+                                  .visibility), // Show/hide password toggle
                               errorStyle: TextStyle(
                                 color: Colors.redAccent,
                                 fontSize: 15,
                               ),
                             ),
+                            style: TextStyle(
+                                color: Colors.black), // Set text color to black
                             controller: confirmPasswordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -319,77 +336,30 @@ class _SignupState extends State<Signup> {
                             ],
                           ),
                         ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    setState(() {
-                                      name = nameController.text;
-                                      email = emailController.text;
-                                      phoneNumber = phoneNumberController.text;
-                                      password = passwordController.text;
-                                      confirmPassword =
-                                          confirmPasswordController.text;
-                                    });
-                                    registration();
-                                  }
-                                },
-                                child: Text(
-                                  'Sign Up',
-                                  style: TextStyle(fontSize: 18.0),
-                                ),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.red,
-                                  ),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.black,
-                                  ),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                         Column(
                           children: [
-                            ElevatedButton.icon(
-                              onPressed: () {
-                                // TODO: Implement sign up with Apple
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => SlotAvailability(),
-                                //   ),
-                                // );
+                            GestureDetector(
+                              onTap: () {
+                                // Handle login action
                               },
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.black,
-                                onPrimary: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 12, horizontal: 20),
+                              child: SvgPicture.asset(
+                                'assets/applesignup.svg',
                               ),
-                              icon: Image.asset(
-                                'assets/apple.png',
-                                height: 20,
-                                width: 20,
-                              ),
-                              label: Text('Sign up with Apple'),
                             ),
                             SizedBox(height: 10),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Signup(),
+                                  ),
+                                );
+                              },
+                              child: SvgPicture.asset(
+                                'assets/signup.svg',
+                              ),
+                            ),
                           ],
                         ),
                         Container(
