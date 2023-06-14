@@ -27,8 +27,8 @@ class _LogoutScreenState extends State<LogoutScreen> {
             ElevatedButton(
               onPressed: () {
                 // call the logout method from the authentication service
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (contex) => LoginScreen()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (contex) => Login()));
               },
               child: Text('Logout'),
             ),
