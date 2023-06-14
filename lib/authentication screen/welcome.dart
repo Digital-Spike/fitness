@@ -1,3 +1,5 @@
+import 'package:fitness/authentication%20screen/log_in.dart';
+import 'package:fitness/authentication%20screen/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -60,16 +62,19 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(height: 10),
                   GestureDetector(
                     onTap: () {
-                      // Handle login action
+                      Navigator.push(context,
+                          (MaterialPageRoute(builder: (context) => Signup())));
                     },
                     child: SvgPicture.asset(
                       'assets/signup.svg',
                     ),
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 10),
                   GestureDetector(
                     onTap: () {
                       // Handle login action
+                      Navigator.push(context,
+                          (MaterialPageRoute(builder: (context) => Login())));
                     },
                     child: Text(
                       'Already have an Account? Login',
