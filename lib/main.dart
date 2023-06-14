@@ -1,12 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness/authentication%20screen/log_in.dart';
 import 'package:fitness/authentication%20screen/splashSceen.dart';
+import 'package:fitness/schedule/gettrinerdetails.dart';
+import 'package:fitness/schedule/selecttrainers.dart';
+import 'package:fitness/schedule/slot.dart';
+import 'package:fitness/schedule/slotbooking.dart';
+import 'package:fitness/schedule/trainerlist.dart';
 import 'package:fitness/screens/mainScreen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'authentication screen/welcome.dart';
+import 'schedule/getbranchtrainers.dart';
 
 const List<String> scopes = <String>[
   'email',
@@ -33,12 +39,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: WelcomePage(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: WelcomePage());
   }
 }

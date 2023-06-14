@@ -44,12 +44,20 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           backgroundColor: Colors.black,
           elevation: 0,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1.0),
+            child: Container(
+              height: 1.0,
+              color: Colors.white,
+            ),
+          ),
           iconTheme: const IconThemeData(color: Colors.white),
-          leading: SvgPicture.asset('assets/language_icon.svg',),
+          leading: SvgPicture.asset(
+            'assets/language_icon.svg',
+          ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
               SizedBox(
                 height: 100,
                 child: Image.asset(

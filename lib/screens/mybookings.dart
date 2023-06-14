@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'booking.dart';
+
 class MyBookingPage extends StatefulWidget {
   @override
   _MyBookingPageState createState() => _MyBookingPageState();
@@ -30,8 +32,16 @@ class _MyBookingPageState extends State<MyBookingPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            height: 1.0,
+            color: Colors.white,
+          ),
+        ),
         title: Text(
           'My Booking',
           style: TextStyle(color: Colors.white),
@@ -40,51 +50,52 @@ class _MyBookingPageState extends State<MyBookingPage>
       ),
       body: Column(
         children: [
-          Divider(
-            color: Colors.white,
-            height: 1,
-          ),
-          Container(
-            color: Colors.grey.shade200,
-            child: TabBar(
-              controller: _tabController,
-              labelColor: Colors.white,
-              unselectedLabelColor: Colors.black,
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                color:
-                    Colors.deepOrange, // Set the indicator color to deep orange
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: Container(
+              margin: EdgeInsets.all(5),
+              padding: EdgeInsets.all(5),
+              color: Colors.grey.shade200,
+              child: TabBar(
+                controller: _tabController,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.black,
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7),
+                  color: Colors
+                      .deepOrange, // Set the indicator color to deep orange
+                ),
+                tabs: [
+                  Tab(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Bookings',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: _tabController.index == 0
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Tab(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'History',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: _tabController.index == 1
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              tabs: [
-                Tab(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Bookings',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: _tabController.index == 0
-                            ? Colors.white
-                            : Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'History',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: _tabController.index == 1
-                            ? Colors.white
-                            : Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
             ),
           ),
           Expanded(
@@ -93,15 +104,7 @@ class _MyBookingPageState extends State<MyBookingPage>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  Center(
-                    child: Text(
-                      'Bookings',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                  Booking(),
                   Center(
                     child: Text(
                       'History',
