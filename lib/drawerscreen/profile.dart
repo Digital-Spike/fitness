@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/drawerscreen/signout.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -134,6 +135,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: 20),
                 buildSettingsButton('Logout', Icons.logout, () {
                   // Handle Logout button tap
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LogoutScreen()));
                 }),
                 SizedBox(height: 10),
                 Center(
