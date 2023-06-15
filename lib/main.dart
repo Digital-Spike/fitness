@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness/authentication%20screen/log_in.dart';
 import 'package:fitness/authentication%20screen/splashSceen.dart';
+import 'package:fitness/schedule/alvailableranches.dart';
+import 'package:fitness/schedule/branches.dart';
 import 'package:fitness/schedule/gettrinerdetails.dart';
 import 'package:fitness/schedule/selecttrainers.dart';
 import 'package:fitness/schedule/slot.dart';

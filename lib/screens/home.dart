@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 
+import '../schedule/branches.dart';
+import '../schedule/trainerlist.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -100,16 +103,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               'Select a Trainer for EMS at Home',
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
-                            Icon(Icons.arrow_forward_ios_rounded,
-                                color: Colors.grey)
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const TrainerList()));
+                              },
+                              child: const Icon(Icons.arrow_forward_ios_rounded,
+                                  color: Colors.grey),
+                            ),
                           ],
                         ),
                       ),
@@ -158,16 +170,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               'Select a Trainer for EMS at Gym',
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
-                            Icon(Icons.arrow_forward_ios_rounded,
-                                color: Colors.grey)
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Branchlist()));
+                              },
+                              child: const Icon(Icons.arrow_forward_ios_rounded,
+                                  color: Colors.grey),
+                            )
                           ],
                         ),
                       ),
