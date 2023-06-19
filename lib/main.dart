@@ -9,7 +9,8 @@ import 'package:fitness/schedule/slot.dart';
 import 'package:fitness/schedule/slotbooking.dart';
 import 'package:fitness/schedule/trainerlist.dart';
 import 'package:fitness/screens/mainScreen.dart';
-
+// Import the generated file
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -30,7 +31,9 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
