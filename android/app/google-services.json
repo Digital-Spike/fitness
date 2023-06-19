@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1009790740333",
+    "firebase_url": "https://fitnessjourney-48caa-default-rtdb.firebaseio.com",
     "project_id": "fitnessjourney-48caa",
     "storage_bucket": "fitnessjourney-48caa.appspot.com"
   },
@@ -14,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1009790740333-i0pbbl6n03kqs13ujeratg3s17ul7ejj.apps.googleusercontent.com",
+          "client_id": "1009790740333-8c4gjb8kge1uu8vforp3qlhbstpv4fsh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fitness",
+            "certificate_hash": "aa9e29ac54afdcf66e11881422d59ab0f9a4e785"
+          }
+        },
+        {
+          "client_id": "1009790740333-ha6qv0js7tq88qt07p79oib4n3e435kg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1009790740333-i0pbbl6n03kqs13ujeratg3s17ul7ejj.apps.googleusercontent.com",
+              "client_id": "1009790740333-ha6qv0js7tq88qt07p79oib4n3e435kg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

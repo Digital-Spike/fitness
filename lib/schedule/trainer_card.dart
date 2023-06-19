@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class TrainerCard1 extends StatelessWidget {
-  final String trainerName;
+  final String name;
   final String experience;
   final String skills;
-  final String imagepath;
+  final String image;
 
   TrainerCard1(
-      {required this.trainerName,
+      {required this.name,
       required this.experience,
       required this.skills,
-      required this.imagepath});
+      required this.image});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,15 +29,17 @@ class TrainerCard1 extends StatelessWidget {
                   CircleAvatar(
                     backgroundColor: Colors.white,
                     minRadius: 40,
-                    foregroundImage: AssetImage(imagepath),
+                    foregroundImage: AssetImage(image),
                   ),
                   const SizedBox(width: 20),
                   Column(
                     children: [
                       Text(
-                        trainerName,
+                        name,
                         style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.orange),
                       ),
                       const SizedBox(height: 10),
                       Text(

@@ -28,6 +28,7 @@ class _MainScreenState extends State<MainScreen> {
   void onTapped(int value) {
     setState(() {
       current_value = value;
+     
     });
   }
 
@@ -46,6 +47,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         selectedIndex: current_value,
         onSelectTab: onTapped,
+        
         items: [
           FFNavigationBarItem(
             iconData: Icons.home,

@@ -1,5 +1,3 @@
-import 'package:fitness/schedule/selecttrainers.dart';
-import 'package:fitness/schedule/slotbooking.dart';
 import 'package:fitness/schedule/trainer_card.dart';
 import 'package:fitness/schedule/trainerprofile.dart';
 import 'package:flutter/material.dart';
@@ -44,19 +42,18 @@ class _TrainerListState extends State<TrainerList> {
                 itemCount: 4,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TrainerProfile()));
-                    },
-                    child: TrainerCard1(
-                      trainerName: 'Name:',
-                      experience: 'Experience:',
-                      skills: 'Skills:',
-                      imagepath: 'assets/Metrofit.png',
-                    ),
-                  );
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TrainerProfile()));
+                      },
+                      child: TrainerCard1(
+                        name: "name",
+                        experience: "Experience: ",
+                        skills: "Skills: ",
+                        image: 'assets/Metrofit.png',
+                      ));
                 },
               ),
             )

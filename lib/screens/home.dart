@@ -116,8 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const TrainerList()));
+                                        builder: (context) => TrainerList()));
                               },
                               child: const Icon(Icons.arrow_forward_ios_rounded,
                                   color: Colors.grey),
@@ -126,10 +125,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       SizedBox(
-                        height: 160,
+                        height: 100,
                         width: double.infinity,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -149,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: SvgPicture.network(
                                   ApiList.imageUrl +
                                       (trainerImage['image'] ?? ""),
-                                  height: 150,
+                                  height: 90,
                                   placeholderBuilder: (BuildContext context) =>
                                       Container(
                                           padding: const EdgeInsets.all(60.0),
@@ -163,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -172,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             const Text(
-                              'Select a Trainer for EMS at Gym',
+                              'Select a Branch for EMS at Gym',
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -193,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       SizedBox(
                         height: 200,
@@ -209,8 +208,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 // Handle trainer selection
                               },
                               child: Container(
-                                margin: const EdgeInsets.only(right: 10),
-                                width: MediaQuery.of(context).size.width,
+                                margin: const EdgeInsets.all(10),
+                                width: 250,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
@@ -221,6 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: SvgPicture.network(
                                     ApiList.imageUrl +
                                         (branchImage['image'] ?? ""),
+                                    fit: BoxFit.cover,
                                     placeholderBuilder:
                                         (BuildContext context) => const Center(
                                             child: CircularProgressIndicator()),
