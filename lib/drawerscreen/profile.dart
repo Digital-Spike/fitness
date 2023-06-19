@@ -2,13 +2,16 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/drawerscreen/signout.dart';
+import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
@@ -54,10 +57,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return MainScreen(
+      mainAppBar: AppBar(
         backgroundColor: Colors.black,
-        title: Center(
+        title: const Center(
           child: Text(
             'Profile',
             style: TextStyle(color: Colors.white),
@@ -71,16 +74,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-      backgroundColor: Colors.black,
-      body: Column(
+      mainChild: Column(
         children: [
-          Divider(
+          const Divider(
             color: Colors.white,
             thickness: 1,
           ),
           Expanded(
             child: ListView(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               children: [
                 Container(
                   width: 300, // Increased width for the circular avatar
@@ -91,54 +93,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       backgroundImage: _profileImage != null
                           ? FileImage(_profileImage!)
                           : null,
-                      child: _profileImage == null ? Icon(Icons.person) : null,
+                      child: _profileImage == null ? const Icon(Icons.person) : null,
                     ),
                     title: Text(
                       _displayName ?? '',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     subtitle: Text(
                       _email ?? '',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.edit,
                       color: Colors.grey,
                     ),
                     onTap: _chooseProfileImage,
                   ),
                 ),
-                Divider(
+                const Divider(
                   color: Colors.white,
                   thickness: 1,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 buildSettingsButton('Languages', Icons.language, () {
                   // Handle languages button tap
                 }),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 buildSettingsButton('Subscription', Icons.subscriptions, () {
                   // Handle subscription button tap
                 }),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 buildSettingsButton('Account and Privacy', Icons.security, () {
                   // Handle Account and Privacy button tap
                 }),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 buildSettingsButton('Settings', Icons.settings, () {
                   // Handle Settings button tap
                 }),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 buildSettingsButton('Help & Support', Icons.help, () {
                   // Handle Help & Support button tap
                 }),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 buildSettingsButton('Logout', Icons.logout, () {
                   // Handle Logout button tap
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LogoutScreen()));
                 }),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Center(
                   child: Image.asset(
                     'assets/fitnessname.png',
@@ -156,21 +158,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget buildSettingsButton(
       String title, IconData icon, VoidCallback onPressed) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.grey[600],
+            backgroundColor: Colors.grey[600],
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6),
             ),
-            padding: EdgeInsets.symmetric(vertical: 6),
+            padding: const EdgeInsets.symmetric(vertical: 6),
           ),
           onPressed: onPressed,
           child: Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Icon(
@@ -178,22 +180,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.white,
                 size: 18,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Expanded(
                 child: Center(
                   child: Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.white,
                 size: 18,

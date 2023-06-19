@@ -1,10 +1,13 @@
+import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'booking.dart';
 
 class MyBookingPage extends StatefulWidget {
+  const MyBookingPage({super.key});
+
   @override
-  _MyBookingPageState createState() => _MyBookingPageState();
+  State<MyBookingPage> createState() => _MyBookingPageState();
 }
 
 class _MyBookingPageState extends State<MyBookingPage>
@@ -31,9 +34,8 @@ class _MyBookingPageState extends State<MyBookingPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
+    return MainScreen(
+      mainAppBar: AppBar(
         backgroundColor: Colors.black,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -42,19 +44,19 @@ class _MyBookingPageState extends State<MyBookingPage>
             color: Colors.white,
           ),
         ),
-        title: Text(
+        title: const Text(
           'My Booking',
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
       ),
-      body: Column(
+      mainChild: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(5),
             child: Container(
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.all(5),
+              margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               color: Colors.grey.shade200,
               child: TabBar(
                 controller: _tabController,
@@ -103,7 +105,7 @@ class _MyBookingPageState extends State<MyBookingPage>
               color: Colors.black, // Set background color to black
               child: TabBarView(
                 controller: _tabController,
-                children: [
+                children: const [
                   Booking(),
                   Center(
                     child: Text(

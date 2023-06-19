@@ -1,7 +1,5 @@
 import 'package:ff_navigation_bar_plus/ff_navigation_bar_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../drawerscreen/profile.dart';
 import 'home.dart';
@@ -9,32 +7,64 @@ import 'mybookings.dart';
 import 'video.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key? key}) : super(key: key);
+  final Widget mainChild;
+  final PreferredSizeWidget? mainAppBar;
+
+  const MainScreen({
+    required this.mainChild,
+    this.mainAppBar,
+    super.key,
+  });
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int current_value = 0;
+  static int? _bottomNavIndex;
 
-  final List<Widget> _pages = [
-    HomeScreen(),
-    Video(),
-    MyBookingPage(),
-    ProfileScreen(),
-  ];
-
-  void onTapped(int value) {
-    setState(() {
-      current_value = value;
-     
-    });
+  switchScreen(int index) {
+    _bottomNavIndex = index;
+    switch (_bottomNavIndex) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Video(),
+          ),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MyBookingPage(),
+          ),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ProfileScreen(),
+          ),
+        );
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: widget.mainAppBar,
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
           barBackgroundColor: Colors.white,
@@ -45,9 +75,13 @@ class _MainScreenState extends State<MainScreen> {
           unselectedItemIconColor: Colors.grey,
           unselectedItemLabelColor: Colors.black,
         ),
-        selectedIndex: current_value,
-        onSelectTab: onTapped,
-        
+        selectedIndex: _bottomNavIndex ?? 0,
+        onSelectTab: (int index){
+          setState(() {
+            _bottomNavIndex = index;
+          });
+          switchScreen(index);
+        },
         items: [
           FFNavigationBarItem(
             iconData: Icons.home,
@@ -67,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: _pages[current_value],
+      body: SafeArea(child: widget.mainChild),
     );
   }
 }

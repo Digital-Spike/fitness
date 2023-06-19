@@ -1,7 +1,8 @@
+import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 
 class Video extends StatefulWidget {
-  const Video({Key? key});
+  const Video({super.key});
 
   @override
   State<Video> createState() => _VideoState();
@@ -10,17 +11,17 @@ class Video extends StatefulWidget {
 class _VideoState extends State<Video> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        title: Text(
-          'Video',
-          style: TextStyle(
-            color: Colors.white,
+    return MainScreen(
+        mainAppBar: AppBar(
+          backgroundColor: Colors.black,
+          centerTitle: true,
+          title: const Text(
+            'Video',
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
-      ),
-    );
+        mainChild: const Center(child: Text("Video section")));
   }
 }
