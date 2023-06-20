@@ -75,15 +75,18 @@ class _BranchListState extends State<BranchList> {
                                   Container(
                                     height: 100,
                                     width: 150,
-                                    decoration:
-                                    BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                                    child:SvgPicture.network(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: SvgPicture.network(
                                       ApiList.imageUrl +
                                           (branchList[index]['image'] ?? ""),
                                       fit: BoxFit.cover,
-                                      placeholderBuilder:
-                                          (BuildContext context) => const Center(
-                                          child: CircularProgressIndicator()),
+                                      placeholderBuilder: (BuildContext
+                                              context) =>
+                                          const Center(
+                                              child:
+                                                  CircularProgressIndicator()),
                                     ),
                                   ),
                                   const SizedBox(width: 10),
@@ -94,7 +97,8 @@ class _BranchListState extends State<BranchList> {
                                               fontSize: 16,
                                               color: Colors.orange,
                                               fontWeight: FontWeight.w500,
-                                              decoration: TextDecoration.underline)),
+                                              decoration:
+                                                  TextDecoration.underline)),
                                       const SizedBox(height: 10),
                                       Row(
                                         children: [
@@ -106,7 +110,8 @@ class _BranchListState extends State<BranchList> {
                                           Text(
                                             branchList[index]['address'],
                                             style: const TextStyle(
-                                                fontSize: 12, fontWeight: FontWeight.w500),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500),
                                           ),
                                         ],
                                       ),
@@ -117,7 +122,8 @@ class _BranchListState extends State<BranchList> {
                               ),
                               const SizedBox(height: 10),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(branchList[index]['phoneNumber']),
                                   Center(
@@ -125,13 +131,16 @@ class _BranchListState extends State<BranchList> {
                                           style: ElevatedButton.styleFrom(
                                               backgroundColor: Colors.orange,
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(10)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
                                               minimumSize: const Size(100, 30)),
                                           onPressed: () {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => const SlotBooking(),
+                                                builder: (context) =>
+                                                    const SlotBooking(),
                                               ),
                                             );
                                           },
@@ -180,4 +189,3 @@ class _BranchListState extends State<BranchList> {
         "status": "ACTIVE"
     },*/
 }
-

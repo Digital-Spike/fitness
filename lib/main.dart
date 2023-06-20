@@ -10,6 +10,7 @@ import 'package:fitness/schedule/slotbooking.dart';
 import 'package:fitness/schedule/trainerlist.dart';
 import 'package:fitness/screens/mainScreen.dart';
 // Import the generated file
+import 'authentication screen/welcome.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -45,10 +46,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Fitness',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          fontFamily: 'Roboto',
         ),
-        home: WelcomePage());
+        home: SplashScreen());
   }
 }

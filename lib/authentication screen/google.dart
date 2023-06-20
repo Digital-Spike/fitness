@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/screens/home.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -16,7 +17,7 @@ class _GoogleState extends State<Google> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Google Sign In'),
+        title: const Text('Google Sign In'),
       ),
       body: Center(
         child: Column(
@@ -45,19 +46,19 @@ class _GoogleState extends State<Google> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('Sign In Successful'),
+                        title: const Text('Sign In Successful'),
                         content: Text('User $userName signed in successfully!'),
                       );
                     },
                   );
 
                   // Navigate to the MainScreen after a short delay
-                  Future.delayed(Duration(seconds: 2), () {
+                  Future.delayed(const Duration(seconds: 2), () {
                     Navigator.pop(context); // Close the dialog
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MainScreen(),
+                        builder: (context) => HomeScreen(),
                       ),
                     );
                   });
@@ -66,7 +67,7 @@ class _GoogleState extends State<Google> {
                   throw e;
                 }
               },
-              child: Text('Sign In'),
+              child: const Text('Sign In'),
             ),
           ],
         ),

@@ -70,16 +70,16 @@ class _MainScreenState extends State<MainScreen> {
       appBar: widget.mainAppBar,
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
-          barBackgroundColor: Colors.white,
+          barBackgroundColor: Colors.black,
           selectedItemBorderColor: Colors.transparent,
           selectedItemBackgroundColor: Colors.deepOrange,
           selectedItemIconColor: Colors.white,
-          selectedItemLabelColor: Colors.black,
+          selectedItemLabelColor: Colors.white,
           unselectedItemIconColor: Colors.grey,
-          unselectedItemLabelColor: Colors.black,
+          unselectedItemLabelColor: Colors.white,
         ),
         selectedIndex: _bottomNavIndex ?? 0,
-        onSelectTab: (int index){
+        onSelectTab: (int index) {
           setState(() {
             _bottomNavIndex = index;
           });

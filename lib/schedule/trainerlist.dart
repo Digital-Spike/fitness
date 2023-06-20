@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/schedule/trainerDetailPage.dart';
 import 'package:fitness/schedule/trainerprofile.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
@@ -56,8 +57,9 @@ class _TrainerListState extends State<TrainerList> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const TrainerProfile()));
+                              builder: (context) => TrainerDetailPage(
+                                    trainer: {},
+                                  )));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(15),
@@ -68,8 +70,7 @@ class _TrainerListState extends State<TrainerList> {
                           padding: const EdgeInsets.all(10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
@@ -78,9 +79,7 @@ class _TrainerListState extends State<TrainerList> {
                                     width: 100,
                                     child: SvgPicture.network(
                                       ApiList.imageUrl +
-                                          (trainersList[index]
-                                                  ['image'] ??
-                                              ""),
+                                          (trainersList[index]['image'] ?? ""),
                                       fit: BoxFit.cover,
                                       placeholderBuilder: (BuildContext
                                               context) =>
@@ -101,21 +100,17 @@ class _TrainerListState extends State<TrainerList> {
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
-                                        trainersList[index]
-                                            ['description'],
+                                        trainersList[index]['description'],
                                         style: const TextStyle(
                                             fontSize: 16,
-                                            fontWeight:
-                                                FontWeight.w500),
+                                            fontWeight: FontWeight.w500),
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
-                                        trainersList[index]
-                                            ['description'],
+                                        trainersList[index]['description'],
                                         style: const TextStyle(
                                             fontSize: 16,
-                                            fontWeight:
-                                                FontWeight.w500),
+                                            fontWeight: FontWeight.w500),
                                       ),
                                     ],
                                   )
@@ -125,8 +120,7 @@ class _TrainerListState extends State<TrainerList> {
                               Text(
                                 'Available',
                                 style: TextStyle(
-                                    color: (trainersList[index]
-                                                ['status'] ==
+                                    color: (trainersList[index]['status'] ==
                                             "ACTIVE")
                                         ? Colors.green
                                         : Colors.grey),

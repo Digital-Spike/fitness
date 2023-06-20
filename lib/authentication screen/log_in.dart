@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication screen/google.dart';
 import 'package:fitness/authentication screen/sign_in.dart';
+import 'package:fitness/screens/home.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,8 +30,8 @@ class _LoginState extends State<Login> {
 
   userLogin() async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
 
       // Get the user ID after successful login
       String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
@@ -46,7 +47,7 @@ class _LoginState extends State<Login> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => MainScreen(),
+            builder: (context) => HomeScreen(),
           ),
         );
       } else {
@@ -207,13 +208,7 @@ class _LoginState extends State<Login> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MainScreen()));
-                                    },
+                                    onTap: userLogin,
                                     child: SvgPicture.asset(
                                       'assets/Logintab.svg',
                                     ),
@@ -287,7 +282,7 @@ class _LoginState extends State<Login> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                MainScreen()));
+                                                HomeScreen()));
                                   },
                                   child: SvgPicture.asset(
                                     'assets/google (3).svg',

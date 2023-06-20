@@ -1,4 +1,5 @@
 import 'package:fitness/authentication%20screen/log_in.dart';
+import 'package:fitness/authentication%20screen/welcome.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:fitness/authentication%20screen/sign_in.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     Future.delayed(Duration(seconds: 3), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Welcome()));
     });
   }
 
