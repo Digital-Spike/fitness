@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/model/branch.dart';
 import 'package:fitness/model/trainer.dart';
+import 'package:fitness/schedule/trainerDetailPage.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -117,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => TrainerList()));
+                                    builder: (context) => const TrainerList()));
                           },
                           child: const Icon(Icons.arrow_forward_ios_rounded,
                               color: Colors.grey),
@@ -137,25 +138,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         final trainerImage =
                         trainersAndBranchList['tariners'][index];
-                        return Padding(
-                          padding:
-                          const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 2,
-                                    color: Colors.deepOrangeAccent),
-                                borderRadius: BorderRadius.circular(80)),
-                            child: SvgPicture.network(
-                              ApiList.imageUrl +
-                                  (trainerImage['image'] ?? ""),
-                              height: 90,
-                              placeholderBuilder: (BuildContext context) =>
-                                  Container(
-                                      padding: const EdgeInsets.all(60.0),
-                                      child: const Center(
-                                          child:
-                                          CircularProgressIndicator())),
+                        return InkWell(
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>  TrainerDetailPage(trainer: trainerImage)));
+                          },
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 2,
+                                      color: Colors.deepOrangeAccent),
+                                  borderRadius: BorderRadius.circular(80)),
+                              child: SvgPicture.network(
+                                ApiList.imageUrl +
+                                    (trainerImage['image'] ?? ""),
+                                height: 90,
+                                placeholderBuilder: (BuildContext context) =>
+                                    Container(
+                                        padding: const EdgeInsets.all(60.0),
+                                        child: const Center(
+                                            child:
+                                            CircularProgressIndicator())),
+                              ),
                             ),
                           ),
                         );
@@ -184,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                    const Branchlist()));
+                                    const BranchList()));
                           },
                           child: const Icon(Icons.arrow_forward_ios_rounded,
                               color: Colors.grey),
