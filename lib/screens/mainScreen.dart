@@ -9,10 +9,12 @@ import 'video.dart';
 class MainScreen extends StatefulWidget {
   final Widget mainChild;
   final PreferredSizeWidget? mainAppBar;
+  final Color? backgroundColor;
 
   const MainScreen({
     required this.mainChild,
     this.mainAppBar,
+    this.backgroundColor,
     super.key,
   });
 
@@ -64,6 +66,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: widget.mainAppBar,
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
