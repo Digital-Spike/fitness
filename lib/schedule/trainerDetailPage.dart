@@ -1,9 +1,10 @@
+import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TrainerDetailPage extends StatefulWidget {
   final Map<String, dynamic> trainer;
-
   const TrainerDetailPage({Key? key, required this.trainer}) : super(key: key);
 
   @override
@@ -11,13 +12,6 @@ class TrainerDetailPage extends StatefulWidget {
 }
 
 class _TrainerDetailPageState extends State<TrainerDetailPage> {
-  Map<String, dynamic> trainer = {};
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MainScreen(
@@ -54,7 +48,16 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset('assets/IMG_9573.jpg'),
+                      const SizedBox(height: 30),
+                      Center(
+                        child: SvgPicture.network(
+                          ApiList.imageUrl + (widget.trainer['image'] ?? ""),
+                          fit: BoxFit.cover,
+                          placeholderBuilder: (BuildContext context) =>
+                              const Center(child: CircularProgressIndicator()),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
                       Center(
                           child: TextButton(
                               style: TextButton.styleFrom(
@@ -69,43 +72,61 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white),
                               ))),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          'Name:',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600),
-                        ),
+                      const SizedBox(height: 30),
+                      Row(
+                        children: [
+                          const Expanded(
+                            flex: 2,
+                            child: Text(
+                              'Name :',
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            flex: 4,
+                            child: Text(
+                              widget.trainer['name'],
+                              style: const TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 10),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text('Experience:',
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600)),
+                      Row(
+                        children: [
+                          const Expanded(
+                            flex: 2,
+                            child: Text(
+                              'Experience :',
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            flex: 4,
+                            child: Text(
+                              widget.trainer['description'],
+                              style: const TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 10),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text('Skills:',
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600)),
-                      ),
-                      const SizedBox(height: 10),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text('About Trainer:',
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600)),
-                      ),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 )
@@ -117,3 +138,22 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
     );
   }
 }
+
+/*{
+        "id": "7",
+        "name": "Jeylan Silanovich",
+        "phoneNumber": "0",
+        "category": "None",
+        "branch": "01",
+        "image": "Trainer4.svg",
+        "status": "ACTIVE",
+        "balance": "0",
+        "description": "3+ Years of experience",
+        "rating": "4",
+        "trainerId": "FJT01",
+        "branchId1": "branch1",
+        "branchId2": "branch2",
+        "branchId3": "branch3",
+        "branchId4": "branch4",
+        "branchId5": "branch5"
+    },*/

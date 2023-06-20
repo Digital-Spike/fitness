@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/schedule/trainerDetailPage.dart';
-import 'package:fitness/schedule/trainerprofile.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -58,7 +57,7 @@ class _TrainerListState extends State<TrainerList> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => TrainerDetailPage(
-                                    trainer: {},
+                                    trainer: trainersList[index],
                                   )));
                     },
                     child: Padding(
