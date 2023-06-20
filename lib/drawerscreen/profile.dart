@@ -89,11 +89,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 80,
                   child: ListTile(
                     leading: CircleAvatar(
-                      radius: 50, // Increased size for the circular avatar
+                      radius: 60, // Increased size for the circular avatar
                       backgroundImage: _profileImage != null
                           ? FileImage(_profileImage!)
                           : null,
-                      child: _profileImage == null ? const Icon(Icons.person) : null,
+                      child: _profileImage == null
+                          ? const Icon(Icons.person)
+                          : null,
                     ),
                     title: Text(
                       _displayName ?? '',
@@ -114,27 +116,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.white,
                   thickness: 1,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 buildSettingsButton('Languages', Icons.language, () {
                   // Handle languages button tap
                 }),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 buildSettingsButton('Subscription', Icons.subscriptions, () {
                   // Handle subscription button tap
                 }),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 buildSettingsButton('Account and Privacy', Icons.security, () {
                   // Handle Account and Privacy button tap
                 }),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 buildSettingsButton('Settings', Icons.settings, () {
                   // Handle Settings button tap
                 }),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 buildSettingsButton('Help & Support', Icons.help, () {
                   // Handle Help & Support button tap
                 }),
-                const SizedBox(height: 20),
+                const SizedBox(height: 15),
                 buildSettingsButton('Logout', Icons.logout, () {
                   // Handle Logout button tap
                   Navigator.push(context,
@@ -160,6 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
       child: SizedBox(
+        height: 50,
         width: double.infinity,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -178,7 +181,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Icon(
                 icon,
                 color: Colors.white,
-                size: 18,
+                size: 25,
               ),
               const SizedBox(width: 8),
               Expanded(
@@ -186,9 +189,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Text(
                     title,
                     style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -198,7 +202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.white,
-                size: 18,
+                size: 25,
               ),
             ],
           ),
