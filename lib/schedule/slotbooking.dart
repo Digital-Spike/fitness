@@ -28,6 +28,64 @@ class _SlotBookingState extends State<SlotBooking>
   CalendarFormat _calenderFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+
+  Future<void> bookSlot(Slot slot) async {
+    if (slot.available) {
+      bool shouldBook = await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            title: Text("Book Slot"),
+            content: Text("Book your slot now?"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true); // Book the slot
+                },
+                child: Text("OK"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false); // Cancel the booking
+                },
+                child: Text("Cancel"),
+              ),
+            ],
+          );
+        },
+      );
+
+      if (shouldBook) {
+        // Perform the booking
+        // ...
+      }
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            title: Text("Slot Unavailable"),
+            content: Text("The selected slot is not available."),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,24 +138,6 @@ class _SlotBookingState extends State<SlotBooking>
                 defaultTextStyle: TextStyle(color: Colors.white),
                 selectedDecoration: BoxDecoration(
                     color: Colors.orange, shape: BoxShape.circle)),
-            onDaySelected: (selectedDay, focusedDay) {
-              if (!isSameDay(_selectedDay, selectedDay)) {
-                setState(() {
-                  _selectedDay = selectedDay;
-                  _focusedDay = focusedDay;
-                });
-              }
-            },
-            selectedDayPredicate: (day) {
-              return isSameDay(_selectedDay, day);
-            },
-            onFormatChanged: (format) {
-              if (_calenderFormat != format) {
-                setState(() {
-                  _calenderFormat = format;
-                });
-              }
-            },
           ),
           const Divider(
             color: Colors.white,

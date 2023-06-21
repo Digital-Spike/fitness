@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/drawerscreen/signout.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -81,15 +82,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             thickness: 1,
           ),
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              children: [
-                Container(
-                  width: 300, // Increased width for the circular avatar
-                  height: 80,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 60, // Increased size for the circular avatar
+              child: ListView.builder(
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 100,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      minRadius: 60,
+                      backgroundColor: Colors.white,
                       backgroundImage: _profileImage != null
                           ? FileImage(_profileImage!)
                           : null,
@@ -97,59 +99,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ? const Icon(Icons.person)
                           : null,
                     ),
-                    title: Text(
-                      _displayName ?? '',
-                      style: const TextStyle(color: Colors.white),
+                    Column(
+                      children: [
+                        Text(
+                          _displayName ?? '',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          _email ?? '',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
-                    subtitle: Text(
-                      _email ?? '',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    trailing: const Icon(
-                      Icons.edit,
-                      color: Colors.grey,
-                    ),
-                    onTap: _chooseProfileImage,
-                  ),
+                    SvgPicture.asset('assets/Edit.svg')
+                  ],
                 ),
-                const Divider(
-                  color: Colors.white,
-                  thickness: 1,
-                ),
-                const SizedBox(height: 15),
-                buildSettingsButton('Languages', Icons.language, () {
-                  // Handle languages button tap
-                }),
-                const SizedBox(height: 15),
-                buildSettingsButton('Subscription', Icons.subscriptions, () {
-                  // Handle subscription button tap
-                }),
-                const SizedBox(height: 15),
-                buildSettingsButton('Account and Privacy', Icons.security, () {
-                  // Handle Account and Privacy button tap
-                }),
-                const SizedBox(height: 15),
-                buildSettingsButton('Settings', Icons.settings, () {
-                  // Handle Settings button tap
-                }),
-                const SizedBox(height: 15),
-                buildSettingsButton('Help & Support', Icons.help, () {
-                  // Handle Help & Support button tap
-                }),
-                const SizedBox(height: 15),
-                buildSettingsButton('Logout', Icons.logout, () {
-                  // Handle Logout button tap
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LogoutScreen()));
-                }),
-                const SizedBox(height: 10),
-                Center(
-                  child: Image.asset(
-                    'assets/fitnessname.png',
-                    height: 80,
-                  ),
-                ),
-              ],
+              );
+            },
+          )),
+          const Divider(
+            color: Colors.white,
+            thickness: 1,
+          ),
+          const SizedBox(height: 10),
+          buildSettingsButton('Languages', Icons.language, () {
+            // Handle languages button tap
+          }),
+          const SizedBox(height: 10),
+          buildSettingsButton('Subscription', Icons.subscriptions, () {
+            // Handle subscription button tap
+          }),
+          const SizedBox(height: 10),
+          buildSettingsButton('Account and Privacy', Icons.security, () {
+            // Handle Account and Privacy button tap
+          }),
+          const SizedBox(height: 10),
+          buildSettingsButton('Settings', Icons.settings, () {
+            // Handle Settings button tap
+          }),
+          const SizedBox(height: 10),
+          buildSettingsButton('Help & Support', Icons.help, () {
+            // Handle Help & Support button tap
+          }),
+          const SizedBox(height: 10),
+          buildSettingsButton('Logout', Icons.logout, () {
+            // Handle Logout button tap
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LogoutScreen()));
+          }),
+          const SizedBox(height: 10),
+          Center(
+            child: Image.asset(
+              'assets/fitnessname.png',
+              height: 80,
             ),
           ),
         ],
@@ -168,7 +170,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.grey[600],
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.symmetric(vertical: 6),
           ),

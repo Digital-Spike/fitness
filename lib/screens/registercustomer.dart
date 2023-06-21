@@ -41,16 +41,16 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register Customer'),
+        title: const Text('Register Customer'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Column(
               children: [
-                Text(" Image", style: TextStyle(color: Colors.black)),
-                SizedBox(
+                const Text(" Image", style: TextStyle(color: Colors.black)),
+                const SizedBox(
                   height: 5,
                 ),
                 Image.network(
@@ -60,58 +60,62 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                     width: 180,
                     child: Text("   Name: ",
                         style: TextStyle(color: Colors.black, fontSize: 18))),
                 SizedBox(
                     width: 200,
                     child: Text(name.toString(),
-                        style: TextStyle(color: Colors.black, fontSize: 18)))
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 18)))
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                     width: 180,
                     child: Text("   Email: ",
                         style: TextStyle(color: Colors.black, fontSize: 18))),
                 SizedBox(
                     width: 200,
                     child: Text(email.toString(),
-                        style: TextStyle(color: Colors.black, fontSize: 18)))
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 18)))
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                     width: 180,
                     child: Text("   PhoneNumber: ",
                         style: TextStyle(color: Colors.black, fontSize: 18))),
                 SizedBox(
                     width: 200,
                     child: Text(phoneNumber.toString(),
-                        style: TextStyle(color: Colors.black, fontSize: 18)))
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 18)))
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                     width: 180,
                     child: Text("   User Id: ",
                         style: TextStyle(color: Colors.black, fontSize: 18))),
                 SizedBox(
                     width: 200,
                     child: Text(userId.toString(),
-                        style: TextStyle(color: Colors.black, fontSize: 18)))
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 18)))
               ],
             ),
           ],

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/schedule/slot.dart';
 import 'package:fitness/schedule/slotbooking.dart';
 import 'package:fitness/schedule/trainerprofile.dart';
 import 'package:fitness/screens/mainScreen.dart';
@@ -74,7 +75,7 @@ class _BranchListState extends State<BranchList> {
                                 children: [
                                   Container(
                                     height: 100,
-                                    width: 150,
+                                    width: 115,
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(10)),
@@ -94,9 +95,10 @@ class _BranchListState extends State<BranchList> {
                                     children: [
                                       Text(branchList[index]['branch'],
                                           style: const TextStyle(
+                                              fontFamily: 'Roboto',
                                               fontSize: 16,
                                               color: Colors.orange,
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w600,
                                               decoration:
                                                   TextDecoration.underline)),
                                       const SizedBox(height: 10),
@@ -110,8 +112,10 @@ class _BranchListState extends State<BranchList> {
                                           Text(
                                             branchList[index]['address'],
                                             style: const TextStyle(
+                                                fontFamily: 'Roboto',
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500),
+                                            maxLines: 3,
                                           ),
                                         ],
                                       ),
@@ -140,7 +144,7 @@ class _BranchListState extends State<BranchList> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const SlotBooking(),
+                                                    SlotAvailability(),
                                               ),
                                             );
                                           },

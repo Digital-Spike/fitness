@@ -132,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 10,
                       ),
                       SizedBox(
-                        height: 100,
+                        height: 115,
                         width: double.infinity,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -160,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: SvgPicture.network(
                                     ApiList.imageUrl +
                                         (trainerImage['image'] ?? ""),
-                                    height: 90,
+                                    height: 105,
                                     placeholderBuilder:
                                         (BuildContext context) => Container(
                                             padding: const EdgeInsets.all(60.0),
