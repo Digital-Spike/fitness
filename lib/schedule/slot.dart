@@ -149,7 +149,7 @@ class _SlotAvailabilityState extends State<SlotAvailability>
   void initState() {
     super.initState();
     selectedDate = DateTime.now();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 1, vsync: this);
     _tabController.addListener(() {
       if (_tabController.index == _tabController.animation!.value) {
         if (_tabController.index == 0 && slots.isEmpty) {
@@ -169,99 +169,117 @@ class _SlotAvailabilityState extends State<SlotAvailability>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Slot Availability"),
-        backgroundColor: Colors.white, // Set the app bar color to white
-        foregroundColor: Colors.black, // Set the app bar text color to black
+        backgroundColor: Colors.black,
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            height: 1.0,
+            color: Colors.white,
+          ),
+        ),
+        title: const Text('Slot Booking',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.white)),
+        centerTitle: true, // Set the app bar text color to black
       ),
       body: Column(
         children: [
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                // Create a new method _buildWeeksTab and pass slots
-                _buildMonthsTab(
-                    slots), // Create a new method _buildMonthsTab and pass slots
-              ],
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Card(
+              color: Colors.white,
+              child: CalendarDatePicker(
+                initialDate: selectedDate,
+                firstDate: DateTime.now(),
+                lastDate: DateTime(2023, 12, 31),
+                initialCalendarMode: DatePickerMode.day,
+                onDateChanged: (date) {
+                  setState(() {
+                    selectedDate = date;
+                  });
+                  loadData();
+                },
+              ),
             ),
           ),
+          if (_showCircle)
+            Center(
+              child: CircularProgressIndicator(),
+            )
+          else
+            Expanded(
+              child: ListView.builder(
+                itemCount: slots.length,
+                itemBuilder: (context, index) {
+                  Slot slot = slots[index];
+                  Color backgroundColor = Colors.white;
+                  Color textColor = Colors.black;
+                  Color borderColor = Colors.grey;
+                  String bookingStatus = slot.bookingStatus;
+
+                  if (slot.available) {
+                    backgroundColor = Colors.white;
+                    textColor = Colors.black;
+                    borderColor = Colors.deepOrange;
+                  } else {
+                    backgroundColor = Colors.red;
+                    textColor = Colors.grey;
+                  }
+
+                  return Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: backgroundColor,
+                      border: Border.all(color: borderColor),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        slot.time,
+                        style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w600,
+                            color: textColor),
+                      ),
+                      subtitle: Text(
+                        slot.available ? "Available" : "Not Available",
+                        style: TextStyle(color: textColor),
+                      ),
+                      trailing: Container(
+                        margin: EdgeInsets.all(10),
+                        height: 25,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.deepOrange),
+                        child: Center(
+                          child: Text(
+                            bookingStatus,
+                            style: TextStyle(
+                                fontFamily: 'Roboto', color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        bookSlot(slot);
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
         ],
       ),
     );
   }
 
   ////////////////////////// months  //////////////////////////
-  Widget _buildMonthsTab(List<Slot> slots) {
-    return Column(
-      children: [
-        CalendarDatePicker(
-          initialDate: selectedDate,
-          firstDate: DateTime.now(),
-          lastDate: DateTime(2023, 12, 31),
-          onDateChanged: (date) {
-            setState(() {
-              selectedDate = date;
-            });
-            loadData();
-          },
-        ),
-        if (_showCircle)
-          Center(
-            child: CircularProgressIndicator(),
-          )
-        else
-          Expanded(
-            child: ListView.builder(
-              itemCount: slots.length,
-              itemBuilder: (context, index) {
-                Slot slot = slots[index];
-                Color backgroundColor = Colors.white;
-                Color textColor = Colors.black;
-                Color borderColor = Colors.grey;
-                String bookingStatus = slot.bookingStatus;
-
-                if (slot.available) {
-                  backgroundColor = Colors.black;
-                  textColor = Colors.white;
-                  borderColor = Colors.deepOrange;
-                } else {
-                  backgroundColor = Colors.red;
-                  textColor = Colors.white;
-                }
-
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: backgroundColor,
-                    border: Border.all(color: borderColor),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      slot.time,
-                      style: TextStyle(color: textColor),
-                    ),
-                    subtitle: Text(
-                      slot.available ? "Available" : "Not Available",
-                      style: TextStyle(color: textColor),
-                    ),
-                    trailing: Text(
-                      bookingStatus,
-                      style: TextStyle(color: textColor),
-                    ),
-                    onTap: () {
-                      bookSlot(slot);
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-      ],
-    );
-  }
 
   void main() {
     runApp(MaterialApp(
