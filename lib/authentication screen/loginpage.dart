@@ -74,10 +74,13 @@ class _LoginPageState extends State<LoginPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
+              backgroundColor: Colors.deepOrange,
               title: Center(
                   child: Text(
-            message,
-          )));
+                message,
+                style: TextStyle(
+                    fontFamily: 'Roboto', fontWeight: FontWeight.w600),
+              )));
         });
   }
 
