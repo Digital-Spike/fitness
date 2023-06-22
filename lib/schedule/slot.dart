@@ -279,8 +279,6 @@ class _SlotAvailabilityState extends State<SlotAvailability>
     );
   }
 
-  ////////////////////////// months  //////////////////////////
-
   void main() {
     runApp(MaterialApp(
       debugShowCheckedModeBanner: false,

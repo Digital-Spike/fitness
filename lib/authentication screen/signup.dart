@@ -13,10 +13,42 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  var name = "";
+  var email = "";
+  var phoneNumber = "";
+  var password = "";
+  var confirmPassword = "";
+
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future SignUp() async {
+    showDialog(
+        context: context,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(),
+            ));
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,7 +163,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           const SizedBox(height: 15),
                           TextFormField(
-                            controller: _passwordController,
+                            controller: _confirmPasswordController,
                             decoration: InputDecoration(
                                 label: const Text('Confirm Password'),
                                 isDense: true,
@@ -148,12 +180,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           const SizedBox(height: 20),
                           GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomeScreen()));
-                              },
+                              onTap: SignUp,
                               child: SvgPicture.asset('assets/Signup.svg')),
                           const SizedBox(height: 10),
                           const Text(

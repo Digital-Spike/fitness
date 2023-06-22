@@ -2,6 +2,8 @@ import 'package:fitness/authentication%20screen/log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../authentication screen/loginpage.dart';
+
 class LogoutScreen extends StatefulWidget {
   @override
   _LogoutScreenState createState() => _LogoutScreenState();
@@ -27,8 +29,8 @@ class _LogoutScreenState extends State<LogoutScreen> {
             ElevatedButton(
               onPressed: () {
                 // call the logout method from the authentication service
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (contex) => Login()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (contex) => LoginPage()));
               },
               child: Text('Logout'),
             ),

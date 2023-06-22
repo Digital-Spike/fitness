@@ -3,7 +3,11 @@ import 'package:fitness/authentication%20screen/sign_in.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+
+import '../screens/home.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,6 +23,57 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  userLogin() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(
+              child: CircularProgressIndicator(),
+            ));
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
+
+      // Get the user ID after successful login
+      String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+
+      // Make an API call and pass the user ID
+      final response = await http.post(
+        Uri.parse('https://fitnessjourni.com/api/getUser.php'),
+        body: {'userId': userId},
+      );
+
+      if (response.statusCode == 200) {
+        // Account exists, navigate to MainScreen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ),
+        );
+      } else {
+        // Account doesn't exist, navigate to Signup
+        Navigator.pushAndRemoveUntil(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, a, b) => SignupPage(),
+            transitionDuration: Duration(seconds: 0),
+          ),
+          (route) => false,
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 30),
                         GestureDetector(
-                            onTap: () {},
+                            onTap: userLogin,
                             child: SvgPicture.asset('assets/Logintab.svg')),
                         const SizedBox(height: 30),
                         const Text(

@@ -16,7 +16,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final User? user = FirebaseAuth.instance.currentUser;
+  final user = FirebaseAuth.instance.currentUser!;
   late String? _displayName;
   late String? _email;
   File? _profileImage;
@@ -25,8 +25,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _displayName = user?.displayName;
-    _email = user?.email;
+    _displayName = user.displayName;
+    _email = user.email;
     _loadProfileImage();
   }
 
@@ -107,10 +107,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Text(
                           _email ?? '',
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(
+                              fontFamily: 'Roboto', color: Colors.white),
                         ),
                       ],
                     ),
+                    SizedBox(width: 10),
                     SvgPicture.asset('assets/Edit.svg')
                   ],
                 ),
@@ -144,8 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(height: 10),
           buildSettingsButton('Logout', Icons.logout, () {
             // Handle Logout button tap
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => LogoutScreen()));
+            () => FirebaseAuth.instance.signOut();
           }),
           const SizedBox(height: 10),
           Center(
