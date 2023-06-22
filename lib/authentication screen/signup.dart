@@ -14,6 +14,8 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  bool _isSecurePassword = true;
+  bool _isSecurePassword1 = true;
   var name = "";
   var email = "";
   var phoneNumber = "";
@@ -50,8 +52,20 @@ class _SignupPageState extends State<SignupPage> {
           password: _passwordController.text.trim());
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      print(e);
+      showErrorMessage(e.code);
     }
+  }
+
+  void showErrorMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Center(
+                  child: Text(
+            message,
+          )));
+        });
   }
 
   @override
@@ -152,11 +166,13 @@ class _SignupPageState extends State<SignupPage> {
                             const SizedBox(height: 15),
                             TextFormField(
                               controller: _passwordController,
+                              obscureText: _isSecurePassword,
                               decoration: InputDecoration(
                                   label: const Text('Password'),
                                   isDense: true,
                                   filled: true,
                                   fillColor: Colors.white,
+                                  suffixIcon: togglepassword(),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
                               autovalidateMode:
@@ -169,11 +185,13 @@ class _SignupPageState extends State<SignupPage> {
                             const SizedBox(height: 15),
                             TextFormField(
                               controller: _confirmPasswordController,
+                              obscureText: _isSecurePassword1,
                               decoration: InputDecoration(
                                   label: const Text('Confirm Password'),
                                   isDense: true,
                                   filled: true,
                                   fillColor: Colors.white,
+                                  suffixIcon: togglepassword1(),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
                               autovalidateMode:
@@ -238,5 +256,33 @@ class _SignupPageState extends State<SignupPage> {
             ),
           ),
         ));
+  }
+
+  Widget togglepassword() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          _isSecurePassword = !_isSecurePassword;
+        });
+      },
+      icon: _isSecurePassword
+          ? const Icon(Icons.visibility)
+          : const Icon(Icons.visibility_off),
+      color: Colors.grey,
+    );
+  }
+
+  Widget togglepassword1() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          _isSecurePassword1 = !_isSecurePassword1;
+        });
+      },
+      icon: _isSecurePassword1
+          ? const Icon(Icons.visibility)
+          : const Icon(Icons.visibility_off),
+      color: Colors.grey,
+    );
   }
 }

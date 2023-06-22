@@ -17,7 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool isChecked = false; // For the checkbox
+  bool _isSecurePassword = true;
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -63,34 +63,22 @@ class _LoginPageState extends State<LoginPage> {
           (route) => false,
         );
       }
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      if (e.code == 'user-not-found') {
-        wrongemailMessage();
-        Navigator.pop(context);
-      } else if (e.code == 'wrong password') {
-        wrongpasswordMessage();
-      }
+      showErrorMessage(e.code);
     }
   }
 
-  void wrongemailMessage() {
+  void showErrorMessage(String message) {
     showDialog(
         context: context,
         builder: (context) {
-          return const AlertDialog(
-            title: Text('Incorrect Email'),
-          );
-        });
-  }
-
-  void wrongpasswordMessage() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const AlertDialog(
-            title: Text('Incorrect Password'),
-          );
+          return AlertDialog(
+              title: Center(
+                  child: Text(
+            message,
+          )));
         });
   }
 
@@ -185,11 +173,13 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 15),
                         TextFormField(
                           controller: _passwordController,
+                          obscureText: _isSecurePassword,
                           decoration: InputDecoration(
                               label: const Text('Password'),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
+                              suffixIcon: togglepassword(),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10))),
                           validator: (value) {
@@ -265,5 +255,19 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ));
+  }
+
+  Widget togglepassword() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          _isSecurePassword = !_isSecurePassword;
+        });
+      },
+      icon: _isSecurePassword
+          ? const Icon(Icons.visibility)
+          : const Icon(Icons.visibility_off),
+      color: Colors.grey,
+    );
   }
 }
