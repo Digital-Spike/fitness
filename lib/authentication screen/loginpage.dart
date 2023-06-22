@@ -63,7 +63,6 @@ class _LoginPageState extends State<LoginPage> {
           (route) => false,
         );
       }
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorMessage(e.code);
