@@ -4,6 +4,7 @@ import 'package:fitness/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -26,6 +27,7 @@ class _SignupPageState extends State<SignupPage> {
   final _confirmPasswordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -35,6 +37,8 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   Future SignUp() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
     showDialog(
         context: context,
         builder: (context) => Center(
@@ -44,6 +48,7 @@ class _SignupPageState extends State<SignupPage> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim());
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       print(e);
     }
@@ -113,117 +118,118 @@ class _SignupPageState extends State<SignupPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.black.withOpacity(0.2)),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextFormField(
-                            decoration: InputDecoration(
-                                label: const Text('User Name'),
-                                isDense: true,
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10))),
-                          ),
-                          const SizedBox(height: 15),
-                          TextFormField(
-                            controller: _emailController,
-                            decoration: InputDecoration(
-                                label: const Text('Email'),
-                                isDense: true,
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10))),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please Enter Email';
-                              } else if (!value.contains('@')) {
-                                return 'Please Enter Valid Email';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 15),
-                          TextFormField(
-                            controller: _passwordController,
-                            decoration: InputDecoration(
-                                label: const Text('Password'),
-                                isDense: true,
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10))),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please Enter Password';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 15),
-                          TextFormField(
-                            controller: _confirmPasswordController,
-                            decoration: InputDecoration(
-                                label: const Text('Confirm Password'),
-                                isDense: true,
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10))),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please Enter Password';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          GestureDetector(
-                              onTap: SignUp,
-                              child: SvgPicture.asset('assets/Signup.svg')),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'OR',
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          const SizedBox(height: 10),
-                          SvgPicture.asset('assets/Applesignup.svg'),
-                          const SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, a, b) =>
-                                          LoginPage(),
-                                      transitionDuration:
-                                          const Duration(seconds: 0),
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  label: const Text('User Name'),
+                                  isDense: true,
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                            ),
+                            const SizedBox(height: 15),
+                            TextFormField(
+                              controller: _emailController,
+                              decoration: InputDecoration(
+                                  label: const Text('Email'),
+                                  isDense: true,
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (email) => email != null &&
+                                      !EmailValidator.validate(email)
+                                  ? 'Enter a valid email'
+                                  : null,
+                            ),
+                            const SizedBox(height: 15),
+                            TextFormField(
+                              controller: _passwordController,
+                              decoration: InputDecoration(
+                                  label: const Text('Password'),
+                                  isDense: true,
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) =>
+                                  value != null && value.length < 6
+                                      ? 'Enter min. 6 characters'
+                                      : null,
+                            ),
+                            const SizedBox(height: 15),
+                            TextFormField(
+                              controller: _confirmPasswordController,
+                              decoration: InputDecoration(
+                                  label: const Text('Confirm Password'),
+                                  isDense: true,
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) =>
+                                  value != null && value.length < 6
+                                      ? 'Enter min. 6 characters'
+                                      : null,
+                            ),
+                            const SizedBox(height: 20),
+                            GestureDetector(
+                                onTap: SignUp,
+                                child: SvgPicture.asset('assets/Signup.svg')),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'OR',
+                              style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            const SizedBox(height: 10),
+                            SvgPicture.asset('assets/Applesignup.svg'),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, a, b) =>
+                                            LoginPage(),
+                                        transitionDuration:
+                                            const Duration(seconds: 0),
+                                      ),
+                                      (route) => false,
+                                    );
+                                  },
+                                  child: const Text(
+                                    'Already have an Account? Login',
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                      decoration: TextDecoration.underline,
                                     ),
-                                    (route) => false,
-                                  );
-                                },
-                                child: const Text(
-                                  'Already have an Account? Login',
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                    decoration: TextDecoration.underline,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

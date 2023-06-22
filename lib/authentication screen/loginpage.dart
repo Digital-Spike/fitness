@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
     try {
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       } else {
@@ -57,15 +57,41 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushAndRemoveUntil(
           context,
           PageRouteBuilder(
-            pageBuilder: (context, a, b) => SignupPage(),
-            transitionDuration: Duration(seconds: 0),
+            pageBuilder: (context, a, b) => const SignupPage(),
+            transitionDuration: const Duration(seconds: 0),
           ),
           (route) => false,
         );
       }
     } on FirebaseAuthException catch (e) {
-      print(e);
+      Navigator.pop(context);
+      if (e.code == 'user-not-found') {
+        wrongemailMessage();
+        Navigator.pop(context);
+      } else if (e.code == 'wrong password') {
+        wrongpasswordMessage();
+      }
     }
+  }
+
+  void wrongemailMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text('Incorrect Email'),
+          );
+        });
+  }
+
+  void wrongpasswordMessage() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text('Incorrect Password'),
+          );
+        });
   }
 
   @override
@@ -211,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                                   context,
                                   PageRouteBuilder(
                                     pageBuilder: (context, a, b) =>
-                                        SignupPage(),
+                                        const SignupPage(),
                                     transitionDuration:
                                         const Duration(seconds: 0),
                                   ),

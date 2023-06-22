@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fitness/authentication%20screen/Utils.dart';
 import 'package:fitness/authentication%20screen/splashSceen.dart';
 import 'package:flutter/material.dart';
 
