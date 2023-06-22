@@ -46,11 +46,19 @@ class _SignupPageState extends State<SignupPage> {
         builder: (context) => Center(
               child: CircularProgressIndicator(),
             ));
+
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim());
-      Navigator.pop(context);
+
+      // Account exists, navigate to MainScreen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ),
+      );
     } on FirebaseAuthException catch (e) {
       showErrorMessage(e.code);
     }

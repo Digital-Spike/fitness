@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               title: Center(
                   child: Text(
                 message,
-                style: TextStyle(
+                style: const TextStyle(
                     fontFamily: 'Roboto', fontWeight: FontWeight.w600),
               )));
         });
@@ -191,11 +191,27 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 30),
+                        SizedBox(height: 15),
+                        GestureDetector(
+                            onTap: () {},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            )),
+                        const SizedBox(height: 20),
                         GestureDetector(
                             onTap: userLogin,
                             child: SvgPicture.asset('assets/Logintab.svg')),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 20),
                         const Text(
                           'OR',
                           style: TextStyle(
@@ -204,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
