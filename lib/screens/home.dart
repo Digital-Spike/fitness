@@ -56,13 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.white,
             ),
           ),
-          iconTheme: const IconThemeData(color: Colors.white),
-          leading: SvgPicture.asset(
-            'assets/language_icon.svg',
-          ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Image.asset('assets/Language.png', scale: 12),
               SizedBox(
                 height: 100,
                 child: Image.asset(
@@ -79,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          automaticallyImplyLeading: false,
         ),
         mainChild: FutureBuilder<bool>(
           future: futureData,
