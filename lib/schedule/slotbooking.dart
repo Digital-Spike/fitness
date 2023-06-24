@@ -18,10 +18,18 @@ class SlotBooking extends StatefulWidget {
 
 class _SlotBookingState extends State<SlotBooking>
     with SingleTickerProviderStateMixin {
+  bool _showCircle = false;
   Map<String, dynamic> slots = {};
   final CalendarFormat _calenderFormat = CalendarFormat.month;
-  final DateTime _focusedDay = DateTime.now();
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
   Future<bool>? futureData;
+
+  Future<dynamic> loadData() async {
+    setState(() {
+      _showCircle = true;
+    });
+  }
 
   @override
   void initState() {
@@ -139,6 +147,15 @@ class _SlotBookingState extends State<SlotBooking>
                   defaultTextStyle: TextStyle(color: Colors.white),
                   selectedDecoration: BoxDecoration(
                       color: Colors.orange, shape: BoxShape.circle)),
+              selectedDayPredicate: (day) {
+                return isSameDay(_selectedDay, day);
+              },
+              onDaySelected: (selectedDay, focusedDay) {
+                setState(() {
+                  _selectedDay = selectedDay;
+                  _focusedDay = focusedDay; // update `_focusedDay` here as well
+                });
+              },
             ),
             const Divider(
               color: Colors.white,

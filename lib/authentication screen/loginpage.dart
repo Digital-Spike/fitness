@@ -4,10 +4,14 @@ import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/instance_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/home.dart';
+import 'google.dart';
+import 'googlesignin.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -191,13 +195,13 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         GestureDetector(
                             onTap: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(
+                                const Text(
                                   'Forgot Password?',
                                   style: TextStyle(
                                       fontFamily: 'Roboto',
@@ -224,7 +228,9 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset('assets/google.svg'),
+                            GestureDetector(
+                                onTap: () => GoogleSinIn().signInWithGoogle(),
+                                child: SvgPicture.asset('assets/google.svg')),
                             const SizedBox(width: 20),
                             SvgPicture.asset('assets/Apple.svg'),
                           ],

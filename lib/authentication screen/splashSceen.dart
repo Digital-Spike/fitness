@@ -1,5 +1,10 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/log_in.dart';
+import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/authentication%20screen/welcome.dart';
+import 'package:fitness/screens/home.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:fitness/authentication%20screen/sign_in.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +15,35 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late StreamSubscription<User?> listener;
   @override
   void initState() {
-    super.initState();
-
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Welcome()));
+    Timer(const Duration(seconds: 2), () {
+      listener = FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null ||
+            ((user.email ?? "").isNotEmpty && !user.emailVerified)) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginPage(),
+            ),
+          );
+        } else {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const HomeScreen()),
+              ModalRoute.withName('/'));
+        }
+      });
     });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    listener.cancel();
+    super.dispose();
   }
 
   @override

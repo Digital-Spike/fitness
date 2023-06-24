@@ -144,7 +144,10 @@ class _BranchListState extends State<BranchList> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    SlotAvailability(),
+                                                    const SlotBooking(
+                                                  trainerId: '',
+                                                  isBranch: true,
+                                                ),
                                               ),
                                             );
                                           },
