@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/schedule/trainerprofile.dart';
+import 'package:fitness/schedule/trainerlist.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -52,12 +52,7 @@ class _BranchListState extends State<BranchList> {
                 itemCount: branchList.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const TrainerProfile()));
-                    },
+                    onTap: () {},
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: ClipRRect(
@@ -138,16 +133,17 @@ class _BranchListState extends State<BranchList> {
                                                           10)),
                                               minimumSize: const Size(100, 30)),
                                           onPressed: () {
-                                            /*Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const SlotBooking(
-                                                  trainerId: '',
-                                                  isBranch: true,
-                                                ),
-                                              ),
-                                            );*/
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TrainerList(
+                                                          isBranchTrainers:
+                                                              true,
+                                                          branchId:
+                                                              branchList[index]
+                                                                  ['branchId'],
+                                                        )));
                                           },
                                           child: const Text('Book Now'))),
                                 ],

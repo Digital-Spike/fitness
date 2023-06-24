@@ -6,9 +6,12 @@ import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class TrainerList extends StatefulWidget {
-  const TrainerList({super.key});
+  final bool isBranchTrainers;
+  final String? branchId;
+  const TrainerList({required this.isBranchTrainers, this.branchId, super.key});
 
   @override
   State<TrainerList> createState() => _TrainerListState();
@@ -145,8 +148,16 @@ class _TrainerListState extends State<TrainerList> {
 
   Future<bool> trainerList() async {
     try {
-      String trainerUrl = "${ApiList.apiUrl}getAllTrainers.php";
-      var response = await http.post(Uri.parse(trainerUrl), body: {});
+      Response? response;
+      if (widget.isBranchTrainers) {
+        String trainerUrl = "${ApiList.apiUrl}getBranchTrainers.php";
+        response = await http
+            .post(Uri.parse(trainerUrl), body: {'branch': widget.branchId});
+      } else {
+        String trainerUrl = "${ApiList.apiUrl}getAllTrainers.php";
+        response = await http.post(Uri.parse(trainerUrl), body: {});
+      }
+
       trainersList = json.decode(response.body);
       return true;
     } catch (e) {

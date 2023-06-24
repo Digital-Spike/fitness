@@ -117,8 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const TrainerList()));
+                                        builder: (context) => const TrainerList(
+                                              isBranchTrainers: false,
+                                            )));
                               },
                               child: const Icon(Icons.arrow_forward_ios_rounded,
                                   color: Colors.grey),
@@ -215,9 +216,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (BuildContext context, int index) {
                             final branchImage =
                                 trainersAndBranchList['branches'][index];
-                            return GestureDetector(
+                            return InkWell(
                               onTap: () {
-                                // Handle trainer selection
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => TrainerList(
+                                              isBranchTrainers: true,
+                                              branchId: trainersAndBranchList[
+                                                      'branches'][index]
+                                                  ['branchId'],
+                                            )));
                               },
                               child: Container(
                                 margin: const EdgeInsets.all(10),
