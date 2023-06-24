@@ -120,12 +120,7 @@ class TrainerCard extends StatelessWidget {
                       textStyle:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   child: Text('View Schedule'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SlotAvailability()));
-                  },
+                  onPressed: () {},
                 ),
               ),
             ],

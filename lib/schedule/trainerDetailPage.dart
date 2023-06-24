@@ -1,4 +1,5 @@
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/schedule/slot.dart';
 import 'package:fitness/schedule/slotbooking.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SlotBooking(
+                                        builder: (context) => SlotBook(
                                               isBranch: false,
                                               trainerId:
                                                   widget.trainer['trainerId'] ??

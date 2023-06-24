@@ -119,12 +119,6 @@ class _GetTrainerDetailsState extends State<GetTrainerDetails>
                         onTap: () async {
                           final prefs = await SharedPreferences.getInstance();
                           prefs.setString('trainer', data?[index]["trainerId"]);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SlotAvailability(),
-                            ),
-                          );
                         },
                         child: Card(
                           elevation: 2,
