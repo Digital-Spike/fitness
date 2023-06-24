@@ -1,4 +1,5 @@
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/schedule/slotbooking.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -63,7 +64,17 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
                               style: TextButton.styleFrom(
                                   minimumSize: const Size(400, 60),
                                   backgroundColor: Colors.orange),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SlotBooking(
+                                              isBranch: false,
+                                              trainerId:
+                                                  widget.trainer['trainerId'] ??
+                                                      '',
+                                            )));
+                              },
                               child: const Text(
                                 'Book Your Slot Now',
                                 style: TextStyle(

@@ -1,22 +1,16 @@
 import 'dart:convert';
 
+import 'package:fitness/constants/api_list.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:http/http.dart' as http;
-
-class Slot {
-  final String time;
-  final bool available;
-  final String bookingStatus;
-
-  Slot(
-      {required this.time,
-      required this.available,
-      required this.bookingStatus});
-}
+import 'package:table_calendar/table_calendar.dart';
 
 class SlotBooking extends StatefulWidget {
-  const SlotBooking({super.key});
+  final String trainerId;
+  final bool isBranch;
+
+  const SlotBooking(
+      {required this.trainerId, required this.isBranch, super.key});
 
   @override
   State<SlotBooking> createState() => _SlotBookingState();
@@ -24,12 +18,18 @@ class SlotBooking extends StatefulWidget {
 
 class _SlotBookingState extends State<SlotBooking>
     with SingleTickerProviderStateMixin {
-  late List<Slot> slots = [];
-  CalendarFormat _calenderFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  Map<String, dynamic> slots = {};
+  final CalendarFormat _calenderFormat = CalendarFormat.month;
+  final DateTime _focusedDay = DateTime.now();
+  Future<bool>? futureData;
 
-  Future<void> bookSlot(Slot slot) async {
+  @override
+  void initState() {
+    futureData = slotList();
+    super.initState();
+  }
+
+  /*Future<void> bookSlot(Slot slot) async {
     if (slot.available) {
       bool shouldBook = await showDialog(
         context: context,
@@ -84,7 +84,7 @@ class _SlotBookingState extends State<SlotBooking>
         },
       );
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -107,78 +107,160 @@ class _SlotBookingState extends State<SlotBooking>
                 color: Colors.white)),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          TableCalendar(
-            rowHeight: 50,
-            focusedDay: _focusedDay,
-            firstDay: DateTime(2010),
-            lastDay: DateTime(2030),
-            calendarFormat: _calenderFormat,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            headerStyle: const HeaderStyle(
-                formatButtonVisible: false,
-                titleCentered: true,
-                titleTextStyle:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-                leftChevronIcon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ),
-                rightChevronIcon: Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.white,
-                )),
-            daysOfWeekStyle: const DaysOfWeekStyle(
-                weekendStyle: TextStyle(color: Colors.red)),
-            calendarStyle: const CalendarStyle(
-                weekendTextStyle: TextStyle(color: Colors.red),
-                todayDecoration:
-                    BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
-                defaultTextStyle: TextStyle(color: Colors.white),
-                selectedDecoration: BoxDecoration(
-                    color: Colors.orange, shape: BoxShape.circle)),
-          ),
-          const Divider(
-            color: Colors.white,
-            height: 1.0,
-            thickness: 1.0,
-          ),
-          SizedBox(height: 15),
-          Text('Available Slots',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white)),
-          SizedBox(height: 10),
-          Expanded(
-              child: ListView.builder(
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                padding: EdgeInsets.all(16),
-                height: 100,
-                width: 350,
-                decoration: BoxDecoration(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TableCalendar(
+              rowHeight: 50,
+              focusedDay: _focusedDay,
+              firstDay: DateTime.now(),
+              lastDay: DateTime(2030),
+              calendarFormat: _calenderFormat,
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              headerStyle: const HeaderStyle(
+                  formatButtonVisible: false,
+                  titleCentered: true,
+                  titleTextStyle: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
+                  leftChevronIcon: Icon(
+                    Icons.arrow_back_ios,
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
-                child: ListTile(
-                  title: Text('9:00 am - 9:45 am',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold)),
-                  subtitle: Text(
-                    'Available',
-                    style: TextStyle(color: Colors.green),
                   ),
-                  trailing: Text('Book Now'),
-                  onTap: () {},
-                ),
-              );
-            },
-          ))
-        ],
+                  rightChevronIcon: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  )),
+              daysOfWeekStyle: const DaysOfWeekStyle(
+                  weekendStyle: TextStyle(color: Colors.red)),
+              calendarStyle: const CalendarStyle(
+                  weekendTextStyle: TextStyle(color: Colors.red),
+                  todayDecoration:
+                      BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
+                  defaultTextStyle: TextStyle(color: Colors.white),
+                  selectedDecoration: BoxDecoration(
+                      color: Colors.orange, shape: BoxShape.circle)),
+            ),
+            const Divider(
+              color: Colors.white,
+              height: 1.0,
+              thickness: 1.0,
+            ),
+            const SizedBox(height: 15),
+            const Text('Available Slots',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.45,
+              child: FutureBuilder<bool>(
+                future: futureData,
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return ListView.builder(
+                      itemCount: slots.length,
+                      itemBuilder: (context, index) {
+                        List branchTimeStamp = [
+                          "9:00 am - 10:30 am",
+                          "10:30 am - 12:00 pm",
+                          "12:00 pm - 1:30 pm",
+                          "2:00 pm - 3:30 pm",
+                          "3:30 pm - 5:00 pm",
+                          "5:00 pm - 6:30 pm",
+                          "6:30 pm - 8:00 pm"
+                        ];
+
+                        List trainerTimeStamp = [
+                          "9:00 am - 9:45 am",
+                          "9:45 am - 10:30 am",
+                          "10:30 am - 11:15 am",
+                          "11:15 am - 12:00 pm",
+                          "12:00 pm - 12:45 pm",
+                          "2:00 pm - 2:45 pm",
+                          "2:45 pm - 3:30 pm",
+                          "3:30 pm - 4:15 pm",
+                          "4:15 pm - 5:00 pm",
+                          "5:00 pm -5:45 pm",
+                          "5:45 pm - 6:30 pm",
+                          "6:30 pm - 7:15 pm",
+                          "7:15 pm - 8:00 pm"
+                        ];
+
+                        bool isBooked = slots[(index + 1).toString()]
+                                .toString()
+                                .toLowerCase() ==
+                            "booked";
+
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.all(16),
+                          height: 100,
+                          width: 350,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: ListTile(
+                            title: Text(trainerTimeStamp[index],
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold)),
+                            subtitle: Text(
+                              slots[(index + 1).toString()].toUpperCase(),
+                              style: TextStyle(
+                                  color: isBooked ? Colors.grey : Colors.green),
+                            ),
+                            trailing: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      isBooked ? Colors.grey : Colors.green,
+                                  side: BorderSide(
+                                      width: 1,
+                                      color: isBooked
+                                          ? Colors.grey
+                                          : Colors.green),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                    20,
+                                  ))),
+                              child: const Text(
+                                'Book Now',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            onTap: () {},
+                          ),
+                        );
+                      },
+                    );
+                  }
+
+                  if (snapshot.hasError) {
+                    const Text("Something wrong");
+                  }
+
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
+            ),
+            const SizedBox(height: 30),
+          ],
+        ),
       ),
     );
+  }
+
+  Future<bool> slotList() async {
+    try {
+      String trainerUrl = "${ApiList.apiUrl}slotavailability.php";
+      var response = await http.post(Uri.parse(trainerUrl),
+          body: {'trainerId': widget.trainerId, 'bookingDate': '2023/06/19'});
+      slots = json.decode(response.body);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
