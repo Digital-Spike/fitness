@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/util/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:table_calendar/table_calendar.dart';
 
 class SlotBooking extends StatefulWidget {
-  final String trainerId;
   final bool isBranch;
+  final Map<String, dynamic> trainer;
 
-  const SlotBooking(
-      {required this.trainerId, required this.isBranch, super.key});
+  const SlotBooking({required this.isBranch, required this.trainer, super.key});
 
   @override
   State<SlotBooking> createState() => _SlotBookingState();
@@ -229,7 +229,38 @@ class _SlotBookingState extends State<SlotBooking>
                                   color: isBooked ? Colors.grey : Colors.green),
                             ),
                             trailing: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: const [
+                                            CircularProgressIndicator(),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 4.0),
+                                              child: Text("Processing..."),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                                await bookSession(
+                                    slotNumber: (index + 1).toString());
+                                if (mounted) {
+                                  Navigator.of(context).pop();
+                                }
+                                setState(() {
+                                  futureData = slotList();
+                                });
+                              },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       isBooked ? Colors.grey : Colors.green,
@@ -272,9 +303,35 @@ class _SlotBookingState extends State<SlotBooking>
   Future<bool> slotList() async {
     try {
       String trainerUrl = "${ApiList.apiUrl}slotavailability.php";
-      var response = await http.post(Uri.parse(trainerUrl),
-          body: {'trainerId': widget.trainerId, 'bookingDate': '2023/06/19'});
+      var response = await http.post(Uri.parse(trainerUrl), body: {
+        'trainerId': widget.trainer['trainerId'],
+        'bookingDate': '2023/06/19'
+      });
       slots = json.decode(response.body);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> bookSession({
+    required String slotNumber,
+  }) async {
+    try {
+      Map<String, dynamic> requestBody = {
+        'trainerId': widget.trainer['trainerId'],
+        'bookingDate': '2023/06/19',
+        'branchId': widget.trainer['branchId1'],
+        'bookingId': StringUtil().generateRandomNumber(length: 10),
+        'customerId': 'Kqe7jbePobU6dqKBVCxU5mH6mtf1',
+        'customerName': 'Shashi',
+        'trainerName': widget.trainer['name'],
+        'bookingTime': '9:00 am - 9:45 am',
+        'slot': slotNumber,
+        'amount': '500'
+      };
+      String trainerUrl = "${ApiList.apiUrl}addBooking.php";
+      await http.post(Uri.parse(trainerUrl), body: requestBody);
       return true;
     } catch (e) {
       return false;

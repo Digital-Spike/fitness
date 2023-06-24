@@ -70,9 +70,7 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
                                     MaterialPageRoute(
                                         builder: (context) => SlotBooking(
                                               isBranch: false,
-                                              trainerId:
-                                                  widget.trainer['trainerId'] ??
-                                                      '',
+                                              trainer: widget.trainer,
                                             )));
                               },
                               child: const Text(
