@@ -96,36 +96,72 @@ class _TrainerListState extends State<TrainerList> {
                                       Text(
                                         trainersList[index]['name'],
                                         style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.orange),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.deepOrange),
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
                                         trainersList[index]['description'],
                                         style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w600),
                                       ),
                                       const SizedBox(height: 10),
-                                      Text(
-                                        trainersList[index]['description'],
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.phone),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            ((trainersList[index]
+                                                            ['phoneNumber'])
+                                                        .toString()
+                                                        .length >=
+                                                    2
+                                                ? trainersList[index]
+                                                    ['phoneNumber']
+                                                : 'Not Available'),
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   )
                                 ],
                               ),
                               const SizedBox(height: 20),
-                              Text(
-                                'Available',
-                                style: TextStyle(
-                                    color: (trainersList[index]['status'] ==
-                                            "ACTIVE")
-                                        ? Colors.green
-                                        : Colors.grey),
+                              Row(
+                                children: [
+                                  Text(
+                                    '    Available',
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: (trainersList[index]['status'] ==
+                                                "ACTIVE")
+                                            ? Colors.green
+                                            : Colors.grey),
+                                  ),
+                                  Spacer(),
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                    size: 30,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Text(
+                                      trainersList[index]['rating'],
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  )
+                                ],
                               )
                             ],
                           ),
