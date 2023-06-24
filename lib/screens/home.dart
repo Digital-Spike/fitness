@@ -145,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => TrainerDetailPage(
+                                            isBranch: false,
                                             trainer: trainerImage)));
                               },
                               child: Padding(

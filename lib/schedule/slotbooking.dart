@@ -16,83 +16,44 @@ class SlotBooking extends StatefulWidget {
   State<SlotBooking> createState() => _SlotBookingState();
 }
 
-class _SlotBookingState extends State<SlotBooking>
-    with SingleTickerProviderStateMixin {
-  bool _showCircle = false;
+class _SlotBookingState extends State<SlotBooking> {
   Map<String, dynamic> slots = {};
   final CalendarFormat _calenderFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   Future<bool>? futureData;
 
-  Future<dynamic> loadData() async {
-    setState(() {
-      _showCircle = true;
-    });
-  }
+  List trainerTimeStamp = [
+    "9:00 am - 10:30 am",
+    "10:30 am - 12:00 pm",
+    "12:00 pm - 1:30 pm",
+    "2:00 pm - 3:30 pm",
+    "3:30 pm - 5:00 pm",
+    "5:00 pm - 6:30 pm",
+    "6:30 pm - 8:00 pm"
+  ];
+
+  List branchTimeStamp = [
+    "9:00 am - 9:45 am",
+    "9:45 am - 10:30 am",
+    "10:30 am - 11:15 am",
+    "11:15 am - 12:00 pm",
+    "12:00 pm - 12:45 pm",
+    "2:00 pm - 2:45 pm",
+    "2:45 pm - 3:30 pm",
+    "3:30 pm - 4:15 pm",
+    "4:15 pm - 5:00 pm",
+    "5:00 pm -5:45 pm",
+    "5:45 pm - 6:30 pm",
+    "6:30 pm - 7:15 pm",
+    "7:15 pm - 8:00 pm"
+  ];
 
   @override
   void initState() {
     futureData = slotList();
     super.initState();
   }
-
-  /*Future<void> bookSlot(Slot slot) async {
-    if (slot.available) {
-      bool shouldBook = await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            title: Text("Book Slot"),
-            content: Text("Book your slot now?"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true); // Book the slot
-                },
-                child: Text("OK"),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false); // Cancel the booking
-                },
-                child: Text("Cancel"),
-              ),
-            ],
-          );
-        },
-      );
-
-      if (shouldBook) {
-        // Perform the booking
-        // ...
-      }
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            title: Text("Slot Unavailable"),
-            content: Text("The selected slot is not available."),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +69,7 @@ class _SlotBookingState extends State<SlotBooking>
             color: Colors.white,
           ),
         ),
-        title: const Text('Slot Booking',
+        title: const Text('Choose a date and slot',
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -178,31 +139,9 @@ class _SlotBookingState extends State<SlotBooking>
                     return ListView.builder(
                       itemCount: slots.length,
                       itemBuilder: (context, index) {
-                        List branchTimeStamp = [
-                          "9:00 am - 10:30 am",
-                          "10:30 am - 12:00 pm",
-                          "12:00 pm - 1:30 pm",
-                          "2:00 pm - 3:30 pm",
-                          "3:30 pm - 5:00 pm",
-                          "5:00 pm - 6:30 pm",
-                          "6:30 pm - 8:00 pm"
-                        ];
-
-                        List trainerTimeStamp = [
-                          "9:00 am - 9:45 am",
-                          "9:45 am - 10:30 am",
-                          "10:30 am - 11:15 am",
-                          "11:15 am - 12:00 pm",
-                          "12:00 pm - 12:45 pm",
-                          "2:00 pm - 2:45 pm",
-                          "2:45 pm - 3:30 pm",
-                          "3:30 pm - 4:15 pm",
-                          "4:15 pm - 5:00 pm",
-                          "5:00 pm -5:45 pm",
-                          "5:45 pm - 6:30 pm",
-                          "6:30 pm - 7:15 pm",
-                          "7:15 pm - 8:00 pm"
-                        ];
+                        List timeStamp = widget.isBranch
+                            ? branchTimeStamp
+                            : trainerTimeStamp;
 
                         bool isBooked = slots[(index + 1).toString()]
                                 .toString()
@@ -219,7 +158,7 @@ class _SlotBookingState extends State<SlotBooking>
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10)),
                           child: ListTile(
-                            title: Text(trainerTimeStamp[index],
+                            title: Text(timeStamp[index],
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
@@ -302,11 +241,21 @@ class _SlotBookingState extends State<SlotBooking>
 
   Future<bool> slotList() async {
     try {
-      String trainerUrl = "${ApiList.apiUrl}slotavailability.php";
-      var response = await http.post(Uri.parse(trainerUrl), body: {
-        'trainerId': widget.trainer['trainerId'],
-        'bookingDate': '2023/06/19'
-      });
+      http.Response? response;
+      if (widget.isBranch) {
+        String trainerUrl = "${ApiList.apiUrl}slotavailability.php";
+        response = await http.post(Uri.parse(trainerUrl), body: {
+          'trainerId': widget.trainer['trainerId'],
+          'bookingDate': '2023/06/24'
+        });
+      } else {
+        String trainerUrl = "${ApiList.apiUrl}webslothome.php";
+        response = await http.post(Uri.parse(trainerUrl), body: {
+          'trainerId': widget.trainer['trainerId'],
+          'bookingDate': '2023/06/24'
+        });
+      }
+
       slots = json.decode(response.body);
       return true;
     } catch (e) {
@@ -320,7 +269,7 @@ class _SlotBookingState extends State<SlotBooking>
     try {
       Map<String, dynamic> requestBody = {
         'trainerId': widget.trainer['trainerId'],
-        'bookingDate': '2023/06/19',
+        'bookingDate': '2023/06/24',
         'branchId': widget.trainer['branchId1'],
         'bookingId': StringUtil().generateRandomNumber(length: 10),
         'customerId': 'Kqe7jbePobU6dqKBVCxU5mH6mtf1',

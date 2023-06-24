@@ -6,7 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class TrainerDetailPage extends StatefulWidget {
   final Map<String, dynamic> trainer;
-  const TrainerDetailPage({Key? key, required this.trainer}) : super(key: key);
+  final bool isBranch;
+  const TrainerDetailPage(
+      {Key? key, required this.trainer, required this.isBranch})
+      : super(key: key);
 
   @override
   State<TrainerDetailPage> createState() => _TrainerDetailPageState();
@@ -69,7 +72,7 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => SlotBooking(
-                                              isBranch: false,
+                                              isBranch: widget.isBranch,
                                               trainer: widget.trainer,
                                             )));
                               },

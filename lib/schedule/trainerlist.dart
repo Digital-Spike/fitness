@@ -60,6 +60,7 @@ class _TrainerListState extends State<TrainerList> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => TrainerDetailPage(
+                                    isBranch: widget.isBranchTrainers,
                                     trainer: trainersList[index],
                                   )));
                     },
