@@ -1,16 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/authentication%20screen/sign_in.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/instance_manager.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/home.dart';
-import 'google.dart';
 import 'googlesignin.dart';
 
 class LoginPage extends StatefulWidget {
