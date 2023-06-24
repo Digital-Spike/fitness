@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/schedule/slot.dart';
-import 'package:fitness/schedule/slotbooking.dart';
 import 'package:fitness/schedule/trainerprofile.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
@@ -140,7 +138,7 @@ class _BranchListState extends State<BranchList> {
                                                           10)),
                                               minimumSize: const Size(100, 30)),
                                           onPressed: () {
-                                            Navigator.push(
+                                            /*Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
@@ -149,7 +147,7 @@ class _BranchListState extends State<BranchList> {
                                                   isBranch: true,
                                                 ),
                                               ),
-                                            );
+                                            );*/
                                           },
                                           child: const Text('Book Now'))),
                                 ],
