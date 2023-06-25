@@ -4,6 +4,7 @@ import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SlotBooking extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SlotBookingState extends State<SlotBooking> {
   DateTime? _selectedDay;
   Future<bool>? futureData;
 
-  List trainerTimeStamp = [
+  List homeTimeStamp = [
     "9:00 am - 10:30 am",
     "10:30 am - 12:00 pm",
     "12:00 pm - 1:30 pm",
@@ -139,9 +140,8 @@ class _SlotBookingState extends State<SlotBooking> {
                     return ListView.builder(
                       itemCount: slots.length,
                       itemBuilder: (context, index) {
-                        List timeStamp = widget.isBranch
-                            ? branchTimeStamp
-                            : trainerTimeStamp;
+                        List timeStamp =
+                            widget.isBranch ? branchTimeStamp : homeTimeStamp;
 
                         bool isBooked = slots[(index + 1).toString()]
                                 .toString()
@@ -192,6 +192,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                   },
                                 );
                                 await bookSession(
+                                    bookingTime: timeStamp[index],
                                     slotNumber: (index + 1).toString());
                                 if (mounted) {
                                   Navigator.of(context).pop();
@@ -246,13 +247,15 @@ class _SlotBookingState extends State<SlotBooking> {
         String trainerUrl = "${ApiList.apiUrl}slotavailability.php";
         response = await http.post(Uri.parse(trainerUrl), body: {
           'trainerId': widget.trainer['trainerId'],
-          'bookingDate': '2023/06/24'
+          'bookingDate':
+              DateFormat('yyyy/MM/dd').format(_selectedDay ?? _focusedDay)
         });
       } else {
         String trainerUrl = "${ApiList.apiUrl}webslothome.php";
         response = await http.post(Uri.parse(trainerUrl), body: {
           'trainerId': widget.trainer['trainerId'],
-          'bookingDate': '2023/06/24'
+          'bookingDate': DateFormat('yyyy/MM/dd')
+              .format(_selectedDay ?? _focusedDay) /*'2023/06/24'*/
         });
       }
 
@@ -265,21 +268,26 @@ class _SlotBookingState extends State<SlotBooking> {
 
   Future<bool> bookSession({
     required String slotNumber,
+    required String bookingTime,
   }) async {
     try {
       Map<String, dynamic> requestBody = {
         'trainerId': widget.trainer['trainerId'],
-        'bookingDate': '2023/06/24',
+        'bookingDate':
+            DateFormat('yyyy/MM/dd').format(_selectedDay ?? _focusedDay),
         'branchId': widget.trainer['branchId1'],
         'bookingId': StringUtil().generateRandomNumber(length: 10),
         'customerId': 'Kqe7jbePobU6dqKBVCxU5mH6mtf1',
         'customerName': 'Shashi',
         'trainerName': widget.trainer['name'],
-        'bookingTime': '9:00 am - 9:45 am',
+        'bookingTime': bookingTime,
         'slot': slotNumber,
         'amount': '500'
       };
-      String trainerUrl = "${ApiList.apiUrl}addBooking.php";
+
+      String trainerUrl = widget.isBranch
+          ? "${ApiList.apiUrl}addBooking.php"
+          : "${ApiList.apiUrl}homeaddBooking.php";
       await http.post(Uri.parse(trainerUrl), body: requestBody);
       return true;
     } catch (e) {
