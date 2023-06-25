@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/authentication%20screen/googlesignin.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -201,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: userLogin,
                             child: SvgPicture.asset('assets/Logintab.svg')),
                         const SizedBox(height: 20),
-                        const Text(
+                        /*const Text(
                           'OR',
                           style: TextStyle(
                               fontFamily: 'Roboto',
@@ -225,10 +224,10 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
 
-                            /*const SizedBox(width: 20),
-                            SvgPicture.asset('assets/Apple.svg'),*/
+                            */ /*const SizedBox(width: 20),
+                            SvgPicture.asset('assets/Apple.svg'),*/ /*
                           ],
-                        ),
+                        ),*/
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
