@@ -24,12 +24,14 @@ class _SignupPageState extends State<SignupPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _phoneController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
@@ -50,13 +52,12 @@ class _SignupPageState extends State<SignupPage> {
                 )),
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Flexible(
-                    flex: 3,
-                    child: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
                       width: 350,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
@@ -87,11 +88,10 @@ class _SignupPageState extends State<SignupPage> {
                         ],
                       ),
                     ),
-                  ),
-                  const Spacer(),
-                  Flexible(
-                    flex: 10,
-                    child: Container(
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
                       padding: const EdgeInsets.all(20),
                       width: 350,
                       decoration: BoxDecoration(
@@ -110,6 +110,12 @@ class _SignupPageState extends State<SignupPage> {
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter user name';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 15),
                             TextFormField(
@@ -127,6 +133,25 @@ class _SignupPageState extends State<SignupPage> {
                                       !EmailValidator.validate(email)
                                   ? 'Enter a valid email'
                                   : null,
+                            ),
+                            const SizedBox(height: 15),
+                            TextFormField(
+                              controller: _phoneController,
+                              decoration: InputDecoration(
+                                  label: const Text('Phone number'),
+                                  isDense: true,
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter user name';
+                                }
+                                return null;
+                              },
                             ),
                             const SizedBox(height: 15),
                             TextFormField(
@@ -215,8 +240,8 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
