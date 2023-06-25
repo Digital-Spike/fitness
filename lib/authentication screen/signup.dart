@@ -304,11 +304,13 @@ class _SignupPageState extends State<SignupPage> {
         return;
       }
 
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+        PageRouteBuilder(
+          pageBuilder: (context, a, b) => const HomeScreen(),
+          transitionDuration: const Duration(seconds: 0),
         ),
+        (route) => false,
       );
     } on FirebaseAuthException catch (e) {
       showErrorMessage(e.code);

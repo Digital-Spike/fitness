@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class SlotBooking extends StatefulWidget {
 class _SlotBookingState extends State<SlotBooking> {
   Map<String, dynamic> slots = {};
   final CalendarFormat _calenderFormat = CalendarFormat.month;
+  User? user = FirebaseAuth.instance.currentUser;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   Future<bool>? futureData;
@@ -280,7 +282,7 @@ class _SlotBookingState extends State<SlotBooking> {
             DateFormat('yyyy/MM/dd').format(_selectedDay ?? _focusedDay),
         'branchId': widget.trainer['branchId1'],
         'bookingId': StringUtil().generateRandomNumber(length: 10),
-        'customerId': 'Kqe7jbePobU6dqKBVCxU5mH6mtf1',
+        'customerId': user?.uid,
         'customerName': 'Shashi',
         'trainerName': widget.trainer['name'],
         'bookingTime': bookingTime,
