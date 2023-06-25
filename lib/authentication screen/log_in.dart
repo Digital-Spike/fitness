@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/authentication screen/google.dart';
 import 'package:fitness/authentication screen/sign_in.dart';
 import 'package:fitness/screens/home.dart';
-import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'forgetpassword.dart';
 import 'package:http/http.dart' as http;
+
+import 'forgetpassword.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -285,7 +284,7 @@ class _LoginState extends State<Login> {
                                                 HomeScreen()));
                                   },
                                   child: SvgPicture.asset(
-                                    'assets/google (3).svg',
+                                    'assets/google.svg',
                                   ),
                                 ),
                               ],

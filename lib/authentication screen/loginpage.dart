@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/authentication%20screen/googlesignin.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 import '../screens/home.dart';
-import 'googlesignin.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -195,8 +195,8 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: () {},
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                const Text(
+                              children: const [
+                                Text(
                                   'Forgot Password?',
                                   style: TextStyle(
                                       fontFamily: 'Roboto',
@@ -224,10 +224,19 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                                onTap: () => GoogleSinIn().signInWithGoogle(),
-                                child: SvgPicture.asset('assets/google.svg')),
-                            const SizedBox(width: 20),
-                            SvgPicture.asset('assets/Apple.svg'),
+                              onTap: () => GoogleSinIn().signInWithGoogle(),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                    color: Colors.white,
+                                    padding: const EdgeInsets.all(6),
+                                    child:
+                                        SvgPicture.asset('assets/google.svg')),
+                              ),
+                            ),
+
+                            /*const SizedBox(width: 20),
+                            SvgPicture.asset('assets/Apple.svg'),*/
                           ],
                         ),
                         const SizedBox(height: 20),
