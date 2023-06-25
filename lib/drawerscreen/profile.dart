@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,87 +45,83 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-      mainChild: Column(
-        children: [
-          const Divider(
-            color: Colors.white,
-            thickness: 1,
-          ),
-          Expanded(
-              child: ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return Container(
-                height: 100,
-                child: Row(
+      mainChild: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Divider(
+              color: Colors.white,
+              thickness: 1,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 80,
+                  child: CircleAvatar(
+                    minRadius: 60,
+                    backgroundColor: Colors.white,
+                    backgroundImage: _profileImage != null
+                        ? FileImage(_profileImage!)
+                        : null,
+                    child:
+                        _profileImage == null ? const Icon(Icons.person) : null,
+                  ),
+                ),
+                Column(
                   children: [
-                    CircleAvatar(
-                      minRadius: 60,
-                      backgroundColor: Colors.white,
-                      backgroundImage: _profileImage != null
-                          ? FileImage(_profileImage!)
-                          : null,
-                      child: _profileImage == null
-                          ? const Icon(Icons.person)
-                          : null,
+                    Text(
+                      _displayName ?? '',
+                      style: const TextStyle(color: Colors.white),
                     ),
-                    Column(
-                      children: [
-                        Text(
-                          _displayName ?? '',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          _email ?? '',
-                          style: const TextStyle(
-                              fontFamily: 'Roboto', color: Colors.white),
-                        ),
-                      ],
+                    Text(
+                      _email ?? '',
+                      style: const TextStyle(
+                          fontFamily: 'Roboto', color: Colors.white),
                     ),
-                    SizedBox(width: 10),
-                    SvgPicture.asset('assets/Edit.svg')
                   ],
                 ),
-              );
-            },
-          )),
-          const Divider(
-            color: Colors.white,
-            thickness: 1,
-          ),
-          const SizedBox(height: 10),
-          buildSettingsButton('Languages', Icons.language, () {
-            // Handle languages button tap
-          }),
-          const SizedBox(height: 10),
-          buildSettingsButton('Subscription', Icons.subscriptions, () {
-            // Handle subscription button tap
-          }),
-          const SizedBox(height: 10),
-          buildSettingsButton('Account and Privacy', Icons.security, () {
-            // Handle Account and Privacy button tap
-          }),
-          const SizedBox(height: 10),
-          buildSettingsButton('Settings', Icons.settings, () {
-            // Handle Settings button tap
-          }),
-          const SizedBox(height: 10),
-          buildSettingsButton('Help & Support', Icons.help, () {
-            // Handle Help & Support button tap
-          }),
-          const SizedBox(height: 10),
-          buildSettingsButton('Logout', Icons.logout, () {
-            // Handle Logout button tap
-            () => FirebaseAuth.instance.signOut();
-          }),
-          const SizedBox(height: 10),
-          Center(
-            child: Image.asset(
-              'assets/fitnessname.png',
-              height: 80,
+                const SizedBox(width: 10),
+                SvgPicture.asset('assets/Edit.svg')
+              ],
             ),
-          ),
-        ],
+            const Divider(
+              color: Colors.white,
+              thickness: 1,
+            ),
+            const SizedBox(height: 10),
+            buildSettingsButton('Languages', Icons.language, () {
+              // Handle languages button tap
+            }),
+            const SizedBox(height: 10),
+            buildSettingsButton('Subscription', Icons.subscriptions, () {
+              // Handle subscription button tap
+            }),
+            const SizedBox(height: 10),
+            buildSettingsButton('Account and Privacy', Icons.security, () {
+              // Handle Account and Privacy button tap
+            }),
+            const SizedBox(height: 10),
+            buildSettingsButton('Settings', Icons.settings, () {
+              // Handle Settings button tap
+            }),
+            const SizedBox(height: 10),
+            buildSettingsButton('Help & Support', Icons.help, () {
+              // Handle Help & Support button tap
+            }),
+            const SizedBox(height: 10),
+            buildSettingsButton('Logout', Icons.logout, () {
+              showLogoutPopup();
+            }),
+            const SizedBox(height: 10),
+            Center(
+              child: Image.asset(
+                'assets/fitnessname.png',
+                height: 80,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -180,6 +177,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> showLogoutPopup() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Logout',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: const Text(
+            'Are you sure?',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  child: const Text(
+                    'YES',
+                    style: TextStyle(
+                      color: Color(0xff0f4c81),
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut().then((value) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const LoginPage()),
+                          ModalRoute.withName('/'));
+                    });
+                  },
+                ),
+                TextButton(
+                  child: const Text(
+                    'NO',
+                    style: TextStyle(
+                      color: Color(0xff0f4c81),
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }
