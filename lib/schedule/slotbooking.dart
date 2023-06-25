@@ -115,7 +115,8 @@ class _SlotBookingState extends State<SlotBooking> {
               onDaySelected: (selectedDay, focusedDay) {
                 setState(() {
                   _selectedDay = selectedDay;
-                  _focusedDay = focusedDay; // update `_focusedDay` here as well
+                  _focusedDay = focusedDay;
+                  futureData = slotList();
                 });
               },
             ),
@@ -169,37 +170,39 @@ class _SlotBookingState extends State<SlotBooking> {
                             ),
                             trailing: ElevatedButton(
                               onPressed: () async {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (BuildContext context) {
-                                    return Dialog(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: const [
-                                            CircularProgressIndicator(),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 4.0),
-                                              child: Text("Processing..."),
-                                            ),
-                                          ],
+                                if (!isBooked) {
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: const [
+                                              CircularProgressIndicator(),
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 4.0),
+                                                child: Text("Processing..."),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                );
-                                await bookSession(
-                                    bookingTime: timeStamp[index],
-                                    slotNumber: (index + 1).toString());
-                                if (mounted) {
-                                  Navigator.of(context).pop();
+                                      );
+                                    },
+                                  );
+                                  await bookSession(
+                                      bookingTime: timeStamp[index],
+                                      slotNumber: (index + 1).toString());
+                                  if (mounted) {
+                                    Navigator.of(context).pop();
+                                  }
+                                  setState(() {
+                                    futureData = slotList();
+                                  });
                                 }
-                                setState(() {
-                                  futureData = slotList();
-                                });
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor:
@@ -213,9 +216,9 @@ class _SlotBookingState extends State<SlotBooking> {
                                       borderRadius: BorderRadius.circular(
                                     20,
                                   ))),
-                              child: const Text(
-                                'Book Now',
-                                style: TextStyle(color: Colors.white),
+                              child: Text(
+                                isBooked ? 'Booked' : 'Book Now',
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
                             onTap: () {},
@@ -273,7 +276,7 @@ class _SlotBookingState extends State<SlotBooking> {
     try {
       Map<String, dynamic> requestBody = {
         'trainerId': widget.trainer['trainerId'],
-        'bookingDate':
+        widget.isBranch ? 'bookingDate' : 'bDate':
             DateFormat('yyyy/MM/dd').format(_selectedDay ?? _focusedDay),
         'branchId': widget.trainer['branchId1'],
         'bookingId': StringUtil().generateRandomNumber(length: 10),
