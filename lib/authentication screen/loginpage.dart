@@ -3,7 +3,6 @@ import 'package:fitness/authentication%20screen/googlesignin.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 import '../screens/home.dart';
@@ -20,8 +19,6 @@ class _LoginPageState extends State<LoginPage> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   userLogin() async {
     showDialog(
@@ -52,15 +49,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
       } else {
-        // Account doesn't exist, navigate to Signup
-        Navigator.pushAndRemoveUntil(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, a, b) => const SignupPage(),
-            transitionDuration: const Duration(seconds: 0),
-          ),
-          (route) => false,
-        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const SignupPage()));
       }
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
@@ -251,16 +241,11 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Colors.white)),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (context, a, b) =>
-                                        const SignupPage(),
-                                    transitionDuration:
-                                        const Duration(seconds: 0),
-                                  ),
-                                  (route) => false,
-                                );
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignupPage()));
                               },
                               child: const Text(
                                 'Signup',

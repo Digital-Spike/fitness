@@ -1,17 +1,15 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/authentication%20screen/log_in.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
-import 'package:fitness/authentication%20screen/welcome.dart';
 import 'package:fitness/screens/home.dart';
-import 'package:fitness/screens/mainScreen.dart';
-import 'package:fitness/authentication%20screen/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -20,8 +18,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(seconds: 2), () {
       listener = FirebaseAuth.instance.authStateChanges().listen((User? user) {
-        if (user == null ||
-            ((user.email ?? "").isNotEmpty && !user.emailVerified)) {
+        if (user ==
+                null /*||
+            ((user.email ?? "").isNotEmpty && !user.emailVerified)*/
+            ) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

@@ -1,9 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
+import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart' as http;
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -15,16 +17,11 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   bool _isSecurePassword = true;
   bool _isSecurePassword1 = true;
-  var name = "";
-  var email = "";
-  var phoneNumber = "";
-  var password = "";
-  var confirmPassword = "";
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _userNameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -38,7 +35,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Container(
@@ -103,6 +100,7 @@ class _SignupPageState extends State<SignupPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextFormField(
+                              controller: _userNameController,
                               decoration: InputDecoration(
                                   label: const Text('User Name'),
                                   isDense: true,
@@ -137,6 +135,7 @@ class _SignupPageState extends State<SignupPage> {
                             const SizedBox(height: 15),
                             TextFormField(
                               controller: _phoneController,
+                              keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                   label: const Text('Phone number'),
                                   isDense: true,
@@ -147,8 +146,9 @@ class _SignupPageState extends State<SignupPage> {
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter user name';
+                                if ((value ?? "").isEmpty ||
+                                    (value ?? "").length != 10) {
+                                  return 'Please enter valid phone number';
                                 }
                                 return null;
                               },
@@ -172,7 +172,7 @@ class _SignupPageState extends State<SignupPage> {
                                       ? 'Enter min. 6 characters'
                                       : null,
                             ),
-                            const SizedBox(height: 15),
+                            /*const SizedBox(height: 15),
                             TextFormField(
                               controller: _confirmPasswordController,
                               obscureText: _isSecurePassword1,
@@ -190,7 +190,7 @@ class _SignupPageState extends State<SignupPage> {
                                   value != null && value.length < 6
                                       ? 'Enter min. 6 characters'
                                       : null,
-                            ),
+                            ),*/
                             const SizedBox(height: 20),
                             GestureDetector(
                                 onTap: signUp,
@@ -286,9 +286,19 @@ class _SignupPageState extends State<SignupPage> {
             ));
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim());
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim());
+
+      var url = Uri.parse('${ApiList.apiUrl}/addUser.php');
+      Map<String, dynamic> userData = {
+        'userId': userCredential.user?.uid,
+        'name': _userNameController.text,
+        'phoneNumber': _phoneController.text,
+        'email': _emailController.text,
+      };
+      await http.post(url, body: userData);
 
       if (!mounted) {
         return;
