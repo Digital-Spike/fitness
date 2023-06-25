@@ -56,8 +56,11 @@ class _MyBookingPageState extends State<MyBookingPage>
             padding: const EdgeInsets.all(5),
             child: Container(
               margin: const EdgeInsets.all(5),
-              padding: const EdgeInsets.all(5),
-              color: Colors.grey.shade200,
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.shade200,
+              ),
               child: TabBar(
                 controller: _tabController,
                 labelColor: Colors.white,
@@ -74,6 +77,8 @@ class _MyBookingPageState extends State<MyBookingPage>
                       child: Text(
                         'Bookings',
                         style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w600,
                           fontSize: 16,
                           color: _tabController.index == 0
                               ? Colors.white
@@ -88,6 +93,8 @@ class _MyBookingPageState extends State<MyBookingPage>
                       child: Text(
                         'History',
                         style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w600,
                           fontSize: 16,
                           color: _tabController.index == 1
                               ? Colors.white
