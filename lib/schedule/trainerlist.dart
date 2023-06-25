@@ -111,8 +111,8 @@ class _TrainerListState extends State<TrainerList> {
                                       const SizedBox(height: 10),
                                       Row(
                                         children: [
-                                          Icon(Icons.phone),
-                                          SizedBox(
+                                          const Icon(Icons.phone),
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           Text(
@@ -148,18 +148,18 @@ class _TrainerListState extends State<TrainerList> {
                                             ? Colors.green
                                             : Colors.grey),
                                   ),
-                                  Spacer(),
-                                  Icon(
+                                  const Spacer(),
+                                  const Icon(
                                     Icons.star,
                                     color: Colors.yellow,
                                     size: 30,
                                   ),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   Padding(
                                     padding: const EdgeInsets.only(right: 10),
                                     child: Text(
                                       trainersList[index]['rating'],
-                                      style: TextStyle(fontSize: 16),
+                                      style: const TextStyle(fontSize: 16),
                                     ),
                                   )
                                 ],
