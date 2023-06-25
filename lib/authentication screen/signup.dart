@@ -1,10 +1,9 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:email_validator/email_validator.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -22,13 +21,9 @@ class _SignupPageState extends State<SignupPage> {
   var password = "";
   var confirmPassword = "";
 
-  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -36,44 +31,6 @@ class _SignupPageState extends State<SignupPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  Future SignUp() async {
-    final isValid = formKey.currentState!.validate();
-    if (!isValid) return;
-    showDialog(
-        context: context,
-        builder: (context) => Center(
-              child: CircularProgressIndicator(),
-            ));
-
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim());
-
-      // Account exists, navigate to MainScreen
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      showErrorMessage(e.code);
-    }
-  }
-
-  void showErrorMessage(String message) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              title: Center(
-                  child: Text(
-            message,
-          )));
-        });
   }
 
   @override
@@ -131,7 +88,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Flexible(
                     flex: 10,
                     child: Container(
@@ -180,7 +137,7 @@ class _SignupPageState extends State<SignupPage> {
                                   isDense: true,
                                   filled: true,
                                   fillColor: Colors.white,
-                                  suffixIcon: togglepassword(),
+                                  suffixIcon: togglePassword(),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
                               autovalidateMode:
@@ -199,7 +156,7 @@ class _SignupPageState extends State<SignupPage> {
                                   isDense: true,
                                   filled: true,
                                   fillColor: Colors.white,
-                                  suffixIcon: togglepassword1(),
+                                  suffixIcon: toggleConfirmPassword(),
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
                               autovalidateMode:
@@ -211,9 +168,9 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             const SizedBox(height: 20),
                             GestureDetector(
-                                onTap: SignUp,
+                                onTap: signUp,
                                 child: SvgPicture.asset('assets/Signup.svg')),
-                            const SizedBox(height: 10),
+                            /*const SizedBox(height: 10),
                             const Text(
                               'OR',
                               style: TextStyle(
@@ -223,7 +180,7 @@ class _SignupPageState extends State<SignupPage> {
                                   color: Colors.white),
                             ),
                             const SizedBox(height: 10),
-                            SvgPicture.asset('assets/Applesignup.svg'),
+                            SvgPicture.asset('assets/Applesignup.svg'),*/
                             const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -234,7 +191,7 @@ class _SignupPageState extends State<SignupPage> {
                                       context,
                                       PageRouteBuilder(
                                         pageBuilder: (context, a, b) =>
-                                            LoginPage(),
+                                            const LoginPage(),
                                         transitionDuration:
                                             const Duration(seconds: 0),
                                       ),
@@ -266,7 +223,7 @@ class _SignupPageState extends State<SignupPage> {
         ));
   }
 
-  Widget togglepassword() {
+  Widget togglePassword() {
     return IconButton(
       onPressed: () {
         setState(() {
@@ -280,7 +237,7 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Widget togglepassword1() {
+  Widget toggleConfirmPassword() {
     return IconButton(
       onPressed: () {
         setState(() {
@@ -292,5 +249,46 @@ class _SignupPageState extends State<SignupPage> {
           : const Icon(Icons.visibility_off),
       color: Colors.grey,
     );
+  }
+
+  Future signUp() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+
+      if (!mounted) {
+        return;
+      }
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      showErrorMessage(e.code);
+    }
+  }
+
+  void showErrorMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Center(
+                  child: Text(
+            message,
+          )));
+        });
   }
 }
