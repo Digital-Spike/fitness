@@ -1,9 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fitness/authentication%20screen/Utils.dart';
 import 'package:fitness/authentication%20screen/splashSceen.dart';
 import 'package:flutter/material.dart';
 
-import 'authentication screen/googlesignup.dart';
 import 'firebase_options.dart';
 
 const List<String> scopes = <String>[
@@ -35,6 +33,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'Roboto',
         ),
-        home: GoogleSignUp());
+        home: const SplashScreen());
   }
 }

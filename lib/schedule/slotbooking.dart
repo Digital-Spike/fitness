@@ -146,35 +146,6 @@ class _SlotBookingState extends State<SlotBooking> {
                         List timeStamp =
                             widget.isBranch ? branchTimeStamp : homeTimeStamp;
 
-                        String timeString = timeStamp[index].substring(0, 7);
-
-                        List<String> parts = timeString.trim().split(' ');
-                        String timePart = parts[0];
-                        String amPmPart = parts[1];
-
-                        List<String> timeParts = timePart.split(':');
-                        int hour = int.parse(timeParts[0]);
-                        int minute = int.parse(timeParts[1]);
-
-                        if (amPmPart == 'PM' && hour < 12) {
-                          hour += 12;
-                        }
-
-                        DateTime now = DateTime.now();
-                        TimeOfDay currentTime =
-                            TimeOfDay(hour: now.hour, minute: now.minute);
-                        TimeOfDay slotTime =
-                            TimeOfDay(hour: hour, minute: minute);
-
-                        double doubleYourTime = slotTime.hour.toDouble() +
-                            (slotTime.minute.toDouble() / 60);
-                        double doubleNowTime = currentTime.hour.toDouble() +
-                            (currentTime.minute.toDouble() / 60);
-
-                        double timeDiff = doubleYourTime - doubleNowTime;
-
-                        bool isAvailable = (timeDiff > 0) ? true : false;
-
                         bool isBooked = slots[(index + 1).toString()]
                                 .toString()
                                 .toLowerCase() ==
@@ -197,13 +168,11 @@ class _SlotBookingState extends State<SlotBooking> {
                             subtitle: Text(
                               slots[(index + 1).toString()].toUpperCase(),
                               style: TextStyle(
-                                  color: isBooked || !isAvailable
-                                      ? Colors.grey
-                                      : Colors.green),
+                                  color: isBooked ? Colors.grey : Colors.green),
                             ),
                             trailing: ElevatedButton(
                               onPressed: () async {
-                                if (!isBooked && isAvailable) {
+                                if (!isBooked) {
                                   showDialog(
                                     context: context,
                                     barrierDismissible: false,
@@ -238,12 +207,11 @@ class _SlotBookingState extends State<SlotBooking> {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: isBooked || !isAvailable
-                                      ? Colors.grey
-                                      : Colors.green,
+                                  backgroundColor:
+                                      isBooked ? Colors.grey : Colors.green,
                                   side: BorderSide(
                                       width: 1,
-                                      color: isBooked || !isAvailable
+                                      color: isBooked
                                           ? Colors.grey
                                           : Colors.green),
                                   shape: RoundedRectangleBorder(
@@ -251,11 +219,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                     20,
                                   ))),
                               child: Text(
-                                isBooked
-                                    ? 'Booked'
-                                    : isAvailable
-                                        ? 'Book Now'
-                                        : 'Not Available',
+                                isBooked ? 'Booked' : 'Book Now',
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),

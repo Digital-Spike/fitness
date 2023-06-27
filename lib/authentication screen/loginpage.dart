@@ -198,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 20),
                         GestureDetector(
                             onTap: userLogin,
-                            child: SvgPicture.asset('assets/Logintab.svg')),
+                            child: SvgPicture.asset('assets/login.svg')),
                         const SizedBox(height: 20),
                         /*const Text(
                           'OR',
