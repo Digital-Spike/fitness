@@ -6,6 +6,7 @@ import 'package:fitness/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -116,6 +117,21 @@ class _SignupPageState extends State<SignupPage> {
                               },
                             ),
                             const SizedBox(height: 15),
+                            IntlPhoneField(
+                              decoration: const InputDecoration(
+                                  isDense: true,
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  labelText: 'Phone Number',
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10)))),
+                              initialCountryCode: 'AE',
+                              onChanged: (phone) {
+                                print(phone.completeNumber);
+                              },
+                            ),
+                            const SizedBox(height: 15),
                             TextFormField(
                               controller: _emailController,
                               decoration: InputDecoration(
@@ -131,27 +147,6 @@ class _SignupPageState extends State<SignupPage> {
                                       !EmailValidator.validate(email)
                                   ? 'Enter a valid email'
                                   : null,
-                            ),
-                            const SizedBox(height: 15),
-                            TextFormField(
-                              controller: _phoneController,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                  label: const Text('Phone number'),
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if ((value ?? "").isEmpty ||
-                                    (value ?? "").length != 10) {
-                                  return 'Please enter valid phone number';
-                                }
-                                return null;
-                              },
                             ),
                             const SizedBox(height: 15),
                             TextFormField(

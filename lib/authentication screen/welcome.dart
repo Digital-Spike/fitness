@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:video_player/video_player.dart';
 import 'loginpage.dart';
 
 class Welcome extends StatefulWidget {
@@ -11,56 +11,38 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  late VideoPlayerController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = VideoPlayerController.asset("assets/fj1.mp4")
+      ..initialize().then((_) {
+        setState(() {});
+      });
+    controller.setLooping(true);
+    controller.play();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
-          child: Container(
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-                color: Colors.transparent,
-                image: DecorationImage(
-                  image: AssetImage('assets/IMG_9750.jpg'),
-                  fit: BoxFit.cover,
-                  opacity: 0.98,
-                )),
-            child: Padding(
+          child: Stack(children: [
+            VideoPlayer(controller),
+            Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 200,
-                    width: 350,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.black.withOpacity(0.2)),
-                    child: Column(
-                      children: const [
-                        SizedBox(height: 20),
-                        Text(
-                          'Transform your body\nand mind',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black.withOpacity(0.2)),
+                        padding: EdgeInsets.all(10),
+                        child: Image.asset('assets/fitness.png')),
                   ),
                   const Spacer(),
                   Container(
@@ -101,7 +83,7 @@ class _WelcomeState extends State<Welcome> {
                 ],
               ),
             ),
-          ),
+          ]),
         ));
   }
 }

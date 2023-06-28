@@ -1,4 +1,5 @@
 import 'package:ff_navigation_bar_plus/ff_navigation_bar_plus.dart';
+import 'package:fitness/theme/glassbox.dart';
 import 'package:flutter/material.dart';
 
 import '../drawerscreen/profile.dart';
@@ -70,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar: widget.mainAppBar,
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
-          barBackgroundColor: Colors.black,
+          barBackgroundColor: Colors.transparent,
           selectedItemBorderColor: Colors.transparent,
           selectedItemBackgroundColor: Colors.deepOrange,
           selectedItemIconColor: Colors.white,

@@ -57,27 +57,32 @@ class _VideoState extends State<Video> {
             ),
           ),
         ),
-        mainChild: Column(
-          children: [
-            YoutubePlayer(
-              controller: controller,
-              showVideoProgressIndicator: true,
-              bottomActions: [
-                FullScreenButton(
+        mainChild: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                YoutubePlayer(
                   controller: controller,
+                  showVideoProgressIndicator: true,
+                  bottomActions: [
+                    FullScreenButton(
+                      controller: controller,
+                    ),
+                    CurrentPosition(),
+                    ProgressBar(
+                      isExpanded: true,
+                      colors: const ProgressBarColors(
+                        playedColor: Colors.deepOrange,
+                        handleColor: Colors.orange,
+                      ),
+                    ),
+                  ],
                 ),
-                CurrentPosition(),
-                ProgressBar(
-                  isExpanded: true,
-                  colors: const ProgressBarColors(
-                    playedColor: Colors.deepOrange,
-                    handleColor: Colors.orange,
-                  ),
-                ),
+                Text(controller.metadata.title)
               ],
             ),
-            Text(controller.metadata.title)
-          ],
+          ),
         ));
   }
 }

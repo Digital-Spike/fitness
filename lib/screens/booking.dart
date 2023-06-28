@@ -53,16 +53,12 @@ class _BookingState extends State<Booking> {
                           const SizedBox(height: 20),
                           Row(
                             children: [
-                              const Expanded(
-                                flex: 2,
-                                child: Text(
-                                  'Trainer : ',
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              const Text(
+                                'Trainer Name :',
+                                style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
                               ),
                               Expanded(
                                 flex: 4,
@@ -70,25 +66,21 @@ class _BookingState extends State<Booking> {
                                   ' ${bookingData?['trainerName']}',
                                   style: const TextStyle(
                                       fontFamily: 'Roboto',
-                                      fontSize: 20,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 15),
                           Row(
                             children: [
-                              const Expanded(
-                                flex: 2,
-                                child: Text(
-                                  'Id :',
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              const Text(
+                                'Booking Id      :',
+                                style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
                               ),
                               Expanded(
                                 flex: 4,
@@ -96,25 +88,21 @@ class _BookingState extends State<Booking> {
                                   ' ${bookingData?['bookingId']}',
                                   style: const TextStyle(
                                       fontFamily: 'Roboto',
-                                      fontSize: 20,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 15),
                           Row(
                             children: [
-                              const Expanded(
-                                flex: 2,
-                                child: Text(
-                                  'Date :',
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              const Text(
+                                'Booking Date :',
+                                style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
                               ),
                               Expanded(
                                 flex: 4,
@@ -122,25 +110,21 @@ class _BookingState extends State<Booking> {
                                   ' ${bookingData?['bookingDate']}',
                                   style: const TextStyle(
                                       fontFamily: 'Roboto',
-                                      fontSize: 20,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 15),
                           Row(
                             children: [
-                              const Expanded(
-                                flex: 2,
-                                child: Text(
-                                  'Time :',
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              const Text(
+                                'Booking Time :',
+                                style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
                               ),
                               Expanded(
                                 flex: 4,
@@ -148,7 +132,29 @@ class _BookingState extends State<Booking> {
                                   ' ${bookingData?['bookingTime']}',
                                   style: const TextStyle(
                                       fontFamily: 'Roboto',
-                                      fontSize: 20,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            children: [
+                              const Text(
+                                'Branch Name :',
+                                style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Expanded(
+                                flex: 4,
+                                child: Text(
+                                  ' ${bookingData?['branch']}',
+                                  style: const TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),

@@ -166,7 +166,10 @@ class _SlotBookingState extends State<SlotBooking> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold)),
                             subtitle: Text(
-                              slots[(index + 1).toString()].toUpperCase(),
+                              slots[(index + 1).toString()] == "booked" ||
+                                      slots[(index + 1).toString()] == "Booked"
+                                  ? "Not available"
+                                  : "Available",
                               style: TextStyle(
                                   color: isBooked ? Colors.grey : Colors.green),
                             ),
@@ -219,7 +222,7 @@ class _SlotBookingState extends State<SlotBooking> {
                                     20,
                                   ))),
                               child: Text(
-                                isBooked ? 'Booked' : 'Book Now',
+                                isBooked ? 'Blocked' : 'Book Now',
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),
@@ -246,6 +249,7 @@ class _SlotBookingState extends State<SlotBooking> {
   }
 
   Future<bool> slotList() async {
+    print(DateFormat("hh:mm a").format(DateTime.now()));
     try {
       http.Response? response;
       if (widget.isBranch) {
@@ -256,15 +260,67 @@ class _SlotBookingState extends State<SlotBooking> {
               DateFormat('yyyy/MM/dd').format(_selectedDay ?? _focusedDay)
         });
       } else {
+        print(DateFormat('yyyy/MM/dd').format(_selectedDay ?? _focusedDay));
         String trainerUrl = "${ApiList.apiUrl}webslothome.php";
         response = await http.post(Uri.parse(trainerUrl), body: {
           'trainerId': widget.trainer['trainerId'],
-          'bookingDate': DateFormat('yyyy/MM/dd')
+          'bdate': DateFormat('yyyy/MM/dd')
               .format(_selectedDay ?? _focusedDay) /*'2023/06/24'*/
         });
       }
-
       slots = json.decode(response.body);
+      print(slots);
+      if (DateFormat('yyyy/MM/dd').format(_selectedDay ?? _focusedDay) ==
+          DateFormat("yyyy/MM/dd").format(DateTime.now())) {
+        print("same day as today called");
+        String tdata = DateFormat("HH:mm").format(DateTime.now());
+        // print(tdata);
+        List branchTimeStamp1 = [
+          '8:45AM',
+          '9:30AM',
+          '10:15AM',
+          '11:00AM',
+          '11:45AM',
+          '1:45PM',
+          '2:30PM',
+          '3:15PM',
+          '4:00PM',
+          '4:45PM',
+          '5:30PM',
+          '6:15PM',
+          '7:00PM'
+        ];
+        List homeTimeStamp1 = [
+          "8:30AM",
+          "10:00AM",
+          "11:30AM",
+          "1:30PM",
+          "3:00PM",
+          "4:30PM",
+          "6:00PM"
+        ];
+        List timeStamp1 = widget.isBranch ? branchTimeStamp1 : homeTimeStamp1;
+        for (int i = 0; i < timeStamp1.length; i++) {
+          var df = DateFormat("h:mma");
+          var dt = df.parse(timeStamp1[i]);
+
+          String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+
+          final dt3 =
+              DateTime.parse(cdate + " " + DateFormat('HH:mm').format(dt));
+
+          var datetime = DateTime.now();
+
+          if (dt3.isAfter(datetime)) {
+          } else {
+            slots[(i + 1).toString()] = "Booked";
+          }
+        }
+        print(slots);
+      } else {
+        slots = json.decode(response.body);
+      }
+
       return true;
     } catch (e) {
       return false;
@@ -278,9 +334,9 @@ class _SlotBookingState extends State<SlotBooking> {
     try {
       Map<String, dynamic> requestBody = {
         'trainerId': widget.trainer['trainerId'],
-        widget.isBranch ? 'bookingDate' : 'bDate':
+        'bookingDate':
             DateFormat('yyyy/MM/dd').format(_selectedDay ?? _focusedDay),
-        'branchId': widget.trainer['branchId1'],
+        'branchName': widget.trainer['name'],
         'bookingId': StringUtil().generateRandomNumber(length: 10),
         'customerId': user?.uid,
         'customerName': 'Shashi',

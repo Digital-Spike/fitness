@@ -65,8 +65,8 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
                       Center(
                           child: TextButton(
                               style: TextButton.styleFrom(
-                                  minimumSize: const Size(400, 60),
-                                  backgroundColor: Colors.orange),
+                                  minimumSize: const Size(400, 50),
+                                  backgroundColor: Colors.deepOrange),
                               onPressed: () {
                                 Navigator.push(
                                     context,

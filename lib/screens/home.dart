@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (snapshot.connectionState == ConnectionState.done) {
               return SingleChildScrollView(
                 child: Container(
-                  color: Colors.black,
+                  color: const Color(0xff150C08),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
