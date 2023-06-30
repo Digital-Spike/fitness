@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
-                        'assets/1.pngu',
+                        'assets/offers.png',
                         height: 150,
                         fit: BoxFit.fitHeight,
                         scale: 10,
