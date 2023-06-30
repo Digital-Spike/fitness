@@ -36,17 +36,17 @@ class _MyBookingPageState extends State<MyBookingPage>
   Widget build(BuildContext context) {
     return MainScreen(
       mainAppBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xffF1F1F2),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
           child: Container(
             height: 1.0,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
         title: const Text(
           'My Booking',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
       ),

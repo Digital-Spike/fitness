@@ -336,6 +336,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.12.0+2"
+  gradient_slide_to_act:
+    dependency: "direct main"
+    description:
+      name: gradient_slide_to_act
+      sha256: aa08019f20f1a8fe80f61ed774c34aca9939c034cdb49cf4d5fa3329337d0ad3
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   html:
     dependency: transitive
     description:
@@ -360,6 +368,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  icons_plus:
+    dependency: "direct main"
+    description:
+      name: icons_plus
+      sha256: b613ec1deac96e9ef5c8065f2d7325967818bc3f4e118a375e50292761849ea6
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   image_picker:
     dependency: "direct main"
     description:
