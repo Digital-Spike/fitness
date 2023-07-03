@@ -26,7 +26,7 @@ class _BookingState extends State<Booking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xffF1F1F2),
         body: FutureBuilder<bool>(
             future: futureData,
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {

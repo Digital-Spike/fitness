@@ -61,22 +61,22 @@ class _SlotBookingState extends State<SlotBooking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xffF1F1F2),
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xffF1F1F2),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
           child: Container(
             height: 1.0,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
         title: const Text('Choose a date and slot',
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: Colors.white)),
+                color: Colors.black)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -123,7 +123,7 @@ class _SlotBookingState extends State<SlotBooking> {
               },
             ),
             const Divider(
-              color: Colors.white,
+              color: Colors.black,
               height: 1.0,
               thickness: 1.0,
             ),
@@ -132,7 +132,7 @@ class _SlotBookingState extends State<SlotBooking> {
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white)),
+                    color: Colors.black)),
             const SizedBox(height: 10),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.45,

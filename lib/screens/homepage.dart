@@ -5,7 +5,7 @@ import 'package:fitness/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_slide_to_act/gradient_slide_to_act.dart';
 
-import 'mainScreen.dart';
+import 'bottomnav.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
+              SizedBox(height: 45),
               Center(
                   child: GradientSlideToAct(
                       width: 320,
@@ -55,10 +56,10 @@ class _HomePageState extends State<HomePage> {
                       gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
-                          colors: [Color(0xffFA812F), Color(0xffFFFA08)]),
+                          colors: [Color(0xff999999), Color(0xff353334)]),
                       onSubmit: () {},
                       backgroundColor: const Color(0xffFA812F))),
-              SizedBox(height: 15),
+              SizedBox(height: 45),
               GestureDetector(
                 onTap: () {},
                 child: Container(
@@ -99,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 25),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -157,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 25),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -220,26 +221,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
-              Container(
-                height: 150,
-                width: 350,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.shade500,
-                          offset: Offset(4.0, 4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0),
-                      BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(-4.0, -4.0),
-                          blurRadius: 15.0,
-                          spreadRadius: 1.0),
-                    ]),
-              )
+              SizedBox(height: 20),
             ],
           ),
         ),

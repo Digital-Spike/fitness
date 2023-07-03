@@ -39,7 +39,7 @@ class _SlotBookState extends State<SlotBook>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xffF1F1F2),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

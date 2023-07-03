@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/schedule/trainerlist.dart';
-import 'package:fitness/screens/mainScreen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
+
+import '../screens/bottomnav.dart';
 
 class BranchList extends StatefulWidget {
   const BranchList({super.key});
@@ -28,20 +30,20 @@ class _BranchListState extends State<BranchList> {
   Widget build(BuildContext context) {
     return MainScreen(
         mainAppBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xffF1F1F2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
             child: Container(
               height: 1.0,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           title: const Text('Available Branches',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
-                  color: Colors.white)),
+                  color: Colors.black)),
           centerTitle: true,
         ),
         mainChild: FutureBuilder<bool>(

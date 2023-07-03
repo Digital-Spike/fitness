@@ -1,7 +1,7 @@
-import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'booking.dart';
+import 'bottomnav.dart';
 
 class MyBookingPage extends StatefulWidget {
   const MyBookingPage({super.key});
@@ -37,6 +37,7 @@ class _MyBookingPageState extends State<MyBookingPage>
     return MainScreen(
       mainAppBar: AppBar(
         backgroundColor: Color(0xffF1F1F2),
+        elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
           child: Container(

@@ -5,13 +5,14 @@ import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/model/branch.dart';
 import 'package:fitness/model/trainer.dart';
 import 'package:fitness/schedule/trainerDetailPage.dart';
-import 'package:fitness/screens/mainScreen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 
 import '../schedule/branches.dart';
 import '../schedule/trainerlist.dart';
+import 'bottomnav.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

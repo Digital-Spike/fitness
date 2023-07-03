@@ -1,74 +1,87 @@
-/*import 'package:fitness/drawerscreen/profile.dart';
-import 'package:fitness/screens/homepage.dart';
-import 'package:fitness/screens/mybookings.dart';
-import 'package:fitness/screens/video.dart';
+import 'package:fitness/theme/glassbox.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-class MaterialYou extends StatefulWidget {
-  const MaterialYou({Key? key}) : super(key: key);
+import '../drawerscreen/profile.dart';
+import 'homescreen.dart';
+import 'my_bottombar.dart';
+import 'mybookings.dart';
+import 'video.dart';
+
+class MainScreen extends StatefulWidget {
+  final Widget mainChild;
+  final PreferredSizeWidget? mainAppBar;
+  final Color? backgroundColor;
+
+  const MainScreen({
+    required this.mainChild,
+    this.mainAppBar,
+    this.backgroundColor,
+    super.key,
+  });
 
   @override
-  State<MaterialYou> createState() => _MaterialYouState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MaterialYouState extends State<MaterialYou> {
-  int _currentIndex = 0;
-  List<Widget> pages = const [
-    HomePage(),
-    Video(),
-    MyBookingPage(),
-    ProfileScreen()
-  ];
+class _MainScreenState extends State<MainScreen> {
+  static int? _currentBottomIndex;
+  void _handleBottomnav(int? index) {
+    setState(() {
+      _currentBottomIndex = index!;
+    });
+    switchScreen(index!);
+  }
+
+  switchScreen(int index) {
+    _currentBottomIndex = index;
+    switch (_currentBottomIndex) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Home(),
+          ),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Video(),
+          ),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MyBookingPage(),
+          ),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ProfileScreen(),
+          ),
+        );
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: pages[_currentIndex],
-      ),
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-            indicatorColor: Colors.white,
-            indicatorShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(100)),
-            labelTextStyle: MaterialStateProperty.all(
-                const TextStyle(fontSize: 12, fontWeight: FontWeight.bold))),
-        child: NavigationBar(
-          backgroundColor: Colors.white,
-          surfaceTintColor: const Color(0xff2bb793),
-          shadowColor: const Color(0xff2bb793),
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          height: 60,
-          selectedIndex: _currentIndex,
-          onDestinationSelected: (int newIndex) {
-            setState(() {
-              _currentIndex = newIndex;
-            });
-          },
-          destinations: [
-            NavigationDestination(
-              selectedIcon: Icon(Icons.home),
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(IonIcons.barbell),
-              icon: Icon(IonIcons.barbell_sharp),
-              label: 'Explore',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.book_online),
-              icon: Icon(Icons.book_online_outlined),
-              label: 'Bookings',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.person),
-              icon: Icon(Icons.person_outlined),
-              label: 'Profile',
-            ),
-          ],
+      extendBody: true,
+      bottomNavigationBar: Glassbox(
+        child: Mybottom(
+          index: _currentBottomIndex ?? 0,
+          onTap: _handleBottomnav,
         ),
       ),
+      body: SafeArea(child: widget.mainChild),
     );
   }
-}*/
+}

@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/authentication%20screen/welcome.dart';
 import 'package:fitness/screens/home.dart';
-import 'package:fitness/screens/homepage.dart';
+import 'package:fitness/screens/homescreen.dart';
+import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -33,8 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const HomePage()),
+              MaterialPageRoute(builder: (BuildContext context) => Home()),
               ModalRoute.withName('/'));
         }
       });

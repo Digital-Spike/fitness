@@ -30,6 +30,7 @@ dependencies:
   video_player: ^2.6.1
   gradient_slide_to_act: ^0.0.2
   icons_plus: ^4.0.0
+  date_picker_timeline: ^1.2.3
   
 dev_dependencies:
   flutter_test:
@@ -45,6 +46,9 @@ flutter:
 
   fonts:
    
-    - family: Roboto
+    - family: TwCenMT
       fonts:
-        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/TwCenMTStd-Light.otf
+    - family: ITCAvant
+      fonts:
+        - asset: fonts/ITCAvantGardeStd-BkCn.ttf

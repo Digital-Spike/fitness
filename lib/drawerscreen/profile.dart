@@ -30,15 +30,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return MainScreen(
       mainAppBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xffF1F1F2),
+        elevation: 0,
         title: const Center(
           child: Text(
             'Profile',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
           ),
         ),
         actions: [
           PopupMenuButton(
+            color: Colors.black,
             itemBuilder: (context) {
               return [];
             },
@@ -49,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             const Divider(
-              color: Colors.white,
+              color: Colors.black,
               thickness: 1,
             ),
             Row(
@@ -72,12 +74,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Text(
                       _displayName ?? '',
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     Text(
                       _email ?? '',
                       style: const TextStyle(
-                          fontFamily: 'Roboto', color: Colors.white),
+                          fontFamily: 'Roboto', color: Colors.black),
                     ),
                   ],
                 ),
@@ -86,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             const Divider(
-              color: Colors.white,
+              color: Colors.black,
               thickness: 1,
             ),
             const SizedBox(height: 10),

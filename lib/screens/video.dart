@@ -1,6 +1,7 @@
-import 'package:fitness/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import 'bottomnav.dart';
 
 class Video extends StatefulWidget {
   const Video({super.key});
@@ -40,20 +41,21 @@ class _VideoState extends State<Video> {
   Widget build(BuildContext context) {
     return MainScreen(
         mainAppBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xffF1F1F2),
+          elevation: 0,
           centerTitle: true,
           title: const Text(
             'Video',
             style: TextStyle(
               fontFamily: 'Roboto',
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
             child: Container(
               height: 1.0,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
         ),
