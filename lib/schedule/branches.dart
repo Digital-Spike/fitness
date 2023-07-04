@@ -28,8 +28,8 @@ class _BranchListState extends State<BranchList> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-        mainAppBar: AppBar(
+    return Scaffold(
+        appBar: AppBar(
           backgroundColor: Color(0xffF1F1F2),
           elevation: 0,
           bottom: PreferredSize(
@@ -45,8 +45,9 @@ class _BranchListState extends State<BranchList> {
                   fontWeight: FontWeight.w700,
                   color: Colors.black)),
           centerTitle: true,
+          leading: BackButton(color: Colors.black,),
         ),
-        mainChild: FutureBuilder<bool>(
+        body: FutureBuilder<bool>(
           future: futureData,
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

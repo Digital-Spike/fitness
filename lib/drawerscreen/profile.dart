@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
-import 'package:fitness/screens/mainScreen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -28,8 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-      mainAppBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: Color(0xffF1F1F2),
         elevation: 0,
         title: const Center(
@@ -47,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-      mainChild: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             const Divider(

@@ -1,87 +1,65 @@
-import 'package:fitness/theme/glassbox.dart';
+import 'package:fitness/drawerscreen/profile.dart';
+import 'package:fitness/screens/mybookings.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 
-import '../drawerscreen/profile.dart';
-import 'homescreen.dart';
-import 'my_bottombar.dart';
-import 'mybookings.dart';
+import '../theme/glassbox.dart';
+import 'homepage.dart';
 import 'video.dart';
 
-class MainScreen extends StatefulWidget {
-  final Widget mainChild;
-  final PreferredSizeWidget? mainAppBar;
-  final Color? backgroundColor;
-
-  const MainScreen({
-    required this.mainChild,
-    this.mainAppBar,
-    this.backgroundColor,
-    super.key,
-  });
+class Mybottom extends StatefulWidget {
+  const Mybottom({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<Mybottom> createState() => _MybottomState();
 }
 
-class _MainScreenState extends State<MainScreen> {
-  static int? _currentBottomIndex;
-  void _handleBottomnav(int? index) {
-    setState(() {
-      _currentBottomIndex = index!;
-    });
-    switchScreen(index!);
-  }
+class _MybottomState extends State<Mybottom> {
+  int _currentBottomIndex = 0;
 
-  switchScreen(int index) {
-    _currentBottomIndex = index;
-    switch (_currentBottomIndex) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Home(),
-          ),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Video(),
-          ),
-        );
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const MyBookingPage(),
-          ),
-        );
-        break;
-      case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ProfileScreen(),
-          ),
-        );
-        break;
-    }
-  }
-
+  List<Widget> Pages = const [
+    HomePage(),
+    Video(),
+    MyBookingPage(),
+    ProfileScreen()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      bottomNavigationBar: Glassbox(
-        child: Mybottom(
-          index: _currentBottomIndex ?? 0,
-          onTap: _handleBottomnav,
+        body: Center(
+          child: Pages[_currentBottomIndex],
         ),
-      ),
-      body: SafeArea(child: widget.mainChild),
-    );
+        extendBody: true,
+        bottomNavigationBar: Glassbox(
+          child: NavigationBarTheme(
+            data: NavigationBarThemeData(
+              labelTextStyle: MaterialStateProperty.all(TextStyle(fontSize: 15,fontWeight: FontWeight.bold))
+            ),
+            child: NavigationBar(
+                selectedIndex: _currentBottomIndex,
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    _currentBottomIndex = index;
+                  });
+                },
+                shadowColor: Colors.white,
+                indicatorColor: Colors.white,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                labelBehavior:
+                    NavigationDestinationLabelBehavior.onlyShowSelected,
+                destinations: const [
+                  NavigationDestination(
+                      icon: Icon(Icons.home_outlined), label: 'Home',),
+                  NavigationDestination(
+                      icon: Icon(Icons.slow_motion_video_outlined),
+                      label: 'Explore'),
+                  NavigationDestination(
+                      icon: Icon(Icons.book_online_outlined),
+                      label: 'My booking'),
+                  NavigationDestination(
+                      icon: Icon(Icons.person_2_outlined), label: 'Profile'),
+                ]),
+          ),
+        ));
   }
 }

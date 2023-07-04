@@ -20,9 +20,9 @@ class TrainerDetailPage extends StatefulWidget {
 class _TrainerDetailPageState extends State<TrainerDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
+    return Scaffold(
       backgroundColor: Colors.black,
-      mainAppBar: AppBar(
+      appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.black,
         bottom: PreferredSize(
@@ -42,7 +42,7 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
               color: Colors.white),
         ),
       ),
-      mainChild: Container(
+      body: Container(
         color: Colors.black,
         child: SingleChildScrollView(
           child: Padding(

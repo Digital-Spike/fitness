@@ -12,7 +12,6 @@ import 'package:http/http.dart' as http;
 
 import '../schedule/branches.dart';
 import '../schedule/trainerlist.dart';
-import 'bottomnav.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -46,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-        mainAppBar: AppBar(
+    return Scaffold(
+        appBar: AppBar(
           backgroundColor: Colors.black,
           elevation: 0,
           bottom: PreferredSize(
@@ -79,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           automaticallyImplyLeading: false,
         ),
-        mainChild: FutureBuilder<bool>(
+        body: FutureBuilder<bool>(
           future: futureData,
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

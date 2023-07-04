@@ -34,8 +34,8 @@ class _MyBookingPageState extends State<MyBookingPage>
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-      mainAppBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: Color(0xffF1F1F2),
         elevation: 0,
         bottom: PreferredSize(
@@ -51,7 +51,7 @@ class _MyBookingPageState extends State<MyBookingPage>
         ),
         centerTitle: true,
       ),
-      mainChild: Column(
+      body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(5),

@@ -1,12 +1,11 @@
-import 'package:fitness/schedule/branches.dart';
-import 'package:fitness/schedule/trainerDetailPage.dart';
-import 'package:fitness/schedule/trainerlist.dart';
-import 'package:fitness/screens/home.dart';
+import 'dart:ui';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_slide_to_act/gradient_slide_to_act.dart';
+import 'package:icons_plus/icons_plus.dart';
 
-import 'bottomnav.dart';
-
+import '../schedule/branches.dart';
+import '../schedule/trainerlist.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,217 +14,231 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  launchWhatsApp() async {
+    final link = WhatsAppUnilink(
+      phoneNumber: '',
+      text: "Hi",
+    );
+    await launch('$link');
+  }
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-      mainAppBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color(0xffF1F1F2),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            height: 1.0,
-            color: Colors.black,
+    return Scaffold(
+      body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/IMG_9779.jpg'), fit: BoxFit.cover)),
+        child: Column(children: [
+          SizedBox(height: 25),
+          Container(
+            height: 80,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.5),
+                image: DecorationImage(
+                    image: AssetImage('assets/fitness.png'),
+                    scale: 2,
+                    alignment: Alignment.center)),
           ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset('assets/fjlogo1.png'),
-            const Icon(
-              Icons.notifications_outlined,
-              color: Colors.black,
-            )
-          ],
-        ),
-        automaticallyImplyLeading: false,
-      ),
-      mainChild: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              SizedBox(height: 45),
-              Center(
-                  child: GradientSlideToAct(
-                      width: 320,
-                      borderRadius: 30,
-                      text: 'Slide to Book Free Trial',
-                      textStyle:
-                          const TextStyle(color: Colors.black, fontSize: 18),
-                      gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Color(0xff999999), Color(0xff353334)]),
-                      onSubmit: () {},
-                      backgroundColor: const Color(0xffFA812F))),
-              SizedBox(height: 45),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: 150,
-                  width: 350,
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.shade500,
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                        BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                      ]),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        'assets/offers.png',
-                        height: 150,
-                        fit: BoxFit.fitHeight,
-                        scale: 10,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        'My Active\nPlans',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
+          Container(
+            height: 15,
+            width: double.infinity,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [
+              Colors.orange,
+              Colors.indigo,
+              Colors.green,
+              Colors.blue
+            ])),
+          ),
+          SizedBox(height: 50),
+          Container(
+            height: 120,
+            width: 180,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.black.withOpacity(0.7),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/One Free.png',
+                  scale: 2,
                 ),
-              ),
-              SizedBox(height: 25),
+                SizedBox(height: 10),
+                Text(
+                  'Book a Trial Session',
+                  style: TextStyle(
+                      fontFamily: 'ITCAvant',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          Wrap(
+            spacing: 20,
+            runSpacing: 20,
+            children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TrainerList(
-                                isBranchTrainers: false,
-                              )));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TrainerList(isBranchTrainers: true,)));
                 },
                 child: Container(
-                  height: 150,
-                  width: 350,
-                  padding: EdgeInsets.all(5),
+                  height: 120,
+                  width: 180,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.shade500,
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                        BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                      ]),
-                  child: Row(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.orange.withOpacity(0.7)),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Get to Know Our\nTeam',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.deepOrange),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            'Enhance Your Skills With \nThe Finest Personal\nTrainers in The UAE',
-                            textAlign: TextAlign.center,
-                          )
-                        ],
+                      Image.asset(
+                        'assets/trainer.png',
+                        scale: 2,
                       ),
-                      SizedBox(width: 10),
-                      Image.asset('assets/IMG_9750.png')
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 25),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const BranchList()));
-                },
-                child: Container(
-                  height: 150,
-                  width: 350,
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.shade500,
-                            offset: Offset(4.0, 4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                        BoxShadow(
-                            color: Colors.white,
-                            offset: Offset(-4.0, -4.0),
-                            blurRadius: 15.0,
-                            spreadRadius: 1.0),
-                      ]),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/IMG_9345.png'),
-                      SizedBox(width: 10),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Train At Our Partner\nGym Branches',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Text(
-                                'METRO',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                ' FITT',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.deepOrange),
-                              )
-                            ],
-                          ),
-                        ],
+                      SizedBox(height: 10),
+                      Text(
+                        'Our Trainers',
+                        style: TextStyle(
+                            fontFamily: 'ITCAvant',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            color: Colors.white),
                       )
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BranchList()));
+                },
+                child: Container(
+                  height: 120,
+                  width: 180,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.indigo.withOpacity(0.7)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/barbell.png',
+                        scale: 2,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Our Gym Partners',
+                        style: TextStyle(
+                            fontFamily: 'ITCAvant',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            color: Colors.white),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 120,
+                width: 180,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.green.withOpacity(0.7)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/plan.png',
+                      scale: 2,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Our Packages',
+                      style: TextStyle(
+                          fontFamily: 'ITCAvant',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                height: 120,
+                width: 180,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.blue.withOpacity(0.7)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/offer.png',
+                      scale: 2,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Our Offers',
+                      style: TextStyle(
+                          fontFamily: 'ITCAvant',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
             ],
-          ),
-        ),
+          ), SizedBox(height: 60),
+          
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(child: TextButton(
+                style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),backgroundColor: Colors.white ,elevation: 10),
+                onPressed: () async {
+                                                                                  final Uri url = Uri(
+                                                                                  scheme: 'tel',
+                                                                                  path:"",                                                                                 
+                                                                                );
+                                                                                if(await canLaunchUrl(url)) {
+                                                                                  await launchUrl(url);                                                                               
+                                                                                } else {
+                                                                                  print('cannot launch this Url');
+                                                                                }
+                }, child: Icon(Icons.call,color: Colors.black,size: 30,))),
+                Container(height: 3.0,
+                    width: 50,
+                color: Colors.white,),
+                
+               
+                Center(child: TextButton(
+                  style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),backgroundColor: Colors.white,elevation: 10),
+                  onPressed: () async{
+                    
+                    launchWhatsApp();}, child: Logo(Logos.whatsapp))),Container(height: 3.0,
+                    width: 50,
+                color: Colors.white,),
+                  Center(child: TextButton(
+                    style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),backgroundColor: Colors.white,elevation: 10),
+                    onPressed: (){}, child: Logo(Logos.instagram)))
+            ],
+          )
+ 
+        ]),
       ),
     );
+
   }
 }

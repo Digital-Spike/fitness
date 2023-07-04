@@ -20,7 +20,7 @@ class _VideoState extends State<Video> {
     controller = YoutubePlayerController(
         initialVideoId: YoutubePlayer.convertUrlToId(Url)!,
         flags:
-            const YoutubePlayerFlags(mute: false, loop: false, autoPlay: true));
+            const YoutubePlayerFlags(mute: false, loop: false, autoPlay: false));
   }
 
   @override
@@ -39,8 +39,8 @@ class _VideoState extends State<Video> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-        mainAppBar: AppBar(
+    return Scaffold(
+        appBar: AppBar(
           backgroundColor: Color(0xffF1F1F2),
           elevation: 0,
           centerTitle: true,
@@ -59,7 +59,7 @@ class _VideoState extends State<Video> {
             ),
           ),
         ),
-        mainChild: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
