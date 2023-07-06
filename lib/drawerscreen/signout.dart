@@ -1,6 +1,4 @@
-import 'package:fitness/authentication%20screen/log_in.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../authentication screen/loginpage.dart';
 

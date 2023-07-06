@@ -105,14 +105,16 @@ class _BranchListState extends State<BranchList> {
                                             size: 16,
                                             color: Colors.black,
                                           ),
-                                          Text(
-                                            branchList[index]['address'],
-                                            style: const TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500),
-                                            maxLines: 3,
-                                          ),
+                                          Wrap(
+                                            children: [Text(
+                                              branchList[index]['address'],
+                                              style: const TextStyle(
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500),
+                                              maxLines: 3,
+                                            ),
+                                        ]),
                                         ],
                                       ),
                                       const SizedBox(height: 10)

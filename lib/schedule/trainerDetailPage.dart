@@ -55,13 +55,11 @@ class _TrainerDetailPageState extends State<TrainerDetailPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 30),
-                      Center(
-                        child: SvgPicture.network(
-                          ApiList.imageUrl + (widget.trainer['image'] ?? ""),
-                          fit: BoxFit.cover,
-                          placeholderBuilder: (BuildContext context) =>
-                              const Center(child: CircularProgressIndicator()),
-                        ),
+                      SvgPicture.network(
+                        ApiList.imageUrl + (widget.trainer['image'] ?? ""),
+                        fit: BoxFit.cover,
+                        placeholderBuilder: (BuildContext context) =>
+                            const Center(child: CircularProgressIndicator()),
                       ),
                       const SizedBox(height: 30),
                       Center(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 
+import '../schedule/trainer.dart';
+
 class Slotbooking1 extends StatefulWidget {
   const Slotbooking1({super.key});
 
@@ -9,8 +11,10 @@ class Slotbooking1 extends StatefulWidget {
 }
 
 class _Slotbooking1State extends State<Slotbooking1> {
-  final items = ['Free solo Training', 'Free duo Training'];
+  final items = ['Free Trail Session', 'Pay Per Session','Single Plan Subscription','Buddy Plan Subscription'];
   String? value;
+  final items1 = ['EMS Fitness Training', 'Personal Training','Injury Rehab','Body Building'];
+  String? value1;
 
   bool pressAttention = false;
   bool pressAttention1 = false;
@@ -35,6 +39,7 @@ class _Slotbooking1State extends State<Slotbooking1> {
                 fontWeight: FontWeight.w700,
                 color: Colors.black)),
         centerTitle: true,
+        leading: BackButton(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -47,7 +52,7 @@ class _Slotbooking1State extends State<Slotbooking1> {
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(),
                 child: DropdownButton<String>(
-                  hint: const Text('Select Training'),
+                  hint: const Text('Select Session'),
                   value: value,
                   isExpanded: true,
                   underline: Container(
@@ -60,9 +65,24 @@ class _Slotbooking1State extends State<Slotbooking1> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              
+              Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(),
+                child: DropdownButton<String>(
+                  hint: const Text('Select Training'),
+                  value: value1,
+                  isExpanded: true,
+                  underline: Container(
+                    height: 1,
+                    color: Colors.black,
+                  ),
+                  items: items1.map(buildMenuItem1).toList(),
+                  onChanged: (value1) => setState(
+                    () => this.value1 = value1,
+                  ),
+                ),
+              ),SizedBox(height: 20),
               Text(
                 '  Preffered Date',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -86,126 +106,59 @@ class _Slotbooking1State extends State<Slotbooking1> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 10),
-              Wrap(spacing: 10, runSpacing: 10, children: [
-                InkWell(
-                  onTap: () {
-                    setState(() => pressAttention = !pressAttention);
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 190,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: pressAttention
-                          ? Colors.blueGrey.shade200
-                          : Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.shade100,
-                          offset: const Offset(4.0, 4.0),
-                          blurRadius: 12,
-                          spreadRadius: 4,
-                        ),
-                        BoxShadow(
-                          color: Colors.grey.shade100,
-                          offset: const Offset(-4.0, -4.0),
-                          blurRadius: 12,
-                          spreadRadius: 4,
-                        ),
-                      ],
+              SizedBox(
+                 height: MediaQuery.of(context).size.height * 0.70,
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: 10,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 10,
+                 mainAxisExtent: 100,
+                  crossAxisSpacing: 10,
+                  crossAxisCount: 2,
+                
+                ), itemBuilder:(context, index){
+                 return InkWell(
+                    onTap: () {
+                      setState(() => pressAttention = !pressAttention);
+                    },
+                    child: Container(
+                      height: 100,
+                      width: 160,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: pressAttention
+                            ? Colors.blueGrey.shade200
+                            : Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade100,
+                            offset: const Offset(4.0, 4.0),
+                            blurRadius: 12,
+                            spreadRadius: 4,
+                          ),
+                          BoxShadow(
+                            color: Colors.grey.shade100,
+                            offset: const Offset(-4.0, -4.0),
+                            blurRadius: 12,
+                            spreadRadius: 4,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('9:00 AM - 9:45 AM'),
+                          SizedBox(height: 10),
+                          Text('Available',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.green),)
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() => pressAttention1 = !pressAttention1);
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 190,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: pressAttention1
-                            ? Colors.blueGrey.shade200
-                            : Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade100,
-                            offset: const Offset(4.0, 4.0),
-                            blurRadius: 12,
-                            spreadRadius: 1,
-                          ),
-                          BoxShadow(
-                            color: Colors.grey.shade100,
-                            offset: const Offset(-4.0, -4.0),
-                            blurRadius: 12,
-                            spreadRadius: 1,
-                          ),
-                        ]),
-                    child: Column(
-                      children: [],
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() => pressAttention2 = !pressAttention2);
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 190,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: pressAttention2
-                            ? Colors.blueGrey.shade200
-                            : Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade100,
-                            offset: const Offset(4.0, 4.0),
-                            blurRadius: 12,
-                            spreadRadius: 1,
-                          ),
-                          BoxShadow(
-                            color: Colors.grey.shade100,
-                            offset: const Offset(-4.0, -4.0),
-                            blurRadius: 12,
-                            spreadRadius: 1,
-                          ),
-                        ]),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    setState(() => pressAttention3 = !pressAttention3);
-                  },
-                  child: Container(
-                    height: 100,
-                    width: 190,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: pressAttention3
-                            ? Colors.blueGrey.shade200
-                            : Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade100,
-                            offset: const Offset(4.0, 4.0),
-                            blurRadius: 12,
-                            spreadRadius: 1,
-                          ),
-                          BoxShadow(
-                            color: Colors.grey.shade100,
-                            offset: const Offset(-4.0, -4.0),
-                            blurRadius: 12,
-                            spreadRadius: 1,
-                          ),
-                        ]),
-                  ),
-                ),
-              ]),
-              SizedBox(height: 20),
-              Center(
+                  );
+                } ),
+              ),
+                
+                 Center(
                 child: TextButton(
                     style: TextButton.styleFrom(
                         elevation: 5, backgroundColor: Colors.white),
@@ -222,9 +175,14 @@ class _Slotbooking1State extends State<Slotbooking1> {
                       ],
                     )),
               ),
+              
+             
+             
               SizedBox(height: 20),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Trainer()));
+                },
                 child: Container(
                   height: 40,
                   width: double.infinity,
@@ -237,7 +195,7 @@ class _Slotbooking1State extends State<Slotbooking1> {
                   child: Center(
                       child: Text(
                     'Personal Trainer',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   )),
                 ),
               )
@@ -252,6 +210,13 @@ class _Slotbooking1State extends State<Slotbooking1> {
         value: item,
         child: Text(
           item,
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+        ),
+      );
+       DropdownMenuItem<String> buildMenuItem1(String item1) => DropdownMenuItem(
+        value: item1,
+        child: Text(
+          item1,
           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
       );

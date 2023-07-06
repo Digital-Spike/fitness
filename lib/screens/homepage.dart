@@ -1,11 +1,11 @@
 import 'dart:ui';
+import 'package:fitness/schedule/partner.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
-import '../schedule/branches.dart';
-import '../schedule/trainerlist.dart';
+import '../schedule/trainer.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -14,6 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  static const Url= 'https://instagram.com/fitness_journey_uae?igshid=MzRlODBiNWFlZA==';
+  final number ='';
   launchWhatsApp() async {
     final link = WhatsAppUnilink(
       phoneNumber: '',
@@ -87,7 +89,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>TrainerList(isBranchTrainers: true,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Trainer()));
                 },
                 child: Container(
                   height: 120,
@@ -118,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BranchList()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Partner()));
                 },
                 child: Container(
                   height: 120,
@@ -208,15 +210,7 @@ class _HomePageState extends State<HomePage> {
               Center(child: TextButton(
                 style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),backgroundColor: Colors.white ,elevation: 10),
                 onPressed: () async {
-                                                                                  final Uri url = Uri(
-                                                                                  scheme: 'tel',
-                                                                                  path:"",                                                                                 
-                                                                                );
-                                                                                if(await canLaunchUrl(url)) {
-                                                                                  await launchUrl(url);                                                                               
-                                                                                } else {
-                                                                                  print('cannot launch this Url');
-                                                                                }
+                 launch('tel://$number');                                                             
                 }, child: Icon(Icons.call,color: Colors.black,size: 30,))),
                 Container(height: 3.0,
                     width: 50,
@@ -232,7 +226,13 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,),
                   Center(child: TextButton(
                     style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),backgroundColor: Colors.white,elevation: 10),
-                    onPressed: (){}, child: Logo(Logos.instagram)))
+                    onPressed: ()async{
+                      if (await canLaunch(Url)){
+                        await launch(Url);
+                      } else{
+                        throw 'Could not launch $Url';
+                      }
+                    }, child: Logo(Logos.instagram)))
             ],
           )
  

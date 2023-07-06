@@ -180,7 +180,7 @@ class _BookingState extends State<Booking> {
                               ),
                             ],
                           ),
-                          const Spacer(),
+                        SizedBox(height: 40),
                           const Center(
                             child: Text(
                               'Thank You For Choosing\nFitness Journey',
