@@ -29,13 +29,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF1F1F2),
       appBar: AppBar(
         backgroundColor: Color(0xffF1F1F2),
         elevation: 0,
         title: const Center(
           child: Text(
             'Profile',
-            style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
+            style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black,fontSize: 20),
           ),
         ),
         actions: [
@@ -46,46 +47,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
         ],
+        leading: BackButton(color: Colors.black),
+        bottom: PreferredSize(child: Container(height: 1.0,color: Colors.black,), preferredSize: Size.fromHeight(1.0)),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Divider(
-              color: Colors.black,
-              thickness: 1,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 80,
-                  child: CircleAvatar(
-                    minRadius: 60,
-                    backgroundColor: Colors.white,
-                    backgroundImage: _profileImage != null
-                        ? FileImage(_profileImage!)
-                        : null,
-                    child:
-                        _profileImage == null ? const Icon(Icons.person) : null,
+           
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 130,
+                    child: CircleAvatar(
+                      minRadius: 60,
+                      backgroundColor: Colors.white,
+                      backgroundImage: _profileImage != null
+                          ? FileImage(_profileImage!)
+                          : null,
+                      child:
+                          _profileImage == null ? const Icon(Icons.person) : null,
+                    ),
+                  ),SizedBox(width: 10),
+                  Column(
+                    children: [
+                      Text(
+                        _displayName ?? '',
+                        style: const TextStyle(color: Colors.black,fontSize: 16),
+                      ),
+                      Text(
+                        _email ?? '',
+                        style: const TextStyle(
+                             color: Colors.black,fontSize: 16),
+                      ),
+                    ],
                   ),
-                ),
-                Column(
-                  children: [
-                    Text(
-                      _displayName ?? '',
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      _email ?? '',
-                      style: const TextStyle(
-                          fontFamily: 'Roboto', color: Colors.black),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 10),
-                SvgPicture.asset('assets/Edit.svg')
-              ],
+                  const SizedBox(width: 10),
+                  SvgPicture.asset('assets/Edit.svg',color: Colors.black,)
+                ],
+              ),
             ),
             const Divider(
               color: Colors.black,
@@ -162,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
-                        fontFamily: 'Roboto',
+
                         fontWeight: FontWeight.w700),
                   ),
                 ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../schedule/trainer.dart';
+import 'freetrialsession.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -55,31 +56,36 @@ class _HomePageState extends State<HomePage> {
             ])),
           ),
           SizedBox(height: 50),
-          Container(
-            height: 120,
-            width: 180,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.black.withOpacity(0.7),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/One Free.png',
-                  scale: 2,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Book a Trial Session',
-                  style: TextStyle(
-                      fontFamily: 'ITCAvant',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: Colors.white),
-                )
-              ],
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> FreeTrialSession()));
+            },
+            child: Container(
+              height: 120,
+              width: 180,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.black.withOpacity(0.7),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/One Free.png',
+                    scale: 2,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Book a Trial Session',
+                    style: TextStyle(
+                        fontFamily: 'ITCAvant',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        color: Colors.white),
+                  )
+                ],
+              ),
             ),
           ),
           SizedBox(height: 20),

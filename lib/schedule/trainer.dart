@@ -1,3 +1,4 @@
+import 'package:fitness/schedule/trainerprofile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -57,33 +58,38 @@ class _TrainerState extends State<Trainer> {
                   itemCount: 6,
                   
                   itemBuilder: (context, index) {
-                    return  Stack(
-                      children: [
-                        Container(
-                       
-                          height: 270,
+                    return  GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>TrainerProfile()));
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
                          
-                          decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(10),
-                           image: DecorationImage(image: AssetImage('assets/IMG_9750.png'),fit: BoxFit.cover)
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            height: 270,
+                           
+                            decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(10),
+                             image: DecorationImage(image: AssetImage('assets/IMG_9750.png'),fit: BoxFit.cover)
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(height: 30,width: 8,color: Colors.deepOrange,),SizedBox(width: 20),Text('Trainer Name',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w900,color: Colors.white)),
+                                    
+                                  ],
+                                ),
+                                SizedBox(height: 20,)
+                              ],
+                            ),
+                          )
                             
-                            children: [
-                              Row(
-                                children: [
-                                  Container(height: 30,width: 5,color: Colors.deepOrange,),SizedBox(width: 20),Text('Trainer Name',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w900)),
-                                  
-                                ],
-                              ),
-                              SizedBox(height: 20,)
-                            ],
-                          ),
-                        )
-                          
-                      ],
+                        ],
+                      ),
                     );
                    } ),
         ),

@@ -198,7 +198,8 @@ class _Slotbooking1State extends State<Slotbooking1> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   )),
                 ),
-              )
+              ),
+              SizedBox(height: 50,)
             ],
           ),
         ),
