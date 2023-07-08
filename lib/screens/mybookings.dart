@@ -50,6 +50,9 @@ class _MyBookingPageState extends State<MyBookingPage>
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
+        leading: BackButton(color: Colors.black,onPressed: (){
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Mybottom()));
+        },),
       ),
       body: Column(
         children: [

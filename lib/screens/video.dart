@@ -56,8 +56,12 @@ class _VideoState extends State<Video> {
             child: Container(
               height: 1.0,
               color: Colors.black,
+              
             ),
           ),
+          leading: BackButton(color: Colors.black,onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Mybottom()));
+          },),
         ),
         body: SingleChildScrollView(
           child: Padding(

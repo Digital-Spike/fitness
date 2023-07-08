@@ -17,10 +17,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static const Url =
       'https://instagram.com/fitness_journey_uae?igshid=MzRlODBiNWFlZA==';
-  final number = '';
+  final number = '+971588340905';
   launchWhatsApp() async {
     final link = const WhatsAppUnilink(
-      phoneNumber: '',
+      phoneNumber: '+971588340905',
       text: "Hi",
     );
     await launch('$link');

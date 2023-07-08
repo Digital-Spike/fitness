@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
+import 'package:fitness/screens/bottomnav.dart';
+import 'package:fitness/screens/homepage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -47,7 +49,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
         ],
-        leading: BackButton(color: Colors.black),
+        leading: BackButton(color: Colors.black,onPressed: () {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Mybottom()));
+        },),
         bottom: PreferredSize(child: Container(height: 1.0,color: Colors.black,), preferredSize: Size.fromHeight(1.0)),
       ),
       body: SingleChildScrollView(
