@@ -1,8 +1,13 @@
+import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/drawerscreen/slotbooking1.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TrainerProfile extends StatefulWidget {
-  const TrainerProfile({super.key});
+  final Map<String, dynamic> trainer;
+  final bool isBranch;
+  const TrainerProfile(
+      {super.key, required this.trainer, required this.isBranch});
 
   @override
   State<TrainerProfile> createState() => _TrainerProfileState();
@@ -23,7 +28,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
           ),
         ),
         title: const Text(
-          'Trainer Name', // call Trainer name from api
+          'Trainer Profile', // call Trainer name from api
           style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.w900, color: Colors.black),
         ),
@@ -39,17 +44,23 @@ class _TrainerProfileState extends State<TrainerProfile> {
               padding: const EdgeInsets.all(15),
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     minRadius: 60,
                     backgroundColor: Colors.grey,
+                    child: SvgPicture.network(
+                      ApiList.imageUrl + (widget.trainer['image'] ?? ""),
+                      fit: BoxFit.cover,
+                      placeholderBuilder: (BuildContext context) =>
+                          const Center(child: CircularProgressIndicator()),
+                    ),
                   ),
                   const SizedBox(width: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Trainer Name',
-                        style: TextStyle(
+                      Text(
+                        widget.trainer['name'],
+                        style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                             color: Colors.deepOrange),
@@ -134,12 +145,12 @@ class _TrainerProfileState extends State<TrainerProfile> {
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text('Description',
+                children: [
+                  const Text('Description',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                  SizedBox(height: 10),
-                  Text('data')
+                  const SizedBox(height: 10),
+                  Text(widget.trainer['description'])
                 ],
               ),
             ),

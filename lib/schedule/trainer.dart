@@ -69,8 +69,10 @@ class _TrainerState extends State<Trainer> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const TrainerProfile()));
+                                  builder: (context) => TrainerProfile(
+                                        isBranch: widget.isBranchTrainers,
+                                        trainer: trainersList[index],
+                                      )));
                         },
                         child: Stack(
                           children: [
