@@ -1,14 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness/authentication%20screen/splashSceen.dart';
-import 'package:fitness/schedule/trainer.dart';
-import 'package:fitness/schedule/trainerprofile.dart';
-import 'package:fitness/screens/bookings.dart';
-
 import 'package:flutter/material.dart';
 
-
-import 'drawerscreen/profile.dart';
-import 'drawerscreen/slotbooking1.dart';
 import 'firebase_options.dart';
 
 const List<String> scopes = <String>[
@@ -32,7 +25,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
@@ -41,7 +33,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'ITCAvant',
         ),
-        home:   Bookings()
-);
+        home: const SplashScreen());
   }
 }

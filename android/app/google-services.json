@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1009790740333:android:aac26e3c956b7358acdc64",
         "android_client_info": {
-          "package_name": "com.example.fitness"
+          "package_name": "com.fitness.journey"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1009790740333-8c4gjb8kge1uu8vforp3qlhbstpv4fsh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.fitness",
+            "package_name": "com.fitness.journey",
             "certificate_hash": "aa9e29ac54afdcf66e11881422d59ab0f9a4e785"
           }
         },
