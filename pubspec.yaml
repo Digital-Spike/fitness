@@ -33,6 +33,7 @@ dependencies:
   date_picker_timeline: ^1.2.3
   url_launcher: ^6.1.11
   whatsapp_unilink: ^2.1.0
+  cached_network_image: ^3.2.3
   
   
 dev_dependencies:
