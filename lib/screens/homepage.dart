@@ -1,12 +1,12 @@
-import 'dart:ui';
 import 'package:fitness/schedule/partner.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 import '../schedule/trainer.dart';
 import 'freetrialsession.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,31 +15,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const Url= 'https://instagram.com/fitness_journey_uae?igshid=MzRlODBiNWFlZA==';
-  final number ='';
+  static const Url =
+      'https://instagram.com/fitness_journey_uae?igshid=MzRlODBiNWFlZA==';
+  final number = '';
   launchWhatsApp() async {
-    final link = WhatsAppUnilink(
+    final link = const WhatsAppUnilink(
       phoneNumber: '',
       text: "Hi",
     );
     await launch('$link');
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/IMG_9779.jpg'), fit: BoxFit.cover)),
         child: Column(children: [
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
           Container(
             height: 80,
             width: double.infinity,
             decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.5),
-                image: DecorationImage(
+                image: const DecorationImage(
                     image: AssetImage('assets/fitness.png'),
                     scale: 2,
                     alignment: Alignment.center)),
@@ -47,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             height: 15,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(colors: [
               Colors.orange,
               Colors.indigo,
@@ -55,10 +57,13 @@ class _HomePageState extends State<HomePage> {
               Colors.blue
             ])),
           ),
-          SizedBox(height: 50),
+          const SizedBox(height: 50),
           GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> FreeTrialSession()));
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FreeTrialSession()));
             },
             child: Container(
               height: 120,
@@ -75,8 +80,8 @@ class _HomePageState extends State<HomePage> {
                     'assets/One Free.png',
                     scale: 2,
                   ),
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'Book a Trial Session',
                     style: TextStyle(
                         fontFamily: 'ITCAvant',
@@ -88,14 +93,15 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Wrap(
             spacing: 20,
             runSpacing: 20,
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Trainer()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Trainer()));
                 },
                 child: Container(
                   height: 120,
@@ -111,8 +117,8 @@ class _HomePageState extends State<HomePage> {
                         'assets/trainer.png',
                         scale: 2,
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         'Our Trainers',
                         style: TextStyle(
                             fontFamily: 'ITCAvant',
@@ -126,7 +132,8 @@ class _HomePageState extends State<HomePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Partner()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Partner()));
                 },
                 child: Container(
                   height: 120,
@@ -142,8 +149,8 @@ class _HomePageState extends State<HomePage> {
                         'assets/barbell.png',
                         scale: 2,
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         'Our Gym Partners',
                         style: TextStyle(
                             fontFamily: 'ITCAvant',
@@ -169,8 +176,8 @@ class _HomePageState extends State<HomePage> {
                       'assets/plan.png',
                       scale: 2,
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       'Our Packages',
                       style: TextStyle(
                           fontFamily: 'ITCAvant',
@@ -195,8 +202,8 @@ class _HomePageState extends State<HomePage> {
                       'assets/offer.png',
                       scale: 2,
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       'Our Offers',
                       style: TextStyle(
                           fontFamily: 'ITCAvant',
@@ -208,43 +215,66 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ],
-          ), SizedBox(height: 60),
-          
+          ),
+          const SizedBox(height: 60),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(child: TextButton(
-                style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),backgroundColor: Colors.white ,elevation: 10),
-                onPressed: () async {
-                 launch('tel://$number');                                                             
-                }, child: Icon(Icons.call,color: Colors.black,size: 30,))),
-                Container(height: 3.0,
-                    width: 50,
-                color: Colors.white,),
-                
-               
-                Center(child: TextButton(
-                  style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),backgroundColor: Colors.white,elevation: 10),
-                  onPressed: () async{
-                    
-                    launchWhatsApp();}, child: Logo(Logos.whatsapp))),Container(height: 3.0,
-                    width: 50,
-                color: Colors.white,),
-                  Center(child: TextButton(
-                    style: TextButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),backgroundColor: Colors.white,elevation: 10),
-                    onPressed: ()async{
-                      if (await canLaunch(Url)){
-                        await launch(Url);
-                      } else{
-                        throw 'Could not launch $Url';
-                      }
-                    }, child: Logo(Logos.instagram)))
+              Center(
+                  child: TextButton(
+                      style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          backgroundColor: Colors.white,
+                          elevation: 10),
+                      onPressed: () async {
+                        launch('tel://$number');
+                      },
+                      child: const Icon(
+                        Icons.call,
+                        color: Colors.black,
+                        size: 30,
+                      ))),
+              Container(
+                height: 3.0,
+                width: 50,
+                color: Colors.white,
+              ),
+              Center(
+                  child: TextButton(
+                      style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          backgroundColor: Colors.white,
+                          elevation: 10),
+                      onPressed: () async {
+                        launchWhatsApp();
+                      },
+                      child: Logo(Logos.whatsapp))),
+              Container(
+                height: 3.0,
+                width: 50,
+                color: Colors.white,
+              ),
+              Center(
+                  child: TextButton(
+                      style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          backgroundColor: Colors.white,
+                          elevation: 10),
+                      onPressed: () async {
+                        if (await canLaunch(Url)) {
+                          await launch(Url);
+                        } else {
+                          throw 'Could not launch $Url';
+                        }
+                      },
+                      child: Logo(Logos.instagram)))
             ],
           )
- 
         ]),
       ),
     );
-
   }
 }
