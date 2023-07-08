@@ -100,8 +100,12 @@ class _HomePageState extends State<HomePage> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Trainer()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Trainer(
+                                isBranchTrainers: false,
+                              )));
                 },
                 child: Container(
                   height: 120,

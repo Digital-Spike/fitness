@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:flutter/material.dart';
 
 import '../schedule/trainer.dart';
 
@@ -11,9 +11,19 @@ class Slotbooking1 extends StatefulWidget {
 }
 
 class _Slotbooking1State extends State<Slotbooking1> {
-  final items = ['Free Trail Session', 'Pay Per Session','Single Plan Subscription','Buddy Plan Subscription'];
+  final items = [
+    'Free Trail Session',
+    'Pay Per Session',
+    'Single Plan Subscription',
+    'Buddy Plan Subscription'
+  ];
   String? value;
-  final items1 = ['EMS Fitness Training', 'Personal Training','Injury Rehab','Body Building'];
+  final items1 = [
+    'EMS Fitness Training',
+    'Personal Training',
+    'Injury Rehab',
+    'Body Building'
+  ];
   String? value1;
 
   bool pressAttention = false;
@@ -65,7 +75,6 @@ class _Slotbooking1State extends State<Slotbooking1> {
                   ),
                 ),
               ),
-              
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(),
@@ -82,7 +91,8 @@ class _Slotbooking1State extends State<Slotbooking1> {
                     () => this.value1 = value1,
                   ),
                 ),
-              ),SizedBox(height: 20),
+              ),
+              SizedBox(height: 20),
               Text(
                 '  Preffered Date',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -107,58 +117,63 @@ class _Slotbooking1State extends State<Slotbooking1> {
               ),
               SizedBox(height: 10),
               SizedBox(
-                 height: MediaQuery.of(context).size.height * 0.70,
+                height: MediaQuery.of(context).size.height * 0.70,
                 child: GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: 10,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 10,
-                 mainAxisExtent: 100,
-                  crossAxisSpacing: 10,
-                  crossAxisCount: 2,
-                
-                ), itemBuilder:(context, index){
-                 return InkWell(
-                    onTap: () {
-                      setState(() => pressAttention = !pressAttention);
-                    },
-                    child: Container(
-                      height: 100,
-                      width: 160,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: pressAttention
-                            ? Colors.blueGrey.shade200
-                            : Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade100,
-                            offset: const Offset(4.0, 4.0),
-                            blurRadius: 12,
-                            spreadRadius: 4,
-                          ),
-                          BoxShadow(
-                            color: Colors.grey.shade100,
-                            offset: const Offset(-4.0, -4.0),
-                            blurRadius: 12,
-                            spreadRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('9:00 AM - 9:45 AM'),
-                          SizedBox(height: 10),
-                          Text('Available',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.green),)
-                        ],
-                      ),
+                    shrinkWrap: true,
+                    itemCount: 10,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 10,
+                      mainAxisExtent: 100,
+                      crossAxisSpacing: 10,
+                      crossAxisCount: 2,
                     ),
-                  );
-                } ),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          setState(() => pressAttention = !pressAttention);
+                        },
+                        child: Container(
+                          height: 100,
+                          width: 160,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: pressAttention
+                                ? Colors.blueGrey.shade200
+                                : Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade100,
+                                offset: const Offset(4.0, 4.0),
+                                blurRadius: 12,
+                                spreadRadius: 4,
+                              ),
+                              BoxShadow(
+                                color: Colors.grey.shade100,
+                                offset: const Offset(-4.0, -4.0),
+                                blurRadius: 12,
+                                spreadRadius: 4,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('9:00 AM - 9:45 AM'),
+                              SizedBox(height: 10),
+                              Text(
+                                'Available',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.green),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
               ),
-                
-                 Center(
+              Center(
                 child: TextButton(
                     style: TextButton.styleFrom(
                         elevation: 5, backgroundColor: Colors.white),
@@ -175,13 +190,15 @@ class _Slotbooking1State extends State<Slotbooking1> {
                       ],
                     )),
               ),
-              
-             
-             
               SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Trainer()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Trainer(
+                                isBranchTrainers: true,
+                              )));
                 },
                 child: Container(
                   height: 40,
@@ -199,7 +216,9 @@ class _Slotbooking1State extends State<Slotbooking1> {
                   )),
                 ),
               ),
-              SizedBox(height: 50,)
+              SizedBox(
+                height: 50,
+              )
             ],
           ),
         ),
@@ -214,7 +233,7 @@ class _Slotbooking1State extends State<Slotbooking1> {
           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
       );
-       DropdownMenuItem<String> buildMenuItem1(String item1) => DropdownMenuItem(
+  DropdownMenuItem<String> buildMenuItem1(String item1) => DropdownMenuItem(
         value: item1,
         child: Text(
           item1,
