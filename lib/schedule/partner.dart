@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/model/branch.dart';
+import 'package:fitness/schedule/trainer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -65,23 +66,33 @@ class _PartnerState extends State<Partner> {
               return ListView.builder(
                 itemCount: trainersAndBranchList['branches'].length,
                 itemBuilder: (BuildContext context, int index) {
-                  final branchImage = trainersAndBranchList['branches'][index];
-                  return Container(
-                    margin: const EdgeInsets.all(10),
-                    height: 200,
-                    width: 250,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey, width: 1.5),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            ApiList.imageUrl + (branchImage['image'] ?? ""),
-                        placeholder: (context, url) => Container(),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                  final branch = trainersAndBranchList['branches'][index];
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Trainer(
+                                    isBranchTrainers: true,
+                                    branchId: branch['branchId'],
+                                  )));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      height: 200,
+                      width: 250,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.grey, width: 1.5),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: CachedNetworkImage(
+                          imageUrl: ApiList.imageUrl + (branch['image'] ?? ""),
+                          placeholder: (context, url) => Container(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
                       ),
                     ),
                   );
