@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/drawerscreen/slotbooking1.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class TrainerProfile extends StatefulWidget {
   final Map<String, dynamic> trainer;
@@ -47,11 +47,13 @@ class _TrainerProfileState extends State<TrainerProfile> {
                   CircleAvatar(
                     minRadius: 60,
                     backgroundColor: Colors.grey,
-                    child: SvgPicture.network(
-                      ApiList.imageUrl + (widget.trainer['image'] ?? ""),
-                      fit: BoxFit.cover,
-                      placeholderBuilder: (BuildContext context) =>
-                          const Center(child: CircularProgressIndicator()),
+                    child: CachedNetworkImage(
+                      height: 120,
+                      imageUrl:
+                          ApiList.imageUrl + (widget.trainer['image'] ?? ""),
+                      placeholder: (context, url) => Container(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                   const SizedBox(width: 20),
