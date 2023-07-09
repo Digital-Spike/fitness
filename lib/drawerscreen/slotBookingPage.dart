@@ -195,7 +195,9 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                             return InkWell(
                               onTap: () {
                                 showBookingPopup(
-                                    timeStamp: timeStamp, index: index);
+                                    timeStamp: timeStamp[index],
+                                    index: index,
+                                    isBooked: isBooked);
                               },
                               child: Container(
                                 height: 100,
@@ -387,7 +389,10 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
         ),
       );
 
-  Future<void> showBookingPopup({required timeStamp, required index}) async {
+  Future<void> showBookingPopup(
+      {required String timeStamp,
+      required int index,
+      required bool isBooked}) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -422,7 +427,41 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  onPressed: () async {},
+                  onPressed: () async {
+                    if (!isBooked) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  CircularProgressIndicator(),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 4.0),
+                                    child: Text("Processing..."),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                      await bookSession(
+                          bookingTime: timeStamp,
+                          slotNumber: (index + 1).toString());
+                      if (mounted) {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      }
+                      setState(() {
+                        futureData = slotList();
+                      });
+                    }
+                  },
                 ),
                 TextButton(
                   child: const Text(
@@ -456,7 +495,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
         'branchName': widget.trainer['name'],
         'bookingId': StringUtil().generateRandomNumber(length: 10),
         'customerId': user?.uid,
-        'customerName': 'Shashi',
+        'customerName': ApiList.user?['name'],
         'trainerName': widget.trainer['name'],
         'bookingTime': bookingTime,
         'slot': slotNumber,

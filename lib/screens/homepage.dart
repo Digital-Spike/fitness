@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/schedule/partner.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:icons_plus/icons_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
@@ -25,6 +30,12 @@ class _HomePageState extends State<HomePage> {
       text: "Hi",
     );
     await launch('$link');
+  }
+
+  @override
+  void initState() {
+    getUser();
+    super.initState();
   }
 
   @override
@@ -285,5 +296,18 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void getUser() async {
+    if (ApiList.user == null) {
+      String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+      final response = await http.post(
+        Uri.parse('https://fitnessjourni.com/api/getUser.php'),
+        body: {'userId': userId},
+      );
+      if (response.statusCode == 200) {
+        ApiList.user = jsonDecode(response.body);
+      }
+    }
   }
 }
