@@ -4,6 +4,7 @@ import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:icons_plus/icons_plus.dart';
 
 import '../screens/home.dart';
 
@@ -201,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: userLogin,
                             child: SvgPicture.asset('assets/login.svg')),
                         const SizedBox(height: 20),
-                        /*const Text(
+                        const Text(
                           'OR',
                           style: TextStyle(
                               fontFamily: 'Roboto',
@@ -210,22 +211,13 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white),
                         ),
                         const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () => GoogleSinIn().signInWithGoogle(),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                    color: Colors.white,
-                                    padding: const EdgeInsets.all(6),
-                                    child:
-                                        SvgPicture.asset('assets/google.svg')),
-                              ),
-                            ),
-
-                            */ /*const SizedBox(width: 20),
+                      Center(child: TextButton(
+                        style: TextButton.styleFrom(
+                          elevation: 10,
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                        onPressed: (){}, child: Logo(Logos.google))),
+                             /*const SizedBox(width: 20),
                             SvgPicture.asset('assets/Apple.svg'),*/ /*
                           ],
                         ),*/
