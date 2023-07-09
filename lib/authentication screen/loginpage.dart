@@ -6,8 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:icons_plus/icons_plus.dart';
 
-import '../screens/home.dart';
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -211,13 +209,17 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white),
                         ),
                         const SizedBox(height: 20),
-                      Center(child: TextButton(
-                        style: TextButton.styleFrom(
-                          elevation: 10,
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-                        onPressed: (){}, child: Logo(Logos.google))),
-                             /*const SizedBox(width: 20),
+                        Center(
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                    elevation: 10,
+                                    backgroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20))),
+                                onPressed: () {},
+                                child: Logo(Logos.google))),
+                        /*const SizedBox(width: 20),
                             SvgPicture.asset('assets/Apple.svg'),*/ /*
                           ],
                         ),*/

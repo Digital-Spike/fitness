@@ -2,13 +2,10 @@ import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/schedule/trainerDetailPage.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-
-import '../screens/bottomnav.dart';
 
 class TrainerList extends StatefulWidget {
   final bool isBranchTrainers;

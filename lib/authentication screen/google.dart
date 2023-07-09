@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/screens/home.dart';
-
+import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -58,7 +57,7 @@ class _GoogleState extends State<Google> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
+                        builder: (context) => HomePage(),
                       ),
                     );
                   });

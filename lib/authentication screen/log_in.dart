@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication screen/sign_in.dart';
-import 'package:fitness/screens/home.dart';
+import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => HomePage(),
           ),
         );
       } else {
@@ -55,7 +55,7 @@ class _LoginState extends State<Login> {
           context,
           PageRouteBuilder(
             pageBuilder: (context, a, b) => Signup(),
-            transitionDuration: Duration(seconds: 0),
+            transitionDuration: const Duration(seconds: 0),
           ),
           (route) => false,
         );
@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/back.jpg'),
                 fit: BoxFit.cover,
@@ -86,18 +86,18 @@ class _LoginState extends State<Login> {
             ),
           ),
           Container(
-            color: Color.fromRGBO(217, 217, 217, 0.25),
+            color: const Color.fromRGBO(217, 217, 217, 0.25),
           ),
           Center(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
               child: ListView(
                 shrinkWrap: true,
                 children: [
                   Column(
                     children: [
-                      SizedBox(height: 40),
-                      Text(
+                      const SizedBox(height: 40),
+                      const Text(
                         'Transform your body and mind',
                         style: TextStyle(
                           fontSize: 20,
@@ -105,8 +105,8 @@ class _LoginState extends State<Login> {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
                         style: TextStyle(
                           fontSize: 16,
@@ -117,26 +117,27 @@ class _LoginState extends State<Login> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Container(
-                    color: Color.fromRGBO(217, 217, 217, 0.25),
+                    color: const Color.fromRGBO(217, 217, 217, 0.25),
                     child: Form(
                       key: _formKey,
                       child: Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 10.0),
+                              margin:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               child: TextFormField(
                                 autofocus: false,
                                 decoration: InputDecoration(
                                   labelText: 'Email: ',
-                                  labelStyle: TextStyle(fontSize: 20.0),
+                                  labelStyle: const TextStyle(fontSize: 20.0),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  errorStyle: TextStyle(
+                                  errorStyle: const TextStyle(
                                     color: Colors.redAccent,
                                     fontSize: 15,
                                   ),
@@ -155,17 +156,18 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 15.0),
+                              margin:
+                                  const EdgeInsets.symmetric(vertical: 15.0),
                               child: TextFormField(
                                 autofocus: false,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   labelText: 'Password: ',
-                                  labelStyle: TextStyle(fontSize: 20.0),
+                                  labelStyle: const TextStyle(fontSize: 20.0),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15.0),
                                   ),
-                                  errorStyle: TextStyle(
+                                  errorStyle: const TextStyle(
                                     color: Colors.redAccent,
                                     fontSize: 15,
                                   ),
@@ -182,7 +184,8 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 20.0),
+                              margin:
+                                  const EdgeInsets.symmetric(vertical: 20.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -194,7 +197,7 @@ class _LoginState extends State<Login> {
                                       });
                                     },
                                   ),
-                                  Text(
+                                  const Text(
                                     "By Continuing you accept our\nprivacy policy and terms of use",
                                     style: TextStyle(fontSize: 16.0),
                                   ),
@@ -202,7 +205,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(left: 20.0),
+                              margin: const EdgeInsets.only(left: 20.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -219,7 +222,7 @@ class _LoginState extends State<Login> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Don't have an Account? "),
+                                  const Text("Don't have an Account? "),
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pushAndRemoveUntil(
@@ -228,12 +231,12 @@ class _LoginState extends State<Login> {
                                           pageBuilder: (context, a, b) =>
                                               Signup(),
                                           transitionDuration:
-                                              Duration(seconds: 0),
+                                              const Duration(seconds: 0),
                                         ),
                                         (route) => false,
                                       );
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       'Signup',
                                       style: TextStyle(
                                         decoration: TextDecoration.underline,
@@ -243,7 +246,7 @@ class _LoginState extends State<Login> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -253,7 +256,7 @@ class _LoginState extends State<Login> {
                                     'assets/Apple.svg',
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 GestureDetector(
                                   onTap: () async {
                                     try {
@@ -281,7 +284,7 @@ class _LoginState extends State<Login> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                HomeScreen()));
+                                                const HomePage()));
                                   },
                                   child: SvgPicture.asset(
                                     'assets/google.svg',
@@ -298,7 +301,7 @@ class _LoginState extends State<Login> {
                                   ),
                                 );
                               },
-                              child: Text(
+                              child: const Text(
                                 'Forgot Password ?',
                                 style: TextStyle(
                                   fontSize: 14.0,

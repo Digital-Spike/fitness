@@ -2,12 +2,9 @@ import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/schedule/trainerlist.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
-
-import '../screens/bottomnav.dart';
 
 class BranchList extends StatefulWidget {
   const BranchList({super.key});
@@ -45,7 +42,9 @@ class _BranchListState extends State<BranchList> {
                   fontWeight: FontWeight.w700,
                   color: Colors.black)),
           centerTitle: true,
-          leading: BackButton(color: Colors.black,),
+          leading: BackButton(
+            color: Colors.black,
+          ),
         ),
         body: FutureBuilder<bool>(
           future: futureData,
@@ -105,8 +104,8 @@ class _BranchListState extends State<BranchList> {
                                             size: 16,
                                             color: Colors.black,
                                           ),
-                                          Wrap(
-                                            children: [Text(
+                                          Wrap(children: [
+                                            Text(
                                               branchList[index]['address'],
                                               style: const TextStyle(
                                                   fontFamily: 'Roboto',
@@ -114,7 +113,7 @@ class _BranchListState extends State<BranchList> {
                                                   fontWeight: FontWeight.w500),
                                               maxLines: 3,
                                             ),
-                                        ]),
+                                          ]),
                                         ],
                                       ),
                                       const SizedBox(height: 10)

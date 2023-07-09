@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/util/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -19,6 +21,8 @@ class SlotBookingPage extends StatefulWidget {
 class _SlotBookingPageState extends State<SlotBookingPage> {
   Future<bool>? futureData;
   Map<String, dynamic> slots = {};
+  DateTime _selectedDay = DateTime.now();
+  User? user = FirebaseAuth.instance.currentUser;
 
   final items = [
     'Free Trail Session',
@@ -65,15 +69,6 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
     futureData = slotList();
     super.initState();
   }
-
-  String? value1;
-
-  bool pressAttention = false;
-  bool pressAttention1 = false;
-  bool pressAttention2 = false;
-  bool pressAttention3 = false;
-
-  DateTime _selectedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -199,17 +194,15 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
 
                             return InkWell(
                               onTap: () {
-                                setState(
-                                    () => pressAttention = !pressAttention);
+                                showBookingPopup(
+                                    timeStamp: timeStamp, index: index);
                               },
                               child: Container(
                                 height: 100,
                                 width: 160,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: pressAttention
-                                      ? Colors.blueGrey.shade200
-                                      : Colors.white,
+                                  color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey.shade100,
@@ -393,4 +386,90 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
       );
+
+  Future<void> showBookingPopup({required timeStamp, required index}) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Book Slot?',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: const Text(
+            'Are you sure?',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  child: const Text(
+                    'YES',
+                    style: TextStyle(
+                      color: Color(0xff0f4c81),
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onPressed: () async {},
+                ),
+                TextButton(
+                  child: const Text(
+                    'NO',
+                    style: TextStyle(
+                      color: Color(0xff0f4c81),
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<bool> bookSession({
+    required String slotNumber,
+    required String bookingTime,
+  }) async {
+    try {
+      Map<String, dynamic> requestBody = {
+        'trainerId': widget.trainer['trainerId'],
+        'bookingDate': DateFormat('yyyy/MM/dd').format(_selectedDay),
+        'branchName': widget.trainer['name'],
+        'bookingId': StringUtil().generateRandomNumber(length: 10),
+        'customerId': user?.uid,
+        'customerName': 'Shashi',
+        'trainerName': widget.trainer['name'],
+        'bookingTime': bookingTime,
+        'slot': slotNumber,
+        'amount': '500'
+      };
+
+      String trainerUrl = widget.isBranch
+          ? "${ApiList.apiUrl}addBooking.php"
+          : "${ApiList.apiUrl}homeaddBooking.php";
+      await http.post(Uri.parse(trainerUrl), body: requestBody);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

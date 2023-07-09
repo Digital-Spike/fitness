@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/screens/home.dart';
+import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -302,7 +302,7 @@ class _SignupPageState extends State<SignupPage> {
       Navigator.pushAndRemoveUntil(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, a, b) => const HomeScreen(),
+          pageBuilder: (context, a, b) => const HomePage(),
           transitionDuration: const Duration(seconds: 0),
         ),
         (route) => false,

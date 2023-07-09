@@ -2,9 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
-import 'package:fitness/screens/bottomnav.dart';
 import 'package:fitness/screens/homepage.dart';
-
+import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -30,15 +29,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffF1F1F2),
-      appBar: AppBar(
-        backgroundColor: Color(0xffF1F1F2),
+    return MainScreen(
+      mainAppBar: AppBar(
+        backgroundColor: const Color(0xffF1F1F2),
         elevation: 0,
         title: const Center(
           child: Text(
             'Profile',
-            style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black,fontSize: 20),
+            style: TextStyle(
+                fontWeight: FontWeight.w600, color: Colors.black, fontSize: 20),
           ),
         ),
         actions: [
@@ -49,15 +48,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
           ),
         ],
-        leading: BackButton(color: Colors.black,onPressed: () {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Mybottom()));
-        },),
-        bottom: PreferredSize(child: Container(height: 1.0,color: Colors.black,), preferredSize: Size.fromHeight(1.0)),
+        leading: BackButton(
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const HomePage()));
+          },
+        ),
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(1.0),
+            child: Container(
+              height: 1.0,
+              color: Colors.black,
+            )),
       ),
-      body: SingleChildScrollView(
+      mainChild: SingleChildScrollView(
         child: Column(
           children: [
-           
             Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
@@ -72,25 +79,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       backgroundImage: _profileImage != null
                           ? FileImage(_profileImage!)
                           : null,
-                      child:
-                          _profileImage == null ? const Icon(Icons.person) : null,
+                      child: _profileImage == null
+                          ? const Icon(Icons.person)
+                          : null,
                     ),
-                  ),SizedBox(width: 10),
+                  ),
+                  const SizedBox(width: 10),
                   Column(
                     children: [
                       Text(
                         _displayName ?? '',
-                        style: const TextStyle(color: Colors.black,fontSize: 16),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 16),
                       ),
                       Text(
                         _email ?? '',
-                        style: const TextStyle(
-                             color: Colors.black,fontSize: 16),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 16),
                       ),
                     ],
                   ),
                   const SizedBox(width: 10),
-                  SvgPicture.asset('assets/Edit.svg',color: Colors.black,)
+                  SvgPicture.asset(
+                    'assets/Edit.svg',
+                  )
                 ],
               ),
             ),
@@ -169,7 +181,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
-
                         fontWeight: FontWeight.w700),
                   ),
                 ),

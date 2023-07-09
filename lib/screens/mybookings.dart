@@ -1,7 +1,8 @@
+import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'booking.dart';
-import 'bottomnav.dart';
+import 'homepage.dart';
 
 class MyBookingPage extends StatefulWidget {
   const MyBookingPage({super.key});
@@ -34,9 +35,9 @@ class _MyBookingPageState extends State<MyBookingPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xffF1F1F2),
+    return MainScreen(
+      mainAppBar: AppBar(
+        backgroundColor: const Color(0xffF1F1F2),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -50,11 +51,15 @@ class _MyBookingPageState extends State<MyBookingPage>
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        leading: BackButton(color: Colors.black,onPressed: (){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Mybottom()));
-        },),
+        leading: BackButton(
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const HomePage()));
+          },
+        ),
       ),
-      body: Column(
+      mainChild: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(5),

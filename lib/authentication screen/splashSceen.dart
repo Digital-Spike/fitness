@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/welcome.dart';
-
+import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
-
-import '../screens/bottomnav.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,7 +31,8 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (BuildContext context) => Mybottom()),
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePage()),
               ModalRoute.withName('/'));
         }
       });

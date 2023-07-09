@@ -1,10 +1,7 @@
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/schedule/slotbooking.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../screens/bottomnav.dart';
 
 class TrainerDetailPage extends StatefulWidget {
   final Map<String, dynamic> trainer;

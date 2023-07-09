@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
-import 'package:fitness/screens/home.dart';
+import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 class Authpage extends StatelessWidget {
@@ -13,7 +13,7 @@ class Authpage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return HomeScreen();
+            return HomePage();
           } else {
             return LoginPage();
           }
