@@ -54,14 +54,13 @@ class _SignupPageState extends State<SignupPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                  padding: EdgeInsets.all(20),
-                  margin: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.3)),
                     child: Column(
                       children: const [
-                      
                         Text(
                           'Transform your body\nand mind',
                           style: TextStyle(
@@ -90,7 +89,7 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   Container(
                     padding: const EdgeInsets.all(20),
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.2)),
@@ -123,8 +122,8 @@ class _SignupPageState extends State<SignupPage> {
                                 fillColor: Colors.white,
                                 labelText: 'Phone Number',
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10)))),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)))),
                             initialCountryCode: 'AE',
                             onChanged: (phone) {
                               print(phone.completeNumber);
@@ -142,10 +141,10 @@ class _SignupPageState extends State<SignupPage> {
                                     borderRadius: BorderRadius.circular(10))),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            validator: (email) => email != null &&
-                                    !EmailValidator.validate(email)
-                                ? 'Enter a valid email'
-                                : null,
+                            validator: (email) =>
+                                email != null && !EmailValidator.validate(email)
+                                    ? 'Enter a valid email'
+                                    : null,
                           ),
                           const SizedBox(height: 15),
                           TextFormField(
@@ -166,40 +165,10 @@ class _SignupPageState extends State<SignupPage> {
                                     ? 'Enter min. 6 characters'
                                     : null,
                           ),
-                          /*const SizedBox(height: 15),
-                          TextFormField(
-                            controller: _confirmPasswordController,
-                            obscureText: _isSecurePassword1,
-                            decoration: InputDecoration(
-                                label: const Text('Confirm Password'),
-                                isDense: true,
-                                filled: true,
-                                fillColor: Colors.white,
-                                suffixIcon: toggleConfirmPassword(),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10))),
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) =>
-                                value != null && value.length < 6
-                                    ? 'Enter min. 6 characters'
-                                    : null,
-                          ),*/
                           const SizedBox(height: 20),
                           GestureDetector(
                               onTap: signUp,
                               child: SvgPicture.asset('assets/Signup.svg')),
-                          /*const SizedBox(height: 10),
-                          const Text(
-                            'OR',
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          const SizedBox(height: 10),
-                          SvgPicture.asset('assets/Applesignup.svg'),*/
                           const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -306,19 +275,56 @@ class _SignupPageState extends State<SignupPage> {
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
-      showErrorMessage(e.code);
+      Navigator.of(context).pop();
+      showErrorMessage(
+          e.message ?? "Something went wrong!. Please try again later.");
     }
   }
 
   void showErrorMessage(String message) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-              title: Center(
-                  child: Text(
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Failed to Sign Up!',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: Text(
             message,
-          )));
-        });
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  child: const Text(
+                    'Okay',
+                    style: TextStyle(
+                      color: Color(0xff0f4c81),
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 }
