@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/authentication%20screen/forgetpassword.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/homepage.dart';
@@ -181,7 +182,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 15),
                         GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: const [

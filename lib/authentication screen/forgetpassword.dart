@@ -1,176 +1,82 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'log_in.dart';
-import 'sign_in.dart';
-
 class ForgotPassword extends StatefulWidget {
-  ForgotPassword({Key? key}) : super(key: key);
+  const ForgotPassword({super.key});
 
   @override
-  _ForgotPasswordState createState() => _ForgotPasswordState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  final _formKey = GlobalKey<FormState>();
-
-  var email = "";
-
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
-  final emailController = TextEditingController();
+  final _emailController = TextEditingController();
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
-    emailController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
-  resetPassword() async {
+  Future passwordReset ()async{
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.orangeAccent,
-          content: Text(
-            'Password Reset Email has been sent !',
-            style: TextStyle(fontSize: 18.0),
-          ),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              'No user found for that email.',
-              style: TextStyle(fontSize: 18.0),
-            ),
-          ),
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
+     showDialog(context: context, builder: (context){
+        return AlertDialog(
+          content: Text('Password reset link sent! Check your email',textAlign: TextAlign.center,),
         );
-      }
+      });
+    } on FirebaseAuthException catch (e){
+      print(e);
+      showDialog(context: context, builder: (context){
+        return AlertDialog(
+          content: Text(e.message.toString(),textAlign: TextAlign.center,),
+        );
+      });
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF1F1F2),
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text("Reset Password"),
+        backgroundColor: Color(0xffF1F1F2),
+        elevation: 0,
+        bottom: PreferredSize(child: Container(height: 1.0,color: Colors.black,), preferredSize: Size.fromHeight(1.0)),
+        title: Text('Forgot Password',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.black),),
+leading: BackButton(color: Colors.black),
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 20.0),
-            child: Text(
-              'Reset Link will be sent to your email id !',
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ),
-          Expanded(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-                child: ListView(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
-                      child: TextFormField(
-                        autofocus: false,
-                        decoration: InputDecoration(
-                          labelText: 'Email: ',
-                          labelStyle: TextStyle(fontSize: 20.0),
-                          border: OutlineInputBorder(),
-                          errorStyle:
-                              TextStyle(color: Colors.redAccent, fontSize: 15),
-                        ),
-                        controller: emailController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Email';
-                          } else if (!value.contains('@')) {
-                            return 'Please Enter Valid Email';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 60.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              // Validate returns true if the form is valid, otherwise false.
-                              if (_formKey.currentState!.validate()) {
-                                setState(() {
-                                  email = emailController.text;
-                                });
-                                resetPassword();
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Enter your Email and we will send you a password reset link',style: TextStyle(fontSize: 20),textAlign: TextAlign.center,),
+            SizedBox(height: 15),
+            TextFormField(
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                                label: const Text('Email'),
+                                isDense: true,
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please Enter Email';
+                              } else if (!value.contains('@')) {
+                                return 'Please Enter Valid Email';
                               }
+                              return null;
                             },
-                            child: Text(
-                              'Send Email',
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
-                              onPrimary: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
                           ),
-                          TextButton(
-                            onPressed: () => {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (context, a, b) => Login(),
-                                    transitionDuration: Duration(seconds: 0),
-                                  ),
-                                  (route) => false)
-                            },
-                            child: Text(
-                              'Login',
-                              style: TextStyle(fontSize: 14.0),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Don't have an Account? "),
-                          TextButton(
-                            onPressed: () => {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (context, a, b) => Signup(),
-                                    transitionDuration: Duration(seconds: 0),
-                                  ),
-                                  (route) => false)
-                            },
-                            child: Text('Signup'),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+                          SizedBox(height: 15),
+                          MaterialButton(onPressed: passwordReset,
+                          child: Text('Reset Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.white),),
+                          minWidth: 150,
+                          height: 45,
+                          color: Colors.deepOrange,)
+          ],
+        ),
       ),
     );
   }

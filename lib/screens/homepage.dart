@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
               },
               child: Container(
                 height: 120,
-                width: 180,
+                width: 170,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.black.withOpacity(0.7),
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Container(
                     height: 120,
-                    width: 180,
+                    width: 170,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.orange.withOpacity(0.7)),
@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Container(
                     height: 120,
-                    width: 180,
+                    width: 170,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.indigo.withOpacity(0.7)),
@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   height: 120,
-                  width: 180,
+                  width: 170,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.green.withOpacity(0.7)),
@@ -209,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   height: 120,
-                  width: 180,
+                  width: 170,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.blue.withOpacity(0.7)),

@@ -1,11 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness/authentication%20screen/splashSceen.dart';
-import 'package:fitness/schedule/trainerprofile.dart';
-import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 import 'firebase_options.dart';
-import 'schedule/trainerlist.dart';
 
 const List<String> scopes = <String>[
   'email',
@@ -36,6 +33,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'ITCAvant',
         ),
-        home: SplashScreen());
+        home: const SplashScreen());
   }
 }
