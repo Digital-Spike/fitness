@@ -107,135 +107,145 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 20),
-            Wrap(
-              spacing: 20,
-              runSpacing: 20,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Trainer(
-                                  isBranchTrainers: false,
-                                )));
-                  },
-                  child: Container(
-                    height: 120,
-                    width: 170,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.orange.withOpacity(0.7)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/trainer.png',
-                          scale: 2,
+            SizedBox(
+              height: 300,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    mainAxisExtent: 120,
+                    crossAxisCount: 2),
+                 
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Trainer(
+                                      isBranchTrainers: false,
+                                    )));
+                      },
+                      child: Container(
+                        height: 120,
+                        width: 170,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.orange.withOpacity(0.7)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/trainer.png',
+                              scale: 2,
+                            ),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'Our Trainers',
+                              style: TextStyle(
+                                  fontFamily: 'ITCAvant',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  color: Colors.white),
+                            )
+                          ],
                         ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Our Trainers',
-                          style: TextStyle(
-                              fontFamily: 'ITCAvant',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              color: Colors.white),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Partner()));
-                  },
-                  child: Container(
-                    height: 120,
-                    width: 170,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.indigo.withOpacity(0.7)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/barbell.png',
-                          scale: 2,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Partner()));
+                      },
+                      child: Container(
+                        height: 120,
+                        width: 170,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.indigo.withOpacity(0.7)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/barbell.png',
+                              scale: 2,
+                            ),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'Our Gym Partners',
+                              style: TextStyle(
+                                  fontFamily: 'ITCAvant',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  color: Colors.white),
+                            )
+                          ],
                         ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Our Gym Partners',
-                          style: TextStyle(
-                              fontFamily: 'ITCAvant',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              color: Colors.white),
-                        )
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                Container(
-                  height: 120,
-                  width: 170,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.green.withOpacity(0.7)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/plan.png',
-                        scale: 2,
+                    Container(
+                      height: 120,
+                      width: 170,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.green.withOpacity(0.7)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/plan.png',
+                            scale: 2,
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Our Packages',
+                            style: TextStyle(
+                                fontFamily: 'ITCAvant',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                color: Colors.white),
+                          )
+                        ],
                       ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        'Our Packages',
-                        style: TextStyle(
-                            fontFamily: 'ITCAvant',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 120,
-                  width: 170,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.blue.withOpacity(0.7)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/offer.png',
-                        scale: 2,
+                    ),
+                    Container(
+                      height: 120,
+                      width: 170,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blue.withOpacity(0.7)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/offer.png',
+                            scale: 2,
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Our Offers',
+                            style: TextStyle(
+                                fontFamily: 'ITCAvant',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                color: Colors.white),
+                          )
+                        ],
                       ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        'Our Offers',
-                        style: TextStyle(
-                            fontFamily: 'ITCAvant',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            color: Colors.white),
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-            const SizedBox(height: 60),
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
