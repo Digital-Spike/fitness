@@ -1,3 +1,4 @@
+import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:video_player/video_player.dart';
@@ -56,7 +57,11 @@ class _WelcomeState extends State<Welcome> {
                       children: [
                         SvgPicture.asset('assets/Applesignup.svg'),
                         SizedBox(height: 15),
-                        SvgPicture.asset('assets/Signup.svg'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupPage()));
+                          },
+                          child: SvgPicture.asset('assets/Signup.svg')),
                         SizedBox(height: 25),
                         GestureDetector(
                           onTap: () {
