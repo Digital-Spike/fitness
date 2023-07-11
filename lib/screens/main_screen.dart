@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: widget.mainAppBar,
-      body: SafeArea(child: widget.mainChild),
+      body: Center(child: widget.mainChild),
       /*Center(
         child: page[_currentBottomIndex],
       ),*/

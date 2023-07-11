@@ -1,7 +1,8 @@
 import 'dart:convert';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/drawerscreen/slotBookingPage.dart';
 import 'package:fitness/schedule/partner.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,17 @@ import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import '../schedule/trainer.dart';
 import 'freetrialsession.dart';
 
+const colorizeColors = [
+  Colors.purple,
+  Colors.blue,
+ 
+];
+
+const colorizeTextStyle = TextStyle(
+  fontSize: 18.0,
+  fontFamily: 'ITCAvant',
+  fontWeight: FontWeight.w600
+);
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -38,6 +50,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return MainScreen(
@@ -48,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 image: AssetImage('assets/IMG_9779.jpg'), fit: BoxFit.cover)),
         child: SingleChildScrollView(
           child: Column(children: [
-            const SizedBox(height: 25),
+            const SizedBox(height: 24),
             Container(
               height: 70,
               width: double.infinity,
@@ -63,26 +76,60 @@ class _HomePageState extends State<HomePage> {
               height: 10,
               width: double.infinity,
               decoration: const BoxDecoration(
-                  gradient: LinearGradient(colors: [
+                  gradient: LinearGradient(
+                   begin: Alignment.topLeft,
+                   end: Alignment.bottomRight,
+                    colors: [
                 Colors.orange,
                 Colors.indigo,
                 Colors.green,
                 Colors.blue
               ])),
             ),
-            const SizedBox(height: 45),
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const FreeTrialSession()));
+              },
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(width: 1,color: Colors.black),
+                  color: Colors.white.withOpacity(0.5),
+                 /* gradient: const LinearGradient(
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                    colors: [Colors.deepOrange,Colors.yellow])*/
+                ),
+                child: AnimatedTextKit(
+                  
+                animatedTexts: [
+                  
+                  ColorizeAnimatedText(
+                    'Book Your Free Session Now',
+                    textStyle: colorizeTextStyle,
+                    colors: colorizeColors,
+                    speed: const Duration(milliseconds: 200)
+                  )],
+                  isRepeatingAnimation: true,
+                  totalRepeatCount: 100,
+              )),
+            ),
+            const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-                Navigator.push(
+               /* Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const FreeTrialSession()));
+                        builder: (context) =>  SlotBookingPage(isBranch: , trainer: const {},)));*/
               },
               child: Container(
                 height: 120,
                 width: 170,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
+                  border: Border.all(width: 2,color: Colors.white),
                   color: Colors.black.withOpacity(0.7),
                 ),
                 child: Column(
@@ -90,12 +137,12 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/One Free.png',
+                      'assets/Session.png',
                       scale: 2,
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Book a Trial Session',
+                      'Book your Session',
                       style: TextStyle(
                           fontFamily: 'ITCAvant',
                           fontWeight: FontWeight.w600,
@@ -106,13 +153,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            
             SizedBox(
-              height: 300,
+              height: 320,
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: GridView(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     mainAxisExtent: 120,

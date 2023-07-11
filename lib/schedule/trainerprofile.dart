@@ -156,7 +156,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
                 ],
               ),
             ),
-            Center(
+           /* Center(
                 child: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -184,7 +184,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
                   textAlign: TextAlign.center,
                 ),
               ),
-            ))
+            ))*/
           ],
         ),
       ),

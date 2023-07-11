@@ -47,11 +47,11 @@ class _FreeTrialSessionState extends State<FreeTrialSession> {
             GestureDetector(
               onTap: (){},
               child: Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(10),
                 margin: EdgeInsets.all(10),
-                child: Text('Book Your Session',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
+                child: Text('Book Your Session',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.white),),
                       decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
               gradient: LinearGradient(colors: [Colors.green,Colors.blue])
                       ),
               ),
