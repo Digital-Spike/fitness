@@ -23,7 +23,7 @@ const colorizeColors = [
 const colorizeTextStyle = TextStyle(
   fontSize: 18.0,
   fontFamily: 'ITCAvant',
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w900
 );
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 animatedTexts: [
                   
                   ColorizeAnimatedText(
-                    'Book Your Free Session Now',
+                    'Book Your Free Trial Session Now',
                     textStyle: colorizeTextStyle,
                     colors: colorizeColors,
                     speed: const Duration(milliseconds: 200)
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                 width: 170,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(width: 2,color: Colors.white),
+                  border: Border.all(width: 1.5,color: Colors.white),
                   color: Colors.black.withOpacity(0.7),
                 ),
                 child: Column(
@@ -180,6 +180,7 @@ class _HomePageState extends State<HomePage> {
                         width: 170,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1.5,color: Colors.white),
                             color: Colors.orange.withOpacity(0.7)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -214,6 +215,7 @@ class _HomePageState extends State<HomePage> {
                         width: 170,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1.5,color: Colors.white),
                             color: Colors.indigo.withOpacity(0.7)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -241,6 +243,7 @@ class _HomePageState extends State<HomePage> {
                       width: 170,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 1.5,color: Colors.white),
                           color: Colors.green.withOpacity(0.7)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -267,6 +270,7 @@ class _HomePageState extends State<HomePage> {
                       width: 170,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 1.5,color: Colors.white),
                           color: Colors.blue.withOpacity(0.7)),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

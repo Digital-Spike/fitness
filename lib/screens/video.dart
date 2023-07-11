@@ -20,7 +20,7 @@ class _VideoState extends State<Video> {
     controller = YoutubePlayerController(
         initialVideoId: YoutubePlayer.convertUrlToId(url)!,
         flags: const YoutubePlayerFlags(
-            mute: false, loop: false, autoPlay: false));
+            mute: false, loop: false, autoPlay: false,showLiveFullscreenButton: true));
   }
 
   @override
@@ -68,6 +68,7 @@ class _VideoState extends State<Video> {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               YoutubePlayer(
                 controller: controller,
