@@ -495,7 +495,8 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
         'branchName': widget.trainer['name'],
         'bookingId': StringUtil().generateRandomNumber(length: 10),
         'customerId': user?.uid,
-        'customerName': ApiList.user?['name'],
+        'customerName': /*ApiList.user?['name']*/
+            user?.displayName ?? ApiList.user?['name'],
         'trainerName': widget.trainer['name'],
         'bookingTime': bookingTime,
         'slot': slotNumber,
