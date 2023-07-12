@@ -36,8 +36,9 @@ class _MyBookingPageState extends State<MyBookingPage>
   @override
   Widget build(BuildContext context) {
     return MainScreen(
+      
       mainAppBar: AppBar(
-        backgroundColor: const Color(0xffF1F1F2),
+        backgroundColor: const Color(0xffE2EEFF),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -48,7 +49,7 @@ class _MyBookingPageState extends State<MyBookingPage>
         ),
         title: const Text(
           'My Booking',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         leading: BackButton(
@@ -68,7 +69,7 @@ class _MyBookingPageState extends State<MyBookingPage>
               padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.grey.shade200,
+                color: Colors.white,
               ),
               child: TabBar(
                 controller: _tabController,

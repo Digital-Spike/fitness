@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
+import 'package:fitness/screens/editprofile.dart';
 import 'package:fitness/screens/homepage.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return MainScreen(
       mainAppBar: AppBar(
-        backgroundColor: const Color(0xffF1F1F2),
+        backgroundColor: const Color(0xffE2EEFF),
         elevation: 0,
         title: const Center(
           child: Text(
@@ -100,8 +101,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                   const SizedBox(width: 10),
-                  SvgPicture.asset(
-                    'assets/Edit.svg',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile()));
+                    },
+                    child: SvgPicture.asset(
+                      'assets/Edit.svg',color: Colors.black,
+                    ),
                   )
                 ],
               ),

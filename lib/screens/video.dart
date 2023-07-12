@@ -39,7 +39,7 @@ class _VideoState extends State<Video> {
   Widget build(BuildContext context) {
     return MainScreen(
       mainAppBar: AppBar(
-        backgroundColor: const Color(0xffF1F1F2),
+        backgroundColor: const Color(0xffE2EEFF),
         elevation: 0,
         centerTitle: true,
         title: const Text(

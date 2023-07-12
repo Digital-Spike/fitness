@@ -26,8 +26,9 @@ class _BranchListState extends State<BranchList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffE2EEFF),
         appBar: AppBar(
-          backgroundColor: Color(0xffF1F1F2),
+          backgroundColor: Color(0xffE2EEFF),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),

@@ -73,8 +73,9 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffE2EEFF),
       appBar: AppBar(
-        backgroundColor: const Color(0xffF1F1F2),
+        backgroundColor: const Color(0xffE2EEFF),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),

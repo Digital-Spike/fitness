@@ -5,6 +5,8 @@ import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/drawerscreen/slotBookingPage.dart';
 import 'package:fitness/schedule/partner.dart';
 import 'package:fitness/screens/main_screen.dart';
+import 'package:fitness/screens/offers.dart';
+import 'package:fitness/screens/ourpackages.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:icons_plus/icons_plus.dart';
@@ -61,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 image: AssetImage('assets/IMG_9779.jpg'), fit: BoxFit.cover)),
         child: SingleChildScrollView(
           child: Column(children: [
-            const SizedBox(height: 24),
+            const SizedBox(height: 30),
             Container(
               height: 70,
               width: double.infinity,
@@ -86,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                 Colors.blue
               ])),
             ),
-            InkWell(
+            GestureDetector(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>const FreeTrialSession()));
               },
@@ -238,58 +240,68 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: 120,
-                      width: 170,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 1.5,color: Colors.white),
-                          color: Colors.green.withOpacity(0.7)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/plan.png',
-                            scale: 2,
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Our Packages',
-                            style: TextStyle(
-                                fontFamily: 'ITCAvant',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: Colors.white),
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>OurPackages()));
+                      },
+                      child: Container(
+                        height: 120,
+                        width: 170,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1.5,color: Colors.white),
+                            color: Colors.green.withOpacity(0.7)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/plan.png',
+                              scale: 2,
+                            ),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'Our Packages',
+                              style: TextStyle(
+                                  fontFamily: 'ITCAvant',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  color: Colors.white),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      height: 120,
-                      width: 170,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 1.5,color: Colors.white),
-                          color: Colors.blue.withOpacity(0.7)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/offer.png',
-                            scale: 2,
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Our Offers',
-                            style: TextStyle(
-                                fontFamily: 'ITCAvant',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: Colors.white),
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Offers()));
+                      },
+                      child: Container(
+                        height: 120,
+                        width: 170,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1.5,color: Colors.white),
+                            color: Colors.blue.withOpacity(0.7)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/offer.png',
+                              scale: 2,
+                            ),
+                            const SizedBox(height: 10),
+                            const Text(
+                              'Our Offers',
+                              style: TextStyle(
+                                  fontFamily: 'ITCAvant',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  color: Colors.white),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
