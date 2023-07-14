@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "1009790740333-jfnbvfqasvnlrrefhvb4nodoa3rnid0q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fitness",
+            "certificate_hash": "6544e58c65d22ee883c3bada74c3c212b1de5d4a"
+          }
+        },
+        {
           "client_id": "1009790740333-ha6qv0js7tq88qt07p79oib4n3e435kg.apps.googleusercontent.com",
           "client_type": 3
         }
