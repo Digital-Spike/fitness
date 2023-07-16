@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/schedule/trainerprofile.dart';
+import 'package:fitness/trainerscreens/trainerprofile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -29,9 +29,9 @@ class _TrainerState extends State<Trainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffF1F1F2),
+        backgroundColor: const Color(0xffE2EEFF),
         appBar: AppBar(
-          backgroundColor: const Color(0xffF1F1F2),
+          backgroundColor: const Color(0xffE2EEFF),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),

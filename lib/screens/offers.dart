@@ -16,6 +16,7 @@ class _OffersState extends State<Offers> {
         title: Text('Offers',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.black),),
         leading: BackButton(color: Colors.black),
         elevation: 0,
+        centerTitle: true,
         bottom: PreferredSize(child: Container(height: 1.0,color: Colors.black,), preferredSize: Size.fromHeight(1.0)),
       ),
     );

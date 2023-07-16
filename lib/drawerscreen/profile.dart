@@ -5,6 +5,7 @@ import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/screens/editprofile.dart';
 import 'package:fitness/screens/homepage.dart';
 import 'package:fitness/screens/main_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -211,7 +212,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text(
             'Logout',
             style: TextStyle(
@@ -229,43 +230,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
             textAlign: TextAlign.center,
           ),
           actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  child: const Text(
-                    'YES',
-                    style: TextStyle(
-                      color: Color(0xff0f4c81),
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut().then((value) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const LoginPage()),
-                          ModalRoute.withName('/'));
-                    });
-                  },
+            MaterialButton(
+              child: const Text(
+                'YES',
+                style: TextStyle(
+                  color: Color(0xff0f4c81),
+                  fontSize: 16,
                 ),
-                TextButton(
-                  child: const Text(
-                    'NO',
-                    style: TextStyle(
-                      color: Color(0xff0f4c81),
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                textAlign: TextAlign.center,
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut().then((value) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const LoginPage()),
+                      ModalRoute.withName('/'));
+                });
+              },
+            ),
+            MaterialButton(
+              child: const Text(
+                'NO',
+                style: TextStyle(
+                  color: Color(0xff0f4c81),
+                  fontSize: 16,
                 ),
-              ],
+                textAlign: TextAlign.center,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
           ],
         );

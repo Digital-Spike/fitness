@@ -1,5 +1,5 @@
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/schedule/slotbooking.dart';
+import 'package:fitness/Slotscreens/slotbooking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

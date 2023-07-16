@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/drawerscreen/slotBookingPage.dart';
+import 'package:fitness/Slotscreens/slotBookingPage.dart';
 import 'package:flutter/material.dart';
 
 class TrainerProfile extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/schedule/trainerlist.dart';
+import 'package:fitness/trainerscreens/trainerlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -55,7 +55,19 @@ class _BranchListState extends State<BranchList> {
                 itemCount: branchList.length,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TrainerList(
+                                                          isBranchTrainers:
+                                                              true,
+                                                          branchId:
+                                                              branchList[index]
+                                                                  ['branchId'],
+                                                        )));
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: ClipRRect(
@@ -70,8 +82,8 @@ class _BranchListState extends State<BranchList> {
                               Row(
                                 children: [
                                   Container(
-                                    height: 100,
-                                    width: 115,
+                                    height: 120,
+                                    width: 125,
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(10)),
@@ -93,37 +105,39 @@ class _BranchListState extends State<BranchList> {
                                           style: const TextStyle(
                                               fontFamily: 'Roboto',
                                               fontSize: 16,
-                                              color: Colors.orange,
+                                              color: Colors.deepOrange,
                                               fontWeight: FontWeight.w600,
                                               decoration:
                                                   TextDecoration.underline)),
                                       const SizedBox(height: 10),
-                                      Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.location_on,
-                                            size: 16,
-                                            color: Colors.black,
-                                          ),
-                                          Wrap(children: [
-                                            Text(
-                                              branchList[index]['address'],
-                                              style: const TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500),
-                                              maxLines: 3,
-                                            ),
-                                          ]),
-                                        ],
-                                      ),
+                                     
                                       const SizedBox(height: 10)
                                     ],
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
-                              Row(
+                               Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.location_on,
+                                            size: 16,
+                                            color: Colors.black,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              branchList[index]['address'],
+                                              style: const TextStyle(
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w500),
+                                                  textAlign: TextAlign.start,
+                                              maxLines: 3,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                              /*Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -152,7 +166,7 @@ class _BranchListState extends State<BranchList> {
                                           },
                                           child: const Text('Book Now'))),
                                 ],
-                              ),
+                              ),*/
                             ],
                           ),
                         ),

@@ -1,5 +1,5 @@
 import 'package:fitness/drawerscreen/profile.dart';
-import 'package:fitness/screens/mybookings.dart';
+import 'package:fitness/bookingscreens/mybookings.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/glassbox.dart';
@@ -23,45 +23,49 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       backgroundColor: Color(0xffE2EEFF),
       appBar: widget.mainAppBar,
-      body: Center(child: widget.mainChild),
+      body: SafeArea(child: widget.mainChild),
       /*Center(
         child: page[_currentBottomIndex],
       ),*/
       extendBody: true,
-      bottomNavigationBar: Glassbox(
-        child: NavigationBarTheme(
-          data: NavigationBarThemeData(
-              labelTextStyle: MaterialStateProperty.all(
-                  const TextStyle(fontSize: 15, fontWeight: FontWeight.bold))),
-          child: NavigationBar(
-              selectedIndex: _bottomNavIndex ?? 0,
-              onDestinationSelected: (int index) {
-                switchScreen(index);
-                setState(() {
-                  _bottomNavIndex = index;
-                });
-              },
-              shadowColor: Colors.white,
-              // indicatorColor: Colors.white,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              labelBehavior:
-                  NavigationDestinationLabelBehavior.onlyShowSelected,
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(Icons.home_outlined),
-                  label: 'Home',
-                ),
-                NavigationDestination(
-                    icon: Icon(Icons.slow_motion_video_outlined),
-                    label: 'Explore'),
-                NavigationDestination(
-                    icon: Icon(Icons.book_online_outlined),
-                    label: 'My booking'),
-                NavigationDestination(
-                    icon: Icon(Icons.person_2_outlined), label: 'Profile'),
-              ]),
-        ),
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+            labelTextStyle: MaterialStateProperty.all(
+                const TextStyle(fontSize: 15, fontWeight: FontWeight.bold))),
+        child: NavigationBar(
+            selectedIndex: _bottomNavIndex ?? 0,
+            onDestinationSelected: (int index) {
+              switchScreen(index);
+              setState(() {
+                _bottomNavIndex = index;
+              });
+            },
+            
+            //shadowColor: Colors.white,
+             indicatorColor: Color(0xffE2EEFF),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            labelBehavior:
+                NavigationDestinationLabelBehavior.onlyShowSelected,
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(Icons.home_outlined),
+                selectedIcon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                  icon: Icon(Icons.slow_motion_video_outlined),
+                  selectedIcon: Icon(Icons.slow_motion_video_sharp),
+                  label: 'Explore'),
+              NavigationDestination(
+                  icon: Icon(Icons.book_online_outlined),
+                  selectedIcon: Icon(Icons.book_online),
+                  label: 'My booking'),
+              NavigationDestination(
+                  icon: Icon(Icons.person_2_outlined),
+                  selectedIcon: Icon(Icons.person_2),
+                   label: 'Profile'),
+            ]),
       ),
     );
   }

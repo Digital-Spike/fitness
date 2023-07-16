@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/schedule/trainerDetailPage.dart';
+import 'package:fitness/Slotscreens/slotBookingPage.dart';
+import 'package:fitness/trainerscreens/trainerDetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -60,9 +61,7 @@ class _TrainerListState extends State<TrainerList> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TrainerDetailPage(
-                                    isBranch: widget.isBranchTrainers,
-                                    trainer: trainersList[index],
+                              builder: (context) => SlotBookingPage(isBranch: false, trainer:trainersList[index]
                                   )));
                     },
                     child: Padding(
@@ -77,6 +76,7 @@ class _TrainerListState extends State<TrainerList> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
                                     height: 100,
@@ -110,7 +110,7 @@ class _TrainerListState extends State<TrainerList> {
                                             fontWeight: FontWeight.w600),
                                       ),
                                       const SizedBox(height: 10),
-                                      Row(
+                                    /*  Row(
                                         children: [
                                           const Icon(Icons.phone),
                                           const SizedBox(
@@ -130,7 +130,7 @@ class _TrainerListState extends State<TrainerList> {
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ],
-                                      ),
+                                      ),*/
                                     ],
                                   )
                                 ],

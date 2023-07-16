@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -49,12 +50,11 @@ class _EditProfileState extends State<EditProfile> {
                                       ),
                                     ),
                                     Positioned(
-                                        right: 5,
+                                        right: 0,
                                         bottom: 0,
                                         child: GestureDetector(
-                                          onTap: () {
-                                            
-                                          },
+                                          onTap: 
+                                          _showDialog,
                                           child: Image.asset('assets/camera.png',scale: 1.5,)))
                                   ],
                                 ),
@@ -198,5 +198,24 @@ class _EditProfileState extends State<EditProfile> {
         ),
       ),
     );
+  }
+  void _showDialog() {
+    showDialog(context: context, builder: (context){
+      return CupertinoAlertDialog(
+        title: Image.asset('assets/CameraIcon.png',height: 60,),
+        content: Text('Choose from',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+       actions: [
+         MaterialButton(onPressed: () {
+          
+        },
+        child: Text('Camera',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+        ),
+        MaterialButton(onPressed: () {
+          
+        },
+        child: Text('Gallery',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),)
+       ],
+      );
+    });
   }
 }

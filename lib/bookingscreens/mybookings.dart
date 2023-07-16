@@ -2,7 +2,7 @@ import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'booking.dart';
-import 'homepage.dart';
+import '../screens/homepage.dart';
 
 class MyBookingPage extends StatefulWidget {
   const MyBookingPage({super.key});

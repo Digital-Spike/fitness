@@ -1,43 +1,42 @@
 import 'dart:convert';
-
-import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:date_picker_timeline/date_picker_widget.dart';
+import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/util/string_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-
-class SlotBookingPage extends StatefulWidget {
+class FreetrialSlot extends StatefulWidget {
   final bool isBranch;
   final Map<String, dynamic> trainer;
-  const SlotBookingPage(
+  const FreetrialSlot(
       {required this.isBranch, required this.trainer, super.key});
 
   @override
-  State<SlotBookingPage> createState() => _SlotBookingPageState();
+  State<FreetrialSlot> createState() => _FreetrialSlotState();
 }
 
-class _SlotBookingPageState extends State<SlotBookingPage> {
+class _FreetrialSlotState extends State<FreetrialSlot> {
   Future<bool>? futureData;
   Map<String, dynamic> slots = {};
   DateTime _selectedDay = DateTime.now();
   User? user = FirebaseAuth.instance.currentUser;
 
   final items = [
-    'Free Trail Session',
-    'Pay Per Session',
-    'Single Plan Subscription',
-    'Buddy Plan Subscription'
+    
+    'Solo Training Session',
+    'Duo Training Session'
   ];
   String? value;
   final items1 = [
-    'EMS Fitness Training',
-    'Personal Training',
-    'Injury Rehab',
-    'Body Building'
+    'Business Village Branch',
+    'Al Ghurair Center Branch',
+    'DAFZA Branch',
+    'DIFC Branch',
+    'Jumeirah Branch'
   ];
-
+String? value1;
   List homeTimeStamp = [
     "9:00 am - 10:30 am",
     "10:30 am - 12:00 pm",
@@ -69,11 +68,10 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
     futureData = slotList();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE2EEFF),
+       backgroundColor: const Color(0xffE2EEFF),
       appBar: AppBar(
         backgroundColor: const Color(0xffE2EEFF),
         elevation: 0,
@@ -84,7 +82,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
             color: Colors.black,
           ),
         ),
-        title: const Text('Book Your Session',
+        title: const Text('Book Trial Session',
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -99,7 +97,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /*Container(
+              Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(),
                 child: DropdownButton<String>(
@@ -120,7 +118,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(),
                 child: DropdownButton<String>(
-                  hint: const Text('Select Training'),
+                  hint: const Text('Select Gym Branch'),
                   value: value1,
                   isExpanded: true,
                   underline: Container(
@@ -132,37 +130,36 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                     () => this.value1 = value1,
                   ),
                 ),
-              ),*/
-              const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 5),
-                child: Text(
-                  'Preferred Date',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
+              ),
+             
+              const Text(
+                '   Preferred Date',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,
               ),
-              DatePicker(
-                DateTime.now(),
-                initialSelectedDate: DateTime.now(),
-                selectionColor: Colors.black,
-                selectedTextColor: Colors.white,
-                onDateChange: (date) {
-                  setState(() {
-                    _selectedDay = date;
-                    futureData = slotList();
-                  });
-                },
+              Container(
+                height: 100,
+                width: double.infinity,
+                child: DatePicker(
+                  
+                  DateTime.now(),
+                  initialSelectedDate: DateTime.now(),
+                  selectionColor: Colors.black,
+                  selectedTextColor: Colors.white,
+                  onDateChange: (date) {
+                    setState(() {
+                      _selectedDay = date;
+                      futureData = slotList();
+                    });
+                  },
+                ),
               ),
               const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 5.0),
-                child: Text(
-                  'Preferred Time',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
+              const Text(
+                '  Preferred Time',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 10),
               SizedBox(
@@ -304,8 +301,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
       ),
     );
   }
-
-  Future<bool> slotList() async {
+   Future<bool> slotList() async {
     try {
       http.Response? response;
       if (widget.isBranch) {
@@ -398,7 +394,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: const Text(
             'Book Slot?',
             style: TextStyle(
@@ -416,68 +412,63 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
             textAlign: TextAlign.center,
           ),
           actions: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  child: const Text(
-                    'YES',
-                    style: TextStyle(
-                      color: Color(0xff0f4c81),
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () async {
-                    if (!isBooked) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  CircularProgressIndicator(),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 4.0),
-                                    child: Text("Processing..."),
-                                  ),
-                                ],
+            MaterialButton(
+              child: const Text(
+                'YES',
+                style: TextStyle(
+                  color: Color(0xff0f4c81),
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              onPressed: () async {
+                if (!isBooked) {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext context) {
+                      return const Dialog(
+                        child: Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CircularProgressIndicator(),
+                              Padding(
+                                padding: EdgeInsets.only(left: 4.0),
+                                child: Text("Processing..."),
                               ),
-                            ),
-                          );
-                        },
+                            ],
+                          ),
+                        ),
                       );
-                      await bookSession(
-                          bookingTime: timeStamp,
-                          slotNumber: (index + 1).toString());
-                      if (mounted) {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                      }
-                      setState(() {
-                        futureData = slotList();
-                      });
-                    }
-                  },
-                ),
-                TextButton(
-                  child: const Text(
-                    'NO',
-                    style: TextStyle(
-                      color: Color(0xff0f4c81),
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () {
+                    },
+                  );
+                  await bookSession(
+                      bookingTime: timeStamp,
+                      slotNumber: (index + 1).toString());
+                  if (mounted) {
                     Navigator.of(context).pop();
-                  },
+                    Navigator.of(context).pop();
+                  }
+                  setState(() {
+                    futureData = slotList();
+                  });
+                }
+              },
+            ),
+            MaterialButton(
+              child: const Text(
+                'NO',
+                style: TextStyle(
+                  color: Color(0xff0f4c81),
+                  fontSize: 16,
                 ),
-              ],
+                textAlign: TextAlign.center,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             ),
           ],
         );
