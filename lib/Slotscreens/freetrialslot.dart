@@ -1,12 +1,14 @@
 import 'dart:convert';
+
 import 'package:date_picker_timeline/date_picker_widget.dart';
-import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+
 class FreetrialSlot extends StatefulWidget {
   final bool isBranch;
   final Map<String, dynamic> trainer;
@@ -23,11 +25,7 @@ class _FreetrialSlotState extends State<FreetrialSlot> {
   DateTime _selectedDay = DateTime.now();
   User? user = FirebaseAuth.instance.currentUser;
 
-  final items = [
-    
-    'Solo Training Session',
-    'Duo Training Session'
-  ];
+  final items = ['Solo Training Session', 'Duo Training Session'];
   String? value;
   final items1 = [
     'Business Village Branch',
@@ -36,13 +34,13 @@ class _FreetrialSlotState extends State<FreetrialSlot> {
     'DIFC Branch',
     'Jumeirah Branch'
   ];
-String? value1;
-final items2 = [
+  String? value1;
+  final items2 = [
     'Jeylan Silanovich',
     'Karina Medovidova',
-    'Hayat Siraj Seid',  
+    'Hayat Siraj Seid',
   ];
-String? value2;
+  String? value2;
 
   List homeTimeStamp = [
     "9:00 am - 10:30 am",
@@ -75,10 +73,11 @@ String? value2;
     futureData = slotList();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: const Color(0xffE2EEFF),
+      backgroundColor: const Color(0xffE2EEFF),
       appBar: AppBar(
         backgroundColor: const Color(0xffE2EEFF),
         elevation: 0,
@@ -105,7 +104,6 @@ String? value2;
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(),
                 child: DropdownButton<String>(
@@ -167,7 +165,6 @@ String? value2;
                 height: 100,
                 width: double.infinity,
                 child: DatePicker(
-                  
                   DateTime.now(),
                   initialSelectedDate: DateTime.now(),
                   selectionColor: Colors.black,
@@ -325,7 +322,8 @@ String? value2;
       ),
     );
   }
-   Future<bool> slotList() async {
+
+  Future<bool> slotList() async {
     try {
       http.Response? response;
       if (widget.isBranch) {
@@ -409,7 +407,7 @@ String? value2;
           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
       );
-      DropdownMenuItem<String> buildMenuItem2(String item2) => DropdownMenuItem(
+  DropdownMenuItem<String> buildMenuItem2(String item2) => DropdownMenuItem(
         value: item2,
         child: Text(
           item2,
@@ -458,12 +456,12 @@ String? value2;
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {
-                      return const Dialog(
+                      return Dialog(
                         child: Padding(
-                          padding: EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
-                            children: [
+                            children: const [
                               CircularProgressIndicator(),
                               Padding(
                                 padding: EdgeInsets.only(left: 4.0),

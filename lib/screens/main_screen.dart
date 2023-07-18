@@ -1,5 +1,5 @@
-import 'package:fitness/drawerscreen/profile.dart';
 import 'package:fitness/bookingscreens/mybookings.dart';
+import 'package:fitness/drawerscreen/profile.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/glassbox.dart';
@@ -21,7 +21,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       appBar: widget.mainAppBar,
       body: SafeArea(child: widget.mainChild),
       /*Center(
@@ -34,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
                 const TextStyle(fontSize: 15, fontWeight: FontWeight.bold))),
         child: Glassbox(
           child: NavigationBar(
-            height: 70,
+              height: 70,
               selectedIndex: _bottomNavIndex ?? 0,
               onDestinationSelected: (int index) {
                 switchScreen(index);
@@ -42,9 +41,9 @@ class _MainScreenState extends State<MainScreen> {
                   _bottomNavIndex = index;
                 });
               },
-              
+
               //shadowColor: Colors.white,
-               indicatorColor: Color(0xffE2EEFF),
+              // indicatorColor: Color(0xffE2EEFF),
               backgroundColor: Colors.transparent,
               elevation: 0,
               labelBehavior:
@@ -66,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
                 NavigationDestination(
                     icon: Icon(Icons.person_2_outlined),
                     selectedIcon: Icon(Icons.person_2),
-                     label: 'Profile'),
+                    label: 'Profile'),
               ]),
         ),
       ),

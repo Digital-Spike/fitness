@@ -134,7 +134,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                   ),
                 ),
               ),*/
-             
+
               const Text(
                 '   Preferred Date',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -146,7 +146,6 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 height: 100,
                 width: double.infinity,
                 child: DatePicker(
-                  
                   DateTime.now(),
                   initialSelectedDate: DateTime.now(),
                   selectionColor: Colors.black,
@@ -206,7 +205,6 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.white,
-                                 
                                 ),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -418,12 +416,12 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {
-                      return const Dialog(
+                      return Dialog(
                         child: Padding(
-                          padding: EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
-                            children: [
+                            children: const [
                               CircularProgressIndicator(),
                               Padding(
                                 padding: EdgeInsets.only(left: 4.0),
