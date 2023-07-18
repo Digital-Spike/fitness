@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
           children: [
           
           Container(
-            height: 70,
+            height: 60,
             width: double.infinity,
             decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.7),
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
               Colors.blue
             ])),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 20),
           GestureDetector(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=> FreeTrialSession(isBranch: false, trainer: {},)));
@@ -159,12 +159,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),*/
-          SizedBox(height: 20),
+          SizedBox(height: 0),
           SizedBox(
-          height: 430,
+         
             child: Padding(
               padding:  const EdgeInsets.all(10),
               child: GridView(
+                shrinkWrap: true,
                 gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
@@ -174,10 +175,11 @@ class _HomePageState extends State<HomePage> {
                 children: [
                  
                     GestureDetector(
-                      onTap: _showDialog,
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>BranchList()));
+                      },
                       child: Container(
-                        height: 120,
-                        width: 170,
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(width: 3,color: Colors.white),
@@ -186,9 +188,11 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              'assets/Gym.png',
-                              scale: 2,
+                            Expanded(
+                              child: Image.asset(
+                                'assets/Gym.png',
+                                scale: 2,
+                              ),
                             ),
                             const SizedBox(height: 10),
                             const Text(
@@ -208,8 +212,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const TrainerListView(isBranchTrainers: false, branchId: '', isBranch: false, trainer: {},)));
                     },
                     child: Container(
-                        height: 120,
-                        width: 170,
+                       padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(width: 3,color: Colors.white),
@@ -218,9 +221,11 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              'assets/home.png',
-                              height: 60,color:Colors.white,
+                            Expanded(
+                              child: Image.asset(
+                                'assets/home.png',
+                                height: 60,color:Colors.white,
+                              ),
                             ),
                             const SizedBox(height: 10),
                             const Text(
@@ -243,8 +248,7 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => const OurTrainers(trainer: {}, isBranch: false, isBranchTrainers: false, branchId: '')));
                     },
                     child: Container(
-                      height: 120,
-                      width: 170,
+                     padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(width: 3,color: Colors.white),
@@ -278,8 +282,7 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => const Partner()));
                     },
                     child: Container(
-                      height: 120,
-                      width: 170,
+                     padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(width: 3,color: Colors.white),
@@ -310,8 +313,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const OurPackages()));
                     },
                     child: Container(
-                      height: 120,
-                      width: 170,
+                     padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(width: 3,color: Colors.white),
@@ -342,8 +344,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>const Offers()));
                     },
                     child: Container(
-                      height: 120,
-                      width: 170,
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(width: 3,color: Colors.white),
@@ -354,7 +355,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Image.asset(
                             'assets/offer.png',
-                            scale: 2,color: Colors.white,
+                            height: 60,color: Colors.white,
                           ),
                           const SizedBox(height: 15),
                           const Text(
@@ -373,6 +374,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          SizedBox(height: 20),
          
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -74,7 +74,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE2EEFF),
+      backgroundColor: const Color(0xffE2EEFF),
       appBar: AppBar(
         backgroundColor: const Color(0xffE2EEFF),
         elevation: 0,
@@ -135,7 +135,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 ),
               ),*/
              
-              Text(
+              const Text(
                 '   Preferred Date',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
@@ -160,7 +160,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Text(
+              const Text(
                 '  Preferred Time',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
@@ -418,12 +418,12 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {
-                      return Dialog(
+                      return const Dialog(
                         child: Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: EdgeInsets.all(20.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
-                            children: const [
+                            children: [
                               CircularProgressIndicator(),
                               Padding(
                                 padding: EdgeInsets.only(left: 4.0),

@@ -137,6 +137,7 @@ class _TrainerState extends State<Trainer> {
       }
 
       trainersList = json.decode(response.body);
+      
       return true;
     } catch (e) {
       return false;

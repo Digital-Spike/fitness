@@ -37,6 +37,13 @@ class _FreetrialSlotState extends State<FreetrialSlot> {
     'Jumeirah Branch'
   ];
 String? value1;
+final items2 = [
+    'Jeylan Silanovich',
+    'Karina Medovidova',
+    'Hayat Siraj Seid',  
+  ];
+String? value2;
+
   List homeTimeStamp = [
     "9:00 am - 10:30 am",
     "10:30 am - 12:00 pm",
@@ -98,6 +105,7 @@ String? value1;
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(),
                 child: DropdownButton<String>(
@@ -131,7 +139,23 @@ String? value1;
                   ),
                 ),
               ),
-             
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(),
+                child: DropdownButton<String>(
+                  hint: const Text('Select Trainer'),
+                  value: value2,
+                  isExpanded: true,
+                  underline: Container(
+                    height: 1,
+                    color: Colors.black,
+                  ),
+                  items: items2.map(buildMenuItem2).toList(),
+                  onChanged: (value2) => setState(
+                    () => this.value2 = value2,
+                  ),
+                ),
+              ),
               const Text(
                 '   Preferred Date',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -382,6 +406,13 @@ String? value1;
         value: item1,
         child: Text(
           item1,
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+        ),
+      );
+      DropdownMenuItem<String> buildMenuItem2(String item2) => DropdownMenuItem(
+        value: item2,
+        child: Text(
+          item2,
           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
       );
