@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/Slotscreens/slotBookingPage.dart';
+import 'package:fitness/trainerscreens/newtrainerprofile.dart';
 import 'package:fitness/trainerscreens/trainerprofile.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -56,7 +57,7 @@ class _OurTrainersState extends State<OurTrainers> {
              Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => TrainerProfile(isBranch: widget.isBranchTrainers,
+                        builder: (context) => NewTrainerProfile(isBranch: widget.isBranchTrainers,
                                         trainer: trainersList[index],)));
           },
            

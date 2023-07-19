@@ -21,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffE2EEFF),
       appBar: widget.mainAppBar,
       body: SafeArea(child: widget.mainChild),
       /*Center(

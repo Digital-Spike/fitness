@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/Slotscreens/slotBookingPage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:fitness/constants/api_list.dart';
@@ -74,17 +75,20 @@ class _TrainerListViewState extends State<TrainerListView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             
               children: [
-               CircleAvatar(
-                minRadius: 60,
-                backgroundColor: Colors.grey,
-                                      child: CachedNetworkImage(
-                                         height: 120,
-                      imageUrl:ApiList.imageUrl + (widget.trainer['image'] ?? ""),
-                      placeholder: (context, url) => Container(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                                      ),
+              SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: SvgPicture.network(
+                                      ApiList.imageUrl +
+                                          (trainersList[index]['image'] ?? ""),
+                                      fit: BoxFit.cover,
+                                      placeholderBuilder: (BuildContext
+                                              context) =>
+                                          const Center(
+                                              child:
+                                                  CircularProgressIndicator()),
                                     ),
+                                  ),
               Text( trainersList[index]['name'],
                                           style: const TextStyle(
                                               fontSize: 17,

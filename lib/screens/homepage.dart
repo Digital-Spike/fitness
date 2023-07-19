@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,6 +49,7 @@ class _HomePageState extends State<HomePage> {
       phoneNumber: '+971588340905',
       text: "Hi",
     );
+    
     await launch('$link');
   }
 
@@ -386,8 +389,9 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(15)),
                           backgroundColor: Colors.white,
                           elevation: 10),
-                      onPressed: () async {
-                        launch('tel://$number');
+                      onPressed: () {
+                       
+                        launch('tel://+971588340905');
                       },
                       child: const Icon(
                         Icons.call,
