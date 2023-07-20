@@ -1,0 +1,62 @@
+{
+  "single": {
+    "single": [
+      {
+        "duration": "1 Day",
+        "price": 175,
+        "perSession": 175,
+        "validity": 1
+      }
+    ],
+    "buddy": [
+      {
+        "duration": "1 Day",
+        "price": 250,
+        "perSession": 250,
+        "validity": 1
+      }
+    ]
+  },
+  "special": {
+    "single": [
+      {
+        "duration": "3 Months",
+        "price": 2786,
+        "perSession": "NA",
+        "validity": 24
+      },
+      {
+        "duration": "6 Months",
+        "price": 4320,
+        "perSession": "NA",
+        "validity": 48
+      },
+      {
+        "duration": "12 Months",
+        "price": 6839,
+        "perSession": "NA",
+        "validity": 96
+      }
+    ]
+  },
+  "standard": [
+    {
+      "duration": "3 Months",
+      "price": 3866,
+      "perSession": "NA",
+      "validity": 24
+    },
+    {
+      "duration": "6 Months",
+      "price": 5616,
+      "perSession": "NA",
+      "validity": 48
+    },
+    {
+      "duration": "12 Months",
+      "price": 8640,
+      "perSession": "NA",
+      "validity": 96
+    }
+  ]
+}

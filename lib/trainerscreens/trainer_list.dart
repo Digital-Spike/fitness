@@ -1,17 +1,22 @@
 import 'dart:convert';
 
-import 'package:fitness/constants/api_list.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/Slotscreens/slotBookingPage.dart';
-import 'package:fitness/trainerscreens/trainerDetailPage.dart';
+import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/trainerscreens/triner_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 class TrainerList extends StatefulWidget {
   final bool isBranchTrainers;
   final String? branchId;
-  const TrainerList({required this.isBranchTrainers, this.branchId, super.key});
+  final bool? isOurTrainers;
+  const TrainerList(
+      {required this.isBranchTrainers,
+      this.branchId,
+      this.isOurTrainers,
+      super.key});
 
   @override
   State<TrainerList> createState() => _TrainerListState();
@@ -30,7 +35,7 @@ class _TrainerListState extends State<TrainerList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE2EEFF),
+        backgroundColor: Color(0xffE2EEFF),
         appBar: AppBar(
           backgroundColor: Color(0xffE2EEFF),
           elevation: 0,
@@ -58,11 +63,18 @@ class _TrainerListState extends State<TrainerList> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SlotBookingPage(isBranch: false, trainer:trainersList[index]
-                                  )));
+                      (widget.isOurTrainers ?? false)
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TrainerProfile(
+                                      trainer: trainersList[index])))
+                          : Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SlotBookingPage(
+                                      isBranch: widget.isBranchTrainers,
+                                      trainer: trainersList[index])));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(15),
@@ -81,15 +93,13 @@ class _TrainerListState extends State<TrainerList> {
                                   SizedBox(
                                     height: 100,
                                     width: 100,
-                                    child: SvgPicture.network(
-                                      ApiList.imageUrl +
+                                    child: CachedNetworkImage(
+                                      imageUrl: ApiList.imageUrl +
                                           (trainersList[index]['image'] ?? ""),
-                                      fit: BoxFit.cover,
-                                      placeholderBuilder: (BuildContext
-                                              context) =>
-                                          const Center(
-                                              child:
-                                                  CircularProgressIndicator()),
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                     ),
                                   ),
                                   const SizedBox(width: 20),
@@ -110,7 +120,7 @@ class _TrainerListState extends State<TrainerList> {
                                             fontWeight: FontWeight.w600),
                                       ),
                                       const SizedBox(height: 10),
-                                    /*  Row(
+                                      /*  Row(
                                         children: [
                                           const Icon(Icons.phone),
                                           const SizedBox(

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/model/branch.dart';
-import 'package:fitness/trainerscreens/trainer.dart';
+import 'package:fitness/trainerscreens/trainer_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -40,7 +40,7 @@ class _PartnerState extends State<Partner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffF1F1F2),
+        backgroundColor: const Color(0xffF1F1F2),
         appBar: AppBar(
           backgroundColor: const Color(0xffF1F1F2),
           elevation: 0,
@@ -72,7 +72,7 @@ class _PartnerState extends State<Partner> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Trainer(
+                              builder: (context) => TrainerList(
                                     isBranchTrainers: true,
                                     branchId: branch['branchId'],
                                   )));
@@ -88,7 +88,8 @@ class _PartnerState extends State<Partner> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: CachedNetworkImage(
-                          imageUrl: ApiList.imageUrl + (branch['image'] ?? ""),fit: BoxFit.cover,
+                          imageUrl: ApiList.imageUrl + (branch['image'] ?? ""),
+                          fit: BoxFit.cover,
                           placeholder: (context, url) => Container(),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),

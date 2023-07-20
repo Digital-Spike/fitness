@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/trainerscreens/trainerlist.dart';
+import 'package:fitness/trainerscreens/trainer_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 
 class BranchList extends StatefulWidget {
@@ -26,9 +26,9 @@ class _BranchListState extends State<BranchList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE2EEFF),
+        backgroundColor: const Color(0xffE2EEFF),
         appBar: AppBar(
-          backgroundColor: Color(0xffE2EEFF),
+          backgroundColor: const Color(0xffE2EEFF),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
@@ -43,7 +43,7 @@ class _BranchListState extends State<BranchList> {
                   fontWeight: FontWeight.w700,
                   color: Colors.black)),
           centerTitle: true,
-          leading: BackButton(
+          leading: const BackButton(
             color: Colors.black,
           ),
         ),
@@ -57,16 +57,12 @@ class _BranchListState extends State<BranchList> {
                   return InkWell(
                     onTap: () {
                       Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TrainerList(
-                                                          isBranchTrainers:
-                                                              true,
-                                                          branchId:
-                                                              branchList[index]
-                                                                  ['branchId'],
-                                                        )));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TrainerList(
+                                    isBranchTrainers: true,
+                                    branchId: branchList[index]['branchId'],
+                                  )));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10),
@@ -87,15 +83,13 @@ class _BranchListState extends State<BranchList> {
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    child: SvgPicture.network(
-                                      ApiList.imageUrl +
+                                    child: CachedNetworkImage(
+                                      imageUrl: ApiList.imageUrl +
                                           (branchList[index]['image'] ?? ""),
-                                      fit: BoxFit.cover,
-                                      placeholderBuilder: (BuildContext
-                                              context) =>
-                                          const Center(
-                                              child:
-                                                  CircularProgressIndicator()),
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                     ),
                                   ),
                                   const SizedBox(width: 10),
@@ -110,33 +104,32 @@ class _BranchListState extends State<BranchList> {
                                               decoration:
                                                   TextDecoration.underline)),
                                       const SizedBox(height: 10),
-                                     
                                       const SizedBox(height: 10)
                                     ],
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
-                               Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.location_on,
-                                            size: 16,
-                                            color: Colors.black,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              branchList[index]['address'],
-                                              style: const TextStyle(
-                                                  fontFamily: 'Roboto',
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w500),
-                                                  textAlign: TextAlign.start,
-                                              maxLines: 3,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    size: 16,
+                                    color: Colors.black,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      branchList[index]['address'],
+                                      style: const TextStyle(
+                                          fontFamily: 'Roboto',
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500),
+                                      textAlign: TextAlign.start,
+                                      maxLines: 3,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               /*Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
