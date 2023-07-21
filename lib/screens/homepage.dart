@@ -371,7 +371,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Image.asset(
                                 'assets/offer.png',
-                                height: 60,
+                                height: 50,
                                 color: Colors.white,
                               ),
                               const SizedBox(height: 15),

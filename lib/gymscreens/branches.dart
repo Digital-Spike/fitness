@@ -78,14 +78,14 @@ class _BranchListState extends State<BranchList> {
                               Row(
                                 children: [
                                   Container(
-                                    height: 120,
-                                    width: 125,
+                                    height: 100,
+                                    width: 140,
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: CachedNetworkImage(
                                       imageUrl: ApiList.imageUrl +
-                                          (branchList[index]['image'] ?? ""),
+                                          (branchList[index]['image'] ?? ""),fit: BoxFit.cover,
                                       placeholder: (context, url) =>
                                           const CircularProgressIndicator(),
                                       errorWidget: (context, url, error) =>
@@ -102,7 +102,7 @@ class _BranchListState extends State<BranchList> {
                                               color: Colors.deepOrange,
                                               fontWeight: FontWeight.w600,
                                               decoration:
-                                                  TextDecoration.underline)),
+                                                  TextDecoration.underline),textAlign: TextAlign.center,),
                                       const SizedBox(height: 10),
                                       const SizedBox(height: 10)
                                     ],

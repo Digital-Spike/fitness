@@ -8,6 +8,8 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  final items = ['Kgs', 'Lbs'];
+  String? value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,11 +62,11 @@ class _EditProfileState extends State<EditProfile> {
                                 ),
                               ),
                 ),
-              SizedBox(height: 15),
-              Divider(height: 1.0,color: Colors.black,thickness: 1.0,),
-              SizedBox(height: 15),
-              Text(' Username',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
-              SizedBox(height: 5),
+              const SizedBox(height: 15),
+              const Divider(height: 1.0,color: Colors.black,thickness: 1.0,),
+              const SizedBox(height: 15),
+              const Text(' Username',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const SizedBox(height: 5),
             TextFormField(
                               
                               decoration: InputDecoration(
@@ -81,9 +83,9 @@ class _EditProfileState extends State<EditProfile> {
                                 return null;
                               },
                             ),
-                            SizedBox(height: 15),
-              Text(' Name',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
-              SizedBox(height: 5),
+                            const SizedBox(height: 15),
+              const Text(' Name',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const SizedBox(height: 5),
                             TextFormField(
                               
                               decoration: InputDecoration(
@@ -100,9 +102,9 @@ class _EditProfileState extends State<EditProfile> {
                                 return null;
                               },
                             ),
-                           SizedBox(height: 15),
-              Text(' Email',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
-              SizedBox(height: 5),
+                           const SizedBox(height: 15),
+              const Text(' Email',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const SizedBox(height: 5),
                             TextFormField(
                               
                               decoration: InputDecoration(
@@ -119,9 +121,9 @@ class _EditProfileState extends State<EditProfile> {
                                 return null;
                               },
                             ),
-                          SizedBox(height: 15),
-              Text(' Phone Number',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
-              SizedBox(height: 5),
+                          const SizedBox(height: 15),
+              const Text(' Phone Number',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const SizedBox(height: 5),
                             TextFormField(
                               
                               decoration: InputDecoration(
@@ -138,13 +140,22 @@ class _EditProfileState extends State<EditProfile> {
                                 return null;
                               },
                             ),
-                            SizedBox(height: 15),
-              Text(' Weight',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
-              SizedBox(height: 5),
+                            const SizedBox(height: 15),
+              const Text(' Weight',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const SizedBox(height: 5),
                             TextFormField(
                               
                               decoration: InputDecoration(
-                                 
+                                  prefix: DropdownButton<String>(
+                                    elevation: 0,
+                                    value: value,
+                                    borderRadius: BorderRadius.circular(5),
+                                    isDense: true,
+                                    hint: const Text('Kgs'),
+                                    items: items.map(buildMenuItem).toList(), onChanged: (value)=>setState((){ this.value=value;
+                                    }
+                              )),
+                             
                                   isDense: true,
                                   filled: true,
                                   fillColor: Colors.white,
@@ -152,13 +163,15 @@ class _EditProfileState extends State<EditProfile> {
                                       borderRadius: BorderRadius.circular(10))),
                              
                             ),
-                           SizedBox(height: 15),
-              Text(' Height',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
-              SizedBox(height: 5),
+                           const SizedBox(height: 15),
+              const Text(' Height',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const SizedBox(height: 5),
                             TextFormField(
                               
                               decoration: InputDecoration(
-                               
+                              prefix: DropdownButton(items: [], onChanged: (value)=>setState(() {
+                                
+                              })),
                                   isDense: true,
                                   filled: true,
                                   fillColor: Colors.white,
@@ -166,9 +179,9 @@ class _EditProfileState extends State<EditProfile> {
                                       borderRadius: BorderRadius.circular(10))),
                              
                             ),
-                           SizedBox(height: 15),
-              Text(' Do You Have Any Previous Injuries?',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
-              SizedBox(height: 5),
+                           const SizedBox(height: 15),
+              const Text(' Do You Have Any Previous Injuries?',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const SizedBox(height: 5),
                             TextFormField(
                               
                               decoration: InputDecoration(
@@ -180,19 +193,19 @@ class _EditProfileState extends State<EditProfile> {
                                       borderRadius: BorderRadius.circular(10))),
                               
                             ),
-                            SizedBox(height: 25),
+                            const SizedBox(height: 25),
                             Center(
                               child: GestureDetector(
                                 onTap: (){},
                                 child: Container(
                                   width: 100,
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(colors: [Colors.deepOrangeAccent,Colors.amberAccent])),
-                                  padding: EdgeInsets.all(10),
-                                  child: Center(child: Text('Submit',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),))),
+                                  gradient: const LinearGradient(colors: [Colors.deepOrangeAccent,Colors.amberAccent])),
+                                  padding: const EdgeInsets.all(10),
+                                  child: const Center(child: Text('Submit',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),))),
                               ),
                             ),
-                            SizedBox(height: 40,)
+                            const SizedBox(height: 40,)
             ],
           ),
         ),
@@ -203,19 +216,26 @@ class _EditProfileState extends State<EditProfile> {
     showDialog(context: context, builder: (context){
       return CupertinoAlertDialog(
         title: Image.asset('assets/CameraIcon.png',height: 60,),
-        content: Text('Choose from',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+        content: const Text('Choose from',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
        actions: [
          MaterialButton(onPressed: () {
           
         },
-        child: Text('Camera',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+        child: const Text('Camera',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
         ),
         MaterialButton(onPressed: () {
           
         },
-        child: Text('Gallery',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),)
+        child: const Text('Gallery',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),),)
        ],
       );
     });
   }
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+        value: item,
+        child: Text(
+          item,
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+        ),
+      );
 }

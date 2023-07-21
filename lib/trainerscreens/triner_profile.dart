@@ -167,8 +167,8 @@ class _TrainerProfileState extends State<TrainerProfile> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      Row(
-                        children: const [
+                      const Row(
+                        children: [
                           Text(
                             'Speak         :',
                             style: TextStyle(
@@ -185,13 +185,14 @@ class _TrainerProfileState extends State<TrainerProfile> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      Row(
-                        children: const [
+                      const Row(
+                        children: [
                           Text(
                             'Qualifiction:',
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w600),
-                          )
+                          ),
+                          Text(' Certified EMS Personal Trainer',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),)
                         ],
                       ),
                       const SizedBox(

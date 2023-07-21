@@ -1,8 +1,4 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:fitness/constants/api_list.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 class PayPerSession extends StatefulWidget {
   const PayPerSession({super.key});
 

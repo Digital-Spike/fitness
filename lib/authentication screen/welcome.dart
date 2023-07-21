@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/authentication%20screen/auth_google.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
@@ -62,9 +63,9 @@ class _WelcomeState extends State<Welcome> {
                         GestureDetector(
                             child:
                                 SvgPicture.asset('assets/google_sign_up.svg'),
-                            onTap: () {
-                              signInWithGoogle(context);
-                            }),
+                            onTap: () => AuthServices().signInWithGoogle()
+                             
+                            ),
                         const SizedBox(height: 15),
                         GestureDetector(
                             onTap: () {

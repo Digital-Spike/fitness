@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Google extends StatefulWidget {
+  const Google({super.key});
+
   @override
   _GoogleState createState() => _GoogleState();
 }
