@@ -74,17 +74,11 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE2EEFF),
+      backgroundColor: const Color(0xffF5E6C2),
       appBar: AppBar(
-        backgroundColor: const Color(0xffE2EEFF),
+        backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            height: 1.0,
-            color: Colors.black,
-          ),
-        ),
+       
         title: const Text('Book Your Session',
             style: TextStyle(
                 fontSize: 20,
@@ -94,197 +88,193 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
         leading: const BackButton(color: Colors.black),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /*Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(),
-                child: DropdownButton<String>(
-                  hint: const Text('Select Session'),
-                  value: value,
-                  isExpanded: true,
-                  underline: Container(
-                    height: 1,
-                    color: Colors.black,
-                  ),
-                  items: items.map(buildMenuItem).toList(),
-                  onChanged: (value) => setState(
-                    () => this.value = value,
-                  ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /*Container(
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(),
+              child: DropdownButton<String>(
+                hint: const Text('Select Session'),
+                value: value,
+                isExpanded: true,
+                underline: Container(
+                  height: 1,
+                  color: Colors.black,
+                ),
+                items: items.map(buildMenuItem).toList(),
+                onChanged: (value) => setState(
+                  () => this.value = value,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(),
-                child: DropdownButton<String>(
-                  hint: const Text('Select Training'),
-                  value: value1,
-                  isExpanded: true,
-                  underline: Container(
-                    height: 1,
-                    color: Colors.black,
-                  ),
-                  items: items1.map(buildMenuItem1).toList(),
-                  onChanged: (value1) => setState(
-                    () => this.value1 = value1,
-                  ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(),
+              child: DropdownButton<String>(
+                hint: const Text('Select Training'),
+                value: value1,
+                isExpanded: true,
+                underline: Container(
+                  height: 1,
+                  color: Colors.black,
                 ),
-              ),*/
-
-              const Text(
-                '   Preferred Date',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 100,
-                width: double.infinity,
-                child: DatePicker(
-                  DateTime.now(),
-                  initialSelectedDate: DateTime.now(),
-                  selectionColor: Colors.black,
-                  selectedTextColor: Colors.white,
-                  onDateChange: (date) {
-                    setState(() {
-                      _selectedDay = date;
-                      futureData = slotList();
-                    });
-                  },
+                items: items1.map(buildMenuItem1).toList(),
+                onChanged: (value1) => setState(
+                  () => this.value1 = value1,
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
-                '  Preferred Time',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 10),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.60,
-                child: FutureBuilder<bool>(
-                  future: futureData,
-                  builder:
-                      (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return GridView.builder(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          itemCount: slots.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            mainAxisSpacing: 10,
-                            mainAxisExtent: 100,
-                            crossAxisSpacing: 10,
-                            crossAxisCount: 2,
-                          ),
-                          itemBuilder: (context, index) {
-                            List timeStamp = widget.isBranch
-                                ? branchTimeStamp
-                                : homeTimeStamp;
-
-                            bool isBooked = slots[(index + 1).toString()]
-                                    .toString()
-                                    .toLowerCase() ==
-                                "booked";
-
-                            return InkWell(
-                              onTap: () {
-                                showBookingPopup(
-                                    timeStamp: timeStamp[index],
-                                    index: index,
-                                    isBooked: isBooked);
-                              },
-                              child: Container(
-                                height: 100,
-                                width: 160,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(timeStamp[index]),
-                                    const SizedBox(height: 10),
-                                    Text(
-                                      slots[(index + 1).toString()] ==
-                                                  "booked" ||
-                                              slots[(index + 1).toString()] ==
-                                                  "Booked"
-                                          ? "Not available"
-                                          : "Available",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: isBooked
-                                              ? Colors.grey
-                                              : Colors.green),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          });
-                    }
-
-                    if (snapshot.hasError) {
-                      const Text("Something wrong");
-                    }
-
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                ),
-              ),
-              /*Center(
-                child: TextButton(
-                    style: TextButton.styleFrom(
-                        elevation: 5, backgroundColor: Colors.white),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          'Select Location',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                        Icon(Icons.pin_drop)
-                      ],
-                    )),
-              ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Trainer(
-                                isBranchTrainers: widget.isBranch,
-                              )));
+            ),*/
+          SizedBox(height: 10),
+            const Text(
+              '   Preferred Date',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            
+            Container(
+              margin: EdgeInsets.all(10),
+              height: 100,
+              width: double.infinity,
+              child: DatePicker(
+                DateTime.now(),
+                initialSelectedDate: DateTime.now(),
+                selectionColor: Colors.black,
+                selectedTextColor: Colors.white,
+                onDateChange: (date) {
+                  setState(() {
+                    _selectedDay = date;
+                    futureData = slotList();
+                  });
                 },
-                child: Container(
-                  height: 40,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: const LinearGradient(
-                          begin: Alignment.bottomRight,
-                          end: Alignment.topLeft,
-                          colors: [Color(0xffFA812F), Color(0xffFFFA08)])),
-                  child: const Center(
-                      child: Text(
-                    'Personal Trainer',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              '  Preferred Time',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+           
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.60,
+              child: FutureBuilder<bool>(
+                future: futureData,
+                builder:
+                    (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return GridView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(10),
+                        itemCount: slots.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 10,
+                          mainAxisExtent: 100,
+                          crossAxisSpacing: 10,
+                          crossAxisCount: 2,
+                        ),
+                        itemBuilder: (context, index) {
+                          List timeStamp = widget.isBranch
+                              ? branchTimeStamp
+                              : homeTimeStamp;
+
+                          bool isBooked = slots[(index + 1).toString()]
+                                  .toString()
+                                  .toLowerCase() ==
+                              "booked";
+
+                          return InkWell(
+                            onTap: () {
+                              showBookingPopup(
+                                  timeStamp: timeStamp[index],
+                                  index: index,
+                                  isBooked: isBooked);
+                            },
+                            child: Container(
+                              height: 100,
+                              width: 160,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(timeStamp[index]),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    slots[(index + 1).toString()] ==
+                                                "booked" ||
+                                            slots[(index + 1).toString()] ==
+                                                "Booked"
+                                        ? "Not available"
+                                        : "Available",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: isBooked
+                                            ? Colors.grey
+                                            : Colors.green),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  }
+
+                  if (snapshot.hasError) {
+                    const Text("Something wrong");
+                  }
+
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
+            ),
+            /*Center(
+              child: TextButton(
+                  style: TextButton.styleFrom(
+                      elevation: 5, backgroundColor: Colors.white),
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        'Select Location',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                      Icon(Icons.pin_drop)
+                    ],
                   )),
-                ),
-              ),*/
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Trainer(
+                              isBranchTrainers: widget.isBranch,
+                            )));
+              },
+              child: Container(
+                height: 40,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: const LinearGradient(
+                        begin: Alignment.bottomRight,
+                        end: Alignment.topLeft,
+                        colors: [Color(0xffFA812F), Color(0xffFFFA08)])),
+                child: const Center(
+                    child: Text(
+                  'Personal Trainer',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                )),
+              ),
+            ),*/
+          ],
         ),
       ),
     );

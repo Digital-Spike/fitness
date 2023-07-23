@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 10),
                         GestureDetector(
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));

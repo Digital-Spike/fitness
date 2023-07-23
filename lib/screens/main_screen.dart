@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE2EEFF),
+      backgroundColor: const Color(0xffF5E6C2),
       appBar: widget.mainAppBar,
       body: SafeArea(child: widget.mainChild),
       /*Center(
@@ -34,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
                 const TextStyle(fontSize: 15, fontWeight: FontWeight.bold))),
         child: Glassbox(
           child: NavigationBar(
-            indicatorColor: const Color(0xffE2EEFF),
+            indicatorColor: const Color(0xffF5E6C2),
               height: 70,
               selectedIndex: _bottomNavIndex ?? 0,
               onDestinationSelected: (int index) {

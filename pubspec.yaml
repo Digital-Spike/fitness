@@ -36,6 +36,7 @@ dependencies:
   cached_network_image: ^3.2.3
   path_provider: ^2.0.11
   animated_text_kit: ^4.2.2
+  marquee: ^2.2.3
   
   
 dev_dependencies:
@@ -52,9 +53,7 @@ flutter:
 
   fonts:
    
-    - family: TwCenMT
+    - family: NotoSans
       fonts:
-        - asset: fonts/TwCenMTStd-Light.otf
-    - family: ITCAvant
-      fonts:
-        - asset: fonts/ITCAvantGardeStd-BkCn.ttf
+        - asset: fonts/NotoSans-Medium.ttf
+   

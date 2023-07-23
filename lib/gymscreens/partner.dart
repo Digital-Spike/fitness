@@ -40,9 +40,9 @@ class _PartnerState extends State<Partner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffF1F1F2),
+        backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: const Color(0xffF1F1F2),
+          backgroundColor: const Color(0xffF5E6C2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),

@@ -29,9 +29,9 @@ class _TrainerState extends State<Trainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffE2EEFF),
+        backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: const Color(0xffE2EEFF),
+          backgroundColor: const Color(0xffF5E6C2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),

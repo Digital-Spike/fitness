@@ -25,9 +25,9 @@ class _TrainerProfileState extends State<TrainerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffE2EEFF),
+        backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: const Color(0xffE2EEFF),
+          backgroundColor: const Color(0xffF5E6C2),
           title: const Text(
             'Trainer profile',
             style: TextStyle(
@@ -190,9 +190,9 @@ class _TrainerProfileState extends State<TrainerProfile> {
                           Text(
                             'Qualifiction:',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
+                                fontSize: 16, fontWeight: FontWeight.w600),
                           ),
-                          Text(' Certified EMS Personal Trainer',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),)
+                          Text(' Certified EMS Personal Trainer',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),)
                         ],
                       ),
                       const SizedBox(

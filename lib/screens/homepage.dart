@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 60,
+                height: 70,
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.7),
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                       Colors.blue
                     ])),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),*/
-              const SizedBox(height: 0),
+              const SizedBox(height: 20),
               SizedBox(
                 child: Padding(
                   padding: const EdgeInsets.all(10),
@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 3, color: Colors.white),
-                              color: Colors.brown.withOpacity(0.7)),
+                              color: Color(0xff50E3C2)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -219,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 3, color: Colors.white),
-                              color: Colors.black.withOpacity(0.7)),
+                              color: Color(0xffFF5436)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -391,7 +391,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

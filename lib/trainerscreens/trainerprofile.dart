@@ -17,9 +17,9 @@ class _TrainerProfileState extends State<TrainerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffE2EEFF),
+      backgroundColor: Color(0xffF5E6C2),
       appBar: AppBar(
-        backgroundColor: const Color(0xffE2EEFF),
+        backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),

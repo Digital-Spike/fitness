@@ -35,9 +35,9 @@ class _TrainerListState extends State<TrainerList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffE2EEFF),
+        backgroundColor: Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: Color(0xffE2EEFF),
+          backgroundColor: Color(0xffF5E6C2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
@@ -76,107 +76,106 @@ class _TrainerListState extends State<TrainerList> {
                                       isBranch: widget.isBranchTrainers,
                                       trainer: trainersList[index])));
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          color: Colors.white,
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: CachedNetworkImage(
-                                      imageUrl: ApiList.imageUrl +
-                                          (trainersList[index]['image'] ?? ""),
-                                      placeholder: (context, url) =>
-                                          const CircularProgressIndicator(),
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(Icons.error),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.white,),
+                      
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 100,
+                                  width: 100,
+                                  child: CachedNetworkImage(
+                                    imageUrl: ApiList.imageUrl +
+                                        (trainersList[index]['image'] ?? ""),
+                                    placeholder: (context, url) =>
+                                        const CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                ),
+                                const SizedBox(width: 20),
+                                Column(
+                                  children: [
+                                    Text(
+                                      trainersList[index]['name'],
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.deepOrange),
                                     ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        trainersList[index]['name'],
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.deepOrange),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        trainersList[index]['description'],
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      /*  Row(
-                                        children: [
-                                          const Icon(Icons.phone),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            ((trainersList[index]
-                                                            ['phoneNumber'])
-                                                        .toString()
-                                                        .length >=
-                                                    2
-                                                ? trainersList[index]
-                                                    ['phoneNumber']
-                                                : 'Not Available'),
-                                            style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),*/
-                                    ],
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                children: [
-                                  Text(
-                                    '    Available',
-                                    style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: (trainersList[index]['status'] ==
-                                                "ACTIVE")
-                                            ? Colors.green
-                                            : Colors.grey),
-                                  ),
-                                  const Spacer(),
-                                  const Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
-                                    size: 30,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: Text(
-                                      trainersList[index]['rating'],
-                                      style: const TextStyle(fontSize: 16),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      trainersList[index]['description'],
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600),
                                     ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                                    const SizedBox(height: 10),
+                                    /*  Row(
+                                      children: [
+                                        const Icon(Icons.phone),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          ((trainersList[index]
+                                                          ['phoneNumber'])
+                                                      .toString()
+                                                      .length >=
+                                                  2
+                                              ? trainersList[index]
+                                                  ['phoneNumber']
+                                              : 'Not Available'),
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),*/
+                                  ],
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Text(
+                                  '    Available',
+                                  style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: (trainersList[index]['status'] ==
+                                              "ACTIVE")
+                                          ? Colors.green
+                                          : Colors.grey),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                  size: 30,
+                                ),
+                                const SizedBox(width: 5),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10),
+                                  child: Text(
+                                    trainersList[index]['rating'],
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ),

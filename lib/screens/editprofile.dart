@@ -13,9 +13,9 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE2EEFF),
+      backgroundColor: const Color(0xffF5E6C2),
       appBar: AppBar(
-        backgroundColor: const Color(0xffE2EEFF),
+        backgroundColor: const Color(0xffF5E6C2),
         title: const Text(
           'Edit Profile',
           style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
@@ -43,7 +43,7 @@ class _EditProfileState extends State<EditProfile> {
                                       backgroundColor: Colors.black,
                                       child: CircleAvatar(
                                         radius: 55,
-                                        backgroundColor: Colors.white,
+                                        backgroundColor: Colors.grey,
                                         child: Text(
                                           "Upload Image",
                                           style: TextStyle(
@@ -57,7 +57,10 @@ class _EditProfileState extends State<EditProfile> {
                                         child: GestureDetector(
                                           onTap: 
                                           _showDialog,
-                                          child: Image.asset('assets/camera.png',scale: 1.5,)))
+                                          child: Container(
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),color: Colors.white),
+                                            child: Image.asset('assets/camera.png',scale: 1.5,))))
                                   ],
                                 ),
                               ),

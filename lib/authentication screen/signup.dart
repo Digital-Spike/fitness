@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
+import 'package:fitness/authentication%20screen/termsandconditions.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  bool isChecked = false;
   bool _isSecurePassword = true;
   bool _isSecurePassword1 = true;
 
@@ -164,6 +166,23 @@ class _SignupPageState extends State<SignupPage> {
                                 value != null && value.length < 6
                                     ? 'Enter min. 6 characters'
                                     : null,
+                          ),
+                          Row(
+                            children: [
+                             Checkbox(
+      checkColor: Colors.white,
+      side: BorderSide(color: Colors.white),
+      value: isChecked,
+      onChanged: (bool? value) {
+        setState(() {
+          isChecked = value!;
+        });
+      },),GestureDetector(
+        onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> TermsAndConditions()));
+        },
+        child: Text('Terms and Conditions',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: Colors.white),))
+                            ],
                           ),
                           const SizedBox(height: 20),
                           GestureDetector(

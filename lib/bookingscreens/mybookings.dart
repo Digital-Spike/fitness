@@ -38,7 +38,7 @@ class _MyBookingPageState extends State<MyBookingPage>
     return MainScreen(
       
       mainAppBar: AppBar(
-        backgroundColor: const Color(0xffE2EEFF),
+        backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),

@@ -14,9 +14,9 @@ class _FreeTrialSessionState extends State<FreeTrialSession> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE2EEFF),
+      backgroundColor: const Color(0xffF5E6C2),
       appBar: AppBar(
-        backgroundColor: const Color(0xffE2EEFF),
+        backgroundColor: const Color(0xffF5E6C2),
         title: const Text('Free Trial Session',style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w600),),
         leading: const BackButton(color: Colors.black),
         centerTitle: true,

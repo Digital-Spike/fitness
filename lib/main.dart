@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         title: 'Fitness',
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          fontFamily: 'ITCAvant',
+          fontFamily: 'NotoSans',
         ),
         home: const SplashScreen());
   }

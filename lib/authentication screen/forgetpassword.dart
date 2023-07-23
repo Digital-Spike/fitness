@@ -36,9 +36,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF1F1F2),
+      backgroundColor: Color(0xffF5E6C2),
       appBar: AppBar(
-        backgroundColor: Color(0xffF1F1F2),
+        backgroundColor: Color(0xffF5E6C2),
         elevation: 0,
         bottom: PreferredSize(child: Container(height: 1.0,color: Colors.black,), preferredSize: Size.fromHeight(1.0)),
         title: Text('Forgot Password',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.black),),
@@ -49,7 +49,7 @@ leading: BackButton(color: Colors.black),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Enter your Email and we will send you a password reset link',style: TextStyle(fontSize: 20),textAlign: TextAlign.center,),
+            Text('Enter your Email and we will send you a password reset link',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
             SizedBox(height: 15),
             TextFormField(
                             controller: _emailController,
