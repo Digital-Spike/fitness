@@ -158,7 +158,7 @@ void _showDialog(){
   showDialog(context: context, builder: (context){
     return AlertDialog(
       title: const Text('Thank You For Choosing\nFitness journey',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.deepOrange),textAlign: TextAlign.center,),
-      content: const Text('Our Team Will Contact You Shortly Please Explore Our Other features in mean time',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
+      content: const Text('We will contact you within next 4 hours to Schedule your FREE TRIAL',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),textAlign: TextAlign.center,),
       actions: [
         Center(
           child: MaterialButton(
