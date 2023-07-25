@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:fitness/util/string_util.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'package:webview_flutter/webview_flutter.dart';
 
 class OurPackages extends StatefulWidget {
   const OurPackages({super.key});
@@ -24,8 +30,8 @@ class _OurPackagesState extends State<OurPackages> {
   String? value;
   final items = ['Standard Plan', 'Special Plan'];
   List<String> session = ['2', '4', '8', '12', '24', '48', '96'];
-  List<String> price = ['359', '652', '1248', '1788', '3096', '4800', '7599'];
-  List<String> persession = ['169', '163', '156', '149', '129', '100', '79'];
+  List<int> price = [359, 652, 1248, 1788, 3096, 4800, 7599];
+  List<String> perSession = ['169', '163', '156', '149', '129', '100', '79'];
   List<String> validity = [
     '15 days',
     '15 days',
@@ -65,6 +71,10 @@ class _OurPackagesState extends State<OurPackages> {
     Colors.amberAccent[100],
     Colors.purple[100]
   ];
+
+  late final WebViewController controller;
+  String paymentUrl = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,7 +195,7 @@ class _OurPackagesState extends State<OurPackages> {
                                             fontWeight: FontWeight.w600),
                                       ),
                                       Text(
-                                        price[index],
+                                        (price[index]).toString(),
                                         style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600),
@@ -217,11 +227,25 @@ class _OurPackagesState extends State<OurPackages> {
                                             fontSize: 18,
                                             fontWeight: FontWeight.w600),
                                       ),
-                                      Text(persession[index])
+                                      Text(perSession[index])
                                     ],
                                   ),
                                   MaterialButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      showProgress();
+                                      await trainerList(price[index]);
+                                      controller = WebViewController()
+                                        ..setJavaScriptMode(
+                                            JavaScriptMode.unrestricted)
+                                        ..setBackgroundColor(
+                                            const Color(0x00000000))
+                                        ..loadRequest(Uri.parse(paymentUrl));
+                                      if (!mounted) {
+                                        return;
+                                      }
+                                      Navigator.of(context).pop();
+                                      _showBottomSheet(context);
+                                    },
                                     color: Colors.deepOrange,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -359,4 +383,82 @@ class _OurPackagesState extends State<OurPackages> {
           style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
         ),
       );
+
+  Future<bool> trainerList(int amount) async {
+    try {
+      Response? response = await http.post(
+          Uri.parse("https://fitnessjourni.com/getPaymentUrl.php"),
+          body: {
+            'bookingId': StringUtil().generateRandomNumber(length: 8),
+            'amount': amount.toString()
+          });
+      paymentUrl = jsonDecode(response.body)['paymentUrl'];
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Container(
+            color: const Color.fromRGBO(0, 0, 0, 0.001),
+            child: GestureDetector(
+              onTap: () {},
+              child: DraggableScrollableSheet(
+                initialChildSize: 0.8,
+                minChildSize: 0.2,
+                maxChildSize: 0.75,
+                builder: (_, controller) {
+                  return Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25.0),
+                        topRight: Radius.circular(25.0),
+                      ),
+                    ),
+                    child: WebViewWidget(controller: this.controller),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showProgress() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                CircularProgressIndicator(),
+                Padding(
+                    padding: EdgeInsets.only(left: 4.0),
+                    child: Text(
+                      'Loading...',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                    )),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
