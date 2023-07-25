@@ -413,8 +413,6 @@ class _OurPackagesState extends State<OurPackages> {
               onTap: () {},
               child: DraggableScrollableSheet(
                 initialChildSize: 0.8,
-                minChildSize: 0.2,
-                maxChildSize: 0.75,
                 builder: (_, controller) {
                   return Container(
                     decoration: const BoxDecoration(
