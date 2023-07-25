@@ -96,7 +96,6 @@ class _TrainerProfileState extends State<TrainerProfile> {
                               child: const Icon(Icons.phone),
                             ),
                           ),
-                         
                           GestureDetector(
                             onTap: () {
                               launchWhatsApp();
@@ -159,8 +158,8 @@ class _TrainerProfileState extends State<TrainerProfile> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      const Row(
-                        children: [
+                      Row(
+                        children: const [
                           Text(
                             'Speak         :',
                             style: TextStyle(
@@ -177,14 +176,18 @@ class _TrainerProfileState extends State<TrainerProfile> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      const Row(
-                        children: [
+                      Row(
+                        children: const [
                           Text(
-                            'Qualifiction:',
+                            'Qualification:',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           ),
-                          Text(' Certified EMS Personal Trainer',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600),)
+                          Text(
+                            ' Certified EMS Personal Trainer',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w600),
+                          )
                         ],
                       ),
                       const SizedBox(
