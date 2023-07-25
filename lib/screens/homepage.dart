@@ -25,7 +25,7 @@ const colorizeColors = [
 ];
 
 const colorizeTextStyle = TextStyle(
-    fontSize: 18.0, fontFamily: 'ITCAvant', fontWeight: FontWeight.w900);
+    fontSize: 18.0, fontFamily: 'ITCAvant', fontWeight: FontWeight.w700);
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -189,16 +189,16 @@ class _HomePageState extends State<HomePage> {
                               Expanded(
                                 child: Image.asset(
                                   'assets/Gym.png',
-                                  scale: 2,
+                                  height: 50,
                                 ),
                               ),
                               const SizedBox(height: 10),
                               const Text(
                                 'EMS at Gym',
                                 style: TextStyle(
-                                    fontFamily: 'ITCAvant',
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 15,
+                                    
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
                                     color: Colors.white),
                               )
                             ],
@@ -227,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                               Expanded(
                                 child: Image.asset(
                                   'assets/home.png',
-                                  height: 60,
+                                  height: 50,
                                   color: Colors.white,
                                 ),
                               ),
@@ -235,9 +235,9 @@ class _HomePageState extends State<HomePage> {
                               const Text(
                                 'EMS at Home',
                                 style: TextStyle(
-                                    fontFamily: 'ITCAvant',
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 15,
+                                   
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
                                     color: Colors.white),
                               )
                             ],
@@ -266,16 +266,16 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Image.asset(
                                 'assets/trainer.png',
-                                scale: 2,
+                               height: 50,
                                 color: Colors.white,
                               ),
                               const SizedBox(height: 10),
                               const Text(
                                 'Our Trainers',
                                 style: TextStyle(
-                                    fontFamily: 'ITCAvant',
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 15,
+                                    
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
                                     color: Colors.white),
                               )
                             ],
@@ -301,16 +301,16 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Image.asset(
                                 'assets/barbell.png',
-                                scale: 2,
+                                height: 50,
                                 color: Colors.white,
                               ),
                               const SizedBox(height: 10),
                               const Text(
                                 'Our Gym Partners',
                                 style: TextStyle(
-                                    fontFamily: 'ITCAvant',
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 15,
+                                    
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
                                     color: Colors.white),
                               )
                             ],
@@ -336,16 +336,16 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Image.asset(
                                 'assets/plan.png',
-                                scale: 2,
+                                height: 50,
                                 color: Colors.white,
                               ),
                               const SizedBox(height: 10),
                               const Text(
                                 'Our Packages',
                                 style: TextStyle(
-                                    fontFamily: 'ITCAvant',
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 15,
+                                    
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
                                     color: Colors.white),
                               )
                             ],
@@ -378,8 +378,8 @@ class _HomePageState extends State<HomePage> {
                               const Text(
                                 'Our Offers',
                                 style: TextStyle(
-                                    fontFamily: 'ITCAvant',
-                                    fontWeight: FontWeight.w600,
+                                    
+                                    fontWeight: FontWeight.w700,
                                     fontSize: 16,
                                     color: Colors.white),
                               )

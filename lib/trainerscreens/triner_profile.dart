@@ -96,15 +96,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
                               child: const Icon(Icons.phone),
                             ),
                           ),
-                          Container(
-                            margin: const EdgeInsets.all(5),
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                border:
-                                    Border.all(width: 0.5, color: Colors.black),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: const Icon(Icons.message),
-                          ),
+                         
                           GestureDetector(
                             onTap: () {
                               launchWhatsApp();
@@ -124,7 +116,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 15),
+                      const SizedBox(height: 25),
                       /*   Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                          children: [

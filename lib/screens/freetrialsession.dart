@@ -61,7 +61,8 @@ class _FreeTrialSessionState extends State<FreeTrialSession> {
               gradient: const LinearGradient(colors: [Colors.green,Colors.blue])
                       ),
               ),
-            )
+            ),
+            SizedBox(height: 50,)
           ],
         ),
       ),

@@ -1,3 +1,6 @@
+
+
+
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +8,7 @@ import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/screens/editprofile.dart';
 import 'package:fitness/screens/homepage.dart';
 import 'package:fitness/screens/main_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -57,26 +61,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 MaterialPageRoute(builder: (context) => const HomePage()));
           },
         ),
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1.0),
-            child: Container(
-              height: 1.0,
-              color: Colors.black,
-            )),
+        
       ),
       mainChild: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+           SizedBox(height: 10),
                   SizedBox(
-                    height: 130,
+                    height: 110,
                     child: CircleAvatar(
-                      minRadius: 60,
+                      minRadius: 50,
                       backgroundColor: Colors.white,
                       backgroundImage: _profileImage != null
                           ? FileImage(_profileImage!)
@@ -87,20 +81,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        _displayName ?? '',
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 16),
-                      ),
-                      Text(
-                        _email ?? '',
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 16),
-                      ),
-                    ],
+                      Column(
+                        children: [
+                          Text(
+                            _displayName ?? '',
+                            style:
+                                const TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          Text(
+                    _email ?? '',
+                    style:
+                        const TextStyle(color: Colors.black, fontSize: 16),
                   ),
+                        ],
+                      ),
+                      
                   const SizedBox(width: 10),
                   GestureDetector(
                     onTap: () {
@@ -109,103 +107,163 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: SvgPicture.asset(
                       'assets/Edit.svg',color: Colors.black,
                     ),
-                  )
-                ],
-              ),
-            ),
-            const Divider(
-              color: Colors.black,
-              thickness: 1,
-            ),
-            const SizedBox(height: 10),
-            buildSettingsButton('Languages', Icons.language, () {
-              // Handle languages button tap
-            }),
-            const SizedBox(height: 10),
-            buildSettingsButton('Subscription', Icons.subscriptions, () {
-              // Handle subscription button tap
-            }),
-            const SizedBox(height: 10),
-            buildSettingsButton('Account and Privacy', Icons.security, () {
-              // Handle Account and Privacy button tap
-            }),
-            const SizedBox(height: 10),
-            buildSettingsButton('Settings', Icons.settings, () {
-              // Handle Settings button tap
-            }),
-            const SizedBox(height: 10),
-            buildSettingsButton('Help & Support', Icons.help, () {
-              // Handle Help & Support button tap
-            }),
-            const SizedBox(height: 10),
-            buildSettingsButton('Logout', Icons.logout, () {
-              showLogoutPopup();
-            }),
-            const SizedBox(height: 10),
+                  ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange[50]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset('assets/password.png'),
+                            SizedBox(width: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Change Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                Text('Change your password easily')
+                              ],
+                            ),
+                            
+                          ],
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+
+                      ],
+                    ),
+                  ),
+                   Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange[50]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset('assets/arabic.png'),
+                            SizedBox(width: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Change Language',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                Text('Change your Language here')
+                              ],
+                            ),
+                            
+                          ],
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+
+                      ],
+                    ),
+                  ),
+                   Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:  Colors.orange[50]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset('assets/credit-card.png'),
+                            SizedBox(width: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Subscription',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                Text('Check your Subscription here')
+                              ],
+                            ),
+                            
+                          ],
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+
+                      ],
+                    ),
+                  ),
+                   Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange[50]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset('assets/insurance.png'),
+                            SizedBox(width: 5),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Privacy and Policy',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                Text('Check our Policy here')
+                              ],
+                            ),
+                            
+                          ],
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+
+                      ],
+                    ),
+                  ),
+                   Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange[50]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                        Row(
+                          children: [
+                          Icon(Icons.logout_outlined,size: 35,),
+                            SizedBox(width: 5),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Logout',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                Text('Click here to logout ')
+                              ],
+                            ),
+                            
+                          ],
+                        ),
+                        Icon(Icons.arrow_forward_ios)
+
+                      ],
+                    ),
+                  ),
+                  
+               
+            
+            
+            const SizedBox(height: 5),
+           
+            const SizedBox(height: 5),
             Center(
               child: Image.asset(
                 'assets/fitnessname.png',
                 height: 80,
               ),
             ),
-          ],
-        ),
-      ),
-    );
+         
+    ],
+              ), ));
   }
 
-  Widget buildSettingsButton(
-      String title, IconData icon, VoidCallback onPressed) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
-      child: SizedBox(
-        height: 50,
-        width: double.infinity,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.grey[600],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 6),
-          ),
-          onPressed: onPressed,
-          child: Row(
-            children: [
-              const SizedBox(
-                width: 10,
-              ),
-              Icon(
-                icon,
-                color: Colors.white,
-                size: 25,
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Center(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.white,
-                size: 25,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  
 
   Future<void> showLogoutPopup() async {
     return showDialog<void>(
