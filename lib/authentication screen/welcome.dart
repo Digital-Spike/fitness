@@ -46,7 +46,7 @@ class _WelcomeState extends State<Welcome> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.black.withOpacity(0.2)),
                       padding: const EdgeInsets.all(10),
-                      child: Image.asset('assets/fitness.png')),
+                      child: Image.asset('assets/FJ FONT.png')),
                 ),
                 const Spacer(),
                 Container(
