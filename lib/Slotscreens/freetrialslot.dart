@@ -58,6 +58,7 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
               const SizedBox(height: 5),
               const TextField(
         decoration: InputDecoration(
+          isDense: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             
@@ -73,6 +74,7 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
               const SizedBox(height: 5),
               const TextField(
         decoration: InputDecoration(
+          isDense: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             
@@ -88,6 +90,7 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
               const SizedBox(height: 5),
               const TextField(
         decoration: InputDecoration(
+          isDense: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             
@@ -103,6 +106,7 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
               const SizedBox(height: 5),
               const TextField(
         decoration: InputDecoration(
+          isDense: true,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             
@@ -116,29 +120,32 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
               const SizedBox(height: 15),
               const Text('Select a Time so Our Team can Contact You',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
               const SizedBox(height: 5),
+             
               GestureDetector(
                 onTap: _showTimePicker,
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  height: 55,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 0.5,color: Colors.black),
-                    borderRadius: BorderRadius.circular(10),color: Colors.white
-                  ),
-                  child: Row(
-                    children: [
-                     const Icon(Icons.access_time_filled_outlined,size: 30,),const SizedBox(width: 20),
-                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                       children: [
-                        const Text('Time',style: TextStyle(fontWeight: FontWeight.w500),),
-                        const SizedBox(height: 2),
-                         Text(_timeOfDay.format(context).toString(),style: const TextStyle(fontSize: 17,fontWeight: FontWeight.w600),),
-                       ],
-                     )
-                    ],
-                  ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      margin: EdgeInsets.all(5),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 1,color: Colors.black),color: Colors.white),
+                      child: Icon(Icons.access_time_filled_outlined,size: 30,),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      height: 45,
+                      width: 150,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 1,color: Colors.black),color: Colors.white),
+                      child: Row(
+                        children: [
+                          Text('Time: ',style: TextStyle(fontSize: 16),),
+                         
+                          Text(_timeOfDay.format(context).toString(),style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600),),
+                        ],
+                      ),
+                    )
+                    
+                  ],
                 ),
               ),
               const SizedBox(

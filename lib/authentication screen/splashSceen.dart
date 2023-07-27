@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   late StreamSubscription<User?> listener;
   @override
   void initState() {
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(milliseconds: 2800), () {
       listener = FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user ==
                 null /*||
@@ -49,12 +49,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF5E6C2),
+      backgroundColor: Color(0xff252525),
       body: Center(
         child: Image.asset(
-          'assets/logo.png',
-          height: 280, // Adjust the height as needed
-          width: 220, // Adjust the width as needed
+          'assets/Comp 1.gif',
+          height: 350, // Adjust the height as needed
+          width: 300, // Adjust the width as needed
         ),
       ),
     );

@@ -75,6 +75,8 @@ class _OurPackagesState extends State<OurPackages> {
   late final WebViewController controller;
   String paymentUrl = "";
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,26 +100,29 @@ class _OurPackagesState extends State<OurPackages> {
         ),
         body: Column(children: [
           const SizedBox(height: 10),
-          DropdownButtonFormField(
-              hint: const Text('Select Plan'),
-              borderRadius: BorderRadius.circular(10),
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black),
-              decoration: InputDecoration(
-                  isDense: true,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  fillColor: Colors.white,
-                  filled: true),
-              items: items.map(buildMenuItem).toList(),
-              onChanged: (value) {
-                setState(() {
-                  this.value = value;
-                  isSelectedPlans = isSelectedPlans;
-                });
-              }),
+          Padding(
+            padding: const EdgeInsets.only(left: 10,right: 10),
+            child: DropdownButtonFormField(
+                hint: const Text('Select Plan'),
+                borderRadius: BorderRadius.circular(10),
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+                decoration: InputDecoration(
+                    isDense: true,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.white,
+                    filled: true),
+                items: items.map(buildMenuItem).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    this.value = value;
+                    isSelectedPlans = !isSelectedPlans;
+                  });
+                }),
+          ),
           const SizedBox(height: 10),
           ToggleButtons(
             direction: vertical ? Axis.vertical : Axis.horizontal,
@@ -165,6 +170,7 @@ class _OurPackagesState extends State<OurPackages> {
                             borderRadius: BorderRadius.circular(10)),
                         backgroundColor: colors1[index],
                         collapsedBackgroundColor: colors[index],
+                        textColor: Colors.black,
                         title: Row(
                           children: [
                             const Text(
@@ -373,6 +379,7 @@ class _OurPackagesState extends State<OurPackages> {
                   }),
             ),
           ),
+        
         ]));
   }
 
@@ -401,6 +408,7 @@ class _OurPackagesState extends State<OurPackages> {
 
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
+      
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -412,17 +420,21 @@ class _OurPackagesState extends State<OurPackages> {
             child: GestureDetector(
               onTap: () {},
               child: DraggableScrollableSheet(
-                initialChildSize: 0.8,
+                
+                initialChildSize: 1.0,
                 builder: (_, controller) {
-                  return Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25.0),
-                        topRight: Radius.circular(25.0),
+                  return SingleChildScrollView(
+                    child: Container(
+                      height: 1500,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0),
+                        ),
                       ),
+                      child: WebViewWidget(controller: this.controller),
                     ),
-                    child: WebViewWidget(controller: this.controller),
                   );
                 },
               ),

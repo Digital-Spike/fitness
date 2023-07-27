@@ -65,10 +65,11 @@ class _HomePageState extends State<HomePage> {
                 height: 70,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.7),
+                    color: Colors.black.withOpacity(0.9),
                     image: const DecorationImage(
-                        image: AssetImage('assets/fitness.png'),
-                        scale: 2,
+                        image: AssetImage('assets/FJ FONT.png'),
+                        scale: 10,
+                        
                         alignment: Alignment.center)),
               ),
               Container(

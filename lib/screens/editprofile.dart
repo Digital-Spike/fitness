@@ -22,7 +22,7 @@ class _EditProfileState extends State<EditProfile> {
         ),
         leading: const BackButton(color: Colors.black),
         elevation: 0,
-        bottom: PreferredSize(child: Container(height: 1.0,color: Colors.black,), preferredSize: const Size.fromHeight(1.0)),
+       
       ),
       body: SingleChildScrollView(
         child: Padding(

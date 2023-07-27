@@ -20,7 +20,7 @@ class _WelcomeState extends State<Welcome> {
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset("assets/fj1.mp4")
+    controller = VideoPlayerController.asset("assets/welcome.mp4")
       ..initialize().then((_) {
         setState(() {});
       });
@@ -32,75 +32,73 @@ class _WelcomeState extends State<Welcome> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Stack(children: [
-            VideoPlayer(controller),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.black.withOpacity(0.2)),
-                        padding: const EdgeInsets.all(10),
-                        child: Image.asset('assets/fitness.png')),
-                  ),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    height: 190,
-                    width: 350,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.black.withOpacity(0.2)),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                            child:
-                                SvgPicture.asset('assets/google_sign_up.svg'),
-                            onTap: () => signInWithGoogle(context)),
-                        const SizedBox(height: 15),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignupPage()));
-                            },
-                            child: SvgPicture.asset('assets/Signup.svg')),
-                        const SizedBox(height: 25),
-                        GestureDetector(
+        body: Stack(children: [
+          VideoPlayer(controller),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.black.withOpacity(0.2)),
+                      padding: const EdgeInsets.all(10),
+                      child: Image.asset('assets/fitness.png')),
+                ),
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  height: 190,
+                  width: 350,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.black.withOpacity(0.2)),
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                          child:
+                              SvgPicture.asset('assets/google_sign_up.svg'),
+                          onTap: () => signInWithGoogle(context)),
+                      const SizedBox(height: 15),
+                      GestureDetector(
                           onTap: () {
-                            // Handle login action
                             Navigator.push(
                                 context,
-                                (MaterialPageRoute(
-                                    builder: (context) => const LoginPage())));
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SignupPage()));
                           },
-                          child: const Text(
-                            'Already have an Account? Login',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              decoration: TextDecoration.underline,
-                            ),
+                          child: SvgPicture.asset('assets/Signup.svg')),
+                      const SizedBox(height: 25),
+                      GestureDetector(
+                        onTap: () {
+                          // Handle login action
+                          Navigator.pushReplacement(
+                              context,
+                              (MaterialPageRoute(
+                                  builder: (context) => const LoginPage())));
+                        },
+                        child: const Text(
+                          'Already have an Account? Login',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ]),
-        ));
+          ),
+        ]));
   }
 
   Future<void> signInWithGoogle(BuildContext context) async {

@@ -9,7 +9,6 @@ import 'package:fitness/screens/editprofile.dart';
 import 'package:fitness/screens/homepage.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -57,8 +56,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: BackButton(
           color: Colors.black,
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const HomePage()));
+            Navigator.of(context).pop();
+                
           },
         ),
         
@@ -109,11 +108,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                     ],
-                  ),
+                  ),SizedBox(height: 10),
+                  Divider(height: 1.0,thickness: 1.0,color: Colors.black,),
+                  SizedBox(height: 10),
                   Container(
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange[50]),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       
@@ -140,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                    Container(
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange[50]),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       
@@ -167,7 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                    Container(
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:  Colors.orange[50]),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:  Colors.yellow[50]),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       
@@ -194,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                    Container(
                     margin: EdgeInsets.all(10),
                     padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange[50]),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       
@@ -218,44 +219,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                   Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.orange[50]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
-                      children: [
-                        Row(
-                          children: [
-                          Icon(Icons.logout_outlined,size: 35,),
-                            SizedBox(width: 5),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Logout',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                Text('Click here to logout ')
-                              ],
-                            ),
-                            
-                          ],
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-
-                      ],
-                    ),
-                  ),
+                   GestureDetector(
+                    onTap: (){
+                      showLogoutPopup();
+                    },
+                     child: Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        
+                        children: [
+                          Row(
+                            children: [
+                            Icon(Icons.logout_outlined,size: 35,),
+                              SizedBox(width: 5),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Logout',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                  Text('Click here to logout ')
+                                ],
+                              ),
+                              
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios)
+                   
+                        ],
+                      ),
+                                     ),
+                   ),
                   
                
             
             
-            const SizedBox(height: 5),
-           
+            
             const SizedBox(height: 5),
             Center(
               child: Image.asset(
-                'assets/fitnessname.png',
-                height: 80,
+                'assets/FJ FONT.png',
+                height: 50,width: 250,
               ),
             ),
          
