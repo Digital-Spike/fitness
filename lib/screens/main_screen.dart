@@ -43,6 +43,8 @@ class _MainScreenState extends State<MainScreen> {
                   _bottomNavIndex = index;
                 });
               },
+                
+              
 
               //shadowColor: Colors.white,
               // indicatorColor: Color(0xffE2EEFF),

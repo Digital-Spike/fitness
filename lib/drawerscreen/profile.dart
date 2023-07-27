@@ -33,197 +33,83 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MainScreen(
-      mainAppBar: AppBar(
-        backgroundColor: const Color(0xffF5E6C2),
-        elevation: 0,
-        title: const Center(
-          child: Text(
-            'Profile',
-            style: TextStyle(
-                fontWeight: FontWeight.w600, color: Colors.black, fontSize: 20),
+  Widget build(BuildContext context) =>
+    WillPopScope(
+      onWillPop: ()async{
+        return true;
+      },
+      child: MainScreen(
+        mainAppBar: AppBar(
+          backgroundColor: const Color(0xffF5E6C2),
+          elevation: 0,
+          title: const Center(
+            child: Text(
+              'Profile',
+              style: TextStyle(
+                  fontWeight: FontWeight.w600, color: Colors.black, fontSize: 20),
+            ),
           ),
+          actions: [
+            PopupMenuButton(
+              color: Colors.black,
+              itemBuilder: (context) {
+                return [];
+              },
+            ),
+          ],
+         leading: BackButton(color: Colors.black,),
+          
         ),
-        actions: [
-          PopupMenuButton(
-            color: Colors.black,
-            itemBuilder: (context) {
-              return [];
-            },
-          ),
-        ],
-        leading: BackButton(
-          color: Colors.black,
-          onPressed: () {
-            Navigator.of(context).pop();
-                
-          },
-        ),
-        
-      ),
-      mainChild: SingleChildScrollView(
-        child: Column(
-          children: [
-           SizedBox(height: 10),
-                  SizedBox(
-                    height: 110,
-                    child: CircleAvatar(
-                      minRadius: 50,
-                      backgroundColor: Colors.white,
-                      backgroundImage: _profileImage != null
-                          ? FileImage(_profileImage!)
-                          : null,
-                      child: _profileImage == null
-                          ? const Icon(Icons.person)
-                          : null,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            _displayName ?? '',
-                            style:
-                                const TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                          Text(
-                    _email ?? '',
-                    style:
-                        const TextStyle(color: Colors.black, fontSize: 16),
-                  ),
-                        ],
+        mainChild: SingleChildScrollView(
+          child: Column(
+            children: [
+             SizedBox(height: 10),
+                    SizedBox(
+                      height: 110,
+                      child: CircleAvatar(
+                        minRadius: 50,
+                        backgroundColor: Colors.white,
+                        backgroundImage: _profileImage != null
+                            ? FileImage(_profileImage!)
+                            : null,
+                        child: _profileImage == null
+                            ? const Icon(Icons.person)
+                            : null,
                       ),
-                      
-                  const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile()));
-                    },
-                    child: SvgPicture.asset(
-                      'assets/Edit.svg',color: Colors.black,
                     ),
-                  ),
-                    ],
-                  ),SizedBox(height: 10),
-                  Divider(height: 1.0,thickness: 1.0,color: Colors.black,),
-                  SizedBox(height: 10),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
+                    const SizedBox(width: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Row(
+                        Column(
                           children: [
-                            Image.asset('assets/password.png'),
-                            SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Change Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                Text('Change your password easily')
-                              ],
+                            Text(
+                              _displayName ?? '',
+                              style:
+                                  const TextStyle(color: Colors.black, fontSize: 16),
                             ),
-                            
+                            Text(
+                      _email ?? '',
+                      style:
+                          const TextStyle(color: Colors.black, fontSize: 16),
+                    ),
                           ],
                         ),
-                        Icon(Icons.arrow_forward_ios)
-
-                      ],
+                        
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile()));
+                      },
+                      child: SvgPicture.asset(
+                        'assets/Edit.svg',color: Colors.black,
+                      ),
                     ),
-                  ),
-                   Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset('assets/arabic.png'),
-                            SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Change Language',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                Text('Change your Language here')
-                              ],
-                            ),
-                            
-                          ],
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-
                       ],
-                    ),
-                  ),
-                   Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:  Colors.yellow[50]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset('assets/credit-card.png'),
-                            SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Subscription',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                Text('Check your Subscription here')
-                              ],
-                            ),
-                            
-                          ],
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-
-                      ],
-                    ),
-                  ),
-                   Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset('assets/insurance.png'),
-                            SizedBox(width: 5),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Privacy and Policy',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                Text('Check our Policy here')
-                              ],
-                            ),
-                            
-                          ],
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-
-                      ],
-                    ),
-                  ),
-                   GestureDetector(
-                    onTap: (){
-                      showLogoutPopup();
-                    },
-                     child: Container(
+                    ),SizedBox(height: 10),
+                    Divider(height: 1.0,thickness: 1.0,color: Colors.black,),
+                    SizedBox(height: 10),
+                    Container(
                       margin: EdgeInsets.all(10),
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
@@ -233,40 +119,153 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           Row(
                             children: [
-                            Icon(Icons.logout_outlined,size: 35,),
-                              SizedBox(width: 5),
+                              Image.asset('assets/password.png'),
+                              SizedBox(width: 10),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Logout',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                  Text('Click here to logout ')
+                                  Text('Change Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                  Text('Change your password easily')
                                 ],
                               ),
                               
                             ],
                           ),
                           Icon(Icons.arrow_forward_ios)
-                   
+    
                         ],
                       ),
-                                     ),
-                   ),
-                  
-               
-            
-            
-            
-            const SizedBox(height: 5),
-            Center(
-              child: Image.asset(
-                'assets/FJ FONT.png',
-                height: 50,width: 250,
+                    ),
+                     Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset('assets/arabic.png'),
+                              SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Change Language',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                  Text('Change your Language here')
+                                ],
+                              ),
+                              
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios)
+    
+                        ],
+                      ),
+                    ),
+                     Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:  Colors.yellow[50]),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset('assets/credit-card.png'),
+                              SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Subscription',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                  Text('Check your Subscription here')
+                                ],
+                              ),
+                              
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios)
+    
+                        ],
+                      ),
+                    ),
+                     Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset('assets/insurance.png'),
+                              SizedBox(width: 5),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Privacy and Policy',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                  Text('Check our Policy here')
+                                ],
+                              ),
+                              
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios)
+    
+                        ],
+                      ),
+                    ),
+                     GestureDetector(
+                      onTap: (){
+                        showLogoutPopup();
+                      },
+                       child: Container(
+                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.yellow[50]),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          
+                          children: [
+                            Row(
+                              children: [
+                              Icon(Icons.logout_outlined,size: 35,),
+                                SizedBox(width: 5),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Logout',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                    Text('Click here to logout ')
+                                  ],
+                                ),
+                                
+                              ],
+                            ),
+                            Icon(Icons.arrow_forward_ios)
+                     
+                          ],
+                        ),
+                                       ),
+                     ),
+                    
+                 
+              
+              
+              
+              const SizedBox(height: 5),
+              Center(
+                child: Image.asset(
+                  'assets/FJ FONT.png',
+                  height: 50,width: 250,
+                ),
               ),
-            ),
-         
-    ],
-              ), ));
-  }
+           
+      ],
+                ), )),
+    );
+  
 
   
 
