@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
               
 
               //shadowColor: Colors.white,
-              // indicatorColor: Color(0xffE2EEFF),
+              indicatorColor: Color(0xffE2EEFF),
               backgroundColor: Colors.transparent,
               elevation: 0,
               labelBehavior:
