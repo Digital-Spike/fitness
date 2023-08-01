@@ -1,3 +1,4 @@
+import 'package:fitness/bookingscreens/bookinghistory.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -49,11 +50,11 @@ class _MyBookingPageState extends State<MyBookingPage>
         ),
         title: const Text(
           'My Booking',
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
+          style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black),
         ),
         centerTitle: true,
         leading: BackButton(
-          color: Colors.black,
+         color: Colors.black,
           onPressed: () {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => const HomePage()));
@@ -124,15 +125,7 @@ class _MyBookingPageState extends State<MyBookingPage>
                 controller: _tabController,
                 children: const [
                   Booking(),
-                  Center(
-                    child: Text(
-                      'History',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                 BookingHistory()
                 ],
               ),
             ),

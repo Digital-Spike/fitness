@@ -82,10 +82,10 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
         title: const Text('Book Your Session',
             style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.black)),
+                fontWeight: FontWeight.w700,color: Colors.black
+                )),
         centerTitle: true,
-        leading: const BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black,),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -141,6 +141,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 initialSelectedDate: DateTime.now(),
                 selectionColor: Colors.black,
                 selectedTextColor: Colors.white,
+               deactivatedColor: Colors.white,
                 onDateChange: (date) {
                   setState(() {
                     _selectedDay = date;
@@ -200,7 +201,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(timeStamp[index]),
+                                  Text(timeStamp[index],style: TextStyle(color: Colors.black),),
                                   const SizedBox(height: 10),
                                   Text(
                                     slots[(index + 1).toString()] ==

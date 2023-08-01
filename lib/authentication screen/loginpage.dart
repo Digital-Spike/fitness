@@ -86,181 +86,187 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: Colors.transparent,
-        body: Container(
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-              color: Colors.transparent,
-              image: DecorationImage(
-                image: AssetImage('assets/IMG_9779.jpg'),
-                fit: BoxFit.cover,
-                opacity: 0.98,
-              )),
-          child: SingleChildScrollView(
-            child: Column(
-              
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(20),
-                  margin: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.black.withOpacity(0.2)),
-                  child: Column(
-                    children: const [
-                    
-                      Text(
-                        'Transform your body\nand mind',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                        style: TextStyle(
+        backgroundColor: Color(0xffF5E6C2),
+        body: SafeArea(
+          child: Container(
+            alignment: Alignment.center,
+            decoration: const BoxDecoration(
+                color: Colors.transparent,
+                image: DecorationImage(
+                  image: AssetImage('assets/ems jacket.webp'),
+                  fit: BoxFit.cover,
+                  opacity: 0.98,
+                )),
+            child: SingleChildScrollView(
+              child: Column(
+                
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    margin: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.black.withOpacity(0.2)),
+                    child: Column(
+                      children: const [
+                      
+                        Text(
+                          'Transform your body\nand mind',
+                          style: TextStyle(
                             fontFamily: 'Roboto',
-                            fontSize: 18,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w800,
                             color: Colors.white,
-                            fontWeight: FontWeight.w500),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-           SizedBox(height: 90),
-                Container(
-                  padding: const EdgeInsets.all(20),
-                 margin: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.black.withOpacity(0.2)),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                            label: const Text('Email'),
-                            isDense: true,
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Email';
-                          } else if (!value.contains('@')) {
-                            return 'Please Enter Valid Email';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                        controller: _passwordController,
-                        obscureText: _isSecurePassword,
-                        decoration: InputDecoration(
-                            label: const Text('Password'),
-                            isDense: true,
-                            filled: true,
-                            fillColor: Colors.white,
-                            suffixIcon: togglepassword(),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Password';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
+             SizedBox(height: 180),
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                   margin: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.black.withOpacity(0.2)),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          style: TextStyle(color: Colors.black),
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                              //label: const Text('Email',style: TextStyle(color: Colors.grey),),
+                              hintText: 'Email',
+                              isDense: true,
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please Enter Email';
+                            } else if (!value.contains('@')) {
+                              return 'Please Enter Valid Email';
+                            }
+                            return null;
                           },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Text(
-                                'Forgot Password?',
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                          style: TextStyle(color: Colors.black),
+                          controller: _passwordController,
+                          obscureText: _isSecurePassword,
+                          decoration: InputDecoration(
+                             // label: const Text('Password',style: TextStyle(color: Colors.grey),),
+                             hintText: 'Password',
+                              isDense: true,
+                              filled: true,
+                              fillColor: Colors.white,
+                              suffixIcon: togglepassword(),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please Enter Password';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: const [
+                                Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            )),
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                            onTap: userLogin,
+                            child: SvgPicture.asset('assets/login.svg')),
+                        /*const SizedBox(height: 20),
+                        const Text(
+                          'OR',
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                    elevation: 10,
+                                    backgroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20))),
+                                onPressed: () {},
+                                child: Logo(Logos.google))),*/
+                        /*const SizedBox(width: 20),
+                            SvgPicture.asset('assets/Apple.svg'),*/ /*
+                          ],
+                        ),*/
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Don't have an Account?",
                                 style: TextStyle(
                                     fontFamily: 'Roboto',
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          )),
-                      const SizedBox(height: 20),
-                      GestureDetector(
-                          onTap: userLogin,
-                          child: SvgPicture.asset('assets/login.svg')),
-                      /*const SizedBox(height: 20),
-                      const Text(
-                        'OR',
-                        style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      const SizedBox(height: 20),
-                      Center(
-                          child: TextButton(
-                              style: TextButton.styleFrom(
-                                  elevation: 10,
-                                  backgroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(20))),
-                              onPressed: () {},
-                              child: Logo(Logos.google))),*/
-                      /*const SizedBox(width: 20),
-                          SvgPicture.asset('assets/Apple.svg'),*/ /*
-                        ],
-                      ),*/
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text("Don't have an Account?",
-                              style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignupPage()));
+                              },
+                              child: const Text(
+                                'Signup',
+                                style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white)),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignupPage()));
-                            },
-                            child: const Text(
-                              'Signup',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                decoration: TextDecoration.underline,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ));

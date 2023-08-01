@@ -54,10 +54,10 @@ class _PartnerState extends State<Partner> {
           title: const Text(
             'Our Partner Gym',
             style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w900, color: Colors.black),
+                fontSize: 18, fontWeight: FontWeight.w900,color: Colors.black ),
           ),
           centerTitle: true,
-          leading: const BackButton(color: Colors.black),
+          leading: const BackButton(color: Colors.black,),
         ),
         body: FutureBuilder<bool>(
           future: futureData,

@@ -10,7 +10,7 @@ class _GymListViewState extends State<GymListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF5E6C2),
+     backgroundColor: Color(0xffF5E6C2),
       appBar: AppBar(
         backgroundColor: Color(0xffF5E6C2),
         title: Text('Gym Branches',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.black),),

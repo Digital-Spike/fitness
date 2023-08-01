@@ -28,7 +28,7 @@ class _BranchListState extends State<BranchList> {
     return Scaffold(
         backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: const Color(0xffF5E6C2),
+         backgroundColor: const Color(0xffF5E6C2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
@@ -40,11 +40,11 @@ class _BranchListState extends State<BranchList> {
           title: const Text('Available Branches',
               style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black)),
+                  fontWeight: FontWeight.w600,color: Colors.black
+                  )),
           centerTitle: true,
-          leading: const BackButton(
-            color: Colors.black,
+          leading: const BackButton(color: Colors.black,
+            
           ),
         ),
         body: FutureBuilder<bool>(
@@ -123,7 +123,7 @@ class _BranchListState extends State<BranchList> {
                                       style: const TextStyle(
                                           fontFamily: 'Roboto',
                                           fontSize: 13,
-                                          fontWeight: FontWeight.w500),
+                                          fontWeight: FontWeight.w500,color: Colors.black),
                                       textAlign: TextAlign.start,
                                       maxLines: 3,
                                     ),

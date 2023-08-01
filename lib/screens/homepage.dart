@@ -10,6 +10,7 @@ import 'package:fitness/gymscreens/partner.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:fitness/screens/offers.dart';
 import 'package:fitness/screens/ourpackages.dart';
+import 'package:fitness/trainerscreens/our_trainers.dart';
 import 'package:fitness/trainerscreens/trainer_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 1, color: Colors.black),
-                      color: Colors.white.withOpacity(0.5),
+                      color: Colors.white.withOpacity(0.7),
                       /* gradient: const LinearGradient(
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
@@ -250,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const TrainerList(
+                                  builder: (context) => const OurTrainers(
                                         isOurTrainers: true,
                                         isBranchTrainers: false,
                                       )));
@@ -307,7 +308,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               const SizedBox(height: 10),
                               const Text(
-                                'Our Gym Partners',
+                                'Our Partners',
                                 style: TextStyle(
                                     
                                     fontWeight: FontWeight.w700,

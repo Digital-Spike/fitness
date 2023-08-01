@@ -20,7 +20,7 @@ class _WelcomeState extends State<Welcome> {
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset("assets/fj%20ddd.mp4")
+    controller = VideoPlayerController.asset('assets/welcom.mp4')
       ..initialize().then((_) {
         setState(() {});
       });

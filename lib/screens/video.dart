@@ -45,8 +45,8 @@ class _VideoState extends State<Video> {
         title: const Text(
           'Video',
           style: TextStyle(
-            fontFamily: 'Roboto',
-            color: Colors.black,
+            color: Colors.black
+            
           ),
         ),
         bottom: PreferredSize(

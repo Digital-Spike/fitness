@@ -31,11 +31,14 @@ class _TrainerListState extends State<TrainerList> {
     futureData = trainerList();
     super.initState();
   }
+ 
+ 
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffF5E6C2),
+       backgroundColor: Color(0xffF5E6C2),
         appBar: AppBar(
           backgroundColor: Color(0xffF5E6C2),
           elevation: 0,
@@ -49,148 +52,154 @@ class _TrainerListState extends State<TrainerList> {
           title: const Text('Available Trainers',
               style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black)),
+                  fontWeight: FontWeight.w600,color: Colors.black
+                  )),
           centerTitle: true,
-          leading: BackButton(color: Colors.black),
+          leading: BackButton(color: Colors.black,),
         ),
-        body: FutureBuilder<bool>(
-          future: futureData,
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return ListView.builder(
-                itemCount: trainersList.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      (widget.isOurTrainers ?? false)
-                          ? Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TrainerProfile(
-                                      trainer: trainersList[index])))
-                          : Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SlotBookingPage(
-                                      isBranch: widget.isBranchTrainers,
-                                      trainer: trainersList[index])));
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.white,),
-                      
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+        body: 
+           
+           
+            FutureBuilder<bool>(
+              future: futureData,
+              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return ListView.builder(
+                    itemCount: trainersList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          (widget.isOurTrainers ?? false)
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TrainerProfile(
+                                          trainer: trainersList[index])))
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SlotBookingPage(
+                                          isBranch: widget.isBranchTrainers,
+                                          trainer: trainersList[index])));
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.white,),
+                          
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 100,
-                                  width: 100,
-                                  child: CachedNetworkImage(
-                                    imageUrl: ApiList.imageUrl +
-                                        (trainersList[index]['image'] ?? ""),
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                  ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 100,
+                                      width: 100,
+                                      child: CachedNetworkImage(
+                                        imageUrl: ApiList.imageUrl +
+                                            (trainersList[index]['image'] ?? ""),
+                                        placeholder: (context, url) =>
+                                            const CircularProgressIndicator(),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 20),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          trainersList[index]['name'],
+                                          style: const TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.deepOrange),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Text(
+                                          trainersList[index]['description'],
+                                          style: const TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600,color: Colors.black),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        /*  Row(
+                                          children: [
+                                            const Icon(Icons.phone),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              ((trainersList[index]
+                                                              ['phoneNumber'])
+                                                          .toString()
+                                                          .length >=
+                                                      2
+                                                  ? trainersList[index]
+                                                      ['phoneNumber']
+                                                  : 'Not Available'),
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ],
+                                        ),*/
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                const SizedBox(width: 20),
-                                Column(
+                                const SizedBox(height: 10),
+                                Row(
                                   children: [
                                     Text(
-                                      trainersList[index]['name'],
-                                      style: const TextStyle(
-                                          fontSize: 17,
+                                      '    Available',
+                                      style: TextStyle(
+                                          fontFamily: 'Roboto',
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.deepOrange),
+                                          color: (trainersList[index]['status'] ==
+                                                  "ACTIVE")
+                                              ? Colors.green
+                                              : Colors.grey),
                                     ),
-                                    const SizedBox(height: 10),
-                                    Text(
-                                      trainersList[index]['description'],
-                                      style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600),
+                                    const Spacer(),
+                                    const Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: 30,
                                     ),
-                                    const SizedBox(height: 10),
-                                    /*  Row(
-                                      children: [
-                                        const Icon(Icons.phone),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          ((trainersList[index]
-                                                          ['phoneNumber'])
-                                                      .toString()
-                                                      .length >=
-                                                  2
-                                              ? trainersList[index]
-                                                  ['phoneNumber']
-                                              : 'Not Available'),
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),*/
+                                    const SizedBox(width: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Text(
+                                        trainersList[index]['rating'],
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                    )
                                   ],
                                 )
                               ],
                             ),
-                            const SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Text(
-                                  '    Available',
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: (trainersList[index]['status'] ==
-                                              "ACTIVE")
-                                          ? Colors.green
-                                          : Colors.grey),
-                                ),
-                                const Spacer(),
-                                const Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                  size: 30,
-                                ),
-                                const SizedBox(width: 5),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: Text(
-                                    trainersList[index]['rating'],
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   );
-                },
-              );
-            }
-
-            if (snapshot.hasError) {
-              const Text("Something wrong");
-            }
-
-            return const Center(child: CircularProgressIndicator());
-          },
-        ));
+                }
+        
+                if (snapshot.hasError) {
+                  const Text("Something wrong");
+                }
+        
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
+           
+          
+        );
   }
 
   Future<bool> trainerList() async {

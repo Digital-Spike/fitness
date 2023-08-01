@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/screens/editprofile.dart';
-import 'package:fitness/screens/homepage.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Text(
               'Profile',
               style: TextStyle(
-                  fontWeight: FontWeight.w600, color: Colors.black, fontSize: 20),
+                  fontWeight: FontWeight.w600,  fontSize: 20,color: Colors.black),
             ),
           ),
           actions: [
@@ -86,12 +85,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Text(
                               _displayName ?? '',
                               style:
-                                  const TextStyle(color: Colors.black, fontSize: 16),
+                                  const TextStyle( fontSize: 16),
                             ),
                             Text(
                       _email ?? '',
                       style:
-                          const TextStyle(color: Colors.black, fontSize: 16),
+                          const TextStyle( fontSize: 16),
                     ),
                           ],
                         ),
@@ -124,14 +123,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Change Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                  Text('Change your password easily')
+                                  Text('Change Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
+                                  Text('Change your password easily',style: TextStyle(color: Colors.black),)
                                 ],
                               ),
                               
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios)
+                          Icon(Icons.arrow_forward_ios,color: Colors.black,)
     
                         ],
                       ),
@@ -151,14 +150,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Change Language',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                  Text('Change your Language here')
+                                  Text('Change Language',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
+                                  Text('Change your Language here',style: TextStyle(color: Colors.black),)
                                 ],
                               ),
                               
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios)
+                          Icon(Icons.arrow_forward_ios,color: Colors.black,)
     
                         ],
                       ),
@@ -178,14 +177,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Subscription',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                  Text('Check your Subscription here')
+                                  Text('Subscription',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
+                                  Text('Check your Subscription here',style: TextStyle(color: Colors.black),)
                                 ],
                               ),
                               
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios)
+                          Icon(Icons.arrow_forward_ios,color: Colors.black,)
     
                         ],
                       ),
@@ -205,14 +204,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Privacy and Policy',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                  Text('Check our Policy here')
+                                  Text('Privacy and Policy',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
+                                  Text('Check our Policy here',style: TextStyle(color: Colors.black),)
                                 ],
                               ),
                               
                             ],
                           ),
-                          Icon(Icons.arrow_forward_ios)
+                          Icon(Icons.arrow_forward_ios,color: Colors.black,)
     
                         ],
                       ),
@@ -231,19 +230,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             Row(
                               children: [
-                              Icon(Icons.logout_outlined,size: 35,),
+                              Icon(Icons.logout_outlined,size: 35,color: Colors.black,),
                                 SizedBox(width: 5),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Logout',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-                                    Text('Click here to logout ')
+                                    Text('Logout',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
+                                    Text('Click here to logout ',style: TextStyle(color: Colors.black),)
                                   ],
                                 ),
                                 
                               ],
                             ),
-                            Icon(Icons.arrow_forward_ios)
+                            Icon(Icons.arrow_forward_ios,color: Colors.black,)
                      
                           ],
                         ),
@@ -286,7 +285,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           content: const Text(
             'Are you sure?',
             style: TextStyle(
-              color: Colors.black,
+              
               fontSize: 20,
             ),
             textAlign: TextAlign.center,

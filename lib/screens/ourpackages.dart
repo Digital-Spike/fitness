@@ -25,7 +25,8 @@ class _OurPackagesState extends State<OurPackages> {
   final List<bool> _selectedPlans = <bool>[true, false];
   bool vertical = false;
   bool isSelectedPlans = false;
-  bool single = false;
+  bool isSelectedPlans1=false;
+
 
   String? value;
   final items = ['Standard Plan', 'Special Plan'];
@@ -80,15 +81,16 @@ class _OurPackagesState extends State<OurPackages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: const Color(0xffF5E6C2),
+         backgroundColor: const Color(0xffF5E6C2),
           title: const Text(
             'Our Packages',
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),
+                fontSize: 20, fontWeight: FontWeight.w600,color: Colors.black ),
           ),
-          leading: const BackButton(color: Colors.black),
+          leading: const BackButton(color: Colors.black,),
           elevation: 0,
           centerTitle: true,
           bottom: PreferredSize(
@@ -107,8 +109,8 @@ class _OurPackagesState extends State<OurPackages> {
                 borderRadius: BorderRadius.circular(10),
                 style: const TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
+                    fontWeight: FontWeight.w600,color: Colors.black
+                    ),
                 decoration: InputDecoration(
                     isDense: true,
                     border: OutlineInputBorder(
@@ -170,6 +172,7 @@ class _OurPackagesState extends State<OurPackages> {
                             borderRadius: BorderRadius.circular(10)),
                         backgroundColor: colors1[index],
                         collapsedBackgroundColor: colors[index],
+                        collapsedTextColor: Colors.black,
                         textColor: Colors.black,
                         title: Row(
                           children: [
@@ -181,7 +184,7 @@ class _OurPackagesState extends State<OurPackages> {
                             Text(
                               session[index],
                               style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
+                                  fontSize: 16, fontWeight: FontWeight.w600,),
                             )
                           ],
                         ),
@@ -198,13 +201,13 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Price: ',
                                         style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w600),
+                                            fontWeight: FontWeight.w600,color: Colors.black),
                                       ),
                                       Text(
                                         (price[index]).toString(),
                                         style: const TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w600),
+                                            fontWeight: FontWeight.w600,color: Colors.black),
                                       )
                                     ],
                                   ),
@@ -214,9 +217,9 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Validity: ',
                                         style: TextStyle(
                                             fontSize: 18,
-                                            fontWeight: FontWeight.w600),
+                                            fontWeight: FontWeight.w600,color: Colors.black),
                                       ),
-                                      Text(validity[index])
+                                      Text(validity[index],style: TextStyle(color: Colors.black),)
                                     ],
                                   ),
                                 ],
@@ -231,9 +234,9 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Per Session: ',
                                         style: TextStyle(
                                             fontSize: 18,
-                                            fontWeight: FontWeight.w600),
+                                            fontWeight: FontWeight.w600,color: Colors.black),
                                       ),
-                                      Text(perSession[index])
+                                      Text(perSession[index],style: TextStyle(color: Colors.black),)
                                     ],
                                   ),
                                   MaterialButton(
@@ -413,34 +416,40 @@ class _OurPackagesState extends State<OurPackages> {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        return GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Container(
-            color: const Color.fromRGBO(0, 0, 0, 0.001),
-            child: GestureDetector(
-              onTap: () {},
-              child: DraggableScrollableSheet(
-                
-                initialChildSize: 1.0,
-                builder: (_, controller) {
-                  return SingleChildScrollView(
-                    child: Container(
-                      height: 1500,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25.0),
-                          topRight: Radius.circular(25.0),
+       return  Padding(
+           padding:  EdgeInsets.only(bottom:  MediaQuery.of(context).viewInsets.bottom)
+                       ,
+           child: GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Container(
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
+              child: GestureDetector(
+                onTap: () {},
+                child: DraggableScrollableSheet(
+                  expand: true,
+              initialChildSize: 1,
+                  builder: (BuildContext context, controller) {
+                    return SingleChildScrollView(
+                    
+                      controller: controller,
+                      child: Container(
+                        height: 1500,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25.0),
+                            topRight: Radius.circular(25.0),
+                          ),
                         ),
+                        child: WebViewWidget(controller: this.controller),
                       ),
-                      child: WebViewWidget(controller: this.controller),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        );
+                 ),
+         );
       },
     );
   }
