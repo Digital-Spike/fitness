@@ -8,6 +8,7 @@ import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:icons_plus/icons_plus.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -207,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                         GestureDetector(
                             onTap: userLogin,
                             child: SvgPicture.asset('assets/login.svg')),
-                        /*const SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         const Text(
                           'OR',
                           style: TextStyle(
@@ -217,16 +218,22 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white),
                         ),
                         const SizedBox(height: 20),
-                        Center(
-                            child: TextButton(
-                                style: TextButton.styleFrom(
-                                    elevation: 10,
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20))),
-                                onPressed: () {},
-                                child: Logo(Logos.google))),*/
+                       GestureDetector(
+                        onTap: (){},
+                         child: Container(
+                          height: 50,
+                          width: 130,
+                          padding: EdgeInsets.all(15),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white),
+                           child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Logo(Logos.google),
+                                        Text('  SignIn',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),)
+                                      ],
+                                    ),
+                         ),
+                       ),
                         /*const SizedBox(width: 20),
                             SvgPicture.asset('assets/Apple.svg'),*/ /*
                           ],
