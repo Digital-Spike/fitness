@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Fitness',
         theme: ThemeData(
-          primarySwatch: Colors.orange,
+          primarySwatch: Colors.grey,
+          brightness: Brightness.dark,
           fontFamily: 'NotoSans',
         ),
         home: const SplashScreen());

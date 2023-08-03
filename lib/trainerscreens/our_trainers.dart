@@ -48,9 +48,9 @@ class _OurTrainersState extends State<OurTrainers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffF5E6C2),
+       // backgroundColor: Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: Color(0xffF5E6C2),
+        //  backgroundColor: Color(0xffF5E6C2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
@@ -62,10 +62,10 @@ class _OurTrainersState extends State<OurTrainers> {
           title: const Text('Available Trainers',
               style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.w600,color: Colors.black
+                  fontWeight: FontWeight.w600,
                   )),
           centerTitle: true,
-          leading: BackButton(color: Colors.black,),
+         // leading: BackButton(color: Colors.black,),
         ),
         body: Container(
           child: Column(crossAxisAlignment: CrossAxisAlignment.center,

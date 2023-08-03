@@ -39,13 +39,13 @@ class _VideoState extends State<Video> {
   Widget build(BuildContext context) {
     return MainScreen(
       mainAppBar: AppBar(
-        backgroundColor: const Color(0xffF5E6C2),
+       // backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
         centerTitle: true,
         title: const Text(
           'Video',
           style: TextStyle(
-            color: Colors.black
+            
             
           ),
         ),
@@ -57,7 +57,7 @@ class _VideoState extends State<Video> {
           ),
         ),
         leading: BackButton(
-          color: Colors.black,
+         
           onPressed: () {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => const HomePage()));

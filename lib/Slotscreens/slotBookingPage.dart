@@ -74,18 +74,18 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5E6C2),
+     // backgroundColor: const Color(0xffF5E6C2),
       appBar: AppBar(
-        backgroundColor: const Color(0xffF5E6C2),
+     //   backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
        
         title: const Text('Book Your Session',
             style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.w700,color: Colors.black
+                fontWeight: FontWeight.w700,
                 )),
         centerTitle: true,
-        leading: const BackButton(color: Colors.black,),
+       // leading: const BackButton(color: Colors.black,),
       ),
       body: SingleChildScrollView(
         child: Column(

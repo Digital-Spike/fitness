@@ -39,7 +39,7 @@ class _MyBookingPageState extends State<MyBookingPage>
     return MainScreen(
       
       mainAppBar: AppBar(
-        backgroundColor: const Color(0xffF5E6C2),
+      //  backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -50,11 +50,11 @@ class _MyBookingPageState extends State<MyBookingPage>
         ),
         title: const Text(
           'My Booking',
-          style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black),
+          style: TextStyle(fontWeight: FontWeight.w600,),
         ),
         centerTitle: true,
         leading: BackButton(
-         color: Colors.black,
+        
           onPressed: () {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => const HomePage()));

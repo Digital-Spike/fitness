@@ -15,6 +15,7 @@ import 'package:fitness/trainerscreens/trainer_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:icons_plus/icons_plus.dart';
+import 'package:marquee/marquee.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -36,6 +37,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+   final user = FirebaseAuth.instance.currentUser!;
+  late String? _displayName;
   static const url =
       'https://instagram.com/fitness_journey_uae?igshid=MzRlODBiNWFlZA==';
   final number = '+971588340905';
@@ -52,41 +55,52 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     getUser();
     super.initState();
+     _displayName = user.displayName;
   }
+  
 
   @override
   Widget build(BuildContext context) {
     return MainScreen(
+      mainAppBar: AppBar(
+        elevation: 3,
+        title: Text(_displayName??''),
+        centerTitle: false,
+        automaticallyImplyLeading: false,
+        actions: [
+          Icon(Icons.notifications)
+        ],
+      ),
       mainChild: SingleChildScrollView(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: 70,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.9),
-                    image: const DecorationImage(
-                        image: AssetImage('assets/FJ FONT.png'),
-                        scale: 10,
+              // Container(
+              //   height: 70,
+              //   width: double.infinity,
+              //   decoration: BoxDecoration(
+              //       color: Colors.black.withOpacity(0.9),
+              //       image: const DecorationImage(
+              //           image: AssetImage('assets/FJ FONT.png'),
+              //           scale: 10,
                         
-                        alignment: Alignment.center)),
-              ),
-              Container(
-                height: 10,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                      Colors.orange,
-                      Colors.indigo,
-                      Colors.green,
-                      Colors.blue
-                    ])),
-              ),
+              //           alignment: Alignment.center)),
+              // ),
+              // Container(
+              //   height: 10,
+              //   width: double.infinity,
+              //   decoration: const BoxDecoration(
+              //       gradient: LinearGradient(
+              //           begin: Alignment.topLeft,
+              //           end: Alignment.bottomRight,
+              //           colors: [
+              //         Colors.orange,
+              //         Colors.indigo,
+              //         Colors.green,
+              //         Colors.blue
+              //       ])),
+              // ),
               const SizedBox(height: 30),
               GestureDetector(
                 onTap: () {
@@ -99,11 +113,12 @@ class _HomePageState extends State<HomePage> {
                               )));
                 },
                 child: Container(
-                    padding: const EdgeInsets.all(15),
+                    
+                  padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 1, color: Colors.black),
-                      color: Colors.white.withOpacity(0.7),
+                      color: Colors.white,
                       /* gradient: const LinearGradient(
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
@@ -120,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                       totalRepeatCount: 100,
                     )),
               ),
-
+      
               /* GestureDetector(
             onTap: () {
              /* Navigator.push(
@@ -183,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 3, color: Colors.white),
-                              color: Color(0xff50E3C2)),
+                              color: Color(0xfff26f14)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -221,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 3, color: Colors.white),
-                              color: Color(0xffFF5436)),
+                              color: Color(0xff758058)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -261,7 +276,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 3, color: Colors.white),
-                              color: Colors.orange.withOpacity(0.7)),
+                              color: Color(0xff8cbd62)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -296,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 3, color: Colors.white),
-                              color: Colors.indigo.withOpacity(0.7)),
+                              color: Color(0xfffff4d4d)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -331,7 +346,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 3, color: Colors.white),
-                              color: Colors.green.withOpacity(0.7)),
+                              color: Color(0xffffc16a)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -366,7 +381,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 3, color: Colors.white),
-                              color: Colors.blue.withOpacity(0.7)),
+                              color: Color(0xff006c84)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,

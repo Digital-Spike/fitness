@@ -40,9 +40,9 @@ class _PartnerState extends State<Partner> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffF5E6C2),
+       // backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: const Color(0xffF5E6C2),
+        //  backgroundColor: const Color(0xffF5E6C2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
@@ -54,10 +54,10 @@ class _PartnerState extends State<Partner> {
           title: const Text(
             'Our Partner Gym',
             style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w900,color: Colors.black ),
+                fontSize: 18, fontWeight: FontWeight.w900,),
           ),
           centerTitle: true,
-          leading: const BackButton(color: Colors.black,),
+         // leading: const BackButton(color: Colors.black,),
         ),
         body: FutureBuilder<bool>(
           future: futureData,

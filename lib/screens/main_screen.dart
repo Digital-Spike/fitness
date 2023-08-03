@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: const Color(0xffF5E6C2),
+    // backgroundColor: const Color(0xffF5E6C2),
       appBar: widget.mainAppBar,
       body: SafeArea(child: widget.mainChild),
       
@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         
          elevation: 0,
-        backgroundColor: Color(0xffF5E6C2),
+       // backgroundColor: Color(0xffF5E6C2),
           currentIndex: _bottomNavIndex ?? 0,
           onTap: (int index) {
             switchScreen(index);
@@ -39,10 +39,10 @@ class _MainScreenState extends State<MainScreen> {
           },
           selectedLabelStyle: TextStyle(fontWeight: FontWeight.w900),
           landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
-         selectedIconTheme: IconThemeData(color: Colors.black),
-         selectedItemColor: Colors.black,
-          unselectedIconTheme: IconThemeData(color: Colors.black),
-          unselectedItemColor: Colors.black,
+        selectedIconTheme: IconThemeData(color: Color(0xff9EEB47)),
+         selectedItemColor: Color(0xff9EEB47),
+         unselectedIconTheme: IconThemeData(color: Colors.white),
+         unselectedItemColor: Colors.white,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem> [

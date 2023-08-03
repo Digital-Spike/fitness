@@ -26,9 +26,9 @@ class _BranchListState extends State<BranchList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffF5E6C2),
+       // backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-         backgroundColor: const Color(0xffF5E6C2),
+        // backgroundColor: const Color(0xffF5E6C2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
@@ -40,12 +40,12 @@ class _BranchListState extends State<BranchList> {
           title: const Text('Available Branches',
               style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.w600,color: Colors.black
+                  fontWeight: FontWeight.w600,
                   )),
           centerTitle: true,
-          leading: const BackButton(color: Colors.black,
+          // leading: const BackButton(color: Colors.black,
             
-          ),
+          // ),
         ),
         body: FutureBuilder<bool>(
           future: futureData,

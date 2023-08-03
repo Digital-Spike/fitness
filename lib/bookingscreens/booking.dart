@@ -26,15 +26,15 @@ class _BookingState extends State<Booking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffF5E6C2),
+       // backgroundColor: Color(0xffF5E6C2),
         body: FutureBuilder<bool>(
             future: futureData,
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Padding(
                   padding: const EdgeInsets.all(15),
-                  child: Card(
-                    color: Colors.white,
+                  child: Container(
+                   // color: Colors.white,
                     child: (bookingData == null)
                         ? const Center(
                             child: Text(
@@ -45,165 +45,63 @@ class _BookingState extends State<Booking> {
                                   fontWeight: FontWeight.w700),
                             ),
                           )
-                        : Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Center(
-                                  child: Text(
-                                    'Booking Confirmed',
-                                    style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700),
-                                  ),
-                                ),
-                                const SizedBox(height: 20),
-                                Row(
-                                  children: [
-                                    const Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        'Trainer Name : ',
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 4,
-                                      child: Text(
-                                        ' ${bookingData?['trainerName']}',
-                                        style: const TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 15),
-                                Row(
-                                  children: [
-                                    const Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        'Booking Id :',
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 4,
-                                      child: Text(
-                                        ' ${bookingData?['bookingId']}',
-                                        style: const TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 15),
-                                Row(
-                                  children: [
-                                    const Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        'Booking Date :',
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 4,
-                                      child: Text(
-                                        ' ${bookingData?['bookingDate']}',
-                                        style: const TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 15),
-                                Row(
-                                  children: [
-                                    const Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        'Booking Time :',
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 4,
-                                      child: Text(
-                                        ' ${bookingData?['bookingTime']}',
-                                        style: const TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    const Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        'Branch Name :',
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 4,
-                                      child: Text(
-                                        ' ${bookingData?['branchName']}',
-                                        style: const TextStyle(
-                                            fontFamily: 'Roboto',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 40),
-                                const Center(
-                                  child: Text(
-                                    'Thank You For Choosing\nFitness Journey',
-                                    style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        : ListView.builder(
+           itemCount: 1,
+            itemBuilder: ((context, index) {
+            return Container(
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text('Trainer :',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
+                      Text(' ${bookingData?['trainerName']}',style: TextStyle(color: Colors.deepOrange,fontSize: 16),)
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: [
+                      Text('Booking Id :',style: TextStyle(fontSize: 16,color: Colors.black),),
+                      Text(' ${bookingData?['bookingId']}',style: TextStyle(fontSize: 16,color: Colors.black),)
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    Row(
+                      children: [
+                        Text('Date :',style: TextStyle(fontSize: 16,color: Colors.black),),
+                        Text(' ${bookingData?['bookingDate']}',style: TextStyle(fontSize: 16,color: Colors.black),)
+                      ],
+                    ),
+                     Row(children: [
+                    Text('Time :',style: TextStyle(fontSize: 16,color: Colors.black),),
+                    Text(' ${bookingData?['bookingTime']}',style: TextStyle(fontSize: 16,color: Colors.black),)
+                  ],),
+                  ],),
+                  
+                 
+                   SizedBox(height: 5),
+                  Row(children: [
+                    Text('Branch :',style: TextStyle(fontSize: 16,color: Colors.black),),
+                    Text( ' ${bookingData?['branchName']}',style: TextStyle(fontSize: 16,color: Colors.black),)
+                  ],),
+                  SizedBox(height: 5,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      MaterialButton(onPressed: (){},child: Text('Postpone',style: TextStyle(color: Colors.white,fontSize: 16),),color:Color(0xff404040),minWidth: 100,),
+                       MaterialButton(onPressed: (){},child: Text('Prepone',style: TextStyle(color: Colors.white,fontSize: 16),),color: Color(0xff404040),minWidth: 110,),
+                        MaterialButton(onPressed: (){},child: Text('Cancel',style: TextStyle(color: Colors.white,fontSize: 16),),color: Color(0xff404040),minWidth: 110,)
+                    ],
+                  )
+                ],
+              ),
+            );
+          })),
                   ),
                 );
               }

@@ -38,9 +38,9 @@ class _TrainerListState extends State<TrainerList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Color(0xffF5E6C2),
+     //  backgroundColor: Color(0xffF5E6C2),
         appBar: AppBar(
-          backgroundColor: Color(0xffF5E6C2),
+        //  backgroundColor: Color(0xffF5E6C2),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.0),
@@ -52,10 +52,10 @@ class _TrainerListState extends State<TrainerList> {
           title: const Text('Available Trainers',
               style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.w600,color: Colors.black
+                  fontWeight: FontWeight.w600,
                   )),
           centerTitle: true,
-          leading: BackButton(color: Colors.black,),
+         // leading: BackButton(color: Colors.black,),
         ),
         body: 
            
@@ -86,7 +86,7 @@ class _TrainerListState extends State<TrainerList> {
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
                             margin: EdgeInsets.all(10),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.white,),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.black,),
                           
                             padding: const EdgeInsets.all(10),
                             child: Column(
@@ -123,7 +123,7 @@ class _TrainerListState extends State<TrainerList> {
                                           trainersList[index]['description'],
                                           style: const TextStyle(
                                               fontSize: 17,
-                                              fontWeight: FontWeight.w600,color: Colors.black),
+                                              fontWeight: FontWeight.w600,color: Colors.white),
                                         ),
                                         const SizedBox(height: 10),
                                         /*  Row(

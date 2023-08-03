@@ -39,7 +39,7 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: Color(0xffF5E6C2),
+       // backgroundColor: Color(0xffF5E6C2),
         body: SafeArea(
           child: Container(
             alignment: Alignment.center,
@@ -105,7 +105,7 @@ class _SignupPageState extends State<SignupPage> {
                             style: TextStyle(color: Colors.black),
                             controller: _userNameController,
                             decoration: InputDecoration(
-                               // label: const Text('User Name',style: TextStyle(color: Colors.grey),),
+                                label: const Text('User Name',style: TextStyle(color: Colors.grey),),
                                hintText: 'User Name',
                                 isDense: true,
                                 filled: true,
@@ -125,9 +125,9 @@ class _SignupPageState extends State<SignupPage> {
                             decoration: const InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.white,
+                                fillColor: Colors.white60,
                                 labelStyle: TextStyle(color: Colors.grey),
-                               // labelText: 'Phone Number',
+                                labelText: 'Phone Number',
                                hintText: 'Phone Number',
                                 border: OutlineInputBorder(
                                     borderRadius:
@@ -144,7 +144,7 @@ class _SignupPageState extends State<SignupPage> {
                             style: TextStyle(color: Colors.black),
                             controller: _emailController,
                             decoration: InputDecoration(
-                                //label: const Text('Email',style: TextStyle(color: Colors.grey),),
+                                label: const Text('Email',style: TextStyle(color: Colors.grey),),
                                 hintText: 'Email',
                                 isDense: true,
                                 filled: true,
@@ -164,7 +164,7 @@ class _SignupPageState extends State<SignupPage> {
                             controller: _passwordController,
                             obscureText: _isSecurePassword,
                             decoration: InputDecoration(
-                                //label: const Text('Password',style: TextStyle(color: Colors.grey),),
+                                label: const Text('Password',style: TextStyle(color: Colors.grey),),
                                 hintText: 'Password',
                                 isDense: true,
                                 filled: true,

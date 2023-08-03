@@ -11,24 +11,24 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5E6C2),
+     // backgroundColor: const Color(0xffF5E6C2),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xffF5E6C2),
+      //  backgroundColor: const Color(0xffF5E6C2),
         title: const Text(
           'Terms And Conditions',
           style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),
+              fontSize: 20, fontWeight: FontWeight.w600, ),
         ),
         centerTitle: true,
         leading: const BackButton(
-          color: Colors.black,
+          color: Colors.orange,
         ),
         bottom: PreferredSize(child: Container(height: 1,color: Colors.black,), preferredSize: Size.fromHeight(1.0,)),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

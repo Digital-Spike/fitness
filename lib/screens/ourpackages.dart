@@ -82,15 +82,15 @@ class _OurPackagesState extends State<OurPackages> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-        backgroundColor: const Color(0xffF5E6C2),
+       // backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-         backgroundColor: const Color(0xffF5E6C2),
+        // backgroundColor: const Color(0xffF5E6C2),
           title: const Text(
             'Our Packages',
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.w600,color: Colors.black ),
+                fontSize: 20, fontWeight: FontWeight.w600,),
           ),
-          leading: const BackButton(color: Colors.black,),
+         // leading: const BackButton(color: Colors.black,),
           elevation: 0,
           centerTitle: true,
           bottom: PreferredSize(
@@ -109,13 +109,13 @@ class _OurPackagesState extends State<OurPackages> {
                 borderRadius: BorderRadius.circular(10),
                 style: const TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,color: Colors.black
+                    fontWeight: FontWeight.w600,
                     ),
                 decoration: InputDecoration(
                     isDense: true,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    fillColor: Colors.white,
+                   // fillColor: Colors.white,
                     filled: true),
                 items: items.map(buildMenuItem).toList(),
                 onChanged: (value) {

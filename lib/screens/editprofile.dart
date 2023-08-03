@@ -13,14 +13,14 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5E6C2),
+    //  backgroundColor: const Color(0xffF5E6C2),
       appBar: AppBar(
-        backgroundColor: const Color(0xffF5E6C2),
+     //   backgroundColor: const Color(0xffF5E6C2),
         title: const Text(
           'Edit Profile',
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
-        leading: const BackButton(color: Colors.black),
+      //  leading: const BackButton(color: Colors.black),
         elevation: 0,
        
       ),
@@ -58,143 +58,164 @@ class _EditProfileState extends State<EditProfile> {
                                           onTap: 
                                           _showDialog,
                                           child: Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50),color: Colors.white),
-                                            child: Image.asset('assets/camera.png',scale: 1.5,))))
+                                            padding: EdgeInsets.all(2),
+                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.black),
+                                            child: Icon(Icons.photo_camera_outlined,size: 35,))))
                                   ],
                                 ),
                               ),
                 ),
               const SizedBox(height: 15),
-              const Divider(height: 1.0,color: Colors.black,thickness: 1.0,),
+              const Divider(height: 1.0,color: Colors.white,thickness: 1.0,),
               const SizedBox(height: 15),
-              const Text(' Username',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const Text(' Username',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),),
               const SizedBox(height: 5),
-            TextFormField(
-                              
-                              decoration: InputDecoration(
-                                  label: const Text('User Name'),
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter user name';
-                                }
-                                return null;
-                              },
-                            ),
+            SizedBox(
+              height: 45,
+              child: TextFormField(
+                                
+                                decoration: InputDecoration(
+                                    label: const Text('User Name'),
+                                    isDense: true,
+                                    filled: true,
+                                   // fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter user name';
+                                  }
+                                  return null;
+                                },
+                              ),
+            ),
                             const SizedBox(height: 15),
-              const Text(' Name',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const Text(' Name',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),),
               const SizedBox(height: 5),
-                            TextFormField(
-                              
-                              decoration: InputDecoration(
-                                  label: const Text('Name'),
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter Name';
-                                }
-                                return null;
-                              },
+                            SizedBox(
+                              height: 45,
+                              child: TextFormField(
+                                
+                                decoration: InputDecoration(
+                                    label: const Text('Name'),
+                                    isDense: true,
+                                    filled: true,
+                                  //  fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter Name';
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
                            const SizedBox(height: 15),
-              const Text(' Email',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const Text(' Email',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),),
               const SizedBox(height: 5),
-                            TextFormField(
-                              
-                              decoration: InputDecoration(
-                                  label: const Text('Email'),
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter Email';
-                                }
-                                return null;
-                              },
+                            SizedBox(
+                              height: 45,
+                              child: TextFormField(
+                                
+                                decoration: InputDecoration(
+                                    label: const Text('Email'),
+                                    isDense: true,
+                                    filled: true,
+                                   // fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter Email';
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
                           const SizedBox(height: 15),
-              const Text(' Phone Number',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const Text(' Phone Number',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),),
               const SizedBox(height: 5),
-                            TextFormField(
-                              
-                              decoration: InputDecoration(
-                                  label: const Text('Phone Number'),
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter Phone Number';
-                                }
-                                return null;
-                              },
+                            SizedBox(
+                              height: 45,
+                              child: TextFormField(
+                                
+                                decoration: InputDecoration(
+                                    label: const Text('Phone Number'),
+                                    isDense: true,
+                                    filled: true,
+                                   // fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter Phone Number';
+                                  }
+                                  return null;
+                                },
+                              ),
                             ),
                             const SizedBox(height: 15),
-              const Text(' Weight',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const Text(' Weight',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),),
               const SizedBox(height: 5),
-                            TextFormField(
-                              
-                              decoration: InputDecoration(
-                                  prefix: DropdownButton<String>(
-                                    elevation: 0,
-                                    value: value,
-                                    borderRadius: BorderRadius.circular(5),
-                                    isDense: true,
-                                    hint: const Text('Kgs'),
-                                    items: items.map(buildMenuItem).toList(), onChanged: (value)=>setState((){ this.value=value;
-                                    }
-                              )),
-                             
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                             
-                            ),
-                           const SizedBox(height: 15),
-              const Text(' Height',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
-              const SizedBox(height: 5),
-                            TextFormField(
-                              
-                              decoration: InputDecoration(
-                              prefix: DropdownButton(items: [], onChanged: (value)=>setState(() {
+                            SizedBox(
+                              height: 45,
+                              child: TextFormField(
                                 
-                              })),
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                             
+                                decoration: InputDecoration(
+                                    prefix: DropdownButton<String>(
+                                      elevation: 0,
+                                      value: value,
+                                      borderRadius: BorderRadius.circular(5),
+                                      isDense: true,
+                                      hint: const Text('Kgs'),
+                                      items: items.map(buildMenuItem).toList(), onChanged: (value)=>setState((){ this.value=value;
+                                      }
+                                )),
+                               
+                                    isDense: true,
+                                    filled: true,
+                                    //fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10))),
+                               
+                              ),
                             ),
                            const SizedBox(height: 15),
-              const Text(' Do You Have Any Previous Injuries?',style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black,fontSize: 16),),
+              const Text(' Height',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),),
               const SizedBox(height: 5),
-                            TextFormField(
-                              
-                              decoration: InputDecoration(
+                            SizedBox(
+                              height: 45,
+                              child: TextFormField(
+                                
+                                decoration: InputDecoration(
+                                prefix: DropdownButton(items: [], onChanged: (value)=>setState(() {
                                   
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                              
+                                })),
+                                    isDense: true,
+                                    filled: true,
+                                  //  fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10))),
+                               
+                              ),
+                            ),
+                           const SizedBox(height: 15),
+              const Text(' Do You Have Any Previous Injuries?',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),),
+              const SizedBox(height: 5),
+                            SizedBox(
+                              height: 45,
+                              child: TextFormField(
+                                
+                                decoration: InputDecoration(
+                                    
+                                    isDense: true,
+                                    filled: true,
+                                   // fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10))),
+                                
+                              ),
                             ),
                             const SizedBox(height: 25),
                             Center(
@@ -205,7 +226,7 @@ class _EditProfileState extends State<EditProfile> {
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
                                   gradient: const LinearGradient(colors: [Colors.deepOrangeAccent,Colors.amberAccent])),
                                   padding: const EdgeInsets.all(10),
-                                  child: const Center(child: Text('Submit',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),))),
+                                  child: const Center(child: Text('Submit',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,),))),
                               ),
                             ),
                             const SizedBox(height: 40,)
@@ -218,7 +239,7 @@ class _EditProfileState extends State<EditProfile> {
   void _showDialog() {
     showDialog(context: context, builder: (context){
       return CupertinoAlertDialog(
-        title: Image.asset('assets/CameraIcon.png',height: 60,),
+        title: Image.asset('assets/CameraIcon.png',height: 60,color: Colors.white,),
         content: const Text('Choose from',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
        actions: [
          MaterialButton(onPressed: () {

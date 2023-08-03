@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: Color(0xffF5E6C2),
+      //.com  backgroundColor: Color(0xffF5E6C2),
         body: SafeArea(
           child: Container(
             alignment: Alignment.center,
@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.black),
                           controller: _emailController,
                           decoration: InputDecoration(
-                              //label: const Text('Email',style: TextStyle(color: Colors.grey),),
+                              label: const Text('Email',style: TextStyle(color: Colors.grey),),
                               hintText: 'Email',
                               isDense: true,
                               filled: true,
@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: _passwordController,
                           obscureText: _isSecurePassword,
                           decoration: InputDecoration(
-                             // label: const Text('Password',style: TextStyle(color: Colors.grey),),
+                             label: const Text('Password',style: TextStyle(color: Colors.grey),),
                              hintText: 'Password',
                               isDense: true,
                               filled: true,

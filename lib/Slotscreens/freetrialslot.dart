@@ -14,7 +14,7 @@ class FreetrialSlot extends StatefulWidget {
 
 class _FreetrialSlotState extends State<FreetrialSlot> {
 
-TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
+TimeOfDay _timeOfDay = TimeOfDay.now();
 
   void _showTimePicker(){
     showTimePicker(
@@ -29,9 +29,9 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF5E6C2),
+     // backgroundColor: const Color(0xffF5E6C2),
       appBar: AppBar(
-        backgroundColor: const Color(0xffF5E6C2),
+       // backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -44,9 +44,9 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: Colors.black)),
+                )),
         centerTitle: true,
-        leading: const BackButton(color: Colors.black),
+       // leading: const BackButton(color: Colors.black),
       ),
       body:  SingleChildScrollView(
         child: Padding(
@@ -63,7 +63,7 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
             borderRadius: BorderRadius.all(Radius.circular(10)),
             
           ),
-          fillColor: Colors.white,
+         // fillColor: Colors.white,
           filled: true,
           hintText: 'Enter Your Name',
         ),
@@ -79,7 +79,7 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
             borderRadius: BorderRadius.all(Radius.circular(10)),
             
           ),
-          fillColor: Colors.white,
+         // fillColor: Colors.white,
           filled: true,
           hintText: 'Enter Phone Number',
         ),
@@ -95,7 +95,7 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
             borderRadius: BorderRadius.all(Radius.circular(10)),
             
           ),
-          fillColor: Colors.white,
+         // fillColor: Colors.white,
           filled: true,
           hintText: 'Enter Your Email',
         ),
@@ -111,7 +111,7 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
             borderRadius: BorderRadius.all(Radius.circular(10)),
             
           ),
-          fillColor: Colors.white,
+         // fillColor: Colors.white,
           filled: true,
           hintText: 'Enter Your City',
         ),
@@ -128,14 +128,14 @@ TimeOfDay _timeOfDay =const TimeOfDay(hour: 10, minute: 30);
                     Container(
                       padding: EdgeInsets.all(5),
                       margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 1,color: Colors.black),color: Colors.white),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 1,color: Colors.grey),color: Colors.black),
                       child: Icon(Icons.access_time_filled_outlined,size: 30,),
                     ),
                     Container(
                       padding: EdgeInsets.all(5),
                       height: 45,
                       width: 150,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 1,color: Colors.black),color: Colors.white),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all(width: 1,color: Colors.grey),),
                       child: Row(
                         children: [
                           Text('Time: ',style: TextStyle(fontSize: 16),),
