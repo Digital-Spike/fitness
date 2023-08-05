@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-             SizedBox(height: 180),
+             SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(20),
                    margin: EdgeInsets.all(20),
@@ -149,8 +149,9 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.black),
                           controller: _emailController,
                           decoration: InputDecoration(
-                              label: const Text('Email',style: TextStyle(color: Colors.grey),),
+                            //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
                               hintText: 'Email',
+                              hintStyle: TextStyle(color: Colors.grey),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
@@ -171,8 +172,9 @@ class _LoginPageState extends State<LoginPage> {
                           controller: _passwordController,
                           obscureText: _isSecurePassword,
                           decoration: InputDecoration(
-                             label: const Text('Password',style: TextStyle(color: Colors.grey),),
+                          //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
                              hintText: 'Password',
+                             hintStyle: TextStyle(color: Colors.grey),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
@@ -220,24 +222,13 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 20),
                        GestureDetector(
                         onTap: (){},
-                         child: Container(
-                          height: 50,
-                          width: 130,
-                          padding: EdgeInsets.all(15),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white),
-                           child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Logo(Logos.google),
-                                        Text('  SignIn',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),)
-                                      ],
-                                    ),
-                         ),
+                         child: SvgPicture.asset('assets/GoogleSignIn.svg'),
                        ),
                         /*const SizedBox(width: 20),
                             SvgPicture.asset('assets/Apple.svg'),*/ /*
                           ],
                         ),*/
+                        SvgPicture.asset('assets/Save.svg'),
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

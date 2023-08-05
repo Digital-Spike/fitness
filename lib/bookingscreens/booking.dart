@@ -56,8 +56,8 @@ class _BookingState extends State<Booking> {
                 children: [
                   Row(
                     children: [
-                      Text('Trainer :',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color: Colors.black),),
-                      Text(' ${bookingData?['trainerName']}',style: TextStyle(color: Colors.deepOrange,fontSize: 16),)
+                      Text('Trainer :',style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: Colors.black),),
+                      Text(' ${bookingData?['trainerName']}',style: TextStyle(color: Colors.deepOrange,fontSize: 15),)
                     ],
                   ),
                   SizedBox(height: 5),
@@ -73,13 +73,13 @@ class _BookingState extends State<Booking> {
                     children: [
                     Row(
                       children: [
-                        Text('Date :',style: TextStyle(fontSize: 15,color: Colors.black),),
-                        Text(' ${bookingData?['bookingDate']}',style: TextStyle(fontSize: 14,color: Colors.black),)
+                        Text('Date :',style: TextStyle(fontSize: 14,color: Colors.black),),
+                        Text(' ${bookingData?['bookingDate']}',style: TextStyle(fontSize: 12,color: Colors.black),)
                       ],
                     ),
                      Row(children: [
-                    Text('Time :',style: TextStyle(fontSize: 15,color: Colors.black),),
-                    Text(' ${bookingData?['bookingTime']}',style: TextStyle(fontSize: 14,color: Colors.black),)
+                    Text('Time :',style: TextStyle(fontSize: 14,color: Colors.black),),
+                    Text(' ${bookingData?['bookingTime']}',style: TextStyle(fontSize: 12,color: Colors.black),)
                   ],),
                   ],),
                   
