@@ -50,7 +50,7 @@ class _BookingState extends State<Booking> {
             itemBuilder: ((context, index) {
             return Container(
               padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(5),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white),
               child: Column(
                 children: [
@@ -63,8 +63,8 @@ class _BookingState extends State<Booking> {
                   SizedBox(height: 5),
                   Row(
                     children: [
-                      Text('Booking Id :',style: TextStyle(fontSize: 16,color: Colors.black),),
-                      Text(' ${bookingData?['bookingId']}',style: TextStyle(fontSize: 16,color: Colors.black),)
+                      Text('Booking Id :',style: TextStyle(fontSize: 15,color: Colors.black),),
+                      Text(' ${bookingData?['bookingId']}',style: TextStyle(fontSize: 15,color: Colors.black),)
                     ],
                   ),
                   SizedBox(height: 5),
@@ -73,29 +73,29 @@ class _BookingState extends State<Booking> {
                     children: [
                     Row(
                       children: [
-                        Text('Date :',style: TextStyle(fontSize: 16,color: Colors.black),),
-                        Text(' ${bookingData?['bookingDate']}',style: TextStyle(fontSize: 16,color: Colors.black),)
+                        Text('Date :',style: TextStyle(fontSize: 15,color: Colors.black),),
+                        Text(' ${bookingData?['bookingDate']}',style: TextStyle(fontSize: 14,color: Colors.black),)
                       ],
                     ),
                      Row(children: [
-                    Text('Time :',style: TextStyle(fontSize: 16,color: Colors.black),),
-                    Text(' ${bookingData?['bookingTime']}',style: TextStyle(fontSize: 16,color: Colors.black),)
+                    Text('Time :',style: TextStyle(fontSize: 15,color: Colors.black),),
+                    Text(' ${bookingData?['bookingTime']}',style: TextStyle(fontSize: 14,color: Colors.black),)
                   ],),
                   ],),
                   
                  
                    SizedBox(height: 5),
                   Row(children: [
-                    Text('Branch :',style: TextStyle(fontSize: 16,color: Colors.black),),
-                    Text( ' ${bookingData?['branchName']}',style: TextStyle(fontSize: 16,color: Colors.black),)
+                    Text('Branch :',style: TextStyle(fontSize: 15,color: Colors.black),),
+                    Text( ' ${bookingData?['branchName']}',style: TextStyle(fontSize: 15,color: Colors.black),)
                   ],),
                   SizedBox(height: 5,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      MaterialButton(onPressed: (){},child: Text('Postpone',style: TextStyle(color: Colors.white,fontSize: 16),),color:Color(0xff404040),minWidth: 100,),
-                       MaterialButton(onPressed: (){},child: Text('Prepone',style: TextStyle(color: Colors.white,fontSize: 16),),color: Color(0xff404040),minWidth: 110,),
-                        MaterialButton(onPressed: (){},child: Text('Cancel',style: TextStyle(color: Colors.white,fontSize: 16),),color: Color(0xff404040),minWidth: 110,)
+                      MaterialButton(onPressed: (){},child: Text('Postpone',style: TextStyle(color: Colors.white,fontSize: 16),),color:Color(0xff404040)),
+                       MaterialButton(onPressed: (){},child: Text('Prepone',style: TextStyle(color: Colors.white,fontSize: 16),),color: Color(0xff404040)),
+                        MaterialButton(onPressed: (){},child: Text('Cancel',style: TextStyle(color: Colors.white,fontSize: 16),),color: Color(0xff404040))
                     ],
                   )
                 ],

@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'dart:io';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
@@ -39,6 +41,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
    final user = FirebaseAuth.instance.currentUser!;
   late String? _displayName;
+  File? _profileImage;
   static const url =
       'https://instagram.com/fitness_journey_uae?igshid=MzRlODBiNWFlZA==';
   final number = '+971588340905';
@@ -63,12 +66,28 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MainScreen(
       mainAppBar: AppBar(
-        elevation: 3,
-        title: Text(_displayName??''),
+        toolbarHeight: 80,
+        elevation: 0,
+        title: Row(
+         mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              minRadius: 33,
+               backgroundColor: Colors.white,
+                        backgroundImage: _profileImage != null
+                            ? FileImage(_profileImage!)
+                            : null,
+                        child: _profileImage == null
+                            ? const Icon(Icons.person)
+                            : null,
+            ),SizedBox(width: 10),
+            Text(_displayName??''),
+          ],
+        ),
         centerTitle: false,
         automaticallyImplyLeading: false,
         actions: [
-          Icon(Icons.notifications)
+          Icon(Icons.notifications),SizedBox(width: 10,)
         ],
       ),
       mainChild: SingleChildScrollView(

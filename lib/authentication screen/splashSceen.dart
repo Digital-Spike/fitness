@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //backgroundColor: Color(0xffF5E6C2),
       body: Center(
         child: Image.asset(
-          'assets/Comp 1.gif',
+          'assets/FJ.gif',
           height: 350, // Adjust the height as needed
           width: 300, // Adjust the width as needed
         ),

@@ -25,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar: widget.mainAppBar,
       body: SafeArea(child: widget.mainChild),
       
-      
+      extendBody: true,
       bottomNavigationBar: BottomNavigationBar(
         
          elevation: 0,

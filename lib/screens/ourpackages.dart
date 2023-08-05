@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class OurPackages extends StatefulWidget {
   const OurPackages({super.key});
@@ -24,7 +25,8 @@ class _OurPackagesState extends State<OurPackages> {
   ];
   final List<bool> _selectedPlans = <bool>[true, false];
   bool vertical = false;
-  bool isSelectedPlans = false;
+  bool isSelectedPlans = true;
+  bool isSelectedPlans2=false;
   bool isSelectedPlans1=false;
 
 
@@ -126,6 +128,18 @@ class _OurPackagesState extends State<OurPackages> {
                 }),
           ),
           const SizedBox(height: 10),
+          // ToggleSwitch(
+          //   totalSwitches: 2,
+          //   labels: [
+          //     'Single','Buddy'
+          //   ],
+          //   doubleTapDisable: true,
+          //   onToggle: (index) {
+          //     setState(() {
+          //       isSelectedPlans=!isSelectedPlans;
+          //     });
+          //   },
+          // ),
           ToggleButtons(
             direction: vertical ? Axis.vertical : Axis.horizontal,
             onPressed: (int index) {
@@ -153,6 +167,7 @@ class _OurPackagesState extends State<OurPackages> {
           const SizedBox(height: 10),
           Visibility(
             visible: !isSelectedPlans,
+            replacement: SizedBox.shrink(),
             child: Expanded(
               child: ListView.builder(
                   itemCount: session.length,

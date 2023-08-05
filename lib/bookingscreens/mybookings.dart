@@ -63,59 +63,56 @@ class _MyBookingPageState extends State<MyBookingPage>
       ),
       mainChild: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(5),
-            child: Container(
-              margin: const EdgeInsets.all(5),
-              padding: const EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
+          Container(
+            margin: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+            child: TabBar(
+              controller: _tabController,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.black,
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(7),
+                color: Colors
+                    .deepOrange, // Set the indicator color to deep orange
               ),
-              child: TabBar(
-                controller: _tabController,
-                labelColor: Colors.white,
-                unselectedLabelColor: Colors.black,
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7),
-                  color: Colors
-                      .deepOrange, // Set the indicator color to deep orange
+              tabs: [
+                Tab(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Bookings',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        color: _tabController.index == 0
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
+                  ),
                 ),
-                tabs: [
-                  Tab(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Bookings',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: _tabController.index == 0
-                              ? Colors.white
-                              : Colors.black,
-                        ),
+                Tab(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'History',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        color: _tabController.index == 1
+                            ? Colors.white
+                            : Colors.black,
                       ),
                     ),
                   ),
-                  Tab(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'History',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                          color: _tabController.index == 1
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Expanded(

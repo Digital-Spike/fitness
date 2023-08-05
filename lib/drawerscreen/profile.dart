@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
+import 'package:fitness/profilescreens/subscription.dart';
 import 'package:fitness/screens/editprofile.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -198,33 +199,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                     ),
-                     Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:  Color(0xffe2e8e4)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset('assets/CC.svg',height: 40,),
-                              const SizedBox(width: 10),
-                              const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Subscription',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
-                                  Text('Check your Subscription here',style: TextStyle(color: Colors.black),)
-                                ],
-                              ),
-                              
-                            ],
-                          ),
-                          const Icon(Icons.arrow_forward_ios,color: Colors.black,)
-    
-                        ],
-                      ),
-                    ),
+                     GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Subscription()));
+                      },
+                       child: Container(
+                        margin: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:  Color(0xffe2e8e4)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          
+                          children: [
+                            Row(
+                              children: [
+                                SvgPicture.asset('assets/CC.svg',height: 40,),
+                                const SizedBox(width: 10),
+                                const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Subscription',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
+                                    Text('Check your Subscription here',style: TextStyle(color: Colors.black),)
+                                  ],
+                                ),
+                                
+                              ],
+                            ),
+                            const Icon(Icons.arrow_forward_ios,color: Colors.black,)
+                         
+                          ],
+                        ),
+                                         ),
+                     ),
                      Container(
                       margin: const EdgeInsets.all(10),
                       padding: const EdgeInsets.all(5),
