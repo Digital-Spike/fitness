@@ -1,9 +1,9 @@
-import 'package:fitness/bookingscreens/bookinghistory.dart';
+import 'package:fitness/my_booking/bookinghistory.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'booking.dart';
 import '../screens/homepage.dart';
+import 'booking.dart';
 
 class MyBookingPage extends StatefulWidget {
   const MyBookingPage({super.key});
@@ -37,9 +37,8 @@ class _MyBookingPageState extends State<MyBookingPage>
   @override
   Widget build(BuildContext context) {
     return MainScreen(
-      
       mainAppBar: AppBar(
-      //  backgroundColor: const Color(0xffF5E6C2),
+        //  backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -50,11 +49,12 @@ class _MyBookingPageState extends State<MyBookingPage>
         ),
         title: const Text(
           'My Booking',
-          style: TextStyle(fontWeight: FontWeight.w600,),
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
         ),
         centerTitle: true,
         leading: BackButton(
-        
           onPressed: () {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => const HomePage()));
@@ -76,8 +76,8 @@ class _MyBookingPageState extends State<MyBookingPage>
               unselectedLabelColor: Colors.black,
               indicator: BoxDecoration(
                 borderRadius: BorderRadius.circular(7),
-                color: Colors
-                    .deepOrange, // Set the indicator color to deep orange
+                color:
+                    Colors.deepOrange, // Set the indicator color to deep orange
               ),
               tabs: [
                 Tab(
@@ -120,10 +120,7 @@ class _MyBookingPageState extends State<MyBookingPage>
               color: Colors.black, // Set background color to black
               child: TabBarView(
                 controller: _tabController,
-                children: const [
-                  Booking(),
-                 BookingHistory()
-                ],
+                children: const [Booking(), BookingHistory()],
               ),
             ),
           ),
