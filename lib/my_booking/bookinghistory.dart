@@ -35,8 +35,8 @@ class _BookingHistoryState extends State<BookingHistory> {
                     itemCount: bookingData?.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white),
@@ -44,7 +44,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                           children: [
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Trainer Name :',
                                   style: TextStyle(
                                       fontSize: 16,
@@ -53,60 +53,60 @@ class _BookingHistoryState extends State<BookingHistory> {
                                 ),
                                 Text(
                                   ' ${bookingData?['trainerName']}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 16, color: Colors.deepOrange),
                                 )
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Booking Id :',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black),
                                 ),
                                 Text('${bookingData?['bookingId']}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16, color: Colors.black))
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Booking Date :',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black),
                                 ),
                                 Text('${bookingData?['bookingDate']}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16, color: Colors.black))
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Booking Time :',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black),
                                 ),
                                 Text('${bookingData?['bookingTime']}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16, color: Colors.black))
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Branch :',
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black),
                                 ),
                                 Text('${bookingData?['branchName']}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16, color: Colors.black))
                               ],
                             )
@@ -115,7 +115,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                       );
                     });
               }
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }));
   }
 
