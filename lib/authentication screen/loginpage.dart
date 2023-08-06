@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/forgetpassword.dart';
+import 'package:fitness/authentication%20screen/services.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
-import 'package:icons_plus/icons_plus.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: true,
-      //.com  backgroundColor: Color(0xffF5E6C2),
+        //.com  backgroundColor: Color(0xffF5E6C2),
         body: SafeArea(
           child: Container(
             alignment: Alignment.center,
@@ -100,19 +100,17 @@ class _LoginPageState extends State<LoginPage> {
                 )),
             child: SingleChildScrollView(
               child: Column(
-                
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(20),
-                    margin: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.2)),
-                    child: Column(
-                      children: const [
-                      
+                    child: const Column(
+                      children: [
                         Text(
                           'Transform your body\nand mind',
                           style: TextStyle(
@@ -136,22 +134,22 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-             SizedBox(height: 80),
+                  const SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(20),
-                   margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.2)),
                     child: Column(
                       children: [
                         TextFormField(
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                           controller: _emailController,
                           decoration: InputDecoration(
-                            //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
+                              //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
                               hintText: 'Email',
-                              hintStyle: TextStyle(color: Colors.grey),
+                              hintStyle: const TextStyle(color: Colors.grey),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
@@ -168,13 +166,13 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 15),
                         TextFormField(
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                           controller: _passwordController,
                           obscureText: _isSecurePassword,
                           decoration: InputDecoration(
-                          //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
-                             hintText: 'Password',
-                             hintStyle: TextStyle(color: Colors.grey),
+                              //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
+                              hintText: 'Password',
+                              hintStyle: const TextStyle(color: Colors.grey),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
@@ -191,11 +189,15 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 10),
                         GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ForgotPassword()));
                             },
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
+                              children: [
                                 Text(
                                   'Forgot Password?',
                                   style: TextStyle(
@@ -220,15 +222,11 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white),
                         ),
                         const SizedBox(height: 20),
-                       GestureDetector(
-                        onTap: (){},
-                         child: SvgPicture.asset('assets/GoogleSignIn.svg'),
-                       ),
-                        /*const SizedBox(width: 20),
-                            SvgPicture.asset('assets/Apple.svg'),*/ /*
-                          ],
-                        ),*/
-                        SvgPicture.asset('assets/Save.svg'),
+                        GestureDetector(
+                            child:
+                                SvgPicture.asset('assets/google_sign_up.svg'),
+                            onTap: () =>
+                                FirebaseServices.signInWithGoogle(context)),
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

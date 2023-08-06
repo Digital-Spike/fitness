@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/authentication%20screen/services.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
-import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:video_player/video_player.dart';
 
 import 'loginpage.dart';
@@ -31,8 +29,9 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(children: [
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
           VideoPlayer(controller),
           Padding(
             padding: const EdgeInsets.all(20),
@@ -59,17 +58,16 @@ class _WelcomeState extends State<Welcome> {
                   child: Column(
                     children: [
                       GestureDetector(
-                          child:
-                              SvgPicture.asset('assets/google_sign_up.svg'),
-                          onTap: () => signInWithGoogle(context)),
+                          child: SvgPicture.asset('assets/google_sign_up.svg'),
+                          onTap: () =>
+                              FirebaseServices.signInWithGoogle(context)),
                       const SizedBox(height: 15),
                       GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SignupPage()));
+                                    builder: (context) => const SignupPage()));
                           },
                           child: SvgPicture.asset('assets/Signup.svg')),
                       const SizedBox(height: 25),
@@ -98,109 +96,8 @@ class _WelcomeState extends State<Welcome> {
               ],
             ),
           ),
-        ]));
-  }
-
-  Future<void> signInWithGoogle(BuildContext context) async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Dialog(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                CircularProgressIndicator(),
-                Padding(
-                    padding: EdgeInsets.only(left: 4.0),
-                    child: Text(
-                      'Loading...',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-                    )),
-              ],
-            ),
-          ),
-        );
-      },
+        ],
+      ),
     );
-
-    FirebaseAuth auth = FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
-
-    if (googleSignInAccount != null) {
-      try {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleSignInAuthentication.accessToken,
-          idToken: googleSignInAuthentication.idToken,
-        );
-
-        final UserCredential userCredential =
-            await auth.signInWithCredential(credential);
-
-        if (!mounted) {
-          return;
-        }
-
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => const HomePage()),
-            ModalRoute.withName('/'));
-
-        /*String trainerUrl = "${ApiList.apiUrl}getUser.php";
-        http.Response response = await http.post(Uri.parse(trainerUrl),
-            body: {'userId': userCredential.user?.uid});
-        Map<String, dynamic>? jsonResponse = json.decode(response.body);
-
-        if (!mounted) {
-          return;
-        }
-
-        if (jsonResponse == null) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const GoogleSignUp()));
-        } else {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const HomePage()),
-              ModalRoute.withName('/'));
-        }*/
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'account-exists-with-different-credential') {
-          if (!mounted) {
-            return;
-          }
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(e.message ?? "Something went wrong!")),
-          );
-        } else if (e.code == 'invalid-credential') {
-          if (!mounted) {
-            return;
-          }
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(e.message ?? "Something went wrong!")),
-          );
-        }
-      } catch (e) {
-        if (!mounted) {
-          return;
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Something went wrong!")),
-        );
-      }
-    }
   }
 }
