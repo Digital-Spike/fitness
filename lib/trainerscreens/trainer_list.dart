@@ -86,7 +86,7 @@ class _TrainerListState extends State<TrainerList> {
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
                             margin: EdgeInsets.all(10),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.black,),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.white12,),
                           
                             padding: const EdgeInsets.all(10),
                             child: Column(

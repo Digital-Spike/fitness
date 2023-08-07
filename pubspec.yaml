@@ -39,6 +39,7 @@ dependencies:
   marquee: ^2.2.3
   webview_flutter: ^4.2.2
   toggle_switch: ^2.1.0
+  shimmer: ^3.0.0
   
   
 dev_dependencies:

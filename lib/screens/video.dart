@@ -183,59 +183,59 @@ class _VideoState extends State<Video> {
                     //     _loadCueButton('CUE'),
                     //   ],
                     // ),
-                    // _space,
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //     IconButton(
-                    //       icon: const Icon(Icons.skip_previous),
-                    //       onPressed: _isPlayerReady
-                    //           ? () => _controller.load(_ids[
-                    //               (_ids.indexOf(_controller.metadata.videoId) -
-                    //                       1) %
-                    //                   _ids.length])
-                    //           : null,
-                    //     ),
-                    //     IconButton(
-                    //       icon: Icon(
-                    //         _controller.value.isPlaying
-                    //             ? Icons.pause
-                    //             : Icons.play_arrow,
-                    //       ),
-                    //       onPressed: _isPlayerReady
-                    //           ? () {
-                    //               _controller.value.isPlaying
-                    //                   ? _controller.pause()
-                    //                   : _controller.play();
-                    //               setState(() {});
-                    //             }
-                    //           : null,
-                    //     ),
-                    //     IconButton(
-                    //       icon: Icon(_muted ? Icons.volume_off : Icons.volume_up),
-                    //       onPressed: _isPlayerReady
-                    //           ? () {
-                    //               _muted
-                    //                   ? _controller.unMute()
-                    //                   : _controller.mute();
-                    //               setState(() {
-                    //                 _muted = !_muted;
-                    //               });
-                    //             }
-                    //           : null,
-                    //     ),
+                    _space,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.skip_previous),
+                          onPressed: _isPlayerReady
+                              ? () => _controller.load(_ids[
+                                  (_ids.indexOf(_controller.metadata.videoId) -
+                                          1) %
+                                      _ids.length])
+                              : null,
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            _controller.value.isPlaying
+                                ? Icons.pause
+                                : Icons.play_arrow,
+                          ),
+                          onPressed: _isPlayerReady
+                              ? () {
+                                  _controller.value.isPlaying
+                                      ? _controller.pause()
+                                      : _controller.play();
+                                  setState(() {});
+                                }
+                              : null,
+                        ),
+                        IconButton(
+                          icon: Icon(_muted ? Icons.volume_off : Icons.volume_up),
+                          onPressed: _isPlayerReady
+                              ? () {
+                                  _muted
+                                      ? _controller.unMute()
+                                      : _controller.mute();
+                                  setState(() {
+                                    _muted = !_muted;
+                                  });
+                                }
+                              : null,
+                        ),
                        
-                    //     IconButton(
-                    //       icon: const Icon(Icons.skip_next),
-                    //       onPressed: _isPlayerReady
-                    //           ? () => _controller.load(_ids[
-                    //               (_ids.indexOf(_controller.metadata.videoId) +
-                    //                       1) %
-                    //                   _ids.length])
-                    //           : null,
-                    //     ),
-                    //   ],
-                    // ),
+                        IconButton(
+                          icon: const Icon(Icons.skip_next),
+                          onPressed: _isPlayerReady
+                              ? () => _controller.load(_ids[
+                                  (_ids.indexOf(_controller.metadata.videoId) +
+                                          1) %
+                                      _ids.length])
+                              : null,
+                        ),
+                      ],
+                    ),
                     // _space,
                     // Row(
                     //   children: <Widget>[

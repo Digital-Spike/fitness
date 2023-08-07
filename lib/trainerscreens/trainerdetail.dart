@@ -3,17 +3,17 @@ import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/Slotscreens/slotBookingPage.dart';
 import 'package:flutter/material.dart';
 
-class TrainerProfile extends StatefulWidget {
+class TrainerDetail extends StatefulWidget {
   final Map<String, dynamic> trainer;
   final bool isBranch;
-  const TrainerProfile(
+  const TrainerDetail(
       {super.key, required this.trainer, required this.isBranch});
 
   @override
-  State<TrainerProfile> createState() => _TrainerProfileState();
+  State<TrainerDetail> createState() => _TrainerProfileState();
 }
 
-class _TrainerProfileState extends State<TrainerProfile> {
+class _TrainerProfileState extends State<TrainerDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

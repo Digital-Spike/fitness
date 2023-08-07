@@ -127,7 +127,7 @@ class _OurTrainersState extends State<OurTrainers> {
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
                                   margin: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.white,),
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),  color: Colors.white12,),
                                 
                                   padding: const EdgeInsets.all(10),
                                   child: Column(
@@ -249,7 +249,7 @@ class _OurTrainersState extends State<OurTrainers> {
                       return Container(
                         padding: EdgeInsets.all(10),
                         margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,

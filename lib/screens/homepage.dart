@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleAvatar(
-              minRadius: 33,
+              minRadius: 30,
                backgroundColor: Colors.white,
                         backgroundImage: _profileImage != null
                             ? FileImage(_profileImage!)

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/trainerscreens/trainerprofile.dart';
+import 'package:fitness/trainerscreens/trainerdetail.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -69,7 +69,7 @@ class _TrainerState extends State<Trainer> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => TrainerProfile(
+                                  builder: (context) => TrainerDetail(
                                         isBranch: widget.isBranchTrainers,
                                         trainer: trainersList[index],
                                       )));

@@ -69,7 +69,7 @@ class _BranchListState extends State<BranchList> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Container(
-                          color: Colors.white,
+                          color: Colors.white12,
                           padding: const EdgeInsets.all(10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -97,7 +97,7 @@ class _BranchListState extends State<BranchList> {
                                     children: [
                                       Text(branchList[index]['branch'],
                                           style: const TextStyle(
-                                              fontFamily: 'Roboto',
+                                             
                                               fontSize: 16,
                                               color: Colors.deepOrange,
                                               fontWeight: FontWeight.w600,
@@ -115,7 +115,7 @@ class _BranchListState extends State<BranchList> {
                                   const Icon(
                                     Icons.location_on,
                                     size: 16,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                   Expanded(
                                     child: Text(
@@ -123,7 +123,7 @@ class _BranchListState extends State<BranchList> {
                                       style: const TextStyle(
                                           fontFamily: 'Roboto',
                                           fontSize: 13,
-                                          fontWeight: FontWeight.w500,color: Colors.black),
+                                          fontWeight: FontWeight.w500,color: Colors.white),
                                       textAlign: TextAlign.start,
                                       maxLines: 3,
                                     ),

@@ -141,38 +141,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-             SizedBox(height: 80),
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    margin: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.black.withOpacity(0.2)),
-                    child: const Column(
-                      children: [
-                        Text(
-                          'Transform your body\nand mind',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
+           
+                 
                   const SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(20),

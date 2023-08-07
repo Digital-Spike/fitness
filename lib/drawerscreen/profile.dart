@@ -8,6 +8,7 @@ import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/profilescreens/subscription.dart';
 import 'package:fitness/screens/editprofile.dart';
 import 'package:fitness/screens/main_screen.dart';
+import 'package:fitness/theme/profile_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -97,209 +98,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                           ],
                         ),
-                        
-                    // const SizedBox(width: 10),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile()));
-                    //   },
-                    //   child: SvgPicture.asset(
-                    //     'assets/Edit.svg',
-                    //   ),
-                    // ),
                       ],
                     ),const SizedBox(height: 10),
                     const Divider(height: 1.0,thickness: 1.0,color: Colors.white,),
-                    const SizedBox(height: 5),
-                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
-                      },
-                       child: Container(
-                        margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Color(0xffe2e8e4)),
-                        child:  Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          
-                          children: [
-                            Row(
-                              children: [
-
-                              
-                               SvgPicture.asset('assets/edit-3.svg',height: 40),
-                                SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Edit Profile',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
-                                    Text('Edit your profile here',style: TextStyle(color: Colors.black),)
-                                  ],
-                                ),
-                                
-                              ],
-                            ),
-                            Icon(Icons.arrow_forward_ios,color: Colors.black,)
-                         
-                          ],
-                        ),
-                                         ),
-                     ),
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Color(0xffe2e8e4)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset('assets/lock.svg',height: 40,),
-                              const SizedBox(width: 10),
-                              const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Change Password',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
-                                  Text('Change your password easily',style: TextStyle(color: Colors.black),)
-                                ],
-                              ),
-                              
-                            ],
-                          ),
-                          const Icon(Icons.arrow_forward_ios,color: Colors.black,)
-    
-                        ],
-                      ),
-                    ),
-                     Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Color(0xffe2e8e4)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset('assets/ab-2.svg',height: 40,color: Colors.black,),
-                              const SizedBox(width: 10),
-                              const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Change Language',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
-                                  Text('Change your Language here',style: TextStyle(color: Colors.black),)
-                                ],
-                              ),
-                              
-                            ],
-                          ),
-                          const Icon(Icons.arrow_forward_ios,color: Colors.black,)
-    
-                        ],
-                      ),
-                    ),
-                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Subscription()));
-                      },
-                       child: Container(
-                        margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color:  Color(0xffe2e8e4)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          
-                          children: [
-                            Row(
-                              children: [
-                                SvgPicture.asset('assets/CC.svg',height: 40,),
-                                const SizedBox(width: 10),
-                                const Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Subscription',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
-                                    Text('Check your Subscription here',style: TextStyle(color: Colors.black),)
-                                  ],
-                                ),
-                                
-                              ],
-                            ),
-                            const Icon(Icons.arrow_forward_ios,color: Colors.black,)
-                         
-                          ],
-                        ),
-                                         ),
-                     ),
-                     Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Color(0xffe2e8e4)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset('assets/I.svg',height: 40,),
-                              const SizedBox(width: 5),
-                              const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Privacy and Policy',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
-                                  Text('Check our Policy here',style: TextStyle(color: Colors.black),)
-                                ],
-                              ),
-                              
-                            ],
-                          ),
-                          const Icon(Icons.arrow_forward_ios,color: Colors.black,)
-    
-                        ],
-                      ),
-                    ),
-                     GestureDetector(
-                      onTap: (){
-                        showLogoutPopup();
-                      },
-                       child: Container(
-                        margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Color(0xffe2e8e4)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          
-                          children: [
-                            Row(
-                              children: [
-                             // Icon(Icons.logout_outlined,size: 35,color: Colors.black,),
-                             Padding(
-                               padding: const EdgeInsets.only(left: 5),
-                               child: SvgPicture.asset('assets/Logout.svg',height: 35,),
-                             ),
-                                SizedBox(width: 5),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Logout',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
-                                    Text('Click here to logout ',style: TextStyle(color: Colors.black),)
-                                  ],
-                                ),
-                                
-                              ],
-                            ),
-                            Icon(Icons.arrow_forward_ios,color: Colors.black,)
-                     
-                          ],
-                        ),
-                                       ),
-                     ),
-                    
-                 
-              
-              
-              
-             
+                    const SizedBox(height: 5),                   
+                    CustomButton(title: 'Edit Profile', subtitle: 'Edit your profile here', svgPath: 'assets/edit-3.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));}),
+                    CustomButton(title: 'Change Password', subtitle: 'Change your password easily', svgPath: 'assets/Locked.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
+                    CustomButton(title: 'Change Language', subtitle: 'Change your Language here', svgPath: 'assets/ab-2.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
+                    CustomButton(title: 'Subscription', subtitle: 'Check your Subscription here', svgPath: 'assets/CC.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Subscription()));}),
+                    CustomButton(title: 'Privacy and Policy', subtitle: 'Check our Policy here', svgPath: 'assets/I (2).svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
+                     CustomButton(title: 'Logout', subtitle: 'Click here to logout', svgPath: 'assets/lOGOUT SVG.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){showLogoutPopup();}),                                                                                      
               Center(
                 child: Image.asset(
                   'assets/FJ FONT.png',
