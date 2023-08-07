@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/Slotscreens/slotBookingPage.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -35,7 +36,8 @@ class _BookingState extends State<Booking> {
                   padding: const EdgeInsets.all(15),
                   child: Container(
                     // color: Colors.white,
-                    child: (bookingData == null)
+                    child: (bookingData == null ||
+                            bookingData?['bookingId'] == null)
                         ? const Center(
                             child: Text(
                               "No Bookings found!",
@@ -154,7 +156,11 @@ class _BookingState extends State<Booking> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         MaterialButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              changeSlot(
+                                                  changeSlotEnum:
+                                                      ChangeSlotEnum.postpone);
+                                            },
                                             color: const Color(0xff404040),
                                             child: const Text(
                                               'Postpone',
@@ -163,7 +169,11 @@ class _BookingState extends State<Booking> {
                                                   fontSize: 16),
                                             )),
                                         MaterialButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              changeSlot(
+                                                  changeSlotEnum:
+                                                      ChangeSlotEnum.prepone);
+                                            },
                                             color: const Color(0xff404040),
                                             child: const Text(
                                               'Prepone',
@@ -172,7 +182,9 @@ class _BookingState extends State<Booking> {
                                                   fontSize: 16),
                                             )),
                                         MaterialButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              cancelBooking();
+                                            },
                                             color: const Color(0xff404040),
                                             child: const Text(
                                               'Cancel',
@@ -203,10 +215,73 @@ class _BookingState extends State<Booking> {
       String trainerUrl = "${ApiList.apiUrl}getUserBookings.php";
       var response =
           await http.post(Uri.parse(trainerUrl), body: {'userId': user?.uid});
-      bookingData = json.decode(response.body);
+      bookingData = (json.decode(response.body) as List).last;
       return true;
     } catch (e) {
+      setState(() {
+        bookingData?.clear();
+      });
       return false;
     }
   }
+
+  void changeSlot({required ChangeSlotEnum changeSlotEnum}) async {
+    Map<String, dynamic> trainer = {};
+    try {
+      String trainerUrl = "${ApiList.apiUrl}admin/viewTrainer.php";
+      var response = await http.post(Uri.parse(trainerUrl),
+          body: {'trainerId': bookingData?["trainerId"]});
+      trainer = json.decode(response.body);
+    } catch (e) {}
+
+    if (!mounted) {
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SlotBookingPage(
+          isBranch: true,
+          bookingData: bookingData,
+          trainer: trainer,
+          changeSlotEnum: changeSlotEnum,
+          isChangeSlot: true,
+        ),
+      ),
+    );
+  }
+
+  void cancelBooking() async {
+    try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const Dialog(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircularProgressIndicator(),
+                  Padding(
+                    padding: EdgeInsets.only(left: 4.0),
+                    child: Text("Processing..."),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+      String trainerUrl = "${ApiList.apiUrl}cancelBooking.php";
+      await http.post(Uri.parse(trainerUrl),
+          body: {'bookingId': bookingData?["bookingId"], 'userId': user?.uid});
+    } catch (e) {}
+    Navigator.of(context).pop();
+    futureData = fetchData();
+  }
 }
+
+enum ChangeSlotEnum { postpone, prepone, cancel }

@@ -14,7 +14,7 @@ class BookingHistory extends StatefulWidget {
 
 class _BookingHistoryState extends State<BookingHistory> {
   Future<bool>? futureData;
-  Map<String, dynamic>? bookingData;
+  List? bookingData;
   User? user = FirebaseAuth.instance.currentUser;
 
   @override
@@ -34,6 +34,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                 return ListView.builder(
                     itemCount: bookingData?.length,
                     itemBuilder: (context, index) {
+                      var bookingData = this.bookingData?[index];
                       return Container(
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.all(5),

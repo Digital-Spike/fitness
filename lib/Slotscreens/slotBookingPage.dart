@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/my_booking/booking.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,16 @@ import 'package:intl/intl.dart';
 class SlotBookingPage extends StatefulWidget {
   final bool isBranch;
   final Map<String, dynamic> trainer;
+  final Map<String, dynamic>? bookingData;
+  final bool? isChangeSlot;
+  final ChangeSlotEnum? changeSlotEnum;
   const SlotBookingPage(
-      {required this.isBranch, required this.trainer, super.key});
+      {required this.isBranch,
+      required this.trainer,
+      this.bookingData,
+      this.isChangeSlot,
+      this.changeSlotEnum,
+      super.key});
 
   @override
   State<SlotBookingPage> createState() => _SlotBookingPageState();
@@ -74,66 +83,28 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // backgroundColor: const Color(0xffF5E6C2),
       appBar: AppBar(
-     //   backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
-       
         title: const Text('Book Your Session',
             style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                )),
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            )),
         centerTitle: true,
-       // leading: const BackButton(color: Colors.black,),
+        // leading: const BackButton(color: Colors.black,),
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /*Container(
-              padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(),
-              child: DropdownButton<String>(
-                hint: const Text('Select Session'),
-                value: value,
-                isExpanded: true,
-                underline: Container(
-                  height: 1,
-                  color: Colors.black,
-                ),
-                items: items.map(buildMenuItem).toList(),
-                onChanged: (value) => setState(
-                  () => this.value = value,
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(),
-              child: DropdownButton<String>(
-                hint: const Text('Select Training'),
-                value: value1,
-                isExpanded: true,
-                underline: Container(
-                  height: 1,
-                  color: Colors.black,
-                ),
-                items: items1.map(buildMenuItem1).toList(),
-                onChanged: (value1) => setState(
-                  () => this.value1 = value1,
-                ),
-              ),
-            ),*/
-          SizedBox(height: 10),
+            const SizedBox(height: 10),
             const Text(
               '   Preferred Date',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
-            
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               height: 100,
               width: double.infinity,
               child: DatePicker(
@@ -141,7 +112,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 initialSelectedDate: DateTime.now(),
                 selectionColor: Colors.black,
                 selectedTextColor: Colors.white,
-               deactivatedColor: Colors.white,
+                deactivatedColor: Colors.white,
                 onDateChange: (date) {
                   setState(() {
                     _selectedDay = date;
@@ -155,13 +126,11 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
               '  Preferred Time',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
-           
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.60,
               child: FutureBuilder<bool>(
                 future: futureData,
-                builder:
-                    (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return GridView.builder(
                         shrinkWrap: true,
@@ -175,9 +144,8 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                           crossAxisCount: 2,
                         ),
                         itemBuilder: (context, index) {
-                          List timeStamp = widget.isBranch
-                              ? branchTimeStamp
-                              : homeTimeStamp;
+                          List timeStamp =
+                              widget.isBranch ? branchTimeStamp : homeTimeStamp;
 
                           bool isBooked = slots[(index + 1).toString()]
                                   .toString()
@@ -186,10 +154,12 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
 
                           return InkWell(
                             onTap: () {
-                              showBookingPopup(
-                                  timeStamp: timeStamp[index],
-                                  index: index,
-                                  isBooked: isBooked);
+                              if (!isBooked) {
+                                showBookingPopup(
+                                    timeStamp: timeStamp[index],
+                                    index: index,
+                                    isBooked: isBooked);
+                              }
                             },
                             child: Container(
                               height: 100,
@@ -201,15 +171,13 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(timeStamp[index],style: TextStyle(color: Colors.black),),
+                                  Text(
+                                    timeStamp[index],
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    slots[(index + 1).toString()] ==
-                                                "booked" ||
-                                            slots[(index + 1).toString()] ==
-                                                "Booked"
-                                        ? "Not available"
-                                        : "Available",
+                                    isBooked ? "Not available" : "Available",
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
@@ -232,49 +200,6 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 },
               ),
             ),
-            /*Center(
-              child: TextButton(
-                  style: TextButton.styleFrom(
-                      elevation: 5, backgroundColor: Colors.white),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'Select Location',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
-                      ),
-                      Icon(Icons.pin_drop)
-                    ],
-                  )),
-            ),
-            const SizedBox(height: 20),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Trainer(
-                              isBranchTrainers: widget.isBranch,
-                            )));
-              },
-              child: Container(
-                height: 40,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: const LinearGradient(
-                        begin: Alignment.bottomRight,
-                        end: Alignment.topLeft,
-                        colors: [Color(0xffFA812F), Color(0xffFFFA08)])),
-                child: const Center(
-                    child: Text(
-                  'Personal Trainer',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                )),
-              ),
-            ),*/
           ],
         ),
       ),
@@ -338,7 +263,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
 
           if (dt3.isAfter(datetime)) {
           } else {
-            slots[(i + 1).toString()] = "Booked";
+            slots[(i + 1).toString()] = "booked";
           }
         }
       } else {
@@ -402,39 +327,46 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 textAlign: TextAlign.center,
               ),
               onPressed: () async {
-                if (!isBooked) {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              CircularProgressIndicator(),
-                              Padding(
-                                padding: EdgeInsets.only(left: 4.0),
-                                child: Text("Processing..."),
-                              ),
-                            ],
-                          ),
+                if (!(widget.isChangeSlot ?? false) && isBooked) {
+                  return;
+                }
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return const Dialog(
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(),
+                            Padding(
+                              padding: EdgeInsets.only(left: 4.0),
+                              child: Text("Processing..."),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  );
+                      ),
+                    );
+                  },
+                );
+                if (widget.isChangeSlot ?? false) {
+                  await changeSlotFuture(
+                      bookingTime: timeStamp,
+                      slotNumber: (index + 1).toString());
+                } else if (!isBooked) {
                   await bookSession(
                       bookingTime: timeStamp,
                       slotNumber: (index + 1).toString());
-                  if (mounted) {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
-                  }
-                  setState(() {
-                    futureData = slotList();
-                  });
                 }
+                if (mounted) {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                }
+                setState(() {
+                  futureData = slotList();
+                });
               },
             ),
             MaterialButton(
@@ -479,6 +411,24 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
           ? "${ApiList.apiUrl}addBooking.php"
           : "${ApiList.apiUrl}homeaddBooking.php";
       await http.post(Uri.parse(trainerUrl), body: requestBody);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  changeSlotFuture(
+      {required String bookingTime, required String slotNumber}) async {
+    try {
+      Map<String, dynamic> requestBody = {
+        'bookingDate': DateFormat('yyyy/MM/dd').format(_selectedDay),
+        'bookingId': widget.bookingData?["bookingId"],
+        'bookingTime': bookingTime,
+        'slot': slotNumber,
+      };
+
+      String changeSlot = "${ApiList.apiUrl}updateBooking.php";
+      await http.post(Uri.parse(changeSlot), body: requestBody);
       return true;
     } catch (e) {
       return false;
