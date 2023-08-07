@@ -10,6 +10,9 @@ class MainScreen extends StatefulWidget {
   final PreferredSizeWidget? mainAppBar;
   const MainScreen({required this.mainChild, this.mainAppBar, super.key});
 
+  static const String id = 'main-screen';
+
+
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -20,7 +23,9 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color(0xffF5E6C2),
+    // backgroundColor: const Color(0xffF5E6C2),
+    extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       appBar: widget.mainAppBar,
       body: SafeArea(child: widget.mainChild),
 
@@ -29,12 +34,12 @@ class _MainScreenState extends State<MainScreen> {
           elevation: 0,
           // backgroundColor: Color(0xffF5E6C2),
           currentIndex: _bottomNavIndex ?? 0,
-          onTap: (int index) {
-            switchScreen(index);
-            setState(() {
-              _bottomNavIndex = index;
-            });
-          },
+          onTap: (index) =>
+            switchScreen(index),
+            // setState(() {
+            //   _bottomNavIndex = index;
+            // });
+         
           selectedLabelStyle: TextStyle(fontWeight: FontWeight.w900),
           landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
           selectedIconTheme: IconThemeData(color: Color(0xff9EEB47)),

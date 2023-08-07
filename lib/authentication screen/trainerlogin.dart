@@ -1,24 +1,22 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/authentication%20screen/forgetpassword.dart';
-import 'package:fitness/authentication%20screen/services.dart';
-import 'package:fitness/authentication%20screen/signup.dart';
-import 'package:fitness/authentication%20screen/trainerlogin.dart';
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/screens/homepage.dart';
+import 'package:fitness/traineraccount/trainerhome.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+import 'forgetpassword.dart';
+class TrainerLogin extends StatefulWidget {
+  const TrainerLogin({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<TrainerLogin> createState() => _TrainerLoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _TrainerLoginState extends State<TrainerLogin> {
+
   bool _isSecurePassword = true;
 
   final _emailController = TextEditingController();
@@ -49,17 +47,18 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomePage(),
+            builder: (context) => const TrainerHome(),
           ),
         );
       } else {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const SignupPage()));
-      }
+            MaterialPageRoute(builder: (context) => const TrainerLogin()));
+      } 
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
+      Navigator.pop(context); 
       showErrorMessage(e.code);
     }
+      
   }
 
   void showErrorMessage(String message) {
@@ -83,12 +82,9 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: true,
-        //.com  backgroundColor: Color(0xffF5E6C2),
         body: SafeArea(
           child: Container(
             alignment: Alignment.center,
@@ -101,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                 )),
             child: SingleChildScrollView(
               child: Column(
+                
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -144,51 +141,19 @@ class _LoginPageState extends State<LoginPage> {
              SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(20),
-                    margin: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.black.withOpacity(0.2)),
-                    child: const Column(
-                      children: [
-                        Text(
-                          'Transform your body\nand mind',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 80),
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    margin: const EdgeInsets.all(20),
+                   margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.2)),
                     child: Column(
                       children: [
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black),
                           controller: _emailController,
                           decoration: InputDecoration(
-                              //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
+                            //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
                               hintText: 'Email',
-                              hintStyle: const TextStyle(color: Colors.grey),
+                              hintStyle: TextStyle(color: Colors.grey),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
@@ -205,13 +170,13 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(height: 15),
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black),
                           controller: _passwordController,
                           obscureText: _isSecurePassword,
                           decoration: InputDecoration(
-                              //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
-                              hintText: 'Password',
-                              hintStyle: const TextStyle(color: Colors.grey),
+                          //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
+                             hintText: 'Password',
+                             hintStyle: TextStyle(color: Colors.grey),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
@@ -228,15 +193,11 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: 10),
                         GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ForgotPassword()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
                             },
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
+                              children: const [
                                 Text(
                                   'Forgot Password?',
                                   style: TextStyle(
@@ -252,62 +213,36 @@ class _LoginPageState extends State<LoginPage> {
                             onTap: userLogin,
                             child: SvgPicture.asset('assets/login.svg')),
                         const SizedBox(height: 20),
-                        const Text(
-                          'OR',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                        const SizedBox(height: 20),
-                        GestureDetector(
-                            child:
-                                SvgPicture.asset('assets/google_sign_up.svg'),
-                            onTap: () =>
-                                FirebaseServices.signInWithGoogle(context)),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("Don't have an Account?",
-                                style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SignupPage()));
-                              },
-                              child: const Text(
-                                'Signup',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ),
+                        // const Text(
+                        //   'OR',
+                        //   style: TextStyle(
+                        //       fontFamily: 'Roboto',
+                        //       fontSize: 18,
+                        //       fontWeight: FontWeight.bold,
+                        //       color: Colors.white),
+                        // ),
+                        // const SizedBox(height: 20),
+                      //  GestureDetector(
+                      //   onTap: (){},
+                      //    child: SvgPicture.asset('assets/Google.1.svg',height: 40,),
+                      //  ),
+                        /*const SizedBox(width: 20),
+                            SvgPicture.asset('assets/Apple.svg'),*/ /*
                           ],
-                        ),
-                      ],
-                    ),
+                        ),*/
+                       
+                        const SizedBox(height: 20),
+                      
+                ]),
                   ),
                 ],
               ),
             ),
           ),
-        ));
+        )
+    );
   }
-
-  Widget togglepassword() {
+   Widget togglepassword() {
     return IconButton(
       onPressed: () {
         setState(() {
