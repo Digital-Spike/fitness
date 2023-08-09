@@ -19,7 +19,7 @@ class _CompletedSessionState extends State<CompletedSession> {
         return Container(
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white60),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white24),
           child: const Column(
             children: [
               Row(

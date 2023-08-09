@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
+import 'package:fitness/authentication%20screen/termsandconditions.dart';
 import 'package:fitness/profilescreens/subscription.dart';
 import 'package:fitness/screens/editprofile.dart';
 import 'package:fitness/screens/main_screen.dart';
@@ -106,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CustomButton(title: 'Change Password', subtitle: 'Change your password easily', svgPath: 'assets/Locked.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
                     CustomButton(title: 'Change Language', subtitle: 'Change your Language here', svgPath: 'assets/ab-2.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
                     CustomButton(title: 'Subscription', subtitle: 'Check your Subscription here', svgPath: 'assets/CC.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Subscription()));}),
-                    CustomButton(title: 'Privacy and Policy', subtitle: 'Check our Policy here', svgPath: 'assets/I (2).svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
+                    CustomButton(title: 'Privacy and Policy', subtitle: 'Check our Policy here', svgPath: 'assets/I (2).svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>TermsAndConditions()));}),
                      CustomButton(title: 'Logout', subtitle: 'Click here to logout', svgPath: 'assets/lOGOUT SVG.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){showLogoutPopup();}),                                                                                      
               Center(
                 child: Image.asset(

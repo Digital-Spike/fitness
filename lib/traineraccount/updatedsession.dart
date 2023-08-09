@@ -19,7 +19,7 @@ class _UpdatedSessionState extends State<UpdatedSession> {
         return Container(
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white60),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.white24),
           child: Column(
             children: [
               const Row(
@@ -44,7 +44,7 @@ class _UpdatedSessionState extends State<UpdatedSession> {
                       const Text('Updated Date'),
                       const SizedBox(height: 6),
                       Container(
-                        padding: const EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),color: Colors.white,border: Border.all(width: 1.0,color: Colors.black)),
                         child: Row(
@@ -62,7 +62,7 @@ class _UpdatedSessionState extends State<UpdatedSession> {
                       const Text('Updated Time'),
                       const SizedBox(height: 6),
                        Container(
-                        padding: const EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),color: Colors.white,border: Border.all(width: 1.0,color: Colors.black)),
                         child: Row(

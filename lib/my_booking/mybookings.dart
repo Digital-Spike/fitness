@@ -68,7 +68,7 @@ class _MyBookingPageState extends State<MyBookingPage>
             padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
+              color: Colors.white54,
             ),
             child: TabBar(
               controller: _tabController,

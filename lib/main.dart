@@ -36,6 +36,6 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           fontFamily: 'NotoSans',
         ),
-        home: const SplashScreen());
+        home: const TrainerHome());
   }
 }

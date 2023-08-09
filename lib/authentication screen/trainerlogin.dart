@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/constants/trainer_api.dart';
 import 'package:fitness/traineraccount/trainerhome.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -22,7 +23,7 @@ class _TrainerLoginState extends State<TrainerLogin> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  userLogin() async {
+  trainerLogin() async {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -34,16 +35,16 @@ class _TrainerLoginState extends State<TrainerLogin> {
           email: _emailController.text, password: _passwordController.text);
 
       // Get the user ID after successful login
-      String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+      String trainerId = FirebaseAuth.instance.currentUser?.uid ?? '';
 
       // Make an API call and pass the user ID
       final response = await http.post(
-        Uri.parse('https://fitnessjourni.com/api/getUser.php'),
-        body: {'userId': userId},
+        Uri.parse('https://fitnessjourni.com/trainers/trainerLogin.php'),
+        body: {'trainerId': trainerId},
       );
 
       if (response.statusCode == 200) {
-        ApiList.user = jsonDecode(response.body);
+        TrainerApiList.trainer = jsonDecode(response.body);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -75,7 +76,6 @@ class _TrainerLoginState extends State<TrainerLogin> {
               )));
         });
   }
-
   @override
   void dispose() {
     _emailController.dispose();
@@ -101,59 +101,54 @@ class _TrainerLoginState extends State<TrainerLogin> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>TrainerLogin()));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(20),
-                      margin: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.black.withOpacity(0.2)),
-                      child: Column(
-                        children: const [
-                        
-                          Text(
-                            'Transform your body\nand mind',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 25,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                            style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-             SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(20),
-                   margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.black.withOpacity(0.2)),
+                    child: const Column(
+                      children: [
+                      
+                        Text(
+                          'Transform your body\nand mind',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 25,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+             const SizedBox(height: 80),
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                   margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.2)),
                     child: Column(
                       children: [
                         TextFormField(
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                           controller: _emailController,
                           decoration: InputDecoration(
                             //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
                               hintText: 'Email',
-                              hintStyle: TextStyle(color: Colors.grey),
+                              hintStyle: const TextStyle(color: Colors.grey),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
@@ -170,13 +165,13 @@ class _TrainerLoginState extends State<TrainerLogin> {
                         ),
                         const SizedBox(height: 15),
                         TextFormField(
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                           controller: _passwordController,
                           obscureText: _isSecurePassword,
                           decoration: InputDecoration(
                           //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
                              hintText: 'Password',
-                             hintStyle: TextStyle(color: Colors.grey),
+                             hintStyle: const TextStyle(color: Colors.grey),
                               isDense: true,
                               filled: true,
                               fillColor: Colors.white,
@@ -193,11 +188,11 @@ class _TrainerLoginState extends State<TrainerLogin> {
                         const SizedBox(height: 10),
                         GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>const ForgotPassword()));
                             },
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
+                              children: [
                                 Text(
                                   'Forgot Password?',
                                   style: TextStyle(
@@ -210,7 +205,7 @@ class _TrainerLoginState extends State<TrainerLogin> {
                             )),
                         const SizedBox(height: 20),
                         GestureDetector(
-                            onTap: userLogin,
+                            onTap: trainerLogin,
                             child: SvgPicture.asset('assets/login.svg')),
                         const SizedBox(height: 20),
                         // const Text(

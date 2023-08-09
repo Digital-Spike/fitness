@@ -45,11 +45,11 @@ class _TrainerState extends State<Tscreen> {
                 label: 'Home',
                 backgroundColor: Color(0xffF5E6C2)),
           
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person_2_outlined),
-                activeIcon: Icon(Icons.person_2),
-                label: 'Profile',
-                backgroundColor: Color(0xffF5E6C2)),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.person_2_outlined),
+            //     activeIcon: Icon(Icons.person_2),
+            //     label: 'Profile',
+            //     backgroundColor: Color(0xffF5E6C2)),
           ]),
     );
   }
@@ -64,13 +64,13 @@ class _TrainerState extends State<Tscreen> {
           ),
         );
         break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const TrainerAccount(),
-          ),
-        );
-        break;
+      // case 1:
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => const TrainerAccount(),
+      //     ),
+      //   );
+      //   break;
 }
   }}
