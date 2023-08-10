@@ -14,7 +14,6 @@ class Booking extends StatefulWidget {
 }
 
 class _BookingState extends State<Booking> {
-  
   Future<bool>? futureData;
   Map<String, dynamic>? bookingData;
   User? user = FirebaseAuth.instance.currentUser;
@@ -64,9 +63,9 @@ class _BookingState extends State<Booking> {
                                         const Text(
                                           'Trainer :',
                                           style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              ),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                         Text(
                                           ' ${bookingData?['trainerName']}',
@@ -82,14 +81,14 @@ class _BookingState extends State<Booking> {
                                         const Text(
                                           'Booking Id :',
                                           style: TextStyle(
-                                              fontSize: 14,
-                                              ),
+                                            fontSize: 14,
+                                          ),
                                         ),
                                         Text(
                                           ' ${bookingData?['bookingId']}',
                                           style: const TextStyle(
-                                              fontSize: 14,
-                                              ),
+                                            fontSize: 14,
+                                          ),
                                         )
                                       ],
                                     ),
@@ -103,12 +102,18 @@ class _BookingState extends State<Booking> {
                                             const Text(
                                               'Date :',
                                               style: TextStyle(
-                                                  fontSize: 14,
-                                                  ),
+                                                fontSize: 14,
+                                              ),
                                             ),
                                             Container(
-                                              padding: EdgeInsets.all(4),
-                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.white,border: Border.all(width: 1.0,color: Colors.black)),
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                      width: 1.0,
+                                                      color: Colors.black)),
                                               child: Text(
                                                 ' ${bookingData?['bookingDate']}',
                                                 style: const TextStyle(
@@ -123,12 +128,18 @@ class _BookingState extends State<Booking> {
                                             const Text(
                                               'Time :',
                                               style: TextStyle(
-                                                  fontSize: 14,
-                                                  ),
+                                                fontSize: 14,
+                                              ),
                                             ),
                                             Container(
-                                              padding: EdgeInsets.all(4),
-                                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.white,border: Border.all(width: 1.0,color: Colors.black)),
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                      width: 1.0,
+                                                      color: Colors.black)),
                                               child: Text(
                                                 ' ${bookingData?['bookingTime']}',
                                                 style: const TextStyle(
@@ -146,14 +157,14 @@ class _BookingState extends State<Booking> {
                                         const Text(
                                           'Branch :',
                                           style: TextStyle(
-                                              fontSize: 14,
-                                              ),
+                                            fontSize: 14,
+                                          ),
                                         ),
                                         Text(
                                           ' ${bookingData?['branchName']}',
                                           style: const TextStyle(
-                                              fontSize: 14,
-                                             ),
+                                            fontSize: 14,
+                                          ),
                                         )
                                       ],
                                     ),
@@ -166,7 +177,6 @@ class _BookingState extends State<Booking> {
                                       children: [
                                         MaterialButton(
                                             onPressed: () {
-                                              
                                               changeSlot(
                                                   changeSlotEnum:
                                                       ChangeSlotEnum.postpone);
@@ -180,13 +190,10 @@ class _BookingState extends State<Booking> {
                                             )),
                                         MaterialButton(
                                             onPressed: () {
-                                              setState(() {
-                                              
-                                              });
+                                              setState(() {});
                                               changeSlot(
                                                   changeSlotEnum:
                                                       ChangeSlotEnum.prepone);
-                                                    
                                             },
                                             color: const Color(0xff404040),
                                             child: const Text(
@@ -208,10 +215,17 @@ class _BookingState extends State<Booking> {
                                             ))
                                       ],
                                     ),
-                                     SizedBox(height: 5),
-                                    Divider(height: 1.0,thickness: 1.0,color: Colors.black,),
-                                    SizedBox(height: 5),
-                                    Text('You can update your session within 12 hours of booking',textAlign: TextAlign.center,)
+                                    const SizedBox(height: 5),
+                                    const Divider(
+                                      height: 1.0,
+                                      thickness: 1.0,
+                                      color: Colors.black,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'You can update your session within 12 hours of booking',
+                                      textAlign: TextAlign.center,
+                                    )
                                   ],
                                 ),
                               );
