@@ -39,12 +39,12 @@ class _SlotBookState extends State<SlotBook>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF1F1F2),
+     // backgroundColor: Color(0xffF1F1F2),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             const SliverAppBar(
-              backgroundColor: Colors.black,
+             // backgroundColor: Colors.black,
               centerTitle: true,
               title: Text(
                 'Slot Booking',
@@ -152,8 +152,7 @@ class _SlotBookState extends State<SlotBook>
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 8),
                                 padding: const EdgeInsets.all(16),
-                                height: 100,
-                                width: 350,
+                              
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)),

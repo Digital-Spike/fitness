@@ -202,7 +202,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
                               MaterialPageRoute(
                                   builder: (context) => SlotBookingPage(
                                       isBranch: false,
-                                      trainer: widget.trainer)));
+                                      trainer: widget.trainer, )));
                         },
                         child: const Text(
                           'Book Session',

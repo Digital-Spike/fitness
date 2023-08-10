@@ -80,7 +80,7 @@ class _TrainerListState extends State<TrainerList> {
                                   MaterialPageRoute(
                                       builder: (context) => SlotBookingPage(
                                           isBranch: widget.isBranchTrainers,
-                                          trainer: trainersList[index])));
+                                          trainer: trainersList[index], )));
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),

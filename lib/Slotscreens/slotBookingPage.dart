@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 
 class SlotBookingPage extends StatefulWidget {
   final bool isBranch;
+ 
   final Map<String, dynamic> trainer;
   final Map<String, dynamic>? bookingData;
   final bool? isChangeSlot;
@@ -19,6 +20,7 @@ class SlotBookingPage extends StatefulWidget {
   const SlotBookingPage(
       {required this.isBranch,
       required this.trainer,
+      
       this.bookingData,
       this.isChangeSlot,
       this.changeSlotEnum,
@@ -109,6 +111,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
               width: double.infinity,
               child: DatePicker(
                 DateTime.now(),
+               
                 initialSelectedDate: DateTime.now(),
                 selectionColor: Colors.black,
                 selectedTextColor: Colors.white,

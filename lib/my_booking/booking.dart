@@ -186,6 +186,7 @@ class _BookingState extends State<Booking> {
                                               changeSlot(
                                                   changeSlotEnum:
                                                       ChangeSlotEnum.prepone);
+                                                    
                                             },
                                             color: const Color(0xff404040),
                                             child: const Text(
