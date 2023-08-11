@@ -71,7 +71,8 @@ class _BookingState extends State<Booking> {
                                           ' ${bookingData?['trainerName']}',
                                           style: const TextStyle(
                                               color: Colors.orange,
-                                              fontSize: 15,fontWeight: FontWeight.bold),
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
@@ -274,7 +275,8 @@ class _BookingState extends State<Booking> {
       context,
       MaterialPageRoute(
         builder: (context) => SlotBookingPage(
-          isBranch: true,
+          isBranch:
+              bookingData?['branchName'].toString().toLowerCase() != 'home',
           bookingData: bookingData,
           trainer: trainer,
           changeSlotEnum: changeSlotEnum,
