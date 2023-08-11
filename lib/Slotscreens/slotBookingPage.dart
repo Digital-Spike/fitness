@@ -4,6 +4,7 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/my_booking/booking.dart';
+import 'package:fitness/my_booking/mybookings.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -368,8 +369,9 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                       slotNumber: (index + 1).toString());
                 }
                 if (mounted) {
+                 
                   Navigator.of(context).pop();
-                  Navigator.of(context).pop();
+                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyBookingPage()));
                 }
                 setState(() {
                   futureData = slotList();
