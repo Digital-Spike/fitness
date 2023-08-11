@@ -150,7 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: const Text(
                 'YES',
                 style: TextStyle(
-                  color: Color(0xff0f4c81),
+                  color:Colors.blue,
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,
@@ -170,7 +170,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: const Text(
                 'NO',
                 style: TextStyle(
-                  color: Color(0xff0f4c81),
+                  color: Colors.blue,
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,

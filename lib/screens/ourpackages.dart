@@ -57,13 +57,13 @@ class _OurPackagesState extends State<OurPackages> {
     '365 days'
   ];
   var colors = [
-    Colors.deepOrange[300],
-    Colors.yellow[300],
-    Colors.red[200],
-    Colors.blue[300],
-    Colors.green[300],
-    Colors.amber[300],
-    Colors.purple[200]
+    Colors.deepOrange[100],
+    Colors.yellow[100],
+    Colors.red[100],
+    Colors.blue[100],
+    Colors.green[100],
+    Colors.amber[100],
+    Colors.purple[100]
   ];
   var colors1 = [
     Colors.deepOrange[100],
@@ -166,7 +166,7 @@ class _OurPackagesState extends State<OurPackages> {
           ),
           const SizedBox(height: 10),
           Visibility(
-            visible: !isSelectedPlans,
+            visible: isSelectedPlans,
             replacement: SizedBox.shrink(),
             child: Expanded(
               child: ListView.builder(
@@ -179,6 +179,9 @@ class _OurPackagesState extends State<OurPackages> {
                       ),
                       margin: const EdgeInsets.all(10),
                       child: ExpansionTile(
+                        collapsedIconColor: Colors.black,
+                        // trailing: Icon(Icons.keyboard_arrow_down,color: Colors.black,),
+                        iconColor: Colors.black,
                         collapsedShape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         childrenPadding: const EdgeInsets.only(
@@ -186,7 +189,7 @@ class _OurPackagesState extends State<OurPackages> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         backgroundColor: colors1[index],
-                        collapsedBackgroundColor: colors[index],
+                        collapsedBackgroundColor: Colors.white,
                         collapsedTextColor: Colors.black,
                         textColor: Colors.black,
                         title: Row(
@@ -293,7 +296,7 @@ class _OurPackagesState extends State<OurPackages> {
             ),
           ),
           Visibility(
-            visible: isSelectedPlans,
+            visible: !isSelectedPlans,
             child: Expanded(
               child: ListView.builder(
                   itemCount: session1.length,
@@ -305,6 +308,7 @@ class _OurPackagesState extends State<OurPackages> {
                       ),
                       margin: const EdgeInsets.all(10),
                       child: ExpansionTile(
+                        iconColor: Colors.black,
                         collapsedShape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         childrenPadding: const EdgeInsets.only(
@@ -313,17 +317,19 @@ class _OurPackagesState extends State<OurPackages> {
                             borderRadius: BorderRadius.circular(10)),
                         backgroundColor: colors1[index],
                         collapsedBackgroundColor: colors[index],
+                          collapsedTextColor: Colors.black,
+                        textColor: Colors.black,
                         title: Row(
                           children: [
                             const Text(
                               'Number of Sessions: ',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w600),
+                                  fontSize: 16, fontWeight: FontWeight.w600,color: Colors.black),
                             ),
                             Text(
                               session1[index],
                               style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600),
+                                  fontSize: 15, fontWeight: FontWeight.w600,color: Colors.black),
                             )
                           ],
                         ),
@@ -340,9 +346,9 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Price: ',
                                         style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w600),
+                                            fontWeight: FontWeight.w600,color: Colors.black),
                                       ),
-                                      Text(price1[index])
+                                      Text(price1[index],style: TextStyle(color: Colors.black),)
                                     ],
                                   ),
                                   Row(
@@ -350,10 +356,10 @@ class _OurPackagesState extends State<OurPackages> {
                                       const Text(
                                         'Validity: ',
                                         style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w600,color: Colors.black),
                                       ),
-                                      Text(validity1[index])
+                                      Text(validity1[index],style: TextStyle(color: Colors.black),)
                                     ],
                                   ),
                                 ],
@@ -367,10 +373,10 @@ class _OurPackagesState extends State<OurPackages> {
                                       const Text(
                                         'Per Session: ',
                                         style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w600,color: Colors.black),
                                       ),
-                                      Text(persession1[index])
+                                      Text(persession1[index],style: TextStyle(color: Colors.black),)
                                     ],
                                   ),
                                   MaterialButton(
@@ -382,7 +388,7 @@ class _OurPackagesState extends State<OurPackages> {
                                     child: const Text(
                                       'Subscribe',
                                       style: TextStyle(
-                                          fontSize: 18,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white),
                                     ),

@@ -115,8 +115,9 @@ class _TrainerListState extends State<TrainerList> {
                                           trainersList[index]['name'],
                                           style: const TextStyle(
                                               fontSize: 17,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.deepOrange),
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.orange,
+                                              decoration: TextDecoration.underline),
                                         ),
                                         const SizedBox(height: 10),
                                         Text(
@@ -175,7 +176,7 @@ class _TrainerListState extends State<TrainerList> {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10),
                                       child: Text(
-                                        trainersList[index]['rating'],
+                                        '5',
                                         style: const TextStyle(fontSize: 16),
                                       ),
                                     )

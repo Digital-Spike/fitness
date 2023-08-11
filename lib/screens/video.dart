@@ -120,7 +120,7 @@ class _VideoState extends State<Video> {
         ),
         builder: (context, player) => Scaffold(
           appBar: AppBar(
-           
+           centerTitle: true,
             title: const Text(
               'Explore',
               style: TextStyle(color: Colors.white),

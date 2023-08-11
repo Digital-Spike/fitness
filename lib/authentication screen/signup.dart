@@ -222,6 +222,12 @@ class _SignupPageState extends State<SignupPage> {
                           children: [
                             TextButton(
                               onPressed: () {
+                                showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   PageRouteBuilder(

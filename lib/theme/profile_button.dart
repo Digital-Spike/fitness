@@ -19,13 +19,13 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 5,top: 10),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           primary: Colors.blueGrey[100], // Customize button color
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.all(10),
         ),
         child: Row(
           children: [
@@ -40,11 +40,11 @@ class CustomButton extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
                 Text(
                   subtitle,
-                  style: TextStyle(fontSize: 14, color: Colors.grey[800]),
+                  style: TextStyle(fontSize: 12, color: Colors.grey[800]),
                 ),
               ],
             ),

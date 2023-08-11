@@ -105,15 +105,19 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
               '   Preferred Date',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
+            SizedBox(height: 10),
             Container(
-              margin: const EdgeInsets.all(10),
+              color: Colors.white10,
+             
               height: 100,
               width: double.infinity,
               child: DatePicker(
                 DateTime.now(),
-               
+                dayTextStyle: TextStyle(color: Colors.orangeAccent),
+                monthTextStyle: TextStyle(color: Colors.orange),
+               dateTextStyle: TextStyle(color: Colors.amber,fontSize: 16),
                 initialSelectedDate: DateTime.now(),
-                selectionColor: Colors.black,
+                selectionColor: Colors.black54,
                 selectedTextColor: Colors.white,
                 deactivatedColor: Colors.white,
                 onDateChange: (date) {
@@ -314,7 +318,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
           content: const Text(
             'Are you sure?',
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontSize: 20,
             ),
             textAlign: TextAlign.center,
@@ -324,7 +328,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
               child: const Text(
                 'YES',
                 style: TextStyle(
-                  color: Color(0xff0f4c81),
+                  color: Colors.blue,
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,
@@ -376,7 +380,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
               child: const Text(
                 'NO',
                 style: TextStyle(
-                  color: Color(0xff0f4c81),
+                  color: Colors.blue,
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,

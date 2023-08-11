@@ -55,7 +55,7 @@ class _BookingState extends State<Booking> {
                                 margin: const EdgeInsets.all(5),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white24),
+                                    color: Colors.white12),
                                 child: Column(
                                   children: [
                                     Row(
@@ -70,8 +70,8 @@ class _BookingState extends State<Booking> {
                                         Text(
                                           ' ${bookingData?['trainerName']}',
                                           style: const TextStyle(
-                                              color: Colors.deepOrange,
-                                              fontSize: 15),
+                                              color: Colors.orange,
+                                              fontSize: 15,fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
@@ -181,7 +181,7 @@ class _BookingState extends State<Booking> {
                                                   changeSlotEnum:
                                                       ChangeSlotEnum.postpone);
                                             },
-                                            color: const Color(0xff404040),
+                                            color: Colors.white30,
                                             child: const Text(
                                               'Postpone',
                                               style: TextStyle(
@@ -195,7 +195,7 @@ class _BookingState extends State<Booking> {
                                                   changeSlotEnum:
                                                       ChangeSlotEnum.prepone);
                                             },
-                                            color: const Color(0xff404040),
+                                            color: Colors.white30,
                                             child: const Text(
                                               'Prepone',
                                               style: TextStyle(
@@ -206,7 +206,7 @@ class _BookingState extends State<Booking> {
                                             onPressed: () {
                                               cancelBooking();
                                             },
-                                            color: const Color(0xff404040),
+                                            color: Colors.white30,
                                             child: const Text(
                                               'Cancel',
                                               style: TextStyle(

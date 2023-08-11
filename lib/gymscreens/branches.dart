@@ -99,8 +99,8 @@ class _BranchListState extends State<BranchList> {
                                           style: const TextStyle(
                                              
                                               fontSize: 16,
-                                              color: Colors.deepOrange,
-                                              fontWeight: FontWeight.w600,
+                                              color: Colors.orange,
+                                              fontWeight: FontWeight.w900,
                                               decoration:
                                                   TextDecoration.underline),textAlign: TextAlign.center,),
                                       const SizedBox(height: 10),
@@ -116,7 +116,7 @@ class _BranchListState extends State<BranchList> {
                                     Icons.location_on,
                                     size: 16,
                                     color: Colors.white,
-                                  ),
+                                  ),SizedBox(width: 10),
                                   Expanded(
                                     child: Text(
                                       branchList[index]['address'],
@@ -124,7 +124,7 @@ class _BranchListState extends State<BranchList> {
                                           fontFamily: 'Roboto',
                                           fontSize: 13,
                                           fontWeight: FontWeight.w500,color: Colors.white),
-                                      textAlign: TextAlign.start,
+                                      // textAlign: TextAlign.start,
                                       maxLines: 3,
                                     ),
                                   ),
