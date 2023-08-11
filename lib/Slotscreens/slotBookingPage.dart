@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/my_booking/booking.dart';
 import 'package:fitness/my_booking/mybookings.dart';
+import 'package:fitness/screens/ourpackages.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ import 'package:intl/intl.dart';
 
 class SlotBookingPage extends StatefulWidget {
   final bool isBranch;
- 
+
   final Map<String, dynamic> trainer;
   final Map<String, dynamic>? bookingData;
   final bool? isChangeSlot;
@@ -21,7 +22,6 @@ class SlotBookingPage extends StatefulWidget {
   const SlotBookingPage(
       {required this.isBranch,
       required this.trainer,
-      
       this.bookingData,
       this.isChangeSlot,
       this.changeSlotEnum,
@@ -109,14 +109,13 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
             SizedBox(height: 10),
             Container(
               color: Colors.white10,
-             
               height: 100,
               width: double.infinity,
               child: DatePicker(
                 DateTime.now(),
                 dayTextStyle: TextStyle(color: Colors.orangeAccent),
                 monthTextStyle: TextStyle(color: Colors.orange),
-               dateTextStyle: TextStyle(color: Colors.amber,fontSize: 16),
+                dateTextStyle: TextStyle(color: Colors.amber, fontSize: 16),
                 initialSelectedDate: DateTime.now(),
                 selectionColor: Colors.black54,
                 selectedTextColor: Colors.white,
@@ -163,6 +162,12 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                           return InkWell(
                             onTap: () {
                               if (!isBooked) {
+                                if (ApiList.user?['subscriptionId'] == null ||
+                                    ApiList.user?['available'] == "0") {
+                                  showSubscriptionPopup();
+                                  return;
+                                }
+
                                 showBookingPopup(
                                     timeStamp: timeStamp[index],
                                     index: index,
@@ -369,13 +374,77 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                       slotNumber: (index + 1).toString());
                 }
                 if (mounted) {
-                 
                   Navigator.of(context).pop();
-                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyBookingPage()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => MyBookingPage()));
                 }
                 setState(() {
                   futureData = slotList();
                 });
+              },
+            ),
+            MaterialButton(
+              child: const Text(
+                'NO',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  showSubscriptionPopup() {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: const Text(
+            'No active subscription plan?',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          content: const Text(
+            'Choose subscription plan',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: <Widget>[
+            MaterialButton(
+              child: const Text(
+                'YES',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              onPressed: () async {
+                /*Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const OurPackages()));*/
+
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const OurPackages()));
               },
             ),
             MaterialButton(

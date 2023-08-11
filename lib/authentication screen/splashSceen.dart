@@ -29,11 +29,11 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           );
         } else {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => const HomePage()),
-              ModalRoute.withName('/'));
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const HomePage()),
+          );
         }
       });
     });
