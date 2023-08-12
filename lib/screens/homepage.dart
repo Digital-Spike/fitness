@@ -12,6 +12,7 @@ import 'package:fitness/gymscreens/partner.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:fitness/screens/offers.dart';
 import 'package:fitness/screens/ourpackages.dart';
+import 'package:fitness/screens/packages_.dart';
 import 'package:fitness/trainerscreens/our_trainers.dart';
 import 'package:fitness/trainerscreens/trainer_list.dart';
 import 'package:flutter/material.dart';
@@ -358,7 +359,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const OurPackages()));
+                                  builder: (context) => const Packages()));
                         },
                         child: Container(
                           padding: const EdgeInsets.all(10),
