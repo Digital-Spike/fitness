@@ -7,6 +7,7 @@ import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:fitness/authentication%20screen/trainerlogin.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/homepage.dart';
+import 'package:fitness/theme/glassbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
@@ -89,25 +90,22 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         resizeToAvoidBottomInset: true,
         //.com  backgroundColor: Color(0xffF5E6C2),
-        body: Container(
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-              color: Colors.transparent,
-              image: DecorationImage(
-                image: AssetImage('assets/IMG_9404.jpg'),
-                fit: BoxFit.cover,
-                opacity: 0.98,
-              )),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>TrainerLogin()));
-                  },
-                  child: Container(
+        body: SafeArea(
+          child: Container(
+            alignment: Alignment.center,
+            decoration: const BoxDecoration(
+                color: Colors.transparent,
+                image: DecorationImage(
+                  image: AssetImage('assets/ems jacket.webp'),
+                  fit: BoxFit.contain,
+                  opacity: 0.98,
+                )),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
                     padding: EdgeInsets.all(20),
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
@@ -139,137 +137,137 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                ),
-         
-               
-                const SizedBox(height: 80),
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  margin: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.black.withOpacity(0.2)),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        // style: const TextStyle(color: Colors.black),
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                            //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
-                            hintText: 'Email',
-                            // hintStyle: const TextStyle(color: Colors.grey),
-                            isDense: true,
-                            filled: true,
-                            fillColor: Colors.black54,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Email';
-                          } else if (!value.contains('@')) {
-                            return 'Please Enter Valid Email';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                        // style: const TextStyle(color: Colors.black),
-                        controller: _passwordController,
-                        obscureText: _isSecurePassword,
-                        decoration: InputDecoration(
-                            //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
-                            hintText: 'Password',
-                            // hintStyle: const TextStyle(color: Colors.grey),
-                            isDense: true,
-                            filled: true,
-                            fillColor: Colors.black54,
-                            suffixIcon: togglepassword(),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Password';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ForgotPassword()));
+           
+                 
+                  const SizedBox(height: 80),
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    margin: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.black.withOpacity(0.2)),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          // style: const TextStyle(color: Colors.black),
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                              //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
+                              hintText: 'Email',
+                              // hintStyle: const TextStyle(color: Colors.grey),
+                              isDense: true,
+                              filled: true,
+                              fillColor: Colors.black54,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please Enter Email';
+                            } else if (!value.contains('@')) {
+                              return 'Please Enter Valid Email';
+                            }
+                            return null;
                           },
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                'Forgot Password?',
-                                style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          )),
-                      const SizedBox(height: 20),
-                      GestureDetector(
-                          onTap: userLogin,
-                          child: SvgPicture.asset('assets/login.svg')),
-                      const SizedBox(height: 20),
-                      const Text(
-                        'OR',
-                        style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      const SizedBox(height: 20),
-                      GestureDetector(
-                          child:
-                              SvgPicture.asset('assets/google_sign_up.svg'),
-                          onTap: () =>
-                              FirebaseServices.signInWithGoogle(context)),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text("Don't have an Account?",
-                              style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white)),
-                          TextButton(
-                            onPressed: () {
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                          // style: const TextStyle(color: Colors.black),
+                          controller: _passwordController,
+                          obscureText: _isSecurePassword,
+                          decoration: InputDecoration(
+                              //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
+                              hintText: 'Password',
+                              // hintStyle: const TextStyle(color: Colors.grey),
+                              isDense: true,
+                              filled: true,
+                              fillColor: Colors.black54,
+                              suffixIcon: togglepassword(),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please Enter Password';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        GestureDetector(
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const SignupPage()));
+                                          const ForgotPassword()));
                             },
-                            child: const Text(
-                              'Signup',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                decoration: TextDecoration.underline,
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            )),
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                            onTap: userLogin,
+                            child: SvgPicture.asset('assets/login.svg')),
+                        const SizedBox(height: 20),
+                        const Text(
+                          'OR',
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                            child:
+                                SvgPicture.asset('assets/google_sign_up.svg'),
+                            onTap: () =>
+                                FirebaseServices.signInWithGoogle(context)),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Don't have an Account?",
+                                style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignupPage()));
+                              },
+                              child: const Text(
+                                'Signup',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ));

@@ -103,12 +103,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),const SizedBox(height: 10),
                     const Divider(height: 1.0,thickness: 1.0,color: Colors.white,),
                     const SizedBox(height: 5),                   
-                    CustomButton(title: 'Edit Profile', subtitle: 'Edit your profile here', svgPath: 'assets/edit-3.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));}),
-                    CustomButton(title: 'Change Password', subtitle: 'Change your password easily', svgPath: 'assets/Locked.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
-                    CustomButton(title: 'Change Language', subtitle: 'Change your Language here', svgPath: 'assets/ab-2.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
-                    CustomButton(title: 'Subscription', subtitle: 'Check your Subscription here', svgPath: 'assets/CC.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Subscription()));}),
-                    CustomButton(title: 'Privacy and Policy', subtitle: 'Check our Policy here', svgPath: 'assets/I (2).svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>TermsAndConditions()));}),
-                     CustomButton(title: 'Logout', subtitle: 'Click here to logout', svgPath: 'assets/lOGOUT SVG.svg', trailingIcon: Icons.arrow_forward_ios, onPressed: (){showLogoutPopup();}),                                                                                      
+                    CustomButton(title: 'Edit Profile', subtitle: 'Edit your profile here', leadingIcon: Icons.edit_outlined, trailingIcon: Icons.arrow_forward_ios, onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));}),
+                    CustomButton(title: 'Change Password', subtitle: 'Change your password easily', leadingIcon: Icons.lock, trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
+                    CustomButton(title: 'Change Language', subtitle: 'Change your Language here',leadingIcon: Icons.language_outlined, trailingIcon: Icons.arrow_forward_ios, onPressed: (){}),
+                    CustomButton(title: 'Subscription', subtitle: 'Check your Subscription here',leadingIcon: Icons.credit_card, trailingIcon: Icons.arrow_forward_ios, onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Subscription()));}),
+                    CustomButton(title: 'Privacy and Policy', subtitle: 'Check our Policy here', leadingIcon: Icons.privacy_tip, trailingIcon: Icons.arrow_forward_ios, onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>TermsAndConditions()));}),
+                     CustomButton(title: 'Logout', subtitle: 'Click here to logout', leadingIcon: Icons.logout, trailingIcon: Icons.arrow_forward_ios, onPressed: (){showLogoutPopup();}),                                                                                      
               Center(
                 child: Image.asset(
                   'assets/FJ FONT.png',

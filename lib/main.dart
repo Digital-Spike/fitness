@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness/authentication%20screen/splashSceen.dart';
+import 'package:fitness/authentication%20screen/trainerlogin.dart';
 
 import 'package:flutter/material.dart';
 
@@ -36,6 +37,6 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           fontFamily: 'NotoSans',
         ),
-        home: SplashScreen());
+        home: TrainerLogin());
   }
 }

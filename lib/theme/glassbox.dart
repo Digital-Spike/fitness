@@ -8,13 +8,13 @@ class Glassbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(0),
+      borderRadius: BorderRadius.circular(20),
       child: Container(
-        height: 80,
+       
         width: double.infinity,
-        padding: EdgeInsets.all(2),
+        
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
           child: Container(
             alignment: Alignment.bottomCenter,
             child: child,

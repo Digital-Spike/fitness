@@ -38,217 +38,219 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+     
       resizeToAvoidBottomInset: true,
-      body: Container(
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-            color: Colors.transparent,
-            image: DecorationImage(
-              image: AssetImage('assets/IMG_9404.jpg'),
-              fit: BoxFit.cover,
-              opacity: 0.98,
-            )),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.black.withOpacity(0.3)),
-                child: const Column(
-                  children: [
-                    Text(
-                      'Transform your body\nand mind',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 25,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                      style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.black.withOpacity(0.2)),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+      body: SafeArea(
+        child: Container(
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+              color: Colors.transparent,
+              image: DecorationImage(
+                image: AssetImage('assets/ems jacket.webp'),
+                fit: BoxFit.contain,
+                opacity: 0.98,
+              )),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.black.withOpacity(0.3)),
+                  child: const Column(
                     children: [
-                      TextFormField(
-                        controller: _userNameController,
-                        decoration: InputDecoration(
-                            
-                            hintText: 'User Name',
-                            isDense: true,
-                            filled: true,
-                            fillColor: Colors.black54,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter user name';
-                          }
-                          return null;
-                        },
+                      Text(
+                        'Transform your body\nand mind',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 25,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 15),
-                      IntlPhoneField(
-                       
-                        
-                        decoration: const InputDecoration(
-                          
-                            isDense: true,
-                            filled: true,
-                           fillColor: Colors.black54,
-                             
-                           
-                            hintText: 'Phone Number',
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)))),
-                        disableLengthCheck: true,
-                        initialCountryCode: 'AE',
-                        onChanged: (phone) {
-                          print(phone.completeNumber);
-                        },
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                     
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                           
-                            hintText: 'Email',
-                            isDense: true,
-                            filled: true,
-                            fillColor: Colors.black54,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (email) =>
-                            email != null && !EmailValidator.validate(email)
-                                ? 'Enter a valid email'
-                                : null,
-                      ),
-                      const SizedBox(height: 15),
-                      TextFormField(
-                       
-                        controller: _passwordController,
-                        obscureText: _isSecurePassword,
-                        decoration: InputDecoration(
-                            
-                            hintText: 'Password',
-                            isDense: true,
-                            filled: true,
-                            fillColor: Colors.black54,
-                            suffixIcon: togglePassword(),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) =>
-                            value != null && value.length < 6
-                                ? 'Enter min. 6 characters'
-                                : null,
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            checkColor: Colors.white,
-                            side: const BorderSide(color: Colors.white),
-                            value: isChecked,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isChecked = value!;
-                              });
-                            },
-                          ),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const TermsAndConditions()));
-                              },
-                              child: const Text(
-                                'Terms and Conditions',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white),
-                              ))
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      GestureDetector(
-                          onTap: signUp,
-                          child: SvgPicture.asset('assets/Signup.svg')),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(
-            child: CircularProgressIndicator(),
-          ));
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a, b) =>
-                                      const LoginPage(),
-                                  transitionDuration:
-                                      const Duration(seconds: 0),
-                                ),
-                                (route) => false,
-                              );
-                            },
-                            child: const Text(
-                              'Already have an Account? Login',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        ],
+                      SizedBox(height: 10),
+                      Text(
+                        'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
+                        style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.black.withOpacity(0.2)),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextFormField(
+                          controller: _userNameController,
+                          decoration: InputDecoration(
+                              
+                              hintText: 'User Name',
+                              isDense: true,
+                              filled: true,
+                              fillColor: Colors.black54,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter user name';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 15),
+                        IntlPhoneField(
+                         
+                          
+                          decoration: const InputDecoration(
+                            
+                              isDense: true,
+                              filled: true,
+                             fillColor: Colors.black54,
+                               
+                             
+                              hintText: 'Phone Number',
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)))),
+                          disableLengthCheck: true,
+                          initialCountryCode: 'AE',
+                          onChanged: (phone) {
+                            print(phone.completeNumber);
+                          },
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                       
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                             
+                              hintText: 'Email',
+                              isDense: true,
+                              filled: true,
+                              fillColor: Colors.black54,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (email) =>
+                              email != null && !EmailValidator.validate(email)
+                                  ? 'Enter a valid email'
+                                  : null,
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                         
+                          controller: _passwordController,
+                          obscureText: _isSecurePassword,
+                          decoration: InputDecoration(
+                              
+                              hintText: 'Password',
+                              isDense: true,
+                              filled: true,
+                              fillColor: Colors.black54,
+                              suffixIcon: togglePassword(),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) =>
+                              value != null && value.length < 6
+                                  ? 'Enter min. 6 characters'
+                                  : null,
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              checkColor: Colors.white,
+                              side: const BorderSide(color: Colors.white),
+                              value: isChecked,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isChecked = value!;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TermsAndConditions()));
+                                },
+                                child: const Text(
+                                  'Terms and Conditions',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                ))
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        GestureDetector(
+                            onTap: signUp,
+                            child: SvgPicture.asset('assets/Signup.svg')),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, a, b) =>
+                                        const LoginPage(),
+                                    transitionDuration:
+                                        const Duration(seconds: 0),
+                                  ),
+                                  (route) => false,
+                                );
+                              },
+                              child: const Text(
+                                'Already have an Account? Login',
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
