@@ -20,13 +20,23 @@ class _BuddyState extends State<Buddy> {
     '365 days'
   ];
   final List<Color> colors = [
-    Colors.red.shade400,
-    Colors.green,
-    Color(0xff00e6f6),
-    Color(0xffff8c00),
-    Colors.purple.shade400,
-    Color(0xfff1c40f),
-    Colors.teal,
+    Colors.red.shade900,
+    Colors.green.shade900,
+    Colors.cyan.shade900,
+    Colors.orange.shade900,
+    Colors.purple.shade900,
+    Colors.yellow.shade900,
+    Colors.teal.shade900,
+    Colors.pink.shade900,
+  ];
+   final List<Color> colorss = [
+    Colors.red.shade200,
+    Colors.green.shade200,
+    Colors.cyan.shade200,
+    Colors.orange.shade200,
+    Colors.purple.shade200,
+    Colors.yellow.shade200,
+    Colors.teal.shade200,
     Colors.pink,
   ];
   @override
@@ -46,7 +56,10 @@ class _BuddyState extends State<Buddy> {
             margin: EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-             color: colors[index]
+             gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [colorss[index],colors[index]]),
            
             ),
             child: Column(
