@@ -1,5 +1,6 @@
-import 'package:fitness/traineraccount/bottomnav.dart';
+import 'package:fitness/trainer_section/bottomnav.dart';
 import 'package:flutter/material.dart';
+
 class TrainerAccount extends StatefulWidget {
   const TrainerAccount({super.key});
 
@@ -10,10 +11,10 @@ class TrainerAccount extends StatefulWidget {
 class _TrainerProfileState extends State<TrainerAccount> {
   @override
   Widget build(BuildContext context) {
-    return Tscreen( 
-      trainerAppbar: AppBar(
-        automaticallyImplyLeading: false,
-      ),
-      trainerChild: Column());
+    return Tscreen(
+        trainerAppbar: AppBar(
+          automaticallyImplyLeading: false,
+        ),
+        trainerChild: Column());
   }
 }
