@@ -487,6 +487,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
       String trainerUrl = widget.isBranch
           ? "${ApiList.apiUrl}addBooking.php"
           : "${ApiList.apiUrl}homeaddBooking.php";
+      jsonEncode(requestBody);
       await http.post(Uri.parse(trainerUrl), body: requestBody);
       return true;
     } catch (e) {

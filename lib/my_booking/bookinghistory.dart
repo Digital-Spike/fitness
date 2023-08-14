@@ -14,7 +14,7 @@ class BookingHistory extends StatefulWidget {
 
 class _BookingHistoryState extends State<BookingHistory> {
   Future<bool>? futureData;
-  List? bookingData;
+  List bookingData = [];
   User? user = FirebaseAuth.instance.currentUser;
 
   @override
@@ -32,9 +32,9 @@ class _BookingHistoryState extends State<BookingHistory> {
             builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return ListView.builder(
-                    itemCount: 1,
+                    itemCount: bookingData.length,
                     itemBuilder: (context, index) {
-                      var bookingData = this.bookingData?.last;
+                      var booking = bookingData[index];
                       return Container(
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.all(5),
@@ -53,7 +53,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                                       color: Colors.black),
                                 ),
                                 Text(
-                                  ' ${bookingData?['trainerName']}',
+                                  ' ${booking?['trainerName']}',
                                   style: const TextStyle(
                                       fontSize: 16, color: Colors.deepOrange),
                                 )
@@ -67,7 +67,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black),
                                 ),
-                                Text('${bookingData?['bookingId']}',
+                                Text('${booking?['bookingId']}',
                                     style: const TextStyle(
                                         fontSize: 16, color: Colors.black))
                               ],
@@ -80,7 +80,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black),
                                 ),
-                                Text('${bookingData?['bookingDate']}',
+                                Text('${booking?['bookingDate']}',
                                     style: const TextStyle(
                                         fontSize: 16, color: Colors.black))
                               ],
@@ -93,7 +93,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black),
                                 ),
-                                Text('${bookingData?['bookingTime']}',
+                                Text('${booking?['bookingTime']}',
                                     style: const TextStyle(
                                         fontSize: 16, color: Colors.black))
                               ],
@@ -106,7 +106,7 @@ class _BookingHistoryState extends State<BookingHistory> {
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.black),
                                 ),
-                                Text('${bookingData?['branchName']}',
+                                Text('${booking?['branchName']}',
                                     style: const TextStyle(
                                         fontSize: 16, color: Colors.black))
                               ],
@@ -126,6 +126,19 @@ class _BookingHistoryState extends State<BookingHistory> {
       var response =
           await http.post(Uri.parse(trainerUrl), body: {'userId': user?.uid});
       bookingData = json.decode(response.body);
+
+      Set<String> seenIds = {};
+      List<Map<String, dynamic>> uniqueList = [];
+
+      for (var item in bookingData) {
+        String id = item['bookingId'];
+        if (!seenIds.contains(id)) {
+          seenIds.add(id);
+          uniqueList.add(item);
+        }
+      }
+      bookingData = uniqueList;
+
       return true;
     } catch (e) {
       return false;

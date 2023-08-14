@@ -15,7 +15,7 @@ class Booking extends StatefulWidget {
 
 class _BookingState extends State<Booking> {
   Future<bool>? futureData;
-  Map<String, dynamic>? bookingData;
+  List bookingData = [];
   User? user = FirebaseAuth.instance.currentUser;
 
   @override
@@ -36,8 +36,7 @@ class _BookingState extends State<Booking> {
                   padding: const EdgeInsets.all(15),
                   child: Container(
                     // color: Colors.white,
-                    child: (bookingData == null ||
-                            bookingData?['bookingId'] == null)
+                    child: (bookingData.isEmpty)
                         ? const Center(
                             child: Text(
                               "No Bookings found!",
@@ -48,7 +47,7 @@ class _BookingState extends State<Booking> {
                             ),
                           )
                         : ListView.builder(
-                            itemCount: 1,
+                            itemCount: bookingData.length,
                             itemBuilder: ((context, index) {
                               return Container(
                                 padding: const EdgeInsets.all(10),
@@ -68,7 +67,7 @@ class _BookingState extends State<Booking> {
                                           ),
                                         ),
                                         Text(
-                                          ' ${bookingData?['trainerName']}',
+                                          ' ${bookingData[index]?['trainerName']}',
                                           style: const TextStyle(
                                               color: Colors.orange,
                                               fontSize: 15,
@@ -86,7 +85,7 @@ class _BookingState extends State<Booking> {
                                           ),
                                         ),
                                         Text(
-                                          ' ${bookingData?['bookingId']}',
+                                          ' ${bookingData[index]?['bookingId']}',
                                           style: const TextStyle(
                                             fontSize: 14,
                                           ),
@@ -116,7 +115,7 @@ class _BookingState extends State<Booking> {
                                                       width: 1.0,
                                                       color: Colors.black)),
                                               child: Text(
-                                                ' ${bookingData?['bookingDate']}',
+                                                ' ${bookingData[index]?['bookingDate']}',
                                                 style: const TextStyle(
                                                     fontSize: 13,
                                                     color: Colors.black),
@@ -142,7 +141,7 @@ class _BookingState extends State<Booking> {
                                                       width: 1.0,
                                                       color: Colors.black)),
                                               child: Text(
-                                                ' ${bookingData?['bookingTime']}',
+                                                ' ${bookingData[index]?['bookingTime']}',
                                                 style: const TextStyle(
                                                     fontSize: 13,
                                                     color: Colors.black),
@@ -162,7 +161,7 @@ class _BookingState extends State<Booking> {
                                           ),
                                         ),
                                         Text(
-                                          ' ${bookingData?['branchName']}',
+                                          ' ${bookingData[index]?['branchName']}',
                                           style: const TextStyle(
                                             fontSize: 14,
                                           ),
@@ -180,7 +179,8 @@ class _BookingState extends State<Booking> {
                                             onPressed: () {
                                               changeSlot(
                                                   changeSlotEnum:
-                                                      ChangeSlotEnum.postpone);
+                                                      ChangeSlotEnum.postpone,
+                                                  booking: bookingData[index]);
                                             },
                                             color: Colors.white30,
                                             child: const Text(
@@ -194,7 +194,8 @@ class _BookingState extends State<Booking> {
                                               setState(() {});
                                               changeSlot(
                                                   changeSlotEnum:
-                                                      ChangeSlotEnum.prepone);
+                                                      ChangeSlotEnum.prepone,
+                                                  booking: bookingData[index]);
                                             },
                                             color: Colors.white30,
                                             child: const Text(
@@ -205,7 +206,9 @@ class _BookingState extends State<Booking> {
                                             )),
                                         MaterialButton(
                                             onPressed: () {
-                                              cancelBooking();
+                                              cancelBooking(
+                                                  bookingId: bookingData[index]
+                                                      ?['bookingId']);
                                             },
                                             color: Colors.white30,
                                             child: const Text(
@@ -248,22 +251,38 @@ class _BookingState extends State<Booking> {
       String trainerUrl = "${ApiList.apiUrl}getUserBookings.php";
       var response =
           await http.post(Uri.parse(trainerUrl), body: {'userId': user?.uid});
-      bookingData = (json.decode(response.body) as List).last;
+      bookingData = json.decode(response.body);
+
+      bookingData.retainWhere((element) => element['status'] == "PENDING");
+
+      Set<String> seenIds = {};
+      List<Map<String, dynamic>> uniqueList = [];
+
+      for (var item in bookingData) {
+        String id = item['bookingId'];
+        if (!seenIds.contains(id)) {
+          seenIds.add(id);
+          uniqueList.add(item);
+        }
+      }
+      bookingData = uniqueList;
+
       return true;
     } catch (e) {
       setState(() {
-        bookingData?.clear();
+        bookingData.clear();
       });
       return false;
     }
   }
 
-  void changeSlot({required ChangeSlotEnum changeSlotEnum}) async {
+  void changeSlot(
+      {required ChangeSlotEnum changeSlotEnum, required var booking}) async {
     Map<String, dynamic> trainer = {};
     try {
       String trainerUrl = "${ApiList.apiUrl}admin/viewTrainer.php";
       var response = await http.post(Uri.parse(trainerUrl),
-          body: {'trainerId': bookingData?["trainerId"]});
+          body: {'trainerId': booking['trainerId']});
       trainer = json.decode(response.body);
     } catch (e) {}
 
@@ -275,9 +294,8 @@ class _BookingState extends State<Booking> {
       context,
       MaterialPageRoute(
         builder: (context) => SlotBookingPage(
-          isBranch:
-              bookingData?['branchName'].toString().toLowerCase() != 'home',
-          bookingData: bookingData,
+          isBranch: booking?['branchName'].toString().toLowerCase() != 'home',
+          bookingData: booking,
           trainer: trainer,
           changeSlotEnum: changeSlotEnum,
           isChangeSlot: true,
@@ -286,7 +304,7 @@ class _BookingState extends State<Booking> {
     );
   }
 
-  void cancelBooking() async {
+  void cancelBooking({required String bookingId}) async {
     try {
       showDialog(
         context: context,
@@ -311,7 +329,7 @@ class _BookingState extends State<Booking> {
       );
       String trainerUrl = "${ApiList.apiUrl}cancelBooking.php";
       await http.post(Uri.parse(trainerUrl),
-          body: {'bookingId': bookingData?["bookingId"], 'userId': user?.uid});
+          body: {'bookingId': bookingId, 'userId': user?.uid});
     } catch (e) {}
     Navigator.of(context).pop();
     futureData = fetchData();

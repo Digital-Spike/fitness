@@ -159,9 +159,7 @@ class _UpcomingSessionState extends State<UpcomingSession> {
       http.Response? response = await http
           .post(Uri.parse(trainerUrl), body: {'trainerId': widget.trainerId});
       slots = json.decode(response.body);
-      slots.retainWhere((element) {
-        return element['status'] == "PENDING";
-      });
+      slots.retainWhere((element) => element['status'] == "PENDING");
 
       Set<String> seenIds = {};
       List<Map<String, dynamic>> uniqueList = [];
