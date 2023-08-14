@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class CompletedSession extends StatefulWidget {
-  const CompletedSession({super.key});
+  final String trainerId;
+  const CompletedSession({super.key, required this.trainerId});
 
   @override
   State<CompletedSession> createState() => _CompletedSessionState();
@@ -110,8 +111,8 @@ class _CompletedSessionState extends State<CompletedSession> {
   Future<bool>? getTrainerSlots() async {
     try {
       String trainerUrl = "${ApiList.apiUrl}getTrainerBookings.php";
-      http.Response? response =
-          await http.post(Uri.parse(trainerUrl), body: {'trainerId': "FJT01"});
+      http.Response? response = await http
+          .post(Uri.parse(trainerUrl), body: {'trainerId': widget.trainerId});
       slots = json.decode(response.body);
       slots.retainWhere((element) {
         return element['status'] == "COMPLETED";

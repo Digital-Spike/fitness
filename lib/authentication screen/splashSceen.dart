@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/welcome.dart';
 import 'package:fitness/screens/homepage.dart';
+import 'package:fitness/trainer_section/trainer_home.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,29 +16,11 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late StreamSubscription<User?> listener;
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   @override
   void initState() {
-    Timer(const Duration(milliseconds: 2800), () {
-      listener = FirebaseAuth.instance.authStateChanges().listen((User? user) {
-        if (user ==
-                null /*||
-            ((user.email ?? "").isNotEmpty && !user.emailVerified)*/
-            ) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Welcome(),
-            ),
-          );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => const HomePage()),
-          );
-        }
-      });
-    });
+    navigateFunction();
     super.initState();
   }
 
@@ -58,5 +42,39 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> navigateFunction() async {
+    final SharedPreferences prefs = await _prefs;
+    Timer(const Duration(milliseconds: 2800), () {
+      if (prefs.getString('trainerId') == null) {
+        listener =
+            FirebaseAuth.instance.authStateChanges().listen((User? user) {
+          if (user ==
+                  null /*||
+            ((user.email ?? "").isNotEmpty && !user.emailVerified)*/
+              ) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Welcome(),
+              ),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePage()),
+            );
+          }
+        });
+      } else {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const TrainerHome()),
+            (Route<dynamic> route) => false);
+      }
+    });
   }
 }

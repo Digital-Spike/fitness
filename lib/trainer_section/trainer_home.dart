@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/theme/trainer_button.dart';
 import 'package:fitness/trainer_section/completedsession.dart';
 import 'package:fitness/trainer_section/upcoming_session.dart';
-import 'package:fitness/trainer_section/updatedsession.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TrainerHome extends StatefulWidget {
   const TrainerHome({super.key});
@@ -19,6 +20,8 @@ class TrainerHome extends StatefulWidget {
 class _TrainerHomeState extends State<TrainerHome> {
   Future<bool>? futureData;
   Map<String, dynamic> trainer = {};
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  String? trainerId;
 
   @override
   void initState() {
@@ -61,8 +64,9 @@ class _TrainerHomeState extends State<TrainerHome> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const UpcomingSession()));
+                                  builder: (context) => UpcomingSession(
+                                        trainerId: trainerId ?? "",
+                                      )));
                         }),
                     TrainerButton(
                         title: 'Completed Sessions',
@@ -72,25 +76,56 @@ class _TrainerHomeState extends State<TrainerHome> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const CompletedSession()));
+                                  builder: (context) => CompletedSession(
+                                        trainerId: trainerId ?? "",
+                                      )));
                         }),
                     TrainerButton(
                         title: 'Updated Sessions',
                         leadingColor: Colors.amberAccent,
                         trailingIcon: Icons.arrow_forward_ios,
                         onPressed: () {
-                          Navigator.push(
+                          /*Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const UpdatedSession()));
+                                      const UpdatedSession()));*/
                         }),
                     TrainerButton(
                       title: 'EMS at Home/ Personal Trainer',
                       trailingIcon: Icons.arrow_forward_ios,
                       onPressed: () {},
                       leadingColor: Colors.greenAccent,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final SharedPreferences prefs = await _prefs;
+                        await prefs.remove('trainerId');
+                        if (!mounted) {
+                          return;
+                        }
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const LoginPage()),
+                            (Route<dynamic> route) => false);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        backgroundColor:
+                            Colors.blueGrey[100], // Customize button color
+                        padding: const EdgeInsets.all(10),
+                      ),
+                      child: const Text(
+                        "Logout",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w600),
+                      ),
                     ),
                     const Spacer(),
                     const Icon(
@@ -118,9 +153,11 @@ class _TrainerHomeState extends State<TrainerHome> {
 
   Future<bool>? getTrainer() async {
     try {
+      final SharedPreferences prefs = await _prefs;
+      trainerId = prefs.getString('trainerId');
       String trainerUrl = "https://fitnessjourni.com/api/admin/viewTrainer.php";
-      http.Response? response =
-          await http.post(Uri.parse(trainerUrl), body: {'trainerId': 'FJT01'});
+      http.Response? response = await http
+          .post(Uri.parse(trainerUrl), body: {'trainerId': trainerId});
 
       trainer = json.decode(response.body);
 

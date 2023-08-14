@@ -7,7 +7,6 @@ import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:fitness/authentication%20screen/trainerlogin.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/homepage.dart';
-import 'package:fitness/theme/glassbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
@@ -106,14 +105,13 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(20),
-                    margin: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.2)),
-                    child: Column(
-                      children: const [
-                      
+                    child: const Column(
+                      children: [
                         Text(
                           'Transform your body\nand mind',
                           style: TextStyle(
@@ -137,12 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-           
-                 
                   const SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(20),
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.2)),
@@ -217,21 +213,56 @@ class _LoginPageState extends State<LoginPage> {
                         GestureDetector(
                             onTap: userLogin,
                             child: SvgPicture.asset('assets/login.svg')),
-                        const SizedBox(height: 20),
-                        const Text(
+                        const SizedBox(height: 15),
+                        const Divider(color: Colors.white),
+                        /*const Text(
                           'OR',
                           style: TextStyle(
                               fontFamily: 'Roboto',
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
-                        ),
-                        const SizedBox(height: 20),
+                        ),*/
+                        const SizedBox(height: 15),
                         GestureDetector(
                             child:
                                 SvgPicture.asset('assets/google_sign_up.svg'),
                             onTap: () =>
                                 FirebaseServices.signInWithGoogle(context)),
+                        const SizedBox(height: 15),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const TrainerLogin()));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              backgroundColor:
+                                  Colors.white, // Customize button color
+                              padding: const EdgeInsets.all(10),
+                            ),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.login_rounded),
+                                SizedBox(width: 3),
+                                Text(
+                                  "Trainer Login",
+                                  style: TextStyle(
+                                      letterSpacing: 0.6,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

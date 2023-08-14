@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class UpcomingSession extends StatefulWidget {
-  const UpcomingSession({super.key});
+  final String trainerId;
+  const UpcomingSession({super.key, required this.trainerId});
 
   @override
   State<UpcomingSession> createState() => _UpcomingSessionState();
@@ -155,8 +156,8 @@ class _UpcomingSessionState extends State<UpcomingSession> {
   Future<bool>? getTrainerSlots() async {
     try {
       String trainerUrl = "${ApiList.apiUrl}getTrainerBookings.php";
-      http.Response? response =
-          await http.post(Uri.parse(trainerUrl), body: {'trainerId': "FJT01"});
+      http.Response? response = await http
+          .post(Uri.parse(trainerUrl), body: {'trainerId': widget.trainerId});
       slots = json.decode(response.body);
       slots.retainWhere((element) {
         return element['status'] == "PENDING";
