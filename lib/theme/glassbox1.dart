@@ -1,60 +1,86 @@
+
 import 'package:flutter/material.dart';
 
 
-class MyLayout extends StatelessWidget {
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  List<Color> colors = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.purple,
+  ];
+
+  int _selectedColor = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stacked Containers with Button Example'),
+        title: Text('Flutter Gridview with Color Change'),
       ),
-      body: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 100,
-                color: Colors.blue,
-                child: Center(
-                  child: Text(
-                    'Container 1',
-                    style: TextStyle(color: Colors.white),
-                  ),
+      body: GridView.builder(
+        itemCount: colors.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                _selectedColor = index;
+                 Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => _ColorPage(color: colors[_selectedColor]),
+            ),
+          );
+              });
+            },
+            child: Container(
+              color: colors[index],
+              child: Center(
+                child: Text(
+                  colors[index].toString(),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
-            Positioned(
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Handle button press
-                },
-                child: Text('Book'),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 100,
-                color: Colors.green,
-                child: Center(
-                  child: Text(
-                    'Container 2',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          );
+        }, gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+         
+        },
+        child: Icon(Icons.arrow_forward),
+      ),
+    );
+  }
+}
+
+class _ColorPage extends StatelessWidget {
+  final Color color;
+
+  _ColorPage({required this.color,super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(color.toString()),
+      ),
+      body: Container(
+        color: color,
+        child: Center(
+          child: Text(
+            'This is the color page!',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );

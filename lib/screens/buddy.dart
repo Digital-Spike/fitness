@@ -1,7 +1,4 @@
-import 'dart:convert';
-
-import 'package:fitness/screens/payment_ui.dart';
-import 'package:fitness/util/string_util.dart';
+import 'package:fitness/screens/packagedetail.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -14,40 +11,54 @@ class Buddy extends StatefulWidget {
 }
 
 class _BuddyState extends State<Buddy> {
-  List<String> session1 = ['2', '4', '8', '12', '24', '48', '96'];
-  List<String> price1 = ['398', '796', '1552', '2328', '4296', '6240', '9600'];
-  List<String> persession1 = ['199', '199', '194', '194', '179', '130', '100'];
-  List<String> validity1 = [
-    '15 days',
-    '30 days',
-    '60 days',
-    '90 days',
-    '160 days',
-    '180 days',
-    '365 days'
+   List<int> session = [2, 4, 8, 12, 24, 48, 96];
+  List<int> price = [398, 796, 1552, 2328, 4296, 6240, 9600];
+  List<int> perSession = [199, 199, 194, 194, 179, 130, 100];
+  List<int> validity = [
+   15 ,
+    30 ,
+    60 ,
+    90 ,
+    160 ,
+    180 ,
+    365 
   ];
-  final List<Color> colors = [
-    Colors.red.shade900,
-    Colors.green.shade900,
-    Colors.cyan.shade900,
-    Colors.orange.shade900,
-    Colors.purple.shade900,
-    Colors.yellow.shade900,
-    Colors.teal.shade900,
-    Colors.pink.shade900,
-  ];
-  final List<Color> colorss = [
-    Colors.red.shade200,
-    Colors.green.shade200,
-    Colors.cyan.shade200,
-    Colors.orange.shade200,
-    Colors.purple.shade200,
-    Colors.yellow.shade200,
-    Colors.teal.shade200,
-    Colors.pink,
+  final List<Gradient> gridGradients = [
+    LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.topLeft,
+      colors: [ Colors.red.shade900,  Colors.red.shade200,]),
+    LinearGradient(
+       begin: Alignment.bottomRight,
+      end: Alignment.topLeft,
+      colors: [  Colors.green.shade900,Colors.green.shade200]),
+ LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.topLeft,
+      colors: [  Colors.cyan.shade900,  Colors.cyan.shade200,]),
+    LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.topLeft,
+      colors: [ Colors.orange.shade900,  Colors.orange.shade200,]),
+    LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.topLeft,
+      colors: [ Colors.purple.shade900,  Colors.purple.shade200,]),
+    LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.topLeft,
+      colors: [ Colors.yellow.shade900,  Colors.yellow.shade200,]),
+       LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.topLeft,
+      colors: [ Colors.teal.shade900,  Colors.teal.shade200,]),
+       LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.topLeft,
+      colors: [ Colors.pink.shade900,  Colors.pink.shade200,]),
   ];
 
-  String paymentUrl = "";
+  
 
   @override
   Widget build(BuildContext context) {
@@ -55,94 +66,35 @@ class _BuddyState extends State<Buddy> {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: GridView.builder(
-            itemCount: session1.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisExtent: 120, crossAxisCount: 2),
-            itemBuilder: ((context, index) {
-              return InkWell(
-                onTap: () async {
-                  showProgress();
-                  await trainerList(price1[index]);
-                  if (!mounted) {
-                    return;
-                  }
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => PaymentPage(
-                                paymentUrl: paymentUrl,
-                              )));
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  margin: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [colorss[index], colors[index]]),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        session1[index],
-                        style: const TextStyle(
-                            fontSize: 50, fontWeight: FontWeight.bold),
-                      ),
-                      const Text(
-                        'Sessions',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+          
+          itemCount: session.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisExtent: 120,
+            crossAxisCount: 2), itemBuilder: ((context, index) {
+          return Container(
+            
+            padding: EdgeInsets.all(5),
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+             gradient: gridGradients[index]
+           
+            ),
+            child: Column(
+              children: [
+               Text(session[index].toString(),style: TextStyle(fontSize: 50,fontWeight: FontWeight.bold),),
+              
+               Text('Sessions',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)
+                  ],
                 ),
-              );
-            })),
+                
+              
+            
+          );
+        })),
       ),
     );
   }
 
-  Future<bool> trainerList(String amount) async {
-    try {
-      Response? response = await http.post(
-          Uri.parse("https://fitnessjourni.com/getPaymentUrl.php"),
-          body: {
-            'bookingId': StringUtil().generateRandomNumber(length: 8),
-            'amount': amount.toString()
-          });
-      paymentUrl = jsonDecode(response.body)['paymentUrl'];
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  void showProgress() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const Dialog(
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CircularProgressIndicator(),
-                Padding(
-                    padding: EdgeInsets.only(left: 4.0),
-                    child: Text(
-                      'Loading...',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-                    )),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+ 
 }
