@@ -11,7 +11,7 @@ class PackageDetail extends StatefulWidget {
   final Gradient gradient;
   final int session;
   final int price;
-  final int perSession;
+  final String perSession;
   final int validity;
 
   const PackageDetail(
