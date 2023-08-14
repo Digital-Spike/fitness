@@ -57,7 +57,15 @@ class _BuddyState extends State<Buddy> {
       end: Alignment.topLeft,
       colors: [ Colors.pink.shade900,  Colors.pink.shade200,]),
   ];
-
+ List<int> specialsession = [24, 48, 96, ];
+  List<int> specialprice = [3866, 5616, 8640, ];
+  List<String> specialperSession = ['NA'];
+  List<String> specialvalidity = [
+   '3 months',
+    '6 months',
+    '12 months'
+    
+  ];
   
 
   @override

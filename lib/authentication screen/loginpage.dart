@@ -7,6 +7,7 @@ import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:fitness/authentication%20screen/trainerlogin.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/homepage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +25,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-   String _errorMessage = "";
+   final formKey = GlobalKey<FormState>();
+ 
 
   userLogin() async {
     showDialog(
@@ -58,20 +60,36 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const SignupPage()));
       }
-    } catch (error) {
-      setState(() {
-        if (error is FirebaseAuthException) {
-          // Customize error messages based on different error codes
-          if (error.code == 'user-not-found') {
-            _errorMessage = 'No user found with this email.';
-          } else if (error.code == 'wrong-password') {
-            _errorMessage = 'Invalid password.Please enter a valid password';
-          } else {
-            _errorMessage = 'An error occurred. Please try again later.';
-          }
-        } else {
-          _errorMessage = 'An error occurred. Please try again later.';
-        }});
+    } on FirebaseAuthException catch (e) {
+    String errorMessage = _getErrorMessage(e.code);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: Text('Login Error',textAlign: TextAlign.center,),
+            content: Text(errorMessage,textAlign: TextAlign.center,),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        });
+    }
+  }
+  String _getErrorMessage(String errorCode) {
+    switch (errorCode) {
+      case 'user-not-found':
+        return 'No user found with this email. please check the email and try again';
+      case 'wrong-password':
+        return 'Invalid password. please check the password and try again';
+      case 'invalid-email':
+        return 'Invalid email format.';
+      default:
+        return 'An error occurred. Please try again later.';
     }
   }
 
@@ -130,183 +148,186 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.black.withOpacity(0.2)),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          // style: const TextStyle(color: Colors.black),
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                              //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
-                              hintText: 'Email',
-                              // hintStyle: const TextStyle(color: Colors.grey),
-                              isDense: true,
-                              filled: true,
-                              fillColor: Colors.black54,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please Enter Email';
-                            } else if (!value.contains('@')) {
-                              return 'Please Enter Valid Email';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 15),
-                        TextFormField(
-                          // style: const TextStyle(color: Colors.black),
-                          controller: _passwordController,
-                          obscureText: _isSecurePassword,
-                          decoration: InputDecoration(
-                              //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
-                              hintText: 'Password',
-                              // hintStyle: const TextStyle(color: Colors.grey),
-                              isDense: true,
-                              filled: true,
-                              fillColor: Colors.black54,
-                              suffixIcon: togglepassword(),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please Enter Password';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ForgotPassword()));
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            // style: const TextStyle(color: Colors.black),
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                                //  label: const Text('Email',style: TextStyle(color: Colors.grey),),
+                                hintText: 'Email',
+                                // hintStyle: const TextStyle(color: Colors.grey),
+                                isDense: true,
+                                filled: true,
+                                fillColor: Colors.black54,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please Enter Email';
+                              } else if (!value.contains('@')) {
+                                return 'Please Enter Valid Email';
+                              }
+                              return null;
                             },
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'Forgot Password?',
-                                  style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white),
-                                ),
-                              ],
-                            )),
-                        const SizedBox(height: 20),
-                        GestureDetector(
-                            onTap: userLogin,
-                            child: SvgPicture.asset('assets/login.svg')),
-                        const SizedBox(height: 15),
-                        const Divider(color: Colors.white),
-                        /*const Text(
-                          'OR',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),*/
-                        const SizedBox(height: 15),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.58,
-                            child: ElevatedButton(onPressed: () {
-                              FirebaseServices.signInWithGoogle(context);
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Logo(Logos.google,size: 25,),SizedBox(width: 3),Text('Sign In with Google',style: TextStyle(
-                                      letterSpacing: 0.6,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold))
-                              ],
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                
-                                  borderRadius: BorderRadius.circular(20)),
-                              backgroundColor:
-                                  Colors.white, // Customize button color
-                              padding: const EdgeInsets.all(7),
-                            ),
-                            ),
-                            
-                            ),
-                                // SvgPicture.asset('assets/google_sign_up.svg'),
-                           
-                        const SizedBox(height: 15),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.58,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const TrainerLogin()));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              
-                              shape: RoundedRectangleBorder(
-                                
-                                  borderRadius: BorderRadius.circular(20)),
-                              backgroundColor:
-                                  Colors.white, // Customize button color
-                              padding: const EdgeInsets.all(7),
-                            ),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.person),
-                                SizedBox(width: 3),
-                                Text(
-                                  "Trainer Login",
-                                  style: TextStyle(
-                                      letterSpacing: 0.6,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("Don't have an Account?",
-                                style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                            TextButton(
-                              onPressed: () {
+                          const SizedBox(height: 15),
+                          TextFormField(
+                            // style: const TextStyle(color: Colors.black),
+                            controller: _passwordController,
+                            obscureText: _isSecurePassword,
+                            decoration: InputDecoration(
+                                //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
+                                hintText: 'Password',
+                                // hintStyle: const TextStyle(color: Colors.grey),
+                                isDense: true,
+                                filled: true,
+                                fillColor: Colors.black54,
+                                suffixIcon: togglepassword(),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please Enter Password';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          GestureDetector(
+                              onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const SignupPage()));
+                                            const ForgotPassword()));
                               },
-                              child: const Text(
-                                'Signup',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  decoration: TextDecoration.underline,
-                                ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'Forgot Password?',
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white),
+                                  ),
+                                ],
+                              )),
+                          const SizedBox(height: 20),
+                          GestureDetector(
+                              onTap: userLogin,
+                              child: SvgPicture.asset('assets/login.svg')),
+                          const SizedBox(height: 15),
+                          const Divider(color: Colors.white),
+                          /*const Text(
+                            'OR',
+                            style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),*/
+                          const SizedBox(height: 15),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.58,
+                              child: ElevatedButton(onPressed: () {
+                                FirebaseServices.signInWithGoogle(context);
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Logo(Logos.google,size: 25,),SizedBox(width: 3),Text('Sign In with Google',style: TextStyle(
+                                        letterSpacing: 0.6,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold))
+                                ],
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  
+                                    borderRadius: BorderRadius.circular(20)),
+                                backgroundColor:
+                                    Colors.white, // Customize button color
+                                padding: const EdgeInsets.all(7),
+                              ),
+                              ),
+                              
+                              ),
+                                  // SvgPicture.asset('assets/google_sign_up.svg'),
+                             
+                          const SizedBox(height: 15),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.58,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            const TrainerLogin()));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                
+                                shape: RoundedRectangleBorder(
+                                  
+                                    borderRadius: BorderRadius.circular(20)),
+                                backgroundColor:
+                                    Colors.white, // Customize button color
+                                padding: const EdgeInsets.all(7),
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.person),
+                                  SizedBox(width: 3),
+                                  Text(
+                                    "Trainer Login",
+                                    style: TextStyle(
+                                        letterSpacing: 0.6,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text("Don't have an Account?",
+                                  style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white)),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignupPage()));
+                                },
+                                child: const Text(
+                                  'Signup',
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

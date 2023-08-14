@@ -62,7 +62,15 @@ int _selectedSession=0;
       end: Alignment.topLeft,
       colors: [ Colors.pink.shade900,  Colors.pink.shade200,]),
   ];
-  
+  List<int> specialsession = [24, 48, 96, ];
+  List<int> specialprice = [1, 4320, 6839, ];
+  List<String> specialperSession = ['NA'];
+  List<String> specialvalidity = [
+   '3 months',
+    '6 months',
+    '12 months'
+    
+  ];
 
   @override
   Widget build(BuildContext context) {
