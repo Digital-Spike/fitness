@@ -31,54 +31,26 @@ class _AddUserPageState extends State<AddUserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.black,
+     // backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
           alignment: Alignment.center,
           decoration: const BoxDecoration(
               color: Colors.transparent,
               image: DecorationImage(
-                image: AssetImage('assets/IMG_9779.jpg'),
-                fit: BoxFit.cover,
+                image: AssetImage('assets/ems jacket.webp'),
+                fit: BoxFit.contain,
                 opacity: 0.98,
               )),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.black.withOpacity(0.3)),
-                    child: const Column(
-                      children: [
-                        SizedBox(height: 20),
-                        Text(
-                          'Transform your body\nand mind',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 10),
-                      ],
-                    ),
-                  ),
-                ),
+                 Container(
+                  padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(20),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.black.withOpacity(0.5)),
+                  child: Image.asset('assets/FJ FONT.png'),
+                 ),
                 const SizedBox(
                   height: 80,
                 ),
@@ -87,7 +59,7 @@ class _AddUserPageState extends State<AddUserPage> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.black.withOpacity(0.3)),
+                        color: Colors.black.withOpacity(0.2)),
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                       child: Form(
@@ -96,17 +68,14 @@ class _AddUserPageState extends State<AddUserPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextFormField(
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.white),
                               controller: _userNameController,
                               decoration: InputDecoration(
-                                  label: const Text(
-                                    'User Name',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
+                                 
                                   hintText: 'User Name',
                                   isDense: true,
                                   filled: true,
-                                  fillColor: Colors.white,
+                                  fillColor: Colors.black54,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
                               validator: (value) {
@@ -119,17 +88,14 @@ class _AddUserPageState extends State<AddUserPage> {
                             const SizedBox(height: 15),
                             TextFormField(
                               initialValue: user?.email,
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.white),
                               enabled: false,
                               decoration: InputDecoration(
-                                  label: const Text(
-                                    'Email',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
+                                 
                                   hintText: 'Email',
                                   isDense: true,
                                   filled: true,
-                                  fillColor: Colors.white,
+                                  fillColor: Colors.black54,
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
                               autovalidateMode:
@@ -141,11 +107,11 @@ class _AddUserPageState extends State<AddUserPage> {
                             ),
                             const SizedBox(height: 15),
                             IntlPhoneField(
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.white),
                               decoration: const InputDecoration(
                                   isDense: true,
                                   filled: true,
-                                  fillColor: Colors.white60,
+                                  fillColor: Colors.black54,
                                   labelStyle: TextStyle(color: Colors.grey),
                                   labelText: 'Phone Number',
                                   hintText: 'Phone Number',

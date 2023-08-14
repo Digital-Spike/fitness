@@ -43,41 +43,16 @@ class _TrainerLoginState extends State<TrainerLogin> {
               )),
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(20),
-                  margin: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.black.withOpacity(0.2)),
-                  child: const Column(
-                    children: [
-                      Text(
-                        'Transform your body\nand mind',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                        style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 80),
+                  padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(20),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.black.withOpacity(0.2)),
+                  child: Image.asset('assets/FJ FONT.png'),
+                 ),
+                const SizedBox(height: 180),
                 Container(
                   padding: const EdgeInsets.all(20),
                   margin: const EdgeInsets.all(20),

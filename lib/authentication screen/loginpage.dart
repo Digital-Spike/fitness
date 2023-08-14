@@ -10,6 +10,7 @@ import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:icons_plus/icons_plus.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -23,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+   String _errorMessage = "";
 
   userLogin() async {
     showDialog(
@@ -56,9 +58,20 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const SignupPage()));
       }
-    } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
-      showErrorMessage(e.code);
+    } catch (error) {
+      setState(() {
+        if (error is FirebaseAuthException) {
+          // Customize error messages based on different error codes
+          if (error.code == 'user-not-found') {
+            _errorMessage = 'No user found with this email.';
+          } else if (error.code == 'wrong-password') {
+            _errorMessage = 'Invalid password.Please enter a valid password';
+          } else {
+            _errorMessage = 'An error occurred. Please try again later.';
+          }
+        } else {
+          _errorMessage = 'An error occurred. Please try again later.';
+        }});
     }
   }
 
@@ -104,37 +117,12 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    margin: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.black.withOpacity(0.2)),
-                    child: const Column(
-                      children: [
-                        Text(
-                          'Transform your body\nand mind',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'with the ultimate EMS fitness journey app for anyone who wants to take control of their health and fitness',
-                          style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
+                 Container(
+                  padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(20),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.black.withOpacity(0.2)),
+                  child: Image.asset('assets/FJ FONT.png'),
+                 ),
                   const SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(20),
@@ -224,14 +212,36 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white),
                         ),*/
                         const SizedBox(height: 15),
-                        GestureDetector(
-                            child:
-                                SvgPicture.asset('assets/google_sign_up.svg'),
-                            onTap: () =>
-                                FirebaseServices.signInWithGoogle(context)),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.58,
+                            child: ElevatedButton(onPressed: () {
+                              FirebaseServices.signInWithGoogle(context);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Logo(Logos.google,size: 25,),SizedBox(width: 3),Text('Sign In with Google',style: TextStyle(
+                                      letterSpacing: 0.6,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                
+                                  borderRadius: BorderRadius.circular(20)),
+                              backgroundColor:
+                                  Colors.white, // Customize button color
+                              padding: const EdgeInsets.all(7),
+                            ),
+                            ),
+                            
+                            ),
+                                // SvgPicture.asset('assets/google_sign_up.svg'),
+                           
                         const SizedBox(height: 15),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.6,
+                          width: MediaQuery.of(context).size.width * 0.58,
                           child: ElevatedButton(
                             onPressed: () async {
                               Navigator.push(
@@ -241,22 +251,24 @@ class _LoginPageState extends State<LoginPage> {
                                           const TrainerLogin()));
                             },
                             style: ElevatedButton.styleFrom(
+                              
                               shape: RoundedRectangleBorder(
+                                
                                   borderRadius: BorderRadius.circular(20)),
                               backgroundColor:
                                   Colors.white, // Customize button color
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(7),
                             ),
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.login_rounded),
+                                Icon(Icons.person),
                                 SizedBox(width: 3),
                                 Text(
                                   "Trainer Login",
                                   style: TextStyle(
                                       letterSpacing: 0.6,
-                                      fontSize: 15,
+                                      fontSize: 13,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],

@@ -97,12 +97,9 @@ class _TrainerHomeState extends State<TrainerHome> {
                       onPressed: () {},
                       leadingColor: Colors.greenAccent,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        final SharedPreferences prefs = await _prefs;
+                    
+                    TrainerButton(title: 'Logout', leadingColor: Colors.teal, trailingIcon: Icons.arrow_forward_ios, onPressed: () async {
+                      final SharedPreferences prefs = await _prefs;
                         await prefs.remove('trainerId');
                         if (!mounted) {
                           return;
@@ -112,21 +109,34 @@ class _TrainerHomeState extends State<TrainerHome> {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     const LoginPage()),
-                            (Route<dynamic> route) => false);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        backgroundColor:
-                            Colors.blueGrey[100], // Customize button color
-                        padding: const EdgeInsets.all(10),
-                      ),
-                      child: const Text(
-                        "Logout",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
-                      ),
-                    ),
+                            (Route<dynamic> route) => false);}),
+                    // ElevatedButton(
+                    //   onPressed: () async {
+                    //     final SharedPreferences prefs = await _prefs;
+                    //     await prefs.remove('trainerId');
+                    //     if (!mounted) {
+                    //       return;
+                    //     }
+                    //     Navigator.pushAndRemoveUntil(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (BuildContext context) =>
+                    //                 const LoginPage()),
+                    //         (Route<dynamic> route) => false);
+                    //   },
+                    //   style: ElevatedButton.styleFrom(
+                    //     shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(10)),
+                    //     backgroundColor:
+                    //         Colors.blueGrey[100], // Customize button color
+                    //     padding: const EdgeInsets.all(10),
+                    //   ),
+                    //   child: const Text(
+                    //     "Logout",
+                    //     style: TextStyle(
+                    //         fontSize: 15, fontWeight: FontWeight.w600),
+                    //   ),
+                    // ),
                     const Spacer(),
                     const Icon(
                       Icons.home_filled,

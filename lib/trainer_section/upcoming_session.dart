@@ -42,7 +42,7 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                         margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.white24),
+                            color: Colors.white12),
                         child: Column(
                           children: [
                             Row(
@@ -54,7 +54,7 @@ class _UpcomingSessionState extends State<UpcomingSession> {
                                     Text(
                                       '${slots[index]['customerName']}',
                                       style: const TextStyle(
-                                          color: Colors.deepOrange),
+                                          color: Colors.orange),
                                     )
                                   ],
                                 ),
