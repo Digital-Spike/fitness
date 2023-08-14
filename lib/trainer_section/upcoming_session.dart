@@ -163,6 +163,18 @@ class _UpcomingSessionState extends State<UpcomingSession> {
         return element['status'] == "PENDING";
       });
 
+      Set<String> seenIds = {};
+      List<Map<String, dynamic>> uniqueList = [];
+
+      for (var item in slots) {
+        String id = item['bookingId'];
+        if (!seenIds.contains(id)) {
+          seenIds.add(id);
+          uniqueList.add(item);
+        }
+      }
+      slots = uniqueList;
+
       return true;
     } catch (e) {
       return false;
