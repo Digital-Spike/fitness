@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/my_booking/booking.dart';
 import 'package:fitness/my_booking/mybookings.dart';
-import 'package:fitness/screens/ourpackages.dart';
+import 'package:fitness/screens/packages_.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -443,8 +443,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const OurPackages()));
+                        builder: (BuildContext context) => const Packages()));
               },
             ),
             MaterialButton(

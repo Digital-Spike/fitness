@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 
 class OurPackages extends StatefulWidget {
   const OurPackages({super.key});
@@ -26,9 +25,8 @@ class _OurPackagesState extends State<OurPackages> {
   final List<bool> _selectedPlans = <bool>[true, false];
   bool vertical = false;
   bool isSelectedPlans = true;
-  bool isSelectedPlans2=false;
-  bool isSelectedPlans1=false;
-
+  bool isSelectedPlans2 = false;
+  bool isSelectedPlans1 = false;
 
   String? value;
   final items = ['Standard Plan', 'Special Plan'];
@@ -78,21 +76,21 @@ class _OurPackagesState extends State<OurPackages> {
   late final WebViewController controller;
   String paymentUrl = "";
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-       // backgroundColor: const Color(0xffF5E6C2),
-        appBar: AppBar(
+        resizeToAvoidBottomInset: false,
         // backgroundColor: const Color(0xffF5E6C2),
+        appBar: AppBar(
+          // backgroundColor: const Color(0xffF5E6C2),
           title: const Text(
             'Our Packages',
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.w600,),
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-         // leading: const BackButton(color: Colors.black,),
+          // leading: const BackButton(color: Colors.black,),
           elevation: 0,
           centerTitle: true,
           bottom: PreferredSize(
@@ -105,19 +103,19 @@ class _OurPackagesState extends State<OurPackages> {
         body: Column(children: [
           const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.only(left: 10,right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: DropdownButtonFormField(
                 hint: const Text('Select Plan'),
                 borderRadius: BorderRadius.circular(10),
                 style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    ),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
                 decoration: InputDecoration(
                     isDense: true,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
-                   // fillColor: Colors.white,
+                    // fillColor: Colors.white,
                     filled: true),
                 items: items.map(buildMenuItem).toList(),
                 onChanged: (value) {
@@ -167,7 +165,7 @@ class _OurPackagesState extends State<OurPackages> {
           const SizedBox(height: 10),
           Visibility(
             visible: isSelectedPlans,
-            replacement: SizedBox.shrink(),
+            replacement: const SizedBox.shrink(),
             child: Expanded(
               child: ListView.builder(
                   itemCount: session.length,
@@ -202,7 +200,9 @@ class _OurPackagesState extends State<OurPackages> {
                             Text(
                               session[index],
                               style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600,),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             )
                           ],
                         ),
@@ -219,13 +219,15 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Price: ',
                                         style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w600,color: Colors.black),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       ),
                                       Text(
                                         (price[index]).toString(),
                                         style: const TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w600,color: Colors.black),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       )
                                     ],
                                   ),
@@ -235,9 +237,14 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Validity: ',
                                         style: TextStyle(
                                             fontSize: 18,
-                                            fontWeight: FontWeight.w600,color: Colors.black),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       ),
-                                      Text(validity[index],style: TextStyle(color: Colors.black),)
+                                      Text(
+                                        validity[index],
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -252,9 +259,14 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Per Session: ',
                                         style: TextStyle(
                                             fontSize: 18,
-                                            fontWeight: FontWeight.w600,color: Colors.black),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       ),
-                                      Text(perSession[index],style: TextStyle(color: Colors.black),)
+                                      Text(
+                                        perSession[index],
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                      )
                                     ],
                                   ),
                                   MaterialButton(
@@ -317,19 +329,23 @@ class _OurPackagesState extends State<OurPackages> {
                             borderRadius: BorderRadius.circular(10)),
                         backgroundColor: colors1[index],
                         collapsedBackgroundColor: colors[index],
-                          collapsedTextColor: Colors.black,
+                        collapsedTextColor: Colors.black,
                         textColor: Colors.black,
                         title: Row(
                           children: [
                             const Text(
                               'Number of Sessions: ',
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600,color: Colors.black),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
                             ),
                             Text(
                               session1[index],
                               style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600,color: Colors.black),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
                             )
                           ],
                         ),
@@ -346,9 +362,14 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Price: ',
                                         style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w600,color: Colors.black),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       ),
-                                      Text(price1[index],style: TextStyle(color: Colors.black),)
+                                      Text(
+                                        price1[index],
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                      )
                                     ],
                                   ),
                                   Row(
@@ -357,9 +378,14 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Validity: ',
                                         style: TextStyle(
                                             fontSize: 15,
-                                            fontWeight: FontWeight.w600,color: Colors.black),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       ),
-                                      Text(validity1[index],style: TextStyle(color: Colors.black),)
+                                      Text(
+                                        validity1[index],
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -374,9 +400,14 @@ class _OurPackagesState extends State<OurPackages> {
                                         'Per Session: ',
                                         style: TextStyle(
                                             fontSize: 15,
-                                            fontWeight: FontWeight.w600,color: Colors.black),
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       ),
-                                      Text(persession1[index],style: TextStyle(color: Colors.black),)
+                                      Text(
+                                        persession1[index],
+                                        style: const TextStyle(
+                                            color: Colors.black),
+                                      )
                                     ],
                                   ),
                                   MaterialButton(
@@ -403,7 +434,6 @@ class _OurPackagesState extends State<OurPackages> {
                   }),
             ),
           ),
-        
         ]));
   }
 
@@ -432,15 +462,14 @@ class _OurPackagesState extends State<OurPackages> {
 
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
-      
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) {
-       return  Padding(
-           padding:  EdgeInsets.only(bottom:  MediaQuery.of(context).viewInsets.bottom)
-                       ,
-           child: GestureDetector(
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: GestureDetector(
             onTap: () => Navigator.of(context).pop(),
             child: Container(
               color: const Color.fromRGBO(0, 0, 0, 0.001),
@@ -448,10 +477,9 @@ class _OurPackagesState extends State<OurPackages> {
                 onTap: () {},
                 child: DraggableScrollableSheet(
                   expand: true,
-              initialChildSize: 1,
+                  initialChildSize: 1,
                   builder: (BuildContext context, controller) {
                     return SingleChildScrollView(
-                    
                       controller: controller,
                       child: Container(
                         height: 1500,
@@ -469,8 +497,8 @@ class _OurPackagesState extends State<OurPackages> {
                 ),
               ),
             ),
-                 ),
-         );
+          ),
+        );
       },
     );
   }
@@ -480,12 +508,12 @@ class _OurPackagesState extends State<OurPackages> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return Dialog(
+        return const Dialog(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(20.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 CircularProgressIndicator(),
                 Padding(
                     padding: EdgeInsets.only(left: 4.0),

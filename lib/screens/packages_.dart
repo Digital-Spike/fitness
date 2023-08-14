@@ -1,13 +1,9 @@
-import 'package:fitness/my_booking/bookinghistory.dart';
 import 'package:fitness/screens/buddy.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:fitness/screens/single.dart';
 import 'package:flutter/material.dart';
 
 import 'homepage.dart';
-
-
-
 
 class Packages extends StatefulWidget {
   const Packages({super.key});
@@ -21,7 +17,7 @@ class _MyBookingPageState extends State<Packages>
   late TabController _tabController;
   String? selectedplans;
 
-final List<String> options = ['Standard', 'Special'];
+  final List<String> options = ['Standard', 'Special'];
 
   @override
   void initState() {
@@ -73,36 +69,35 @@ final List<String> options = ['Standard', 'Special'];
           Padding(
             padding: const EdgeInsets.all(10),
             child: DropdownButtonFormField<String>(
-                  value: selectedplans,
-                  items: options.map((String option) {
-                    return DropdownMenuItem<String>(
-                      value: option,
-                      child: Text(option),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      selectedplans = value!;
-                    });
-                  },
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Please select an option';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    isDense: true,
-                    // labelText: 'Select a plan',
-                    hintText: 'Select a plan',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                  ),
-                ),
+              value: selectedplans,
+              items: options.map((String option) {
+                return DropdownMenuItem<String>(
+                  value: option,
+                  child: Text(option),
+                );
+              }).toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedplans = value!;
+                });
+              },
+              validator: (value) {
+                if (value == null) {
+                  return 'Please select an option';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                isDense: true,
+                // labelText: 'Select a plan',
+                hintText: 'Select a plan',
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 10,right: 10,top: 5),
+            margin: const EdgeInsets.only(left: 10, right: 10, top: 5),
             padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -124,7 +119,6 @@ final List<String> options = ['Standard', 'Special'];
                     child: Text(
                       'Single',
                       style: TextStyle(
-                       
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                         color: _tabController.index == 0
@@ -140,7 +134,6 @@ final List<String> options = ['Standard', 'Special'];
                     child: Text(
                       'Buddy',
                       style: TextStyle(
-                       
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                         color: _tabController.index == 1
@@ -158,7 +151,7 @@ final List<String> options = ['Standard', 'Special'];
               color: Colors.black, // Set background color to black
               child: TabBarView(
                 controller: _tabController,
-                children: const [Single(),Buddy()],
+                children: const [Single(), Buddy()],
               ),
             ),
           ),
