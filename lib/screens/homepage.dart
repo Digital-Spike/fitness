@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'dart:convert';
-
 import 'dart:io';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -11,14 +10,12 @@ import 'package:fitness/gymscreens/branches.dart';
 import 'package:fitness/gymscreens/partner.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:fitness/screens/offers.dart';
-import 'package:fitness/screens/ourpackages.dart';
-import 'package:fitness/screens/packages_.dart';
+import 'package:fitness/screens/our_packages.dart';
 import 'package:fitness/trainerscreens/our_trainers.dart';
 import 'package:fitness/trainerscreens/trainer_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:icons_plus/icons_plus.dart';
-import 'package:marquee/marquee.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -40,7 +37,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   final user = FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser!;
   late String? _displayName;
   File? _profileImage;
   static const url =
@@ -59,9 +56,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     getUser();
     super.initState();
-     _displayName = user.displayName;
+    _displayName = user.displayName;
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -70,25 +66,26 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 80,
         elevation: 0,
         title: Row(
-         mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleAvatar(
               minRadius: 30,
-               backgroundColor: Colors.white,
-                        backgroundImage: _profileImage != null
-                            ? FileImage(_profileImage!)
-                            : null,
-                        child: _profileImage == null
-                            ? const Icon(Icons.person)
-                            : null,
-            ),SizedBox(width: 10),
-            Text(_displayName??''),
+              backgroundColor: Colors.white,
+              backgroundImage:
+                  _profileImage != null ? FileImage(_profileImage!) : null,
+              child: _profileImage == null ? const Icon(Icons.person) : null,
+            ),
+            SizedBox(width: 10),
+            Text(_displayName ?? ''),
           ],
         ),
         centerTitle: false,
         automaticallyImplyLeading: false,
         actions: [
-          Icon(Icons.notifications),SizedBox(width: 10,)
+          Icon(Icons.notifications),
+          SizedBox(
+            width: 10,
+          )
         ],
       ),
       mainChild: SingleChildScrollView(
@@ -104,7 +101,7 @@ class _HomePageState extends State<HomePage> {
               //       image: const DecorationImage(
               //           image: AssetImage('assets/FJ FONT.png'),
               //           scale: 10,
-                        
+
               //           alignment: Alignment.center)),
               // ),
               // Container(
@@ -133,8 +130,7 @@ class _HomePageState extends State<HomePage> {
                               )));
                 },
                 child: Container(
-                    
-                  padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 1, color: Colors.black),
@@ -155,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                       totalRepeatCount: 100,
                     )),
               ),
-      
+
               /* GestureDetector(
             onTap: () {
              /* Navigator.push(
@@ -233,7 +229,6 @@ class _HomePageState extends State<HomePage> {
                               const Text(
                                 'EMS at Gym',
                                 style: TextStyle(
-                                    
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
                                     color: Colors.white),
@@ -272,7 +267,6 @@ class _HomePageState extends State<HomePage> {
                               const Text(
                                 'EMS at Home',
                                 style: TextStyle(
-                                   
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
                                     color: Colors.white),
@@ -303,14 +297,13 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Image.asset(
                                 'assets/trainer.png',
-                               height: 50,
+                                height: 50,
                                 color: Colors.white,
                               ),
                               const SizedBox(height: 10),
                               const Text(
                                 'Our Trainers',
                                 style: TextStyle(
-                                    
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
                                     color: Colors.white),
@@ -345,7 +338,6 @@ class _HomePageState extends State<HomePage> {
                               const Text(
                                 'Our Partners',
                                 style: TextStyle(
-                                    
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
                                     color: Colors.white),
@@ -380,7 +372,6 @@ class _HomePageState extends State<HomePage> {
                               const Text(
                                 'Our Packages',
                                 style: TextStyle(
-                                    
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
                                     color: Colors.white),
@@ -415,7 +406,6 @@ class _HomePageState extends State<HomePage> {
                               const Text(
                                 'Our Offers',
                                 style: TextStyle(
-                                    
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
                                     color: Colors.white),

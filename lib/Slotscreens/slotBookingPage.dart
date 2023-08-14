@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/my_booking/booking.dart';
 import 'package:fitness/my_booking/mybookings.dart';
-import 'package:fitness/screens/packages_.dart';
+import 'package:fitness/screens/our_packages.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
