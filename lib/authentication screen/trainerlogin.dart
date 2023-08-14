@@ -20,7 +20,7 @@ class _TrainerLoginState extends State<TrainerLogin> {
   final _passwordController = TextEditingController();
   final _trainerIdController = TextEditingController();
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
+  String? trainerId;
   @override
   void dispose() {
     _passwordController.dispose();
@@ -131,16 +131,50 @@ class _TrainerLoginState extends State<TrainerLogin> {
                         const SizedBox(height: 20),
                         GestureDetector(
                             onTap: () async {
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return const Dialog(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          CircularProgressIndicator(),
+                                          Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 4.0),
+                                              child: Text(
+                                                'Processing...',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 16),
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
                               await trainerLogin();
                               if (!mounted) {
                                 return;
                               }
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const TrainerHome()),
-                              );
+                              if (trainerId != null) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const TrainerHome()),
+                                );
+                              } else {
+                                Navigator.of(context).pop();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Please enter valid Trainer Id and Password')));
+                              }
                             },
                             child: SvgPicture.asset('assets/login.svg')),
                         const SizedBox(height: 20),
@@ -183,6 +217,7 @@ class _TrainerLoginState extends State<TrainerLogin> {
         http.Response? response = await http.post(url, body: trainerData);
         await prefs.setString(
             'trainerId', json.decode(response.body)['trainerId']);
+        trainerId = json.decode(response.body)['trainerId'];
       } catch (e) {}
     }
   }
