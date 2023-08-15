@@ -91,7 +91,7 @@ int _selectedSession=0;
     _selectedSession=index;
     _selectedValidity=index;
   });
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>PackageDetail(gradient: gridGradients[index], persession: perSession[_selectedPersession], price: price[_selectedPrice], session: session[_selectedSession], validity: validity[_selectedValidity],)));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>PackageDetail(gradient: gridGradients[index], price: price[_selectedPrice], session: session[_selectedSession], validity: validity[_selectedValidity], perSession: perSession[_selectedPersession],)));
             },
             child: Container(
               

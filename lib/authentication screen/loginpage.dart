@@ -29,6 +29,26 @@ class _LoginPageState extends State<LoginPage> {
  
 
   userLogin() async {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text('Error',textAlign: TextAlign.center,),
+          content: Text('Please enter email and password to login.',textAlign: TextAlign.center,),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+    return; // Return early if fields are empty
+  }
     showDialog(
         context: context,
         barrierDismissible: false,
