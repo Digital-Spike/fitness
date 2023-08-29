@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:fitness/screens/payment_ui.dart';
 import 'package:fitness/util/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -14,13 +12,14 @@ class PackageDetail extends StatefulWidget {
   final String perSession;
   final int validity;
 
-  const PackageDetail(
-      {super.key,
-      required this.gradient,
-      required this.session,
-      required this.price,
-      required this.perSession,
-      required this.validity});
+  const PackageDetail({
+    Key? key,
+    required this.gradient,
+    required this.session,
+    required this.price,
+    required this.perSession,
+    required this.validity,
+  }) : super(key: key);
 
   @override
   State<PackageDetail> createState() => _PackageDetailState();
@@ -28,7 +27,6 @@ class PackageDetail extends StatefulWidget {
 
 class _PackageDetailState extends State<PackageDetail> {
   late final WebViewController controller;
-
   String paymentUrl = "";
 
   @override
@@ -37,14 +35,14 @@ class _PackageDetailState extends State<PackageDetail> {
       body: Stack(
         children: [
           Container(
-              height: double.infinity,
-              width: double.infinity,
-              color: Colors.black38),
+            height: double.infinity,
+            width: double.infinity,
+            color: Colors.black38,
+          ),
           Container(
             height: 340,
             width: double.infinity,
             decoration: BoxDecoration(gradient: widget.gradient),
-            // color: Color(0xfff26f14),
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
@@ -56,12 +54,16 @@ class _PackageDetailState extends State<PackageDetail> {
                       const Text(
                         'Number of Sessions : ',
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         widget.session.toString(),
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       )
                     ],
                   ),
@@ -70,18 +72,25 @@ class _PackageDetailState extends State<PackageDetail> {
                   ),
                   const Text(
                     'Per Session',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 5),
                   Row(
                     children: [
                       Text(
-                        widget.perSession.toString(),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        widget.perSession,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const Text(
                         '/Session',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       )
                     ],
                   ),
@@ -93,7 +102,9 @@ class _PackageDetailState extends State<PackageDetail> {
                       const Text(
                         'AED',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
                       const SizedBox(
                         width: 10,
@@ -101,7 +112,9 @@ class _PackageDetailState extends State<PackageDetail> {
                       Text(
                         widget.price.toString(),
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -109,15 +122,21 @@ class _PackageDetailState extends State<PackageDetail> {
                     children: [
                       const Text(
                         'Duration ',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         widget.validity.toString(),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const Text(
                         ' Days',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       )
                     ],
                   )
@@ -126,37 +145,38 @@ class _PackageDetailState extends State<PackageDetail> {
             ),
           ),
           Positioned(
-              left: 60,
-              right: 60,
-              top: 315,
-              child: MaterialButton(
-                elevation: 10,
-                height: 50,
-                minWidth: 200,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                color: Colors.white,
-                onPressed: () async {
-                  showProgress();
-                  await trainerList(widget.price);
-                  if (!mounted) {
-                    return;
-                  }
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => PaymentPage(
-                                paymentUrl: paymentUrl,
-                              )));
-                },
-                child: const Text(
-                  'Subscribe',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepOrange),
+            left: 60,
+            right: 60,
+            top: 315,
+            child: MaterialButton(
+              elevation: 10,
+              height: 50,
+              minWidth: 200,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              color: Colors.white,
+              onPressed: () async {
+                showProgress();
+                final success = await trainerList(widget.price);
+                if (success) {
+                  // Payment was successful, handle it here if needed.
+                  // You can navigate to a success page or perform any other action.
+                } else {
+                  // Payment failed, handle it here if needed.
+                  // You can show an error message to the user.
+                }
+              },
+              child: const Text(
+                'Subscribe',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepOrange,
                 ),
-              )),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -190,12 +210,15 @@ class _PackageDetailState extends State<PackageDetail> {
               children: [
                 CircularProgressIndicator(),
                 Padding(
-                    padding: EdgeInsets.only(left: 4.0),
-                    child: Text(
-                      'Loading...',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-                    )),
+                  padding: EdgeInsets.only(left: 4.0),
+                  child: Text(
+                    'Loading...',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

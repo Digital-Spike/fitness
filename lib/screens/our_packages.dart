@@ -1,5 +1,7 @@
+import 'package:fitness/screens/buddy.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:fitness/screens/packagedetail.dart';
+import 'package:fitness/screens/single.dart';
 import 'package:flutter/material.dart';
 
 import 'homepage.dart';
@@ -170,66 +172,66 @@ class _MyBookingPageState extends State<Packages>
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Colors.grey.shade700, Colors.black54])),
+                colors: [Colors.grey.shade800, Colors.black54])),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: DropdownButtonFormField<String>(
-                value: selectedplans,
-                items: options.map((String option) {
-                  return DropdownMenuItem<String>(
-                    value: option,
-                    child: Text(option),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedplans = value!;
-                    setState(() {
-                      if (selectedplans == 'Standard') {
-                        if (_tabController.index == 0) {
-                          session = singleStandardSession;
-                          price = singleStandardPrice;
-                          validity = singleStandardValidity;
-                          perSession = singleStandardPerSession;
-                        } else {
-                          session = buddyStandardSession;
-                          price = buddyStandardPrice;
-                          validity = buddyStandardValidity;
-                          perSession = buddyStandardPerSession;
-                        }
-                      } else {
-                        if (_tabController.index == 0) {
-                          session = singleSpecialSession;
-                          price = singleSpecialPrice;
-                          validity = singleSpecialValidity;
-                          perSession = singleSpecialPerSession;
-                        } else {
-                          session = buddySpecialSession;
-                          price = buddySpecialPrice;
-                          validity = buddySpecialValidity;
-                          perSession = buddySpecialPerSession;
-                        }
-                      }
-                    });
-                  });
-                },
-                validator: (value) {
-                  if (value == null) {
-                    return 'Please select an option';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  isDense: true,
-                  // labelText: 'Select a plan',
-                  hintText: 'Select a plan',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(10),
+            //   child: DropdownButtonFormField<String>(
+            //     value: selectedplans,
+            //     items: options.map((String option) {
+            //       return DropdownMenuItem<String>(
+            //         value: option,
+            //         child: Text(option),
+            //       );
+            //     }).toList(),
+            //     onChanged: (value) {
+            //       setState(() {
+            //         selectedplans = value!;
+            //         setState(() {
+            //           if (selectedplans == 'Standard') {
+            //             if (_tabController.index == 0) {
+            //               session = singleStandardSession;
+            //               price = singleStandardPrice;
+            //               validity = singleStandardValidity;
+            //               perSession = singleStandardPerSession;
+            //             } else {
+            //               session = buddyStandardSession;
+            //               price = buddyStandardPrice;
+            //               validity = buddyStandardValidity;
+            //               perSession = buddyStandardPerSession;
+            //             }
+            //           } else {
+            //             if (_tabController.index == 0) {
+            //               session = singleSpecialSession;
+            //               price = singleSpecialPrice;
+            //               validity = singleSpecialValidity;
+            //               perSession = singleSpecialPerSession;
+            //             } else {
+            //               session = buddySpecialSession;
+            //               price = buddySpecialPrice;
+            //               validity = buddySpecialValidity;
+            //               perSession = buddySpecialPerSession;
+            //             }
+            //           }
+            //         });
+            //       });
+            //     },
+            //     validator: (value) {
+            //       if (value == null) {
+            //         return 'Please select an option';
+            //       }
+            //       return null;
+            //     },
+            //     decoration: InputDecoration(
+            //       isDense: true,
+            //       // labelText: 'Select a plan',
+            //       hintText: 'Select a plan',
+            //       border: OutlineInputBorder(
+            //           borderRadius: BorderRadius.circular(10)),
+            //     ),
+            //   ),
+            // ),
             Container(
               margin: const EdgeInsets.only(left: 10, right: 10, top: 5),
               padding: const EdgeInsets.all(3),
@@ -286,121 +288,122 @@ class _MyBookingPageState extends State<Packages>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GridView.builder(
-                          itemCount: session.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisExtent: 120, crossAxisCount: 2),
-                          itemBuilder: ((context, index) {
-                            return InkWell(
-                              onTap: () {
-                                setState(() {
-                                  _selectedPerSession = index;
-                                  _selectedPrice = index;
-                                  _selectedSession = index;
-                                  _selectedValidity = index;
-                                });
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PackageDetail(
-                                              gradient: gridGradients[index],
-                                              perSession: perSession[
-                                                  _selectedPerSession],
-                                              price: price[_selectedPrice],
-                                              session:
-                                                  session[_selectedSession],
-                                              validity:
-                                                  validity[_selectedValidity],
-                                            )));
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(5),
-                                margin: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    gradient: gridGradients[index]
-                                    // color: colors[index],
-
-                                    ),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      session[index].toString(),
-                                      style: const TextStyle(
-                                          fontSize: 50,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const Text(
-                                      'Sessions',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          })),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GridView.builder(
-                          itemCount: session.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisExtent: 120, crossAxisCount: 2),
-                          itemBuilder: ((context, index) {
-                            return InkWell(
-                              onTap: () {
-                                setState(() {
-                                  _selectedPerSession = index;
-                                  _selectedPrice = index;
-                                  _selectedSession = index;
-                                  _selectedValidity = index;
-                                });
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PackageDetail(
-                                              gradient: gridGradients[index],
-                                              perSession: perSession[
-                                                  _selectedPerSession],
-                                              price: price[_selectedPrice],
-                                              session:
-                                                  session[_selectedSession],
-                                              validity:
-                                                  validity[_selectedValidity],
-                                            )));
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(5),
-                                margin: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    gradient: gridGradients[index]),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      session[index].toString(),
-                                      style: const TextStyle(
-                                          fontSize: 50,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const Text(
-                                      'Sessions',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          })),
-                    ),
+                    Single(),Buddy()
+                    // Padding(
+                    //   padding: const EdgeInsets.all(10),
+                    //   child: GridView.builder(
+                    //       itemCount: session.length,
+                    //       gridDelegate:
+                    //           const SliverGridDelegateWithFixedCrossAxisCount(
+                    //               mainAxisExtent: 120, crossAxisCount: 2),
+                    //       itemBuilder: ((context, index) {
+                    //         return InkWell(
+                    //           onTap: () {
+                    //             setState(() {
+                    //               _selectedPerSession = index;
+                    //               _selectedPrice = index;
+                    //               _selectedSession = index;
+                    //               _selectedValidity = index;
+                    //             });
+                    //             Navigator.push(
+                    //                 context,
+                    //                 MaterialPageRoute(
+                    //                     builder: (context) => PackageDetail(
+                    //                           gradient: gridGradients[index],
+                    //                           perSession: perSession[
+                    //                               _selectedPerSession],
+                    //                           price: price[_selectedPrice],
+                    //                           session:
+                    //                               session[_selectedSession],
+                    //                           validity:
+                    //                               validity[_selectedValidity],
+                    //                         )));
+                    //           },
+                    //           child: Container(
+                    //             padding: const EdgeInsets.all(5),
+                    //             margin: const EdgeInsets.all(5),
+                    //             decoration: BoxDecoration(
+                    //                 borderRadius: BorderRadius.circular(5),
+                    //                 gradient: gridGradients[index]
+                    //                 // color: colors[index],
+                    //
+                    //                 ),
+                    //             child: Column(
+                    //               children: [
+                    //                 Text(
+                    //                   session[index].toString(),
+                    //                   style: const TextStyle(
+                    //                       fontSize: 50,
+                    //                       fontWeight: FontWeight.bold),
+                    //                 ),
+                    //                 const Text(
+                    //                   'Sessions',
+                    //                   style: TextStyle(
+                    //                       fontSize: 16,
+                    //                       fontWeight: FontWeight.bold),
+                    //                 )
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         );
+                    //       })),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(10),
+                    //   child: GridView.builder(
+                    //       itemCount: session.length,
+                    //       gridDelegate:
+                    //           const SliverGridDelegateWithFixedCrossAxisCount(
+                    //               mainAxisExtent: 120, crossAxisCount: 2),
+                    //       itemBuilder: ((context, index) {
+                    //         return InkWell(
+                    //           onTap: () {
+                    //             setState(() {
+                    //               _selectedPerSession = index;
+                    //               _selectedPrice = index;
+                    //               _selectedSession = index;
+                    //               _selectedValidity = index;
+                    //             });
+                    //             Navigator.push(
+                    //                 context,
+                    //                 MaterialPageRoute(
+                    //                     builder: (context) => PackageDetail(
+                    //                           gradient: gridGradients[index],
+                    //                           perSession: perSession[
+                    //                               _selectedPerSession],
+                    //                           price: price[_selectedPrice],
+                    //                           session:
+                    //                               session[_selectedSession],
+                    //                           validity:
+                    //                               validity[_selectedValidity],
+                    //                         )));
+                    //           },
+                    //           child: Container(
+                    //             padding: const EdgeInsets.all(5),
+                    //             margin: const EdgeInsets.all(5),
+                    //             decoration: BoxDecoration(
+                    //                 borderRadius: BorderRadius.circular(5),
+                    //                 gradient: gridGradients[index]),
+                    //             child: Column(
+                    //               children: [
+                    //                 Text(
+                    //                   session[index].toString(),
+                    //                   style: const TextStyle(
+                    //                       fontSize: 50,
+                    //                       fontWeight: FontWeight.bold),
+                    //                 ),
+                    //                 const Text(
+                    //                   'Sessions',
+                    //                   style: TextStyle(
+                    //                       fontSize: 20,
+                    //                       fontWeight: FontWeight.bold),
+                    //                 )
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         );
+                    //       })),
+                    // ),
                   ],
                 ),
               ),

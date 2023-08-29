@@ -67,7 +67,7 @@ class _TrainerHomeState extends State<TrainerHome> {
                                   builder: (context) => UpcomingSession(
                                         trainerId: trainerId ?? "",
                                       )));
-                        }),
+                        }, imageAsset: 'assets/upcoming.png',),
                     TrainerButton(
                         title: 'Completed Sessions',
                         leadingColor: Colors.indigoAccent,
@@ -79,7 +79,7 @@ class _TrainerHomeState extends State<TrainerHome> {
                                   builder: (context) => CompletedSession(
                                         trainerId: trainerId ?? "",
                                       )));
-                        }),
+                        }, imageAsset: 'assets/complete.png',),
                     TrainerButton(
                         title: 'Updated Sessions',
                         leadingColor: Colors.amberAccent,
@@ -90,14 +90,14 @@ class _TrainerHomeState extends State<TrainerHome> {
                               MaterialPageRoute(
                                   builder: (context) =>
                                       const UpdatedSession()));*/
-                        }),
+                        }, imageAsset: 'assets/calendar.png',),
                     TrainerButton(
-                      title: 'EMS at Home/ Personal Trainer',
+                      title: 'EMS at Home',
                       trailingIcon: Icons.arrow_forward_ios,
                       onPressed: () {},
-                      leadingColor: Colors.greenAccent,
+                      leadingColor: Colors.greenAccent, imageAsset: 'assets/home.png',
                     ),
-                    
+                    TrainerButton(title: 'Personal Trainer', leadingColor: Colors.cyanAccent, trailingIcon: Icons.arrow_forward_ios, onPressed: (){}, imageAsset: 'assets/trainer.png',),
                     TrainerButton(title: 'Logout', leadingColor: Colors.teal, trailingIcon: Icons.arrow_forward_ios, onPressed: () async {
                       final SharedPreferences prefs = await _prefs;
                         await prefs.remove('trainerId');
@@ -109,7 +109,7 @@ class _TrainerHomeState extends State<TrainerHome> {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     const LoginPage()),
-                            (Route<dynamic> route) => false);}),
+                            (Route<dynamic> route) => false);}, imageAsset: 'assets/logout.png',),
                     // ElevatedButton(
                     //   onPressed: () async {
                     //     final SharedPreferences prefs = await _prefs;

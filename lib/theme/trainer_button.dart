@@ -4,13 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TrainerButton extends StatelessWidget {
   final String title;
  final Color leadingColor;
-  
+  final String imageAsset;
   final IconData trailingIcon;
   final VoidCallback onPressed;
 
   TrainerButton({
     required this.title,
-  
+  required this.imageAsset,
     required this.leadingColor,
     required this.trailingIcon,
     required this.onPressed,
@@ -33,8 +33,9 @@ class TrainerButton extends StatelessWidget {
           children: [
           Container(
             height: 40,width: 5,color: leadingColor,
-          ),
-             SizedBox(width: 40),
+          ),SizedBox(width: 20,),
+          Image.asset(imageAsset,height: 30,width: 30,),
+             SizedBox(width: 30),
             Center(
               child: Text(
                 title,
