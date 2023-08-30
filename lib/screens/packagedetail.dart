@@ -32,6 +32,15 @@ class _PackageDetailState extends State<PackageDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text('Our Packages'),
+        centerTitle: true,
+        bottom: PreferredSize(preferredSize: Size.fromHeight(1.0), child: Container(height: 1.0,color: Colors.black54,)),
+
+      ),
+      extendBodyBehindAppBar: true,
       body: Stack(
         children: [
           Container(
@@ -40,7 +49,7 @@ class _PackageDetailState extends State<PackageDetail> {
             color: Colors.black38,
           ),
           Container(
-            height: 340,
+            height: 400,
             width: double.infinity,
             decoration: BoxDecoration(gradient: widget.gradient),
             child: Padding(
@@ -49,6 +58,7 @@ class _PackageDetailState extends State<PackageDetail> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 55),
                   Row(
                     children: [
                       const Text(
@@ -147,7 +157,7 @@ class _PackageDetailState extends State<PackageDetail> {
           Positioned(
             left: 60,
             right: 60,
-            top: 315,
+            top: 375,
             child: MaterialButton(
               elevation: 10,
               height: 50,

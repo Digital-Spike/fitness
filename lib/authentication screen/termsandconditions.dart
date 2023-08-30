@@ -57,7 +57,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 20),
               Text(
                 'License To Use Application',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -68,7 +68,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 20),
               Text(
                 'You must not:',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -84,7 +84,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 20),
               Text(
                 'Acceptable Use',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -94,7 +94,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 20),
               Text(
                 'User Content',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -104,7 +104,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 20),
               Text(
                 'No Warranty',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -114,7 +114,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 20),
               Text(
                 'Limitations Of Liability',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -124,7 +124,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 10),
               Text(
                 'Exceptions',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -134,12 +134,12 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 20),
               Text(
                 'BREACHES OF THESE TERMS AND CONDITIONS',textAlign: TextAlign.justify,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 10),
               Text(
                 'Without Prejudice To',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -149,7 +149,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 10),
               Text(
                 'Variation',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -159,7 +159,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 10),
               Text(
                 'Assignment',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -169,7 +169,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 10),
               Text(
                 'Severability',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -179,7 +179,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 10),
               Text(
                 'Entire Agreement',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(
@@ -189,7 +189,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               SizedBox(height: 10),
               Text(
                 'Law And Jurisdiction',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800,color: Colors.orange),
               ),
               SizedBox(height: 5),
               Text(

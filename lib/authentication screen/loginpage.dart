@@ -278,8 +278,14 @@ class _LoginPageState extends State<LoginPage> {
                               
                               ),
                                   // SvgPicture.asset('assets/google_sign_up.svg'),
-                             
                           const SizedBox(height: 15),
+                          GestureDetector(
+                              onTap: () async {
+                                await signInWithApple();
+                                FirebaseServices authentication = FirebaseServices();                               
+                              },
+                              child: SvgPicture.asset('assets/apple.svg')),
+                          const SizedBox(height: 10),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.58,
                             child: ElevatedButton(
@@ -369,5 +375,9 @@ class _LoginPageState extends State<LoginPage> {
           : const Icon(Icons.visibility_off),
       color: Colors.grey,
     );
+  }
+  Future<UserCredential> signInWithApple() async {
+    final appleProvider = AppleAuthProvider();
+    return await FirebaseAuth.instance.signInWithProvider(appleProvider);
   }
 }
