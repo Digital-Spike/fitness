@@ -281,8 +281,10 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 15),
                           GestureDetector(
                               onTap: () async {
-                                await signInWithApple();
-                                FirebaseServices authentication = FirebaseServices();                               
+                                final appleProvider = AppleAuthProvider();
+                                 await FirebaseAuth.instance.signInWithProvider(appleProvider);
+                                FirebaseAuth auth = FirebaseAuth.instance;
+                                print(auth.currentUser?.uid);
                               },
                               child: SvgPicture.asset('assets/apple.svg')),
                           const SizedBox(height: 10),
