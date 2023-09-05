@@ -25,30 +25,35 @@ class _LoginPageState extends State<LoginPage> {
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-   final formKey = GlobalKey<FormState>();
- 
+  final formKey = GlobalKey<FormState>();
 
   userLogin() async {
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          title: Text('Error',textAlign: TextAlign.center,),
-          content: Text('Please enter email and password to login.',textAlign: TextAlign.center,),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('OK'),
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoAlertDialog(
+            title: const Text(
+              'Error',
+              textAlign: TextAlign.center,
             ),
-          ],
-        );
-      },
-    );
-    return; // Return early if fields are empty
-  }
+            content: const Text(
+              'Please enter email and password to login.',
+              textAlign: TextAlign.center,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return; // Return early if fields are empty
+    }
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -81,25 +86,32 @@ class _LoginPageState extends State<LoginPage> {
             MaterialPageRoute(builder: (context) => const SignupPage()));
       }
     } on FirebaseAuthException catch (e) {
-    String errorMessage = _getErrorMessage(e.code);
+      String errorMessage = _getErrorMessage(e.code);
       showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CupertinoAlertDialog(
-            title: Text('Login Error',textAlign: TextAlign.center,),
-            content: Text(errorMessage,textAlign: TextAlign.center,),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('OK'),
+          context: context,
+          builder: (BuildContext context) {
+            return CupertinoAlertDialog(
+              title: const Text(
+                'Login Error',
+                textAlign: TextAlign.center,
               ),
-            ],
-          );
-        });
+              content: Text(
+                errorMessage,
+                textAlign: TextAlign.center,
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          });
     }
   }
+
   String _getErrorMessage(String errorCode) {
     switch (errorCode) {
       case 'user-not-found':
@@ -155,12 +167,14 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                 Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(20),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.black.withOpacity(0.2)),
-                  child: Image.asset('assets/FJ FONT.png'),
-                 ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.black.withOpacity(0.2)),
+                    child: Image.asset('assets/FJ FONT.png'),
+                  ),
                   const SizedBox(height: 80),
                   Container(
                     padding: const EdgeInsets.all(20),
@@ -252,41 +266,49 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.white),
                           ),*/
                           const SizedBox(height: 15),
-                        SizedBox(width: MediaQuery.of(context).size.width * 0.58,
-                              child: ElevatedButton(onPressed: () {
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.58,
+                            child: ElevatedButton(
+                              onPressed: () {
                                 FirebaseServices.signInWithGoogle(context);
                               },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Logo(Logos.google,size: 25,),SizedBox(width: 3),Text('Sign In with Google',style: TextStyle(
-                                        letterSpacing: 0.6,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold))
-                                ],
-                              ),
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
-                                  
                                     borderRadius: BorderRadius.circular(20)),
                                 backgroundColor:
                                     Colors.white, // Customize button color
                                 padding: const EdgeInsets.all(7),
                               ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Logo(
+                                    Logos.google,
+                                    size: 25,
+                                  ),
+                                  const SizedBox(width: 3),
+                                  const Text('Sign In with Google',
+                                      style: TextStyle(
+                                          letterSpacing: 0.6,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold))
+                                ],
                               ),
-                              
-                              ),
-                                  // SvgPicture.asset('assets/google_sign_up.svg'),
+                            ),
+                          ),
+                          // SvgPicture.asset('assets/google_sign_up.svg'),
                           const SizedBox(height: 15),
                           GestureDetector(
                               onTap: () async {
                                 final appleProvider = AppleAuthProvider();
-                                 await FirebaseAuth.instance.signInWithProvider(appleProvider);
+                                await FirebaseAuth.instance
+                                    .signInWithProvider(appleProvider);
                                 FirebaseAuth auth = FirebaseAuth.instance;
                                 print(auth.currentUser?.uid);
                               },
-                              child: SvgPicture.asset('assets/apple.svg')),
+                              child:
+                                  SvgPicture.asset('assets/Applesignup.svg')),
                           const SizedBox(height: 10),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.58,
@@ -299,9 +321,7 @@ class _LoginPageState extends State<LoginPage> {
                                             const TrainerLogin()));
                               },
                               style: ElevatedButton.styleFrom(
-                                
                                 shape: RoundedRectangleBorder(
-                                  
                                     borderRadius: BorderRadius.circular(20)),
                                 backgroundColor:
                                     Colors.white, // Customize button color
@@ -378,6 +398,7 @@ class _LoginPageState extends State<LoginPage> {
       color: Colors.grey,
     );
   }
+
   Future<UserCredential> signInWithApple() async {
     final appleProvider = AppleAuthProvider();
     return await FirebaseAuth.instance.signInWithProvider(appleProvider);
