@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/add_user_data.dart';
 import 'package:fitness/constants/api_list.dart';
+import 'package:fitness/firebase_options.dart';
 import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -35,7 +36,8 @@ class FirebaseServices {
       },
     );
 
-    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+        clientId: DefaultFirebaseOptions.currentPlatform.iosClientId);
 
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
