@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/forgetpassword.dart';
@@ -33,11 +36,11 @@ class _LoginPageState extends State<LoginPage> {
         context: context,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
-            title: const Text(
+            title: Text(
               'Error',
               textAlign: TextAlign.center,
             ),
-            content: const Text(
+            content: Text(
               'Please enter email and password to login.',
               textAlign: TextAlign.center,
             ),
@@ -46,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('OK'),
+                child: Text('OK'),
               ),
             ],
           );
@@ -87,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
       }
     } on FirebaseAuthException catch (e) {
       String errorMessage = _getErrorMessage(e.code);
+
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -104,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('OK'),
+                  child: Text('OK'),
                 ),
               ],
             );
@@ -272,13 +276,6 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {
                                 FirebaseServices.signInWithGoogle(context);
                               },
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                backgroundColor:
-                                    Colors.white, // Customize button color
-                                padding: const EdgeInsets.all(7),
-                              ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -287,13 +284,20 @@ class _LoginPageState extends State<LoginPage> {
                                     Logos.google,
                                     size: 25,
                                   ),
-                                  const SizedBox(width: 3),
-                                  const Text('Sign In with Google',
+                                  SizedBox(width: 3),
+                                  Text('Sign In with Google',
                                       style: TextStyle(
                                           letterSpacing: 0.6,
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold))
                                 ],
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                backgroundColor:
+                                    Colors.white, // Customize button color
+                                padding: const EdgeInsets.all(7),
                               ),
                             ),
                           ),
