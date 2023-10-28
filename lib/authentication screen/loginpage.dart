@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/forgetpassword.dart';
@@ -9,7 +8,8 @@ import 'package:fitness/authentication%20screen/services.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:fitness/authentication%20screen/trainerlogin.dart';
 import 'package:fitness/constants/api_list.dart';
-import 'package:fitness/screens/homepage.dart';
+
+import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -36,11 +36,11 @@ class _LoginPageState extends State<LoginPage> {
         context: context,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
-            title: Text(
+            title: const Text(
               'Error',
               textAlign: TextAlign.center,
             ),
-            content: Text(
+            content: const Text(
               'Please enter email and password to login.',
               textAlign: TextAlign.center,
             ),
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -67,10 +67,8 @@ class _LoginPageState extends State<LoginPage> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);
 
-      // Get the user ID after successful login
       String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
 
-      // Make an API call and pass the user ID
       final response = await http.post(
         Uri.parse('https://fitnessjourni.com/api/getUser.php'),
         body: {'userId': userId},
@@ -81,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomePage(),
+            builder: (context) => const MainScreen(),
           ),
         );
       } else {
@@ -108,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -284,8 +282,8 @@ class _LoginPageState extends State<LoginPage> {
                                     Logos.google,
                                     size: 25,
                                   ),
-                                  SizedBox(width: 3),
-                                  Text('Sign In with Google',
+                                  const SizedBox(width: 3),
+                                  const Text('Sign In with Google',
                                       style: TextStyle(
                                           letterSpacing: 0.6,
                                           fontSize: 13,

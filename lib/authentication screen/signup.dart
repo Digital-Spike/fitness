@@ -4,6 +4,7 @@ import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/authentication%20screen/termsandconditions.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/screens/homepage.dart';
+import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
@@ -38,7 +39,6 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Container(
@@ -103,7 +103,6 @@ class _SignupPageState extends State<SignupPage> {
                         TextFormField(
                           controller: _userNameController,
                           decoration: InputDecoration(
-                              
                               hintText: 'User Name',
                               isDense: true,
                               filled: true,
@@ -119,15 +118,10 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         const SizedBox(height: 15),
                         IntlPhoneField(
-                         
-                          
                           decoration: const InputDecoration(
-                            
                               isDense: true,
                               filled: true,
-                             fillColor: Colors.black54,
-                               
-                             
+                              fillColor: Colors.black54,
                               hintText: 'Phone Number',
                               border: OutlineInputBorder(
                                   borderRadius:
@@ -140,10 +134,8 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         const SizedBox(height: 15),
                         TextFormField(
-                       
                           controller: _emailController,
                           decoration: InputDecoration(
-                             
                               hintText: 'Email',
                               isDense: true,
                               filled: true,
@@ -158,11 +150,9 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         const SizedBox(height: 15),
                         TextFormField(
-                         
                           controller: _passwordController,
                           obscureText: _isSecurePassword,
                           decoration: InputDecoration(
-                              
                               hintText: 'Password',
                               isDense: true,
                               filled: true,
@@ -216,11 +206,11 @@ class _SignupPageState extends State<SignupPage> {
                             TextButton(
                               onPressed: () {
                                 showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ));
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) => const Center(
+                                          child: CircularProgressIndicator(),
+                                        ));
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   PageRouteBuilder(
@@ -316,7 +306,7 @@ class _SignupPageState extends State<SignupPage> {
       Navigator.pushAndRemoveUntil(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, a, b) => const HomePage(),
+          pageBuilder: (context, a, b) => const MainScreen(),
           transitionDuration: const Duration(seconds: 0),
         ),
         (route) => false,

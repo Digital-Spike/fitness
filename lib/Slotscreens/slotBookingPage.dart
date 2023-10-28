@@ -146,7 +146,7 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           mainAxisSpacing: 10,
-                          mainAxisExtent: 100,
+                          mainAxisExtent: 200,
                           crossAxisSpacing: 10,
                           crossAxisCount: 2,
                         ),
@@ -175,7 +175,8 @@ class _SlotBookingPageState extends State<SlotBookingPage> {
                               }
                             },
                             child: Container(
-                              height: 100,
+                              padding: EdgeInsets.all(20),
+                              height: 200,
                               width: 160,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),

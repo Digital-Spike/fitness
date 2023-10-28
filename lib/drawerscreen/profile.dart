@@ -37,30 +37,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onWillPop: () async {
           return true;
         },
-        child: MainScreen(
-            mainAppBar: AppBar(
-              // backgroundColor: const Color(0xffF5E6C2),
+        child: Scaffold(
+            appBar: AppBar(
               elevation: 0,
-              title: const Center(
-                child: Text(
-                  'Profile',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                  ),
+              title: const Text(
+                'Profile',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
                 ),
               ),
+              centerTitle: true,
               actions: [
                 PopupMenuButton(
-                  itemBuilder: (context) {
-                    return [];
-                  },
-                ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    position: PopupMenuPosition.under,
+                    itemBuilder: (context) => <PopupMenuEntry>[
+                          PopupMenuItem(
+                              padding: const EdgeInsets.all(5),
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: const Row(
+                                  children: [
+                                    Icon(CupertinoIcons.delete),
+                                    Text(' Delete Account')
+                                  ],
+                                ),
+                              ))
+                        ]),
               ],
               // leading: BackButton(color: Colors.black,),
             ),
-            mainChild: SingleChildScrollView(
+            body: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 10),
                   SizedBox(
@@ -112,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => EditProfile()));
+                              builder: (context) => const EditProfile()));
                     },
                     svgPath: 'assets/edit-3.svg',
                   ),
@@ -124,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ForgotPassword()));
+                              builder: (context) => const ForgotPassword()));
                     },
                     svgPath: 'assets/Locked.svg',
                   ),
@@ -143,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Subscription()));
+                              builder: (context) => const Subscription()));
                     },
                     svgPath: 'assets/CC.svg',
                   ),
@@ -155,7 +166,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TermsAndConditions()));
+                              builder: (context) =>
+                                  const TermsAndConditions()));
                     },
                     svgPath: 'assets/I.svg',
                   ),
@@ -168,6 +180,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     svgPath: 'assets/lOGOUT SVG.svg',
                   ),
+                  // CustomButton(
+                  //     title: 'Delete Account',
+                  //     subtitle: 'Click here to delete account',
+                  //     svgPath: 'assets/delete.svg',
+                  //     trailingIcon: Icons.arrow_forward_ios,
+                  //     onPressed: () {}),
                   Center(
                     child: Image.asset(
                       'assets/FJ FONT.png',

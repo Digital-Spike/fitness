@@ -6,41 +6,51 @@ import 'homepage.dart';
 import 'video.dart';
 
 class MainScreen extends StatefulWidget {
-  final Widget mainChild;
-  final PreferredSizeWidget? mainAppBar;
-  const MainScreen({required this.mainChild, this.mainAppBar, super.key});
+  const MainScreen({super.key});
 
   static const String id = 'main-screen';
-
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static int? _bottomNavIndex;
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    Video(),
+    MyBookingPage(),
+    ProfileScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-    // backgroundColor: const Color(0xffF5E6C2),
-    extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: false,
-      appBar: widget.mainAppBar,
-      body: SafeArea(child: widget.mainChild),
-
-      extendBody: true,
-      bottomNavigationBar: BottomNavigationBar(
+    return WillPopScope(
+      onWillPop: () async {
+        if (_selectedIndex > 0) {
+          setState(() {
+            _selectedIndex = 0;
+          });
+          return false; // Prevent app from closing
+        }
+        return true; // Allow app to close
+      },
+      child: Scaffold(
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
           elevation: 0,
-          // backgroundColor: Color(0xffF5E6C2),
-          currentIndex: _bottomNavIndex ?? 0,
-          onTap: (index) =>
-            switchScreen(index),
-            // setState(() {
-            //   _bottomNavIndex = index;
-            // });
-         
-          selectedLabelStyle: TextStyle(fontWeight: FontWeight.w900),
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.w700),
           landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
           selectedIconTheme: IconThemeData(color: Color(0xff9EEB47)),
           selectedItemColor: Color(0xff9EEB47),
@@ -69,45 +79,9 @@ class _MainScreenState extends State<MainScreen> {
                 activeIcon: Icon(Icons.person_2),
                 label: 'Profile',
                 backgroundColor: Color(0xffF5E6C2)),
-          ]),
+          ],
+        ),
+      ),
     );
-  }
-
-  switchScreen(int index) {
-    _bottomNavIndex = index;
-    switch (_bottomNavIndex) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Video(),
-          ),
-        );
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const MyBookingPage(),
-          ),
-        );
-        break;
-      case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ProfileScreen(),
-          ),
-        );
-        break;
-    }
   }
 }

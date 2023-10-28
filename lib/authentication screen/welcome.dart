@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/services.dart';
 import 'package:fitness/authentication%20screen/signup.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +51,8 @@ class _WelcomeState extends State<Welcome> {
                 const Spacer(),
                 Container(
                   padding: const EdgeInsets.all(20),
-                  height: 190,
-                  width: 350,
+                  margin: const EdgeInsets.only(left: 0),
+                  width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.black.withOpacity(0.2)),
@@ -61,6 +62,16 @@ class _WelcomeState extends State<Welcome> {
                           child: SvgPicture.asset('assets/google_sign_up.svg'),
                           onTap: () =>
                               FirebaseServices.signInWithGoogle(context)),
+                      const SizedBox(height: 15),
+                      GestureDetector(
+                          onTap: () async {
+                            final appleProvider = AppleAuthProvider();
+                            await FirebaseAuth.instance
+                                .signInWithProvider(appleProvider);
+                            FirebaseAuth auth = FirebaseAuth.instance;
+                            print(auth.currentUser?.uid);
+                          },
+                          child: SvgPicture.asset('assets/Applesignup.svg')),
                       const SizedBox(height: 15),
                       GestureDetector(
                           onTap: () {

@@ -30,8 +30,6 @@ class _VideoState extends State<Video> {
     'QxsWslmXgz4',
     'L-mDGKaLUNY',
     'H0x4a5vXnK8'
-    
-   
   ];
 
   @override
@@ -81,8 +79,8 @@ class _VideoState extends State<Video> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-      mainChild: YoutubePlayerBuilder(
+    return Scaffold(
+      body: YoutubePlayerBuilder(
         onExitFullScreen: () {
           // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
           SystemChrome.setPreferredOrientations(DeviceOrientation.values);
@@ -104,11 +102,11 @@ class _VideoState extends State<Video> {
           //       maxLines: 2,
           //     ),
           //   ),
-           
+
           // ],
-          progressColors: ProgressBarColors(backgroundColor: Colors.blue,handleColor: Colors.deepOrange),
-      
-          
+          progressColors: ProgressBarColors(
+              backgroundColor: Colors.blue, handleColor: Colors.deepOrange),
+
           onReady: () {
             _isPlayerReady = true;
           },
@@ -120,15 +118,14 @@ class _VideoState extends State<Video> {
         ),
         builder: (context, player) => Scaffold(
           appBar: AppBar(
-           centerTitle: true,
+            centerTitle: true,
             title: const Text(
               'Explore',
               style: TextStyle(color: Colors.white),
             ),
-           
           ),
           body: ListView(
-           // scrollDirection: Axis.horizontal,
+            // scrollDirection: Axis.horizontal,
             children: [
               player,
               Padding(
@@ -212,7 +209,8 @@ class _VideoState extends State<Video> {
                               : null,
                         ),
                         IconButton(
-                          icon: Icon(_muted ? Icons.volume_off : Icons.volume_up),
+                          icon:
+                              Icon(_muted ? Icons.volume_off : Icons.volume_up),
                           onPressed: _isPlayerReady
                               ? () {
                                   _muted
@@ -224,7 +222,6 @@ class _VideoState extends State<Video> {
                                 }
                               : null,
                         ),
-                       
                         IconButton(
                           icon: const Icon(Icons.skip_next),
                           onPressed: _isPlayerReady

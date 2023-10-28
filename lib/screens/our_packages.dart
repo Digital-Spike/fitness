@@ -1,6 +1,6 @@
 import 'package:fitness/screens/buddy.dart';
 import 'package:fitness/screens/main_screen.dart';
-import 'package:fitness/screens/packagedetail.dart';
+
 import 'package:fitness/screens/single.dart';
 import 'package:flutter/material.dart';
 
@@ -146,8 +146,8 @@ class _MyBookingPageState extends State<Packages>
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-      mainAppBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         //  backgroundColor: const Color(0xffF5E6C2),
         elevation: 0,
 
@@ -165,7 +165,7 @@ class _MyBookingPageState extends State<Packages>
           },
         ),
       ),
-      mainChild: Container(
+      body: Container(
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -287,8 +287,8 @@ class _MyBookingPageState extends State<Packages>
                 color: Colors.black, // Set background color to black
                 child: TabBarView(
                   controller: _tabController,
-                  children: [
-                    Single(),Buddy()
+                  children: const [
+                    Single(), Buddy()
                     // Padding(
                     //   padding: const EdgeInsets.all(10),
                     //   child: GridView.builder(

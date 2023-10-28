@@ -61,8 +61,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-      mainAppBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         toolbarHeight: 80,
         elevation: 0,
         title: Row(
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      mainChild: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

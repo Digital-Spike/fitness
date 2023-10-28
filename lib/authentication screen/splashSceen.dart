@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/welcome.dart';
 import 'package:fitness/screens/homepage.dart';
+import 'package:fitness/screens/main_screen.dart';
 import 'package:fitness/trainer_section/trainer_home.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => const HomePage()),
+                  builder: (BuildContext context) => const MainScreen()),
             );
           }
         });

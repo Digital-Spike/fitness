@@ -17,35 +17,56 @@ class _SingleState extends State<Single> {
     LinearGradient(
         begin: Alignment.bottomRight,
         end: Alignment.topLeft,
-        colors: [ Colors.red.shade900,  Colors.red.shade200,]),
+        colors: [
+          Colors.red.shade900,
+          Colors.red.shade200,
+        ]),
     LinearGradient(
         begin: Alignment.bottomRight,
         end: Alignment.topLeft,
-        colors: [  Colors.green.shade900,Colors.green.shade200]),
+        colors: [Colors.green.shade900, Colors.green.shade200]),
     LinearGradient(
         begin: Alignment.bottomRight,
         end: Alignment.topLeft,
-        colors: [  Colors.cyan.shade900,  Colors.cyan.shade200,]),
+        colors: [
+          Colors.cyan.shade900,
+          Colors.cyan.shade200,
+        ]),
     LinearGradient(
         begin: Alignment.bottomRight,
         end: Alignment.topLeft,
-        colors: [ Colors.orange.shade900,  Colors.orange.shade200,]),
+        colors: [
+          Colors.orange.shade900,
+          Colors.orange.shade200,
+        ]),
     LinearGradient(
         begin: Alignment.bottomRight,
         end: Alignment.topLeft,
-        colors: [ Colors.purple.shade900,  Colors.purple.shade200,]),
+        colors: [
+          Colors.purple.shade900,
+          Colors.purple.shade200,
+        ]),
     LinearGradient(
         begin: Alignment.bottomRight,
         end: Alignment.topLeft,
-        colors: [ Colors.yellow.shade900,  Colors.yellow.shade200,]),
+        colors: [
+          Colors.yellow.shade900,
+          Colors.yellow.shade200,
+        ]),
     LinearGradient(
         begin: Alignment.bottomRight,
         end: Alignment.topLeft,
-        colors: [ Colors.teal.shade900,  Colors.teal.shade200,]),
+        colors: [
+          Colors.teal.shade900,
+          Colors.teal.shade200,
+        ]),
     LinearGradient(
         begin: Alignment.bottomRight,
         end: Alignment.topLeft,
-        colors: [ Colors.pink.shade900,  Colors.pink.shade200,]),
+        colors: [
+          Colors.pink.shade900,
+          Colors.pink.shade200,
+        ]),
   ];
   @override
   void initState() {
@@ -56,7 +77,6 @@ class _SingleState extends State<Single> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: FutureBuilder<void>(
@@ -66,7 +86,7 @@ class _SingleState extends State<Single> {
               return GridView.builder(
                 itemCount: plansList.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisExtent: 120,
+                  mainAxisExtent: 220,
                   crossAxisCount: 2,
                 ),
                 itemBuilder: ((context, index) {
@@ -85,11 +105,11 @@ class _SingleState extends State<Single> {
                             price: int.parse(selectedPackage['price']),
                             session: int.parse(selectedPackage['sessions']),
                             validity: days,
-                            perSession: selectedPackage['price_session'].toString(),
+                            perSession:
+                                selectedPackage['price_session'].toString(),
                           ),
                         ),
                       );
-
                     },
                     child: Container(
                       padding: EdgeInsets.all(5),
@@ -114,7 +134,6 @@ class _SingleState extends State<Single> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-
                         ],
                       ),
                     ),
@@ -139,9 +158,10 @@ class _SingleState extends State<Single> {
 
       if (response.statusCode == 200) {
         print("API Response: ${response.body}");
-        List<Map<String, dynamic>> allPackages = (json.decode(response.body) as List<dynamic>)
-            .map((package) => package as Map<String, dynamic>)
-            .toList();
+        List<Map<String, dynamic>> allPackages =
+            (json.decode(response.body) as List<dynamic>)
+                .map((package) => package as Map<String, dynamic>)
+                .toList();
 
         // Filter and extract data for "single" packages
         plansList = allPackages
@@ -155,5 +175,4 @@ class _SingleState extends State<Single> {
     // Update the state to rebuild the UI with the fetched data
     setState(() {});
   }
-
 }

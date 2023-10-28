@@ -1,4 +1,3 @@
-import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -24,8 +23,8 @@ class _PaymentPageState extends State<PaymentPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScreen(
-        mainAppBar: AppBar(
+    return Scaffold(
+        appBar: AppBar(
           backgroundColor: const Color(0xffF5E6C2),
           elevation: 0,
           centerTitle: true,
@@ -44,6 +43,6 @@ class _PaymentPageState extends State<PaymentPage> {
             ),
           ),
         ),
-        mainChild: WebViewWidget(controller: controller));
+        body: WebViewWidget(controller: controller));
   }
 }
