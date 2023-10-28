@@ -1,12 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:fitness/authentication%20screen/welcome.dart';
+import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/forgetpassword.dart';
 import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/authentication%20screen/termsandconditions.dart';
 import 'package:fitness/profilescreens/subscription.dart';
 import 'package:fitness/screens/editprofile.dart';
-import 'package:fitness/screens/main_screen.dart';
+
 import 'package:fitness/theme/profile_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +25,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late String? _displayName;
   late String? _email;
   File? _profileImage;
-
+  String? name, mobile, email, imageUrl;
   @override
   void initState() {
     super.initState();
-
+    getUser();
     _displayName = user.displayName;
     _email = user.email;
   }
@@ -57,7 +59,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           PopupMenuItem(
                               padding: const EdgeInsets.all(5),
                               child: GestureDetector(
-                                onTap: () {},
+                                onTap: () async {
+                                  showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (context) => const Center(
+                                          child: CircularProgressIndicator()));
+                                  Future.delayed(Duration(seconds: 1),
+                                      () async {
+                                    String userId = FirebaseAuth
+                                            .instance.currentUser?.uid ??
+                                        '';
+                                    var url = Uri.parse(
+                                        'https://fitnessjourni.com/api/deleteUser.php');
+                                    await http.post(url,
+                                        body: {"userId": userId}).then((value) {
+                                      FirebaseAuth.instance.currentUser
+                                          ?.delete();
+                                    });
+
+                                    await FirebaseAuth.instance.signOut();
+
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                const Welcome()),
+                                        ModalRoute.withName('/'));
+                                  });
+                                },
                                 child: const Row(
                                   children: [
                                     Icon(CupertinoIcons.delete),
@@ -97,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 5,
                           ),
                           Text(
-                            _displayName ?? '',
+                            name.toString() ?? '',
                             style: const TextStyle(fontSize: 16),
                           ),
                           Text(
@@ -256,5 +286,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
       },
     );
+  }
+
+  Future<String> getUser() async {
+    try {
+      String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+
+      String url = 'https://fitnessjourni.com/api/getUser.php';
+
+      var response = await http.post(Uri.parse(url), body: {'userId': userId});
+      print(response.body);
+      var jsondata = json.decode(response.body);
+
+      setState(() {
+        name = jsondata['name'];
+        mobile = jsondata['phoneNumber'];
+        email = jsondata['email'];
+        userId = jsondata['userId'];
+        imageUrl = "https://fitnessjourni.com/api/uploads/$userId.jpg";
+      });
+    } on HandshakeException catch (_) {}
+    return "success";
   }
 }

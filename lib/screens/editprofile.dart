@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,24 +20,57 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   String imageUrl = '';
+  String baseimage = "";
+  ImagePicker picker = ImagePicker();
+  XFile? uploadimage;
   var _name = new TextEditingController();
   var _email = new TextEditingController();
   var _phone = new TextEditingController();
   var _weight = new TextEditingController();
   var _height = new TextEditingController();
   var _injury = new TextEditingController();
+  Future<String> getUser() async {
+    try {
+      String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+
+      String url = 'https://fitnessjourni.com/api/getUser.php';
+
+      var response = await http.post(Uri.parse(url), body: {'userId': userId});
+      print(response.body);
+      var jsondata = json.decode(response.body);
+
+      setState(() {
+        _name.text = jsondata["name"];
+        _phone.text = jsondata['phoneNumber'];
+        _email.text = jsondata['email'];
+        userId = jsondata['userId'];
+        imageUrl = "https://fitnessjourni.com/api/uploads/$userId.jpg";
+      });
+    } on HandshakeException catch (_) {}
+    return "success";
+  }
+
   Future<void> _addUser() async {
+    print({
+      'name': _name.text,
+      'email': _email.text,
+      'phoneNumber': _phone.text,
+      'weight': _weight.text,
+      'height': _height.text,
+      'injury': _injury.text,
+      'image': imageUrl,
+    });
     String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
     const apiUrl = 'https://fitnessjourni.com/api/addUser.php';
     final response = await http.post(Uri.parse(apiUrl), body: {
       'userId': userId,
       'name': _name.text,
       'email': _email.text,
-      'phone': _phone.text,
-      'weight': _weight,
-      'height': _height,
+      'phoneNumber': _phone.text,
+      'weight': _weight.text,
+      'height': _height.text,
       'injury': _injury.text,
-      'imageUrl': imageUrl,
+      'image': imageUrl,
     });
     if (response.statusCode == 200) {
       Navigator.pushReplacement(
@@ -43,10 +78,17 @@ class _EditProfileState extends State<EditProfile> {
     }
   }
 
-  File? galleryFile;
-  final picker = ImagePicker();
+  // File? galleryFile;
+  // final picker = ImagePicker();
   final items = ['Kgs', 'Lbs'];
   String? value;
+
+  @override
+  void initState() {
+    getUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,26 +114,22 @@ class _EditProfileState extends State<EditProfile> {
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(width: 1, color: Colors.black),
-                              color: Colors.grey),
-                          child: galleryFile == null
-                              ? const Center(
-                                  child: Text(
-                                    "Upload Image",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600),
-                                  ),
-                                )
-                              : Center(
-                                  child: Image.file(
-                                  galleryFile!,
-                                  fit: BoxFit.cover,
-                                )),
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: BorderRadius.circular(100)),
+                        height: 85,
+                        width: 85,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: imageUrl,
+                            errorWidget: (context, url, error) => const Icon(
+                              CupertinoIcons.person,
+                              size: 35,
+                            ),
+                          ),
                         ),
                       ),
                       Positioned(
@@ -310,9 +348,38 @@ class _EditProfileState extends State<EditProfile> {
             ),
             actions: [
               MaterialButton(
-                onPressed: () {
-                  getImage(ImageSource.camera);
-                  Navigator.of(context).pop();
+                onPressed: () async {
+                  try {
+                    var choosedimage =
+                        await picker.pickImage(source: ImageSource.camera);
+                    setState(() {
+                      uploadimage = choosedimage;
+                    });
+                    List<int> imageBytes = await uploadimage!.readAsBytes();
+                    print(choosedimage);
+                    String baseimage = base64Encode(imageBytes);
+                    print(baseimage);
+                    String userId =
+                        FirebaseAuth.instance.currentUser?.uid ?? '';
+                    String apiUrl =
+                        'https://fitnessjourni.com/api/uploadImage.php';
+                    var response = await http.post(Uri.parse(apiUrl),
+                        body: {'userId': userId, 'image': baseimage});
+                    // Check if the image upload was successful
+                    if (response.statusCode == 200) {
+                      // Show a Snackbar indicating success
+
+                      // Call the getUser function or any other necessary actions
+                      setState(() {
+                        getUser();
+                      });
+                    } else {
+                      // Show a Snackbar indicating an error
+                    }
+                  } catch (error) {
+                    // Show a Snackbar for any unexpected errors
+                  }
+                  Navigator.pop(context);
                 },
                 child: const Text(
                   'Camera',
@@ -320,9 +387,38 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ),
               MaterialButton(
-                onPressed: () {
-                  getImage(ImageSource.gallery);
-                  Navigator.of(context).pop();
+                onPressed: () async {
+                  try {
+                    var choosedimage =
+                        await picker.pickImage(source: ImageSource.gallery);
+                    setState(() {
+                      uploadimage = choosedimage;
+                    });
+                    List<int> imageBytes = await uploadimage!.readAsBytes();
+                    print(choosedimage);
+                    String baseimage = base64Encode(imageBytes);
+                    print(baseimage);
+                    String userId =
+                        FirebaseAuth.instance.currentUser?.uid ?? '';
+                    String apiUrl =
+                        'https://fitnessjourni.com/api/uploadImage.php';
+                    var response = await http.post(Uri.parse(apiUrl),
+                        body: {'userId': userId, 'imageUrl': baseimage});
+                    // Check if the image upload was successful
+                    if (response.statusCode == 200) {
+                      // Show a Snackbar indicating success
+
+                      // Call the getUser function or any other necessary actions
+                      setState(() {
+                        getUser();
+                      });
+                    } else {
+                      // Show a Snackbar indicating an error
+                    }
+                  } catch (error) {
+                    // Show a Snackbar for any unexpected errors
+                  }
+                  Navigator.pop(context);
                 },
                 child: const Text(
                   'Gallery',
@@ -341,20 +437,4 @@ class _EditProfileState extends State<EditProfile> {
           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         ),
       );
-  Future getImage(
-    ImageSource img,
-  ) async {
-    final pickedFile = await picker.pickImage(source: img);
-    XFile? xfilePick = pickedFile;
-    setState(
-      () {
-        if (xfilePick != null) {
-          galleryFile = File(pickedFile!.path);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(// is this context <<<
-              const SnackBar(content: Text('Nothing is selected')));
-        }
-      },
-    );
-  }
 }
