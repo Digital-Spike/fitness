@@ -1,6 +1,7 @@
-import 'package:fitness/drawerscreen/profile.dart';
+import 'package:fitness/profilescreens/profile.dart';
 import 'package:fitness/my_booking/mybookings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'homepage.dart';
 import 'video.dart';
@@ -50,35 +51,36 @@ class _MainScreenState extends State<MainScreen> {
           elevation: 0,
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
-          selectedLabelStyle: TextStyle(fontWeight: FontWeight.w700),
+          selectedLabelStyle:
+              TextStyle(fontWeight: FontWeight.w600, fontFamily: 'WorkSans'),
+          unselectedLabelStyle:
+              TextStyle(fontWeight: FontWeight.w600, fontFamily: 'WorkSans'),
           landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
-          selectedIconTheme: IconThemeData(color: Color(0xff9EEB47)),
-          selectedItemColor: Color(0xff9EEB47),
-          unselectedIconTheme: IconThemeData(color: Colors.white),
-          unselectedItemColor: Colors.white,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Color(0xffB3BAC3),
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                activeIcon: Icon(Icons.home),
-                label: 'Home',
-                backgroundColor: Color(0xffF5E6C2)),
+              icon: SvgPicture.asset('assets/svg/homegrey.svg'),
+              activeIcon: SvgPicture.asset('assets/svg/home.svg'),
+              label: 'HOME',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.slow_motion_video_outlined),
-                activeIcon: Icon(Icons.slow_motion_video_sharp),
-                label: 'Explore',
-                backgroundColor: Color(0xffF5E6C2)),
+              icon: SvgPicture.asset('assets/svg/exploregrey.svg'),
+              activeIcon: SvgPicture.asset('assets/svg/explore.svg'),
+              label: 'EXPLORE',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.book_online_outlined),
-                activeIcon: Icon(Icons.book_online),
-                label: 'My booking',
-                backgroundColor: Color(0xffF5E6C2)),
+              icon: SvgPicture.asset('assets/svg/bookinggrey.svg'),
+              activeIcon: SvgPicture.asset('assets/svg/booking.svg'),
+              label: 'BOOKINGS',
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person_2_outlined),
-                activeIcon: Icon(Icons.person_2),
-                label: 'Profile',
-                backgroundColor: Color(0xffF5E6C2)),
+              icon: SvgPicture.asset('assets/svg/profilegrey.svg'),
+              activeIcon: SvgPicture.asset('assets/svg/profile.svg'),
+              label: 'PROFILE',
+            ),
           ],
         ),
       ),

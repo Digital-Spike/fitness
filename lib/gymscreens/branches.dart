@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:fitness/trainerscreens/trainer_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 
 class BranchList extends StatefulWidget {
@@ -26,156 +27,102 @@ class _BranchListState extends State<BranchList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       // backgroundColor: const Color(0xffF5E6C2),
-        appBar: AppBar(
-        // backgroundColor: const Color(0xffF5E6C2),
-          elevation: 0,
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1.0),
-            child: Container(
-              height: 1.0,
-              color: Colors.black,
-            ),
-          ),
-          title: const Text('Available Branches',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  )),
-          centerTitle: true,
-          // leading: const BackButton(color: Colors.black,
-            
-          // ),
-        ),
-        body: FutureBuilder<bool>(
-          future: futureData,
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return ListView.builder(
-                itemCount: branchList.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TrainerList(
-                                    isBranchTrainers: true,
-                                    branchId: branchList[index]['branchId'],
-                                  )));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          color: Colors.white12,
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 100,
-                                    width: 140,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+             const SizedBox(height: 15),
+        const Text('Available Branches',
+            style: TextStyle(fontSize: 14, fontFamily: 'Work Sans')),
+            FutureBuilder<bool>(
+                future: futureData,
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const NeverScrollableScrollPhysics(),
+                        primary: false,
+                        shrinkWrap: true,
+                        itemCount: branchList.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                color: const Color(0xff142129),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    height: 130,
+                                    width: 116,
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
+                                        borderRadius: BorderRadius.circular(10)),
                                     child: CachedNetworkImage(
                                       imageUrl: ApiList.imageUrl +
-                                          (branchList[index]['image'] ?? ""),fit: BoxFit.cover,
+                                          (branchList[index]['image'] ?? ""),
+                                      fit: BoxFit.cover,
                                       placeholder: (context, url) =>
                                           const CircularProgressIndicator(),
                                       errorWidget: (context, url, error) =>
                                           const Icon(Icons.error),
                                     ),
                                   ),
-                                  const SizedBox(width: 10),
-                                  Column(
-                                    children: [
-                                      Text(branchList[index]['branch'],
-                                          style: const TextStyle(
-                                             
-                                              fontSize: 16,
-                                              color: Colors.orange,
-                                              fontWeight: FontWeight.w900,
-                                              decoration:
-                                                  TextDecoration.underline),textAlign: TextAlign.center,),
-                                      const SizedBox(height: 10),
-                                      const SizedBox(height: 10)
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.location_on,
-                                    size: 16,
-                                    color: Colors.white,
-                                  ),SizedBox(width: 10),
-                                  Expanded(
-                                    child: Text(
-                                      branchList[index]['address'],
+                                ),
+                                const SizedBox(width: 10),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      branchList[index]['branch'],
                                       style: const TextStyle(
-                                          fontFamily: 'Roboto',
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,color: Colors.white),
-                                      // textAlign: TextAlign.start,
-                                      maxLines: 3,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'SpaceGrotesk',
+                                          color: Colors.white),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              /*Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(branchList[index]['phoneNumber']),
-                                  Center(
-                                      child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.orange,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              minimumSize: const Size(100, 30)),
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TrainerList(
-                                                          isBranchTrainers:
-                                                              true,
-                                                          branchId:
-                                                              branchList[index]
-                                                                  ['branchId'],
-                                                        )));
-                                          },
-                                          child: const Text('Book Now'))),
-                                ],
-                              ),*/
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            }
+                                    SizedBox(height: 5),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SvgPicture.asset(
+                                          'assets/svg/marker.svg',
+                                          height: 13,
+                                          width: 8.3,
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context).size.width /
+                                              2.1,
+                                          child: Text(
+                                            branchList[index]['address'],
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                fontFamily: 'WorkSans'),
+                                            softWrap: true,
+                                            // overflow: TextOverflow
+                                            //     .visible,
+                                            maxLines: 3,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          );
+                        });
+                  }
+                  if (snapshot.hasError) {
+                    const Text("Something wrong");
+                  }
 
-            if (snapshot.hasError) {
-              const Text("Something wrong");
-            }
-
-            return const Center(child: CircularProgressIndicator());
-          },
+                  return const Center(child: CircularProgressIndicator());
+                }),
+          ],
         ));
   }
 

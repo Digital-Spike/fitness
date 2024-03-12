@@ -8,66 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1009790740333:android:aac26e3c956b7358acdc64",
-        "android_client_info": {
-          "package_name": "com.example.fitness"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1009790740333-6khoui4g21en7vrp3giuhvk70vjo1765.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.fitness",
-            "certificate_hash": "f294abf7e2a443defec1e866f1dd0d45e3287368"
-          }
-        },
-        {
-          "client_id": "1009790740333-8c4gjb8kge1uu8vforp3qlhbstpv4fsh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.fitness",
-            "certificate_hash": "aa9e29ac54afdcf66e11881422d59ab0f9a4e785"
-          }
-        },
-        {
-          "client_id": "1009790740333-jfnbvfqasvnlrrefhvb4nodoa3rnid0q.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.fitness",
-            "certificate_hash": "6544e58c65d22ee883c3bada74c3c212b1de5d4a"
-          }
-        },
-        {
-          "client_id": "1009790740333-ha6qv0js7tq88qt07p79oib4n3e435kg.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDNZvcQ2-ebE7x-PzB9T2BcM-nRNxtNnX0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1009790740333-ha6qv0js7tq88qt07p79oib4n3e435kg.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1009790740333-2i0tofj6o6cku30o4bm186nucln24od6.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fitness"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:1009790740333:android:700a638a089fcc53acdc64",
         "android_client_info": {
           "package_name": "com.fitness.journey"
@@ -80,6 +20,14 @@
           "android_info": {
             "package_name": "com.fitness.journey",
             "certificate_hash": "f294abf7e2a443defec1e866f1dd0d45e3287368"
+          }
+        },
+        {
+          "client_id": "1009790740333-j1pm8b6a75anijkf4a0gnnt2o9edni0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fitness.journey",
+            "certificate_hash": "6544e58c65d22ee883c3bada74c3c212b1de5d4a"
           }
         },
         {

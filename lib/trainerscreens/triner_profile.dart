@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fitness/Slotscreens/slotBookingPage.dart';
+import 'package:fitness/my_booking/slotBookingPage.dart';
 import 'package:fitness/constants/api_list.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,17 +25,19 @@ class _TrainerProfileState extends State<TrainerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //  backgroundColor: const Color(0xffF5E6C2),
+        //  backgroundColor: const Color(0xffF5E6C2),
         appBar: AppBar(
-        // backgroundColor: const Color(0xffF5E6C2),
+          // backgroundColor: const Color(0xffF5E6C2),
           title: const Text(
             'Trainer profile',
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.w600,),
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           elevation: 0,
           centerTitle: true,
-         // leading: const BackButton(color: Colors.black,),
+          // leading: const BackButton(color: Colors.black,),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +112,8 @@ class _TrainerProfileState extends State<TrainerProfile> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: Image.asset(
                                 'assets/whatsapp.png',
-                                height: 26,color: Colors.white,
+                                height: 26,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -201,8 +204,15 @@ class _TrainerProfileState extends State<TrainerProfile> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SlotBookingPage(
-                                      isBranch: false,
-                                      trainer: widget.trainer, )));
+                                        isBranch: false,
+                                        trainer: widget.trainer,
+                                        trainerName: '',
+                                        branchAddress: '',
+                                        trainerImage: '',
+                                        trainerRating: '',
+                                        experience: '',
+                                        branchName: '',
+                                      )));
                         },
                         child: const Text(
                           'Book Session',

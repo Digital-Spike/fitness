@@ -1,7 +1,10 @@
 import 'dart:convert';
-import 'package:fitness/screens/packagedetail.dart';
+import 'package:fitness/util/string_util.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:lottie/lottie.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class Single extends StatefulWidget {
   const Single({Key? key}) : super(key: key);
@@ -11,63 +14,33 @@ class Single extends StatefulWidget {
 }
 
 class _SingleState extends State<Single> {
+  bool onSelected = false;
+  final WebViewController controller = WebViewController();
+  String paymentUrl = "";
   List<Map<String, dynamic>> plansList = [];
   Future<void>? futureData;
-  final List<Gradient> gridGradients = [
-    LinearGradient(
-        begin: Alignment.bottomRight,
-        end: Alignment.topLeft,
-        colors: [
-          Colors.red.shade900,
-          Colors.red.shade200,
-        ]),
-    LinearGradient(
-        begin: Alignment.bottomRight,
-        end: Alignment.topLeft,
-        colors: [Colors.green.shade900, Colors.green.shade200]),
-    LinearGradient(
-        begin: Alignment.bottomRight,
-        end: Alignment.topLeft,
-        colors: [
-          Colors.cyan.shade900,
-          Colors.cyan.shade200,
-        ]),
-    LinearGradient(
-        begin: Alignment.bottomRight,
-        end: Alignment.topLeft,
-        colors: [
-          Colors.orange.shade900,
-          Colors.orange.shade200,
-        ]),
-    LinearGradient(
-        begin: Alignment.bottomRight,
-        end: Alignment.topLeft,
-        colors: [
-          Colors.purple.shade900,
-          Colors.purple.shade200,
-        ]),
-    LinearGradient(
-        begin: Alignment.bottomRight,
-        end: Alignment.topLeft,
-        colors: [
-          Colors.yellow.shade900,
-          Colors.yellow.shade200,
-        ]),
-    LinearGradient(
-        begin: Alignment.bottomRight,
-        end: Alignment.topLeft,
-        colors: [
-          Colors.teal.shade900,
-          Colors.teal.shade200,
-        ]),
-    LinearGradient(
-        begin: Alignment.bottomRight,
-        end: Alignment.topLeft,
-        colors: [
-          Colors.pink.shade900,
-          Colors.pink.shade200,
-        ]),
+  final List<String> gridImage = [
+    'assets/png/Variant3.png',
+    'assets/png/Group 69.png',
+    'assets/png/Group 64.png',
+    'assets/png/Variant.png',
+    'assets/png/Group 65.png',
+    'assets/png/Group 66.png',
+    'assets/png/Group 67.png',
+    'assets/png/Group 68.png',
   ];
+
+  final List<Color> colorPrice = [
+    const Color(0xffFF5454),
+    const Color(0xff57FF54),
+    const Color(0xff00C2FF),
+    const Color(0xffFF6600),
+    const Color(0xffB454FF),
+    const Color(0xffFFE500),
+    const Color(0xff00FFC2),
+    const Color(0xffFF00F5)
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -85,65 +58,141 @@ class _SingleState extends State<Single> {
             if (snapshot.connectionState == ConnectionState.done) {
               return GridView.builder(
                 itemCount: plansList.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisExtent: 220,
-                  crossAxisCount: 2,
-                ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, childAspectRatio: 1 / 1.03),
                 itemBuilder: ((context, index) {
                   var package = plansList[index];
+                  String sessions = package['sessions'];
                   String validity = package['validity'];
+                  String prices = package['price'];
+                  int price = int.tryParse(prices.split(' ')[0]) ?? 0;
+                  int session = int.tryParse(sessions.split(' ')[0]) ?? 0;
                   int days = int.tryParse(validity.split(' ')[0]) ?? 0;
-                  return InkWell(
-                    onTap: () {
-                      var selectedPackage = plansList[index];
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PackageDetail(
-                            gradient: gridGradients[index],
-                            price: int.parse(selectedPackage['price']),
-                            session: int.parse(selectedPackage['sessions']),
-                            validity: days,
-                            perSession:
-                                selectedPackage['price_session'].toString(),
+                  return Container(
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        image: DecorationImage(
+                            image: AssetImage(gridImage[index]),
+                            fit: BoxFit.cover)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (session == 1)
+                          Text(
+                            '${package['sessions'].toString()} Session',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'WorkSans',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        if (session > 1)
+                          Text(
+                            '${package['sessions'].toString()} Sessions',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'WorkSans',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        Text(
+                          '${package['price_session']}/session',
+                          style: const TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'WorkSans',
+                              color: Color(0xffB3BAC3)),
+                        ),
+                        const Spacer(),
+                        Center(
+                          child: Text(
+                            'AED ${package['price']}',
+                            style: TextStyle(
+                                fontFamily: 'SpaceGrotesk',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: colorPrice[index]),
                           ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        gradient: gridGradients[index],
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            package['sessions'].toString(),
-                            style: TextStyle(
-                              fontSize: 50,
-                              fontWeight: FontWeight.bold,
+                        if (days == 1)
+                          Center(
+                            child: Text(
+                              'Validity $days Day',
+                              style: const TextStyle(
+                                fontFamily: 'WorkSans',
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                          Text(
-                            'Sessions',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                        if (days > 1)
+                          Center(
+                            child: Text(
+                              'Validity $days Days',
+                              style: const TextStyle(
+                                fontFamily: 'WorkSans',
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ],
-                      ),
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                side:
+                                    const MaterialStatePropertyAll<BorderSide>(
+                                  BorderSide(width: 1, color: Colors.white),
+                                ),
+                                backgroundColor:
+                                    const MaterialStatePropertyAll<Color>(
+                                        Colors.transparent),
+                                overlayColor: MaterialStateProperty.resolveWith(
+                                  (states) {
+                                    return states
+                                            .contains(MaterialState.pressed)
+                                        ? colorPrice[index]
+                                        : Colors.transparent;
+                                  },
+                                ),
+                                minimumSize:
+                                    const MaterialStatePropertyAll<Size>(
+                                        Size(double.infinity, 34))),
+                            onPressed: () async {
+                              setState(() {
+                                onSelected == index;
+                              });
+
+                              showProgress();
+                              await trainerList(price);
+                              controller
+                                ..setJavaScriptMode(JavaScriptMode.unrestricted)
+                                ..setBackgroundColor(const Color(0x00000000))
+                                ..loadRequest(Uri.parse(paymentUrl));
+                              if (!mounted) {
+                                return;
+                              }
+                              Navigator.of(context).pop();
+                              _showBottomSheet(context);
+                            },
+                            child: const Text(
+                              'SUBSCRIBE',
+                              style: TextStyle(
+                                  fontFamily: 'WorkSans',
+                                  fontSize: 14,
+                                  color: Colors.white),
+                            ))
+                      ],
                     ),
                   );
                 }),
               );
             } else if (snapshot.hasError) {
-              return Center(child: Text("Something went wrong"));
+              return const Center(child: Text("Something went wrong"));
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(
+                  child: CircularProgressIndicator.adaptive(
+                backgroundColor: Colors.white,
+              ));
             }
           },
         ),
@@ -174,5 +223,73 @@ class _SingleState extends State<Single> {
 
     // Update the state to rebuild the UI with the fetched data
     setState(() {});
+  }
+
+  Future<bool> trainerList(int amount) async {
+    try {
+      Response? response = await http.post(
+          Uri.parse("https://fitnessjourni.com/getPaymentUrl.php"),
+          body: {
+            'bookingId': StringUtil().generateRandomNumber(length: 8),
+            'amount': amount.toString()
+          });
+      paymentUrl = jsonDecode(response.body)['paymentUrl'];
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Container(
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
+              child: DraggableScrollableSheet(
+                expand: true,
+                initialChildSize: 1,
+                builder: (BuildContext context, controller) {
+                  return SingleChildScrollView(
+                    controller: controller,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 2,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0),
+                        ),
+                      ),
+                      child: WebViewWidget(controller: this.controller),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showProgress() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Lottie.asset('assets/json/fjloader.json', height: 100)),
+        );
+      },
+    );
   }
 }

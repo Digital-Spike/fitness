@@ -5,7 +5,7 @@ import 'package:fitness/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl_phone_field/intl_phone_field.dart';
+
 
 class AddUserPage extends StatefulWidget {
   const AddUserPage({super.key});
@@ -16,9 +16,9 @@ class AddUserPage extends StatefulWidget {
 
 class _AddUserPageState extends State<AddUserPage> {
   final _userNameController = TextEditingController();
-  String _phoneNumber = "";
+  final _phoneController = TextEditingController();
   User? user = FirebaseAuth.instance.currentUser;
-
+String mobile = "Enter your mobile number";
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -106,22 +106,48 @@ class _AddUserPageState extends State<AddUserPage> {
                                   : null,
                             ),
                             const SizedBox(height: 15),
-                            IntlPhoneField(
-                              style: const TextStyle(color: Colors.white),
-                              decoration: const InputDecoration(
-                                  isDense: true,
-                                  filled: true,
-                                  fillColor: Colors.black54,
-                                  labelStyle: TextStyle(color: Colors.grey),
-                                  labelText: 'Phone Number',
-                                  hintText: 'Phone Number',
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10)))),
-                              disableLengthCheck: true,
-                              initialCountryCode: 'AE',
-                              onChanged: (phone) {
-                                _phoneNumber = phone.completeNumber;
+                            TextFormField(
+                              controller: _phoneController,
+                              decoration: InputDecoration(
+                                prefix: RichText(
+                                    text: const TextSpan(
+                                        text: '+971',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xffFF6600),
+                                            fontFamily: 'SpaceGrotesk'),
+                                        children: [
+                                      TextSpan(
+                                          text: '  |  ',
+                                          style: TextStyle(
+                                              color: Color(0xffD9DDE1)))
+                                    ])),
+                                isDense: true,
+                                floatingLabelStyle: const TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 20,
+                                    color: Color(0xffB3BAC3)),
+                                labelText: mobile,
+                                labelStyle: const TextStyle(
+                                    fontFamily: 'WorkSans',
+                                    fontSize: 16,
+                                    color: Color(0xffB3BAC3)),
+                                focusedBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        color: Colors.white,
+                                        style: BorderStyle.solid)),
+                                enabledBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        width: 1,
+                                        color: Colors.white,
+                                        style: BorderStyle.solid)),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  mobile = "Mobile Number";
+                                });
                               },
                             ),
                             const SizedBox(height: 20),
@@ -129,6 +155,7 @@ class _AddUserPageState extends State<AddUserPage> {
                                 onTap: () => saveUserData(),
                                 child: SvgPicture.asset('assets/save.svg')),
                             const SizedBox(height: 30),
+                            
                           ],
                         ),
                       ),
@@ -149,7 +176,7 @@ class _AddUserPageState extends State<AddUserPage> {
       Map<String, dynamic> userData = {
         'name': _userNameController.text,
         'userId': user?.uid,
-        'phoneNumber': _phoneNumber,
+        'phoneNumber': _phoneController,
         'email': user?.email,
       };
       await http.post(url, body: userData);

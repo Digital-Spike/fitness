@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
+
 class Offers extends StatefulWidget {
   const Offers({super.key});
 

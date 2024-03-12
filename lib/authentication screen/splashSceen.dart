@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/authentication%20screen/welcome.dart';
-import 'package:fitness/screens/homepage.dart';
 import 'package:fitness/screens/main_screen.dart';
 import 'package:fitness/trainer_section/trainer_home.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late StreamSubscription<User?> listener;
+  late final StreamSubscription<User?> listener;
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override

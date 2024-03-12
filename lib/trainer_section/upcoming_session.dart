@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:fitness/constants/api_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class UpcomingSession extends StatefulWidget {
   final String trainerId;
@@ -26,131 +28,143 @@ class _UpcomingSessionState extends State<UpcomingSession> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Upcoming Sessions"),
-          centerTitle: true,
-        ),
-        body: FutureBuilder<bool>(
-            future: futureData,
-            builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return ListView.builder(
-                    itemCount: slots.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white12),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Text('Name : '),
-                                    Text(
-                                      '${slots[index]['customerName']}',
-                                      style: const TextStyle(
-                                          color: Colors.orange),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Text('Date'),
-                                    const SizedBox(width: 6),
-                                    Container(
-                                      padding: const EdgeInsets.all(2),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              width: 1.0, color: Colors.black)),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            '${slots[index]['bookingDate']}',
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ),
-                                          Icon(
-                                            Icons.calendar_month_outlined,
-                                            color: Colors.grey[700],
-                                          )
-                                        ],
+        body: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: FutureBuilder<bool>(
+          future: futureData,
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return ListView.builder(
+                  itemCount: slots.length,
+                  itemBuilder: (context, index) {
+                    final dates =
+                        slots[index]['bookingDate'].toString().split('/');
+                    const String pattern = 'dd-MMM-yyyy';
+                    final String formatted = DateFormat(pattern).format(
+                        DateTime.parse("${dates[0]}-${dates[1]}-${dates[2]}"));
+                    final times =
+                        slots[index]['bookingTime'].toString().split('-');
+                    String startTime = times[0];
+                    String endtime = times[1];
+
+                    return Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(15),
+                          margin: const EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color(0xff142129)),
+                          child: Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '#${slots[index]['bookingId']}',
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xffB3BAC3),
+                                        fontFamily: 'WorkSans'),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        formatted
+                                            .replaceAll('-', ' ')
+                                            .toUpperCase(),
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'WorkSans',
+                                            color: Color(0xffB3BAC3)),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Text('Time'),
-                                    const SizedBox(width: 6),
-                                    Container(
-                                      padding: const EdgeInsets.all(2),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              width: 1.0, color: Colors.black)),
-                                      child: Row(
+                                      Row(
                                         children: [
-                                          Text(
-                                            '${slots[index]['bookingTime']}',
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                          ),
-                                          Icon(
-                                            Icons.access_time_outlined,
-                                            color: Colors.grey[700],
-                                          )
+                                          Text(startTime.toUpperCase()),
+                                          SvgPicture.asset(
+                                              'assets/svg/two-arrow.svg'),
+                                          Text(endtime.toUpperCase())
                                         ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 15),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        slots[index]['customerName'],
+                                        style: const TextStyle(
+                                            fontFamily: 'SpaceGrotesk',
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
                                       ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                    'Branch : ${slots[index]['branchName'] == "Home" ? slots[index]['branchName'] : slots[index]['branchId']}'),
-                                Text(
-                                    'Booking Id : ${'${slots[index]['bookingId']}'}')
-                              ],
-                            ),
-                            MaterialButton(
-                              onPressed: () {
-                                _showDialog(slots[index]['bookingId']);
-                              },
-                              color: Colors.black,
-                              child: const Text('Session Done'),
-                            )
-                          ],
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2.2,
+                                        child: Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                                'assets/svg/marker.svg'),
+                                            Expanded(
+                                              child: Text(
+                                                ' ${slots[index]['branchName'].toString().replaceAll('\n', '')}',
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily: 'SpaceGrotesk'),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  OutlinedButton(
+                                    onPressed: () {
+                                      _showDialog(slots[index]['bookingId']);
+                                    },
+                                    child: const Text(
+                                      'End Session',
+                                      style: TextStyle(
+                                          fontFamily: 'SpaceGrotesk',
+                                          fontSize: 16,
+                                          color: Colors.white),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      );
-                    });
-              }
+                      ],
+                    );
+                  });
+            }
 
-              if (snapshot.hasError) {
-                const Text("Something wrong");
-              }
+            if (snapshot.hasError) {
+              const Text("Something wrong");
+            }
 
-              return const Center(child: CircularProgressIndicator());
-            }));
+            return const Center(
+                child: CircularProgressIndicator.adaptive(
+              backgroundColor: Colors.white,
+            ));
+          }),
+    ));
   }
 
   Future<bool>? getTrainerSlots() async {
@@ -160,7 +174,7 @@ class _UpcomingSessionState extends State<UpcomingSession> {
           .post(Uri.parse(trainerUrl), body: {'trainerId': widget.trainerId});
       slots = json.decode(response.body);
       slots.retainWhere((element) => element['status'] == "PENDING");
-
+      print(response.body);
       Set<String> seenIds = {};
       List<Map<String, dynamic>> uniqueList = [];
 

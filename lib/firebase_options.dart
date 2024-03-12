@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDNZvcQ2-ebE7x-PzB9T2BcM-nRNxtNnX0',
-    appId: '1:1009790740333:android:aac26e3c956b7358acdc64',
+    appId: '1:1009790740333:android:700a638a089fcc53acdc64',
     messagingSenderId: '1009790740333',
     projectId: 'fitnessjourney-48caa',
     databaseURL: 'https://fitnessjourney-48caa-default-rtdb.firebaseio.com',
@@ -65,8 +65,10 @@ class DefaultFirebaseOptions {
     projectId: 'fitnessjourney-48caa',
     databaseURL: 'https://fitnessjourney-48caa-default-rtdb.firebaseio.com',
     storageBucket: 'fitnessjourney-48caa.appspot.com',
-    androidClientId: '1009790740333-8c4gjb8kge1uu8vforp3qlhbstpv4fsh.apps.googleusercontent.com',
-    iosClientId: '1009790740333-2i0tofj6o6cku30o4bm186nucln24od6.apps.googleusercontent.com',
-    iosBundleId: 'com.example.fitness',
+    androidClientId:
+        '1009790740333-8c4gjb8kge1uu8vforp3qlhbstpv4fsh.apps.googleusercontent.com',
+    iosClientId:
+        '1009790740333-2i0tofj6o6cku30o4bm186nucln24od6.apps.googleusercontent.com',
+    iosBundleId: 'com.fitness.journey',
   );
 }

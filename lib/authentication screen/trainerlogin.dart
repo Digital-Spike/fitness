@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fitness/authentication%20screen/loginpage.dart';
 import 'package:fitness/trainer_section/trainer_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,135 +29,193 @@ class _TrainerLoginState extends State<TrainerLogin> {
     super.dispose();
   }
 
+  String emailString = "Enter your username";
+  String password = "Enter your password";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-              color: Colors.transparent,
-              image: DecorationImage(
-                image: AssetImage('assets/ems jacket.webp'),
-                fit: BoxFit.contain,
-                opacity: 0.98,
-              )),
-          child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Form(
+            key: formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(20),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.black.withOpacity(0.2)),
-                  child: Image.asset('assets/FJ FONT.png'),
-                 ),
-                const SizedBox(height: 180),
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  margin: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.black.withOpacity(0.2)),
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _trainerIdController,
-                          decoration: InputDecoration(
-                              hintText: 'Trainer Id',
-                              isDense: true,
-                              filled: true,
-                              fillColor: Colors.black54,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please Enter Your Id';
-                            }
-                            return null;
-                          },
-                          onChanged: (String value) {},
-                        ),
-                        const SizedBox(height: 15),
-                        TextFormField(
-                          // style: const TextStyle(color: Colors.black),
-                          controller: _passwordController,
-                          obscureText: _isSecurePassword,
-                          decoration: InputDecoration(
-                              //   label: const Text('Password',style: TextStyle(color: Colors.grey),),
-                              hintText: 'Password',
-                              // hintStyle: const TextStyle(color: Colors.grey),
-                              isDense: true,
-                              filled: true,
-                              fillColor: Colors.black54,
-                              suffixIcon: togglePassword(),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please Enter Password';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 10),
-                        const SizedBox(height: 20),
-                        GestureDetector(
-                            onTap: () async {
-                              showDialog(
-                                context: context,
-                                barrierDismissible: false,
-                                builder: (BuildContext context) {
-                                  return const Dialog(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(20.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          CircularProgressIndicator(),
-                                          Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 4.0),
-                                              child: Text(
-                                                'Processing...',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16),
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                              await trainerLogin();
-                              if (!mounted) {
-                                return;
-                              }
-                              if (trainerId != null) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const TrainerHome()),
-                                );
-                              } else {
-                                Navigator.of(context).pop();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            'Please enter valid Trainer Id and Password')));
-                              }
-                            },
-                            child: SvgPicture.asset('assets/login.svg')),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
+                const Text(
+                  'Welcome back!',
+                  style: TextStyle(
+                    color: Color(0xffFF6600),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'SpaceGrotesk',
                   ),
                 ),
+                RichText(
+                    text: const TextSpan(
+                        text: "Let's continue your ",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontFamily: 'SpaceGrotesk',
+                        ),
+                        children: [
+                      TextSpan(
+                          text: 'fitness journey',
+                          style: TextStyle(fontWeight: FontWeight.w900))
+                    ])),
+                const SizedBox(height: 40),
+                TextFormField(
+                  controller: _trainerIdController,
+                  decoration: InputDecoration(
+                    floatingLabelStyle: const TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 18,
+                        color: Color(0xffB3BAC3)),
+                    labelStyle: const TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 16,
+                        color: Color(0xffB3BAC3)),
+                    labelText: emailString,
+                    focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.white,
+                            style: BorderStyle.solid)),
+                    enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.white,
+                            style: BorderStyle.solid)),
+                  ),
+                  onTap: (() {
+                    setState(() {
+                      emailString = "User Name";
+                    });
+                  }),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Your Id';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: _isSecurePassword,
+                  decoration: InputDecoration(
+                      floatingLabelStyle: const TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontSize: 18,
+                          color: Color(0xffB3BAC3)),
+                      labelStyle: const TextStyle(
+                          fontFamily: 'WorkSans',
+                          fontSize: 16,
+                          color: Color(0xffB3BAC3)),
+                      labelText: password,
+                      suffixIcon: togglepassword(),
+                      focusedBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 1,
+                              color: Colors.white,
+                              style: BorderStyle.solid)),
+                      enabledBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 1,
+                              color: Colors.white,
+                              style: BorderStyle.solid)),
+                      border: const UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.white))),
+                  onTap: () {
+                    setState(() {
+                      password = "Password";
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Password';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        minimumSize: const Size(double.infinity, 56)),
+                    onPressed: () async {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return const Dialog(
+                            child: Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CircularProgressIndicator.adaptive(
+                                    backgroundColor: Colors.white,
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.only(left: 4.0),
+                                      child: Text(
+                                        'Processing...',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16),
+                                      )),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                      await trainerLogin();
+                      if (!mounted) {
+                        return;
+                      }
+                      if (trainerId != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const TrainerHome()),
+                        );
+                      } else {
+                        Navigator.of(context).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text(
+                                'Please enter valid Trainer Id and Password')));
+                      }
+                    },
+                    child: const Text(
+                      'Sign In',
+                      style: TextStyle(
+                          fontFamily: 'SpaceGrotesk',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    )),
+                const Spacer(),
+                OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 46)),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    },
+                    child: const Text(
+                      'Login as a Trainee',
+                      style: TextStyle(
+                          fontFamily: 'SpaceGrotesk',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ))
               ],
             ),
           ),
@@ -165,7 +224,7 @@ class _TrainerLoginState extends State<TrainerLogin> {
     );
   }
 
-  Widget togglePassword() {
+  Widget togglepassword() {
     return IconButton(
       onPressed: () {
         setState(() {
@@ -173,9 +232,11 @@ class _TrainerLoginState extends State<TrainerLogin> {
         });
       },
       icon: _isSecurePassword
-          ? const Icon(Icons.visibility)
+          ? const Icon(
+              Icons.visibility,
+            )
           : const Icon(Icons.visibility_off),
-      color: Colors.grey,
+      color: Colors.white,
     );
   }
 
